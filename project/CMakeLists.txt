@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.2.2)
 project(tinder-server CXX)
-file(GLOB_RECURSE TINDER_SOURCES "src/*.cpp")
-#file(GLOB_RECURSE TINDER_SOURCES "lib/*.cpp")
-#file(GLOB_RECURSE TINDER_SOURCES "lib/*.c")
-file(GLOB_RECURSE TINDER_HEADERS "include/*.h")
-#file(GLOB_RECURSE TINDER_SOURCES "lib/*.h")
+file(GLOB_RECURSE TINDER_SOURCES "src/*.cpp" "lib/*.cpp")
+file(GLOB_RECURSE TINDER_HEADERS "include/*.h" "lib/*.h")
 
 set (TINDER_INCLUDE_DIRS "")
 foreach (_headerFile ${TINDER_HEADERS})
