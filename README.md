@@ -9,3 +9,6 @@
 
 Hasta nuevo aviso, si se agrega un nuevo archivo, hay que volver a repetir solamente el paso 1 para que el archivo sea reconocido en eclipse
 
+
+Hay que instalar el paquete libboost-all-dev
+
