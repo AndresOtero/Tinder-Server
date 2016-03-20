@@ -41,7 +41,7 @@ void WebServer::start() {
 
 	  mg_mgr_init(&mgr, NULL);
 	  connection = mg_bind(&mgr, s_http_port, ev_handler);
-
+mg_enable_multithreading(connection);
 	  // Set up HTTP server parameters
 	  mg_set_protocol_http_websocket(connection);
 	  s_http_server_opts.document_root = ".";  // Serve current directory
