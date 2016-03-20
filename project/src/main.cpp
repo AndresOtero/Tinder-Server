@@ -6,10 +6,11 @@
 #include "mongoose.h"
 #include "webserver/WebServer.h"
 #include "dispatcher/EndPoint.h"
-#include <boost/log/trivial.hpp>
+#include "log/Logger.h"
 
 int main() {
-	BOOST_LOG_TRIVIAL(debug) << "A debug severity message";
+ Logger logger;
+ logger.info("Starting WebServer");
   WebServer ws;
   ws.start();
 

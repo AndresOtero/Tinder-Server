@@ -9,6 +9,7 @@
 #include "WebServer.h"
 #include "mongoose.h"
 #include "dispatcher/EndPoint.h"
+#include "log/Logger.h"
 using namespace std;
 
 
@@ -49,7 +50,11 @@ mg_enable_multithreading(connection);
 	  s_http_server_opts.dav_document_root = ".";  // Allow access via WebDav
 	  s_http_server_opts.enable_directory_listing = "yes";
 
-	  printf("Starting web server on port %s\n", s_http_port);
+	  Logger log;
+	  string message = "Web server is now listening on port ";
+	  message = message +s_http_port;
+
+	  log.info(message );
 	  for (;;) {
 	    mg_mgr_poll(&mgr, 1000);
 	  }
