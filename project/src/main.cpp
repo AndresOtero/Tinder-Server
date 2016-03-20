@@ -5,7 +5,7 @@
 
 #include "mongoose.h"
 #include "webserver/WebServer.h"
-
+#include "dispatcher/EndPoint.h"
 
 int main() {
 

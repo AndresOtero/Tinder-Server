@@ -6,9 +6,18 @@
  */
 
 #include <dispatcher/EndPoint.h>
+#include <regex>
+#include <iostream>
+using namespace std;
 
-EndPoint::EndPoint() {
-	// TODO Auto-generated constructor stub
+
+EndPoint::EndPoint(string u) {
+
+		this->uri = u;
+		this->next = 0;
+		regex exp ("#[^\\/]+#");
+
+		this->expression = "^" + regex_replace(u, exp , "([^\\/]+)") + "$" ;
 
 }
 
@@ -18,6 +27,14 @@ void EndPoint::setNext(EndPoint* next) {
  } else {
 	 this->next->setNext(next);
  }
+}
+
+void EndPoint::handle(string & uri) {
+	regex exp (this->expression);
+	if(regex_match(uri, exp)) {
+		cout<<"match"<<endl;
+	}
+
 }
 
 EndPoint::~EndPoint() {

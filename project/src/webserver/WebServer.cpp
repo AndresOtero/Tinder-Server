@@ -8,7 +8,7 @@
 #include <iostream>
 #include "WebServer.h"
 #include "mongoose.h"
-
+#include "dispatcher/EndPoint.h"
 using namespace std;
 
 
@@ -26,10 +26,11 @@ WebServer::~WebServer() {
 }
 
 static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
-  struct http_message *hm = (struct http_message *) ev_data;
   WebServer * server = (WebServer *) nc->user_data;
+  struct http_message *hm = (struct http_message *) ev_data;
   if (ev == MG_EV_HTTP_REQUEST) {
-	  server->sayHello();
+	  string uri = server->getUri(hm);
+	  cout<<uri<<endl;
 	  mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n");
   }
 
@@ -55,6 +56,10 @@ mg_enable_multithreading(connection);
 	  mg_mgr_free(&mgr);
 }
 
-void WebServer::sayHello() {
-	cout << "Hello World" << endl;
+string WebServer::getUri(http_message* hm) {
+	  string uri (*(&hm->uri.p));
+	  std::size_t found = uri.find(" ");
+	   if (found!=std::string::npos)
+	     uri = uri.substr(0,found);
+	   return uri;
 }

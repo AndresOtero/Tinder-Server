@@ -7,13 +7,20 @@
 
 #ifndef SRC_DISPATCHER_ENDPOINT_H_
 #define SRC_DISPATCHER_ENDPOINT_H_
+#include <string>
+#include "mongoose.h"
+
+using namespace std;
 
 class EndPoint {
 private:
 	EndPoint * next;
+	string expression;
+	string uri;
 public:
-	EndPoint();
+	EndPoint(string u);
 	void setNext(EndPoint *);
+	void handle(string & uri);
 	virtual ~EndPoint();
 };
 

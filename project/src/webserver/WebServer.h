@@ -7,6 +7,10 @@
 
 #ifndef SRC_WEBSERVER_WEBSERVER_H_
 #define SRC_WEBSERVER_WEBSERVER_H_
+#include <string>
+#include "mongoose.h"
+using namespace std;
+
 
 class WebServer {
 public:
@@ -14,6 +18,7 @@ public:
 	virtual ~WebServer();
 	void start();
 	void sayHello();
+	string getUri(http_message *);
 private :
 	struct mg_connection * connection;
 private :
