@@ -5,7 +5,8 @@
  *      Author: matias
  */
 
-#include <DBConnector.h>
+#include "DBConnector.h"
+#include "rocksdb/db.h"
 
 DBConnector::DBConnector() {
 	// TODO Auto-generated constructor stub
