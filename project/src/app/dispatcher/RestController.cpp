@@ -5,7 +5,7 @@
  *      Author: jonathan
  */
 
-#include <dispatcher/RestController.h>
+#include "RestController.h"
 
 RestController::RestController() {
 	// TODO Auto-generated constructor stub

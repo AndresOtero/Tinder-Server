@@ -5,7 +5,7 @@
  *      Author: jonathan
  */
 
-#include <log/Logger.h>
+#include "Logger.h"
 #include <boost/log/trivial.hpp>
 
 Logger::Logger() {

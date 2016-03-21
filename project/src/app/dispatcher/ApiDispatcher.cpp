@@ -5,7 +5,7 @@
  *      Author: jonathan
  */
 
-#include <dispatcher/ApiDispatcher.h>
+#include "ApiDispatcher.h"
 
 ApiDispatcher::ApiDispatcher() {
 	[] () {};

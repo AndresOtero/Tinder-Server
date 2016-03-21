@@ -5,7 +5,7 @@
  *      Author: jonathan
  */
 
-#include <dispatcher/PathVariableExtractor.h>
+#include "PathVariableExtractor.h"
 
 PathVariableExtractor::PathVariableExtractor() {
 	// TODO Auto-generated constructor stub

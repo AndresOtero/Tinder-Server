@@ -5,7 +5,7 @@
  *      Author: jonathan
  */
 
-#include <dispatcher/EndPoint.h>
+#include "EndPoint.h"
 #include <regex>
 #include <iostream>
 using namespace std;

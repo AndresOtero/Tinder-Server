@@ -4,9 +4,9 @@
  */
 
 #include "mongoose.h"
-#include "webserver/WebServer.h"
-#include "dispatcher/EndPoint.h"
-#include "log/Logger.h"
+#include "app/webserver/WebServer.h"
+#include "app/dispatcher/EndPoint.h"
+#include "app/log/Logger.h"
 
 int main() {
  Logger logger;

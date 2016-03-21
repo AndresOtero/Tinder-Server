@@ -8,8 +8,8 @@
 #include <iostream>
 #include "WebServer.h"
 #include "mongoose.h"
-#include "dispatcher/EndPoint.h"
-#include "log/Logger.h"
+#include "EndPoint.h"
+#include "../log/Logger.h"
 using namespace std;
 
 
