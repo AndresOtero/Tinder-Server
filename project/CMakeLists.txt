@@ -1,8 +1,14 @@
 cmake_minimum_required (VERSION 3.2.2)
+
+option(test "Build all tests." OFF)
 project (tinder-server C CXX)
+
 set(CMAKE_CXX_STANDARD 11)
 add_subdirectory (app) 
 add_subdirectory (server) 
-add_subdirectory (test)
-enable_testing ()
-add_test (NAME MyTest COMMAND Test)
+
+if(test)
+	add_subdirectory (test)
+	enable_testing ()
+endif()
+

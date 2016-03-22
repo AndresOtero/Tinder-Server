@@ -7,8 +7,8 @@
 3. Como root del proyecto hay que buscar el directorio **_"build"_** creado en el paso 1.
 4. Darle finish y con eso queda importado el proyecto en eclipse.
 
-Hasta nuevo aviso, si se agrega un nuevo archivo, hay que volver a repetir solamente el paso 1 para que el archivo sea reconocido en eclipse
-
+Hasta nuevo aviso, si se agrega un nuevo archivo, hay que correr
+**_cmake ../project/ -Dtest=on_**
 
 Hay que instalar el paquete libboost-all-dev
 
