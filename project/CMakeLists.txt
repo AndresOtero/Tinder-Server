@@ -30,12 +30,12 @@ if(UNIX)
 endif()
 
 add_executable (server ${TINDER_SOURCES})
-target_link_libraries ( server
-	${TINDER_STATICS} 
+target_link_libraries ( server	${TINDER_STATICS} 
     ${CMAKE_THREAD_LIBS_INIT} 
     ${Boost_LOG_SETUP_LIBRARY}
     ${Boost_LOG_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
     ${Boost_THREAD_LIBRARY}
     ${Boost_SYSTEM_LIBRARY}
+    z pthread rt
 )

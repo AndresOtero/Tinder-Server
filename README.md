@@ -11,4 +11,5 @@ Hasta nuevo aviso, si se agrega un nuevo archivo, hay que volver a repetir solam
 
 
 Hay que instalar el paquete libboost-all-dev
+Para RocksDB hay que asegurarse de tener instalado libsnappy-dev libbz2-dev zlib1g-dev
 
