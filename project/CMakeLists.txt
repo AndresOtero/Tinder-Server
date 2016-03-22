@@ -14,17 +14,3 @@ if(test)
 	SET(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
 	add_subdirectory (test)
 endif()
-
-<<<<<<< HEAD
-=======
-add_executable (server ${TINDER_SOURCES})
-target_link_libraries ( server	${TINDER_STATICS} 
-    ${CMAKE_THREAD_LIBS_INIT} 
-    ${Boost_LOG_SETUP_LIBRARY}
-    ${Boost_LOG_LIBRARY}
-    ${Boost_FILESYSTEM_LIBRARY}
-    ${Boost_THREAD_LIBRARY}
-    ${Boost_SYSTEM_LIBRARY}
-    z pthread rt
-)
->>>>>>> iss3
