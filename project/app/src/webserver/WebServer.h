@@ -8,7 +8,8 @@
 #ifndef SRC_WEBSERVER_WEBSERVER_H_
 #define SRC_WEBSERVER_WEBSERVER_H_
 #include <string>
-#include "mongoose.h"
+
+#include "../mongoose/mongoose.h"
 using namespace std;
 
 

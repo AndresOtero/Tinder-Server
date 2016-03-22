@@ -8,7 +8,8 @@
 #ifndef SRC_DISPATCHER_ENDPOINT_H_
 #define SRC_DISPATCHER_ENDPOINT_H_
 #include <string>
-#include "mongoose.h"
+
+#include "../mongoose/mongoose.h"
 
 using namespace std;
 
