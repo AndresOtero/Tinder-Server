@@ -3,20 +3,23 @@ add_definitions(-DBOOST_LOG_DYN_LINK=1)
 FIND_PACKAGE(Threads)
 FIND_PACKAGE(Boost COMPONENTS log log_setup thread filesystem system)
 
+set(DATE '08/02/2016')
+set(TIME '17:0000')
+
 # Enable ExternalProject CMake module
 include(ExternalProject)
 # Download and install RocksDB
+
 ExternalProject_Add(
     rocksdb
+    BUILD_COMMAND make -j8 OPT="-DNDEBUG -O2" static_lib
     URL https://github.com/facebook/rocksdb/archive/v4.4.zip
-    UPDATE_COMMAND ""
-    SOURCE_DIR ${rocksdb_source}
     BUILD_IN_SOURCE 1
-    CONFIGURE_COMMAND ${rocksdb_configure}
-    BUILD_COMMAND ${rocksdb_build}
+    CONFIGURE_COMMAND ""
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/rocksdb
     # Disable install step
-    INSTALL_COMMAND "${rocksdb_install}"
+    INSTALL_COMMAND ""
+    LOG_DOWNLOAD ON
 )
 
 # Create a librocksdb target to be used as a dependency by program
@@ -30,6 +33,9 @@ set_target_properties(librocksdb PROPERTIES
     "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
 #    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
 )
+
+
+
 # I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
 include_directories("${source_dir}/include")
 
@@ -61,6 +67,6 @@ target_link_libraries (applib
     ${Boost_FILESYSTEM_LIBRARY}
     ${Boost_THREAD_LIBRARY}
     ${Boost_SYSTEM_LIBRARY}	
-    z pthread rt
+    z pthread rt librocksdb
 )
 
