@@ -16,9 +16,8 @@ EndPoint::EndPoint(string u) {
 		this->uri = u;
 		this->next = 0;
 		regex exp ("#[^\\/]+#");
-		string const group =  "([^\\/]+)";
-		this->expression = "^" + regex_replace(u, exp , group) + "$" ;
-
+		const string replace = "([^\\/]+)";
+		this->expression = "^" + regex_replace(u, exp ,replace) + "$" ;
 }
 
 void EndPoint::setNext(EndPoint* next) {
