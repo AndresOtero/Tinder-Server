@@ -1,9 +1,8 @@
 #include "dispatcher/EndPoint.h"
 #include "EndPointTest.h"
 
-
 EndPointTest::EndPointTest() {
-
+	EndPoint ep ("asdas");
 }
 
 EndPointTest::~EndPointTest() {};
