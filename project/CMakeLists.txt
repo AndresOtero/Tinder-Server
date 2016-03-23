@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.2.2)
 
-option(test "Build all tests." OFF)
+option(test "Build all tests." ON)
 project (tinder-server C CXX)
 
 set(CMAKE_CXX_STANDARD 11)

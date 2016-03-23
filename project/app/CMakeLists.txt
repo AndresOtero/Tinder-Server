@@ -9,32 +9,32 @@ include(ExternalProject)
 
 ExternalProject_Add(
     rocksdb
-    BUILD_COMMAND make -j8 OPT="-DNDEBUG -O2" static_lib
     URL https://github.com/facebook/rocksdb/archive/v4.4.zip
-    BUILD_IN_SOURCE 1
-    CONFIGURE_COMMAND ""
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/rocksdb
+    BUILD_IN_SOURCE 1
+    BUILD_COMMAND make -j8 OPT="-DNDEBUG -O2" static_lib
+    CONFIGURE_COMMAND ""
     # Disable install step
     INSTALL_COMMAND ""
     LOG_DOWNLOAD ON
 )
 
-ExternalProject_Get_Property(rocksdb source_dir binary_dir)
+ExternalProject_Get_Property(rocksdb source_dir)
+ExternalProject_Get_Property(rocksdb binary_dir)
+
 
 # Create a librocksdb target to be used as a dependency by program
-add_library(librocksdb IMPORTED STATIC GLOBAL)
-add_dependencies(librocksdb rocksdb)
+add_library(myrocksdb STATIC IMPORTED)
+add_dependencies(myrocksdb rocksdb)
 
+set_property(TARGET rocksdb PROPERTY IMPORTED_LOCATION ${LIBROCKSDB_A})
 # Set rocksdb properties
-MESSAGE( STATUS "rocksdblib:         " ${binary_dir}/librocksdb.a )
-set_target_properties(librocksdb PROPERTIES
+set_target_properties(myrocksdb PROPERTIES
     "IMPORTED_LOCATION" "${binary_dir}/librocksdb.a"
-#    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
     "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
 )
 
-# I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
-#include_directories("${source_dir}/include")
+include_directories("${source_dir}/include")
 
 
 
@@ -42,6 +42,8 @@ set_target_properties(librocksdb PROPERTIES
 file(GLOB_RECURSE APP_SOURCES "src/*.cpp" "src/*.c")
 file(GLOB_RECURSE APP_HEADERS "src/*.h")
 set(APP_INCLUDE_DIR src PARENT_SCOPE)
+file(GLOB LIBS "${CMAKE_SOURCE_DIR}/app/lib/*.a")
+set(APP_LIBS ${LIBS} PARENT_SCOPE)
 
 set (APP_INCLUDE_DIRS "")
 foreach (_headerFile ${APP_HEADERS})
@@ -57,8 +59,9 @@ INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS} )
 set(CMAKE_C_FLAGS "-DMG_ENABLE_THREADS")
 
 add_library(applib ${APP_SOURCES} ${APP_HEADERS})
-add_dependencies(applib rocksdb)
+add_dependencies(applib myrocksdb)
 target_include_directories(applib PUBLIC src)
+
 SET_TARGET_PROPERTIES(applib PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries (applib
     ${CMAKE_THREAD_LIBS_INIT} 
@@ -66,7 +69,9 @@ target_link_libraries (applib
     ${Boost_LOG_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
     ${Boost_THREAD_LIBRARY}
-    ${Boost_SYSTEM_LIBRARY}	
-    z pthread rt librocksdb
+    ${Boost_SYSTEM_LIBRARY}
+    myrocksdb
+    ${LIBS}
+    z pthread rt myrocksdb
 )
 
