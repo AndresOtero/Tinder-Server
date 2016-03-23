@@ -3,9 +3,6 @@ add_definitions(-DBOOST_LOG_DYN_LINK=1)
 FIND_PACKAGE(Threads)
 FIND_PACKAGE(Boost COMPONENTS log log_setup thread filesystem system)
 
-set(DATE '08/02/2016')
-set(TIME '17:0000')
-
 # Enable ExternalProject CMake module
 include(ExternalProject)
 # Download and install RocksDB
@@ -22,22 +19,24 @@ ExternalProject_Add(
     LOG_DOWNLOAD ON
 )
 
+ExternalProject_Get_Property(rocksdb source_dir binary_dir)
+
 # Create a librocksdb target to be used as a dependency by program
 add_library(librocksdb IMPORTED STATIC GLOBAL)
 add_dependencies(librocksdb rocksdb)
 
 # Set rocksdb properties
-ExternalProject_Get_Property(rocksdb source_dir binary_dir)
+MESSAGE( STATUS "rocksdblib:         " ${binary_dir}/librocksdb.a )
 set_target_properties(librocksdb PROPERTIES
     "IMPORTED_LOCATION" "${binary_dir}/librocksdb.a"
-    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
-#    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
+#    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
+    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
 )
 
-
-
 # I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
-include_directories("${source_dir}/include")
+#include_directories("${source_dir}/include")
+
+
 
 
 file(GLOB_RECURSE APP_SOURCES "src/*.cpp" "src/*.c")
@@ -58,6 +57,7 @@ INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS} )
 set(CMAKE_C_FLAGS "-DMG_ENABLE_THREADS")
 
 add_library(applib ${APP_SOURCES} ${APP_HEADERS})
+add_dependencies(applib rocksdb)
 target_include_directories(applib PUBLIC src)
 SET_TARGET_PROPERTIES(applib PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries (applib
