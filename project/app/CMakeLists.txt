@@ -48,15 +48,6 @@ file(GLOB_RECURSE APP_HEADERS "src/*.h")
 add_library(applib STATIC ${APP_SOURCES} ${APP_HEADERS})
 
 
-
-
-
-
-
-#set(APP_INCLUDE_DIR src PARENT_SCOPE)
-#file(GLOB LIBS "${CMAKE_SOURCE_DIR}/app/lib/*.a")
-#set(APP_LIBS_DIR ${LIBS} PARENT_SCOPE)
-
 set (APP_INCLUDE_DIRS "" PARENT_SCOPE)
 foreach (_headerFile ${APP_HEADERS})
     get_filename_component(_dir ${_headerFile} PATH)
@@ -87,8 +78,6 @@ if (ZLIB_FOUND)
   target_link_libraries (applib ${ZLIB_LIBRARIES})
 
 endif (ZLIB_FOUND)
-
-#target_link_libraries(applib "${CMAKE_SOURCE_DIR}/app/lib/libsnappy.a")
 
 target_link_libraries (applib
     myrocksdb
