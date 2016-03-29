@@ -55,7 +55,7 @@ add_library(applib STATIC ${APP_SOURCES} ${APP_HEADERS})
 
 #set(APP_INCLUDE_DIR src PARENT_SCOPE)
 #file(GLOB LIBS "${CMAKE_SOURCE_DIR}/app/lib/*.a")
-#set(APP_LIBS ${LIBS} PARENT_SCOPE)
+#set(APP_LIBS_DIR ${LIBS} PARENT_SCOPE)
 
 set (APP_INCLUDE_DIRS "" PARENT_SCOPE)
 foreach (_headerFile ${APP_HEADERS})
@@ -70,17 +70,40 @@ target_INCLUDE_DIRECTORIES(applib PRIVATE ${ROCKSDB_SRC} )
 
 
 add_dependencies(applib myrocksdb)
+file(GLOB_RECURSE APP_STATIC_LIBS  "lib/*.a")
+set(GLOBAL_APP_STATIC_LIBS ${APP_STATIC_LIBS} PARENT_SCOPE)
 
 SET_TARGET_PROPERTIES(applib PROPERTIES LINKER_LANGUAGE CXX)
+
+find_package (BZip2)
+if (BZIP2_FOUND)
+  include_directories(${BZIP_INCLUDE_DIRS})
+  target_link_libraries (applib ${BZIP2_LIBRARIES}) 
+endif (BZIP2_FOUND)
+
+find_package (ZLIB)
+if (ZLIB_FOUND)
+ include_directories(${ZLIB_INCLUDE_DIRS})
+  target_link_libraries (applib ${ZLIB_LIBRARIES})
+
+endif (ZLIB_FOUND)
+
+#target_link_libraries(applib "${CMAKE_SOURCE_DIR}/app/lib/libsnappy.a")
+
 target_link_libraries (applib
+    myrocksdb
     ${CMAKE_THREAD_LIBS_INIT} 
     ${Boost_LOG_SETUP_LIBRARY}
     ${Boost_LOG_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
     ${Boost_THREAD_LIBRARY}
     ${Boost_SYSTEM_LIBRARY}
- #   ${LIBS}
-    z pthread rt myrocksdb
+    pthread
+    ${ZLIB_LIBRARIES}
+    ${BZIP2_LIBRARIES}
+    ${APP_STATIC_LIBS}
 )
+
+target_link_libraries (applib ) 
 
 target_include_directories(applib PUBLIC "src")
