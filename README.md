@@ -1,5 +1,7 @@
 # Tinder-Server
 
+Build Status: [![Build Status](https://travis-ci.org/Tinder2Team/Tinder-Server.svg?branch=master)](https://travis-ci.org/Tinder2Team/Tinder-Server)
+
 ## Configurar proyecto eclipse
 
 1. Correr el archivo **_"configEclipse.sh"_** parado en la raiz del proyecto, va a crear una carpeta llamada **_"build"_**.

@@ -1,0 +1,27 @@
+# Use new trusty images, should yield newer compilers and packages
+sudo: required
+dist: trusty
+language: cpp
+
+notifications:
+  slack: tinder-taller2:cWbnTjsSgfTypO4EFzraPu4Z
+
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env: COMPILER=g++-5
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y libboost-all-dev libsnappy-dev libbz2-dev zlib1g-dev
+script:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. ../project && make
+  - ./test/applib/testapp
