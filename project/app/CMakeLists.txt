@@ -96,3 +96,4 @@ target_link_libraries (applib
 target_link_libraries (applib ) 
 
 target_include_directories(applib PUBLIC "src")
+target_compile_features(applib PRIVATE cxx_range_for)
