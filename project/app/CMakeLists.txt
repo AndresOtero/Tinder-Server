@@ -12,7 +12,7 @@ ExternalProject_Add(
     URL https://github.com/facebook/rocksdb/archive/v4.4.zip
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/rocksdb
     BUILD_IN_SOURCE 1
-    BUILD_COMMAND make -j8 OPT="-DNDEBUG -O2" static_lib
+    BUILD_COMMAND make static_lib
     CONFIGURE_COMMAND ""
     # Disable install step
     INSTALL_COMMAND ""

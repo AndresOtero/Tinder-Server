@@ -13,3 +13,17 @@ Hasta nuevo aviso, si se agrega un nuevo archivo, hay que correr
 Hay que instalar el paquete libboost-all-dev
 Para RocksDB hay que asegurarse de tener instalado libsnappy-dev libbz2-dev zlib1g-dev
 
+## Generar reporte de cobertura
+
+### Dependencias
+- gcovr (paquete aptitude)
+- lcov (pquete aptitude)
+
+### Cómo generar el reporte html
+
+Luego de haber hecho un make
+
+1. Parado en el directorio raíz del proyecto, correr el script **coverageEnvironmentVariables.sh**
+2. El script anterior tiene como salida dos exports de variables, hay que, manualmente, ejecutar esas lineas.
+3. Luego correr el script **coverageReport.sh**
+4. Si no hubo ningún tipo de error se debe generar un reporte en $ROOT_DIRECTORY/build/coverage-report/index.html
