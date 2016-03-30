@@ -19,7 +19,7 @@ matrix:
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y libboost-all-dev libsnappy-dev libbz2-dev zlib1g-dev gcov lcov
+  - sudo apt-get install -y libboost-all-dev libsnappy-dev libbz2-dev zlib1g-dev gcovr lcov
 script:
   - mkdir build
   - cd build
