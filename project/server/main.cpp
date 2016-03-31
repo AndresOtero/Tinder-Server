@@ -9,11 +9,10 @@
 #include "dispatcher/ApiDispatcher.h"
 
 int main() {
-	 Logger logger;
-	 logger.info("Starting WebServer");
-	 logger.info("Starting DB");
+	 LOG_INFO << "Starting WebServer";
+	 LOG_INFO << "Starting DB";
 	 DBConnector connector = DBConnector("/tmp/testdb/");
-	 if(!connector.isOk()) logger.error("Error abriendo la DB.");
+	 if(!connector.isOk()) LOG_ERROR << ("Error abriendo la DB.");
 	 ApiDispatcher dispatcher;
 	 WebServer ws(dispatcher);
 	 ws.start();

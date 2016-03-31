@@ -57,11 +57,11 @@ void WebServer::start() {
 	  s_http_server_opts.dav_document_root = ".";  // Allow access via WebDav
 	  s_http_server_opts.enable_directory_listing = "yes";
 
-	  Logger log;
+
 	  string message = "Web server is now listening on port ";
 	  message = message +s_http_port;
 
-	  log.info(message );
+	  LOG_INFO << message;
 	  for (;;) {
 	    mg_mgr_poll(&mgr, 1000);
 	  }
