@@ -1,4 +1,4 @@
-#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lrt -lsnappy -lgflags -lz -lbz2")
+
 add_executable (server main.cpp)
 include_directories (${APP_INCLUDE_DIRS})
 

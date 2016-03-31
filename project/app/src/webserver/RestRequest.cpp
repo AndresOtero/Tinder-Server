@@ -23,3 +23,6 @@ string RestRequest::getUri() {
 string RestRequest::otro() {
 	return "";
 }
+
+void RestRequest::setUri(string uri) {
+}

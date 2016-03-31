@@ -16,3 +16,6 @@ RestResponse::~RestResponse() {
 	// TODO Auto-generated destructor stub
 }
 
+void RestResponse::setStatus(string status) {
+	this->status = status;
+}
