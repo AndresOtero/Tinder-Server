@@ -4,9 +4,9 @@
  */
 
 #include "webserver/WebServer.h"
-#include "dispatcher/EndPoint.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
+#include "dispatcher/ApiDispatcher.h"
 
 int main() {
 	 Logger logger;
@@ -14,7 +14,8 @@ int main() {
 	 logger.info("Starting DB");
 	 DBConnector connector = DBConnector("/tmp/testdb/");
 	 if(!connector.isOk()) logger.error("Error abriendo la DB.");
-	 WebServer ws;
+	 ApiDispatcher dispatcher;
+	 WebServer ws(dispatcher);
 	 ws.start();
 
 	 return 0;

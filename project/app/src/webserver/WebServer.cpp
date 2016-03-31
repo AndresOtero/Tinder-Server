@@ -8,9 +8,12 @@
 #include <iostream>
 #include "WebServer.h"
 
+#include <string>
 #include "mongoose/mongoose.h"
 #include "EndPoint.h"
 #include "log/Logger.h"
+#include "RestRequest.h"
+#include "RestResponse.h"
 using namespace std;
 
 
@@ -18,9 +21,9 @@ using namespace std;
 static const char *s_http_port = "8000";
 static struct mg_serve_http_opts s_http_server_opts;
 
-WebServer::WebServer() {
-	// TODO Auto-generated constructor stub
-
+WebServer::WebServer(ApiDispatcher & dispatcher) {
+	this->dispatcher = &dispatcher;
+    connection = 0;
 }
 
 WebServer::~WebServer() {
@@ -32,7 +35,10 @@ static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
   struct http_message *hm = (struct http_message *) ev_data;
   if (ev == MG_EV_HTTP_REQUEST) {
 	  string uri = server->getUri(hm);
-	  cout<<uri<<endl;
+	  RestRequest request;
+	  request.setUri(uri);
+	  RestResponse response;
+
 	  mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n");
   }
 
@@ -44,7 +50,7 @@ void WebServer::start() {
 
 	  mg_mgr_init(&mgr, NULL);
 	  connection = mg_bind(&mgr, s_http_port, ev_handler);
-mg_enable_multithreading(connection);
+	  mg_enable_multithreading(connection);
 	  // Set up HTTP server parameters
 	  mg_set_protocol_http_websocket(connection);
 	  s_http_server_opts.document_root = ".";  // Serve current directory

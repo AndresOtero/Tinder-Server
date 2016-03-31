@@ -7,21 +7,25 @@
 
 #ifndef SRC_WEBSERVER_WEBSERVER_H_
 #define SRC_WEBSERVER_WEBSERVER_H_
-#include <string>
 
-#include "../mongoose/mongoose.h"
+
+
+#include "mongoose/mongoose.h"
+#include "dispatcher/ApiDispatcher.h"
+#include <string>
 using namespace std;
 
 
 class WebServer {
-public:
-	WebServer();
-	virtual ~WebServer();
-	void start();
-	string getUri(http_message *);
 private :
 	struct mg_connection * connection;
-private :
+	ApiDispatcher * dispatcher;
+public:
+	WebServer(ApiDispatcher &);
+	virtual ~WebServer();
+	void start();
+
+	string getUri(http_message *);
 };
 
 #endif /* SRC_WEBSERVER_WEBSERVER_H_ */

@@ -9,8 +9,9 @@
 #define SRC_DISPATCHER_ENDPOINT_H_
 #include <string>
 
-#include "../mongoose/mongoose.h"
-
+#include "mongoose/mongoose.h"
+#include "../webserver/RestRequest.h"
+#include "../webserver/RestResponse.h"
 using namespace std;
 
 
@@ -35,7 +36,7 @@ public:
  * \return void
  */
 	void setNext(EndPoint *);
-	void handle(string & uri);
+	void handle(RestRequest &, RestResponse &);
 	virtual ~EndPoint();
 };
 

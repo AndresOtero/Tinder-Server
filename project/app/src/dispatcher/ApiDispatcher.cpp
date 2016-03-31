@@ -7,8 +7,10 @@
 
 #include "ApiDispatcher.h"
 
+
+
 ApiDispatcher::ApiDispatcher() {
-	[] () {};
+
 
 }
 
@@ -16,3 +18,8 @@ ApiDispatcher::~ApiDispatcher() {
 	// TODO Auto-generated destructor stub
 }
 
+void ApiDispatcher::registerEndPoint(methods method, string uri,
+		function<void(WebContext&)> func) {
+
+
+}

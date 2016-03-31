@@ -8,6 +8,11 @@
 #include "EndPoint.h"
 #include <regex>
 #include <iostream>
+#include <string>
+#include "../webserver/RestRequest.h"
+#include "../webserver/RestResponse.h"
+#include "log/Logger.h"
+
 using namespace std;
 
 
@@ -28,20 +33,10 @@ void EndPoint::setNext(EndPoint* next) {
  }
 }
 
-/** \brief getAccounts - inputs accounts from the keyboard
- * \details This function reads input from the keyboard.
- * For every S or C entered, the function creates a new
- * Savings or Checking account object and adds it to the
- * account list. An X terminates the entry. Any other
- * input is assumed to be a deposit (numbers greater than
- * 0) or a withdrawal (numbers less than 0).
- *
- * \param accList list<AccountPtr>& the list of account
- *                objects created by getAccounts()
- * \return void
- */
-void EndPoint::handle(string & uri) {
+void EndPoint::handle(RestRequest & req, RestResponse & resp) {
 	regex exp (this->expression);
+	req.getUri();
+
 	if(regex_match(uri, exp)) {
 		cout<<"match"<<endl;
 	}
