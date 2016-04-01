@@ -4,7 +4,9 @@ dist: trusty
 language: cpp
 
 notifications:
-  slack: tinder-taller2:cWbnTjsSgfTypO4EFzraPu4Z
+  slack:
+    rooms:
+      - 7552-tallerii-2016-1c:IWVOUrDzz9erRJRZFF2GbzNs#grupo9
 
 matrix:
   include:
