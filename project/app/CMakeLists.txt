@@ -80,6 +80,7 @@ if (ZLIB_FOUND)
 endif (ZLIB_FOUND)
 
 target_link_libraries (applib
+    curl
     myrocksdb
     ${CMAKE_THREAD_LIBS_INIT} 
     ${Boost_LOG_SETUP_LIBRARY}
