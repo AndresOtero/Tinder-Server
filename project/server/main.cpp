@@ -8,26 +8,26 @@
 #include "db/DBConnector.h"
 #include "dispatcher/ApiDispatcher.h"
 #include "sharedConnector/SharedConnector.h"
-#include "model/User.h"
-#include "model/UserFactory.h"
+
 
 int main() {
-	 Logger logger;
+	Logger logger;
 
-	 logger.info("Testing conecction to shared server.");
-	 SharedConnector sharedConnector = SharedConnector("http://tinder-shared.herokuapp.com");
-	 if(!sharedConnector.testConnection()) logger.error("Error probando conexion con el shared server");
-	 else logger.info("CONNECTION [OK]");
+	logger.info("Testing conecction to shared server.");
+	SharedConnector sharedConnector = SharedConnector("http://tinder-shared.herokuapp.com");
+	if(!sharedConnector.testConnection()) logger.error("Error probando conexion con el shared server");
+	else logger.info("CONNECTION [OK]");
 
-	 logger.info("Starting DB");
-	 DBConnector dbconnector = DBConnector("/tmp/testdb/");
-	 if(!dbconnector.isOk()) logger.error("Error abriendo la DB.");
-	 else logger.info("DB [OK]");
 
-	 logger.info("Starting WebServer");
-	 ApiDispatcher dispatcher;
-	 WebServer ws(dispatcher);
-	 ws.start();
+	logger.info("Starting DB");
+	DBConnector dbconnector = DBConnector("/tmp/testdb/");
+	if(!dbconnector.isOk()) logger.error("Error abriendo la DB.");
+	else logger.info("DB [OK]");
 
-	 return 0;
+	logger.info("Starting WebServer");
+	ApiDispatcher dispatcher;
+	WebServer ws(dispatcher);
+	ws.start();
+
+	return 0;
 }

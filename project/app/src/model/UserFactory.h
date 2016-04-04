@@ -10,12 +10,14 @@
 
 #include "sharedConnector/SharedConnector.h"
 #include "User.h"
+#include <list>
 
 using namespace std;
 
 class UserFactory {
 public:
 	static User* getUserByID(int id, SharedConnector connector);
+	static list<User *> getAllUsers(SharedConnector connector);
 
 };
 

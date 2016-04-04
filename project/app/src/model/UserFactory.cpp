@@ -21,3 +21,27 @@ User* UserFactory::getUserByID(int id, SharedConnector connector){
 	User* newUser = new User(userid, name, alias, email, photo, interests, location);
 	return newUser;
 }
+
+list<User *> UserFactory::getAllUsers(SharedConnector connector) {
+	list<User *> users;
+	Json::Value root;
+	if (!connector.getAllUsers(root)) {
+		Logger log;
+		log.error("Error obteniendo la lista de users");
+		return users;
+	}
+
+	for( Json::ValueIterator itr = root.begin() ; itr != root.end() ; itr++ ) {
+		unordered_map<string, set<string>> interests;
+		Location location(0.0, 0.0);
+		string userid = itr->get("id", "ERROR").asString();
+		string name = itr->get("name", "ERROR").asString();
+		string alias = itr->get("alias", "ERROR").asString();
+		string email = itr->get("email", "ERROR").asString();
+		string photo = itr->get("photo_profile", "ERROR").asString();
+		User* newUser = new User(userid, name, alias, email, photo, interests, location);
+		users.push_back(newUser);
+	}
+
+	return users;
+}

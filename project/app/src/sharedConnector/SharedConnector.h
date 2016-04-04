@@ -17,7 +17,7 @@ public:
 	SharedConnector(std::string serverBaseURL);
 	virtual ~SharedConnector();
 	bool testConnection();
-	bool getAllUsers();
+	bool getAllUsers(Json::Value& usersData);
 	bool getUserByID(int id, Json::Value& userData);
 
 private:
@@ -25,6 +25,7 @@ private:
 	CURL *curl;
 	CURLcode res;
 	bool returnedError();
+	bool getJsonFromURL(std::string url, Json::Value& jsonSata);
 
 };
 

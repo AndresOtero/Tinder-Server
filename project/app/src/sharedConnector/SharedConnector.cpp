@@ -11,13 +11,12 @@ SharedConnector::~SharedConnector() {
   curl_easy_cleanup(curl);
 }
 
-bool SharedConnector::getUserByID(int id, Json::Value& userData) {
+bool SharedConnector::getJsonFromURL(std::string url, Json::Value& jsonData) {
   //estructura en donde se van a guardar los datos.
   struct MemoryStruct chunk;
   chunk.memory = (char*)malloc(1);  /* will be grown as needed by the realloc above */ 
   chunk.size = 0;    /* no data at this point */
 
-  string url = this->serverBaseURL + "/users/" + std::to_string(id);
   curl_easy_setopt(this->curl, CURLOPT_URL, url.c_str());
   curl_easy_setopt(this->curl, CURLOPT_HTTPGET, 1L);
   curl_easy_setopt(this->curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
@@ -37,7 +36,7 @@ bool SharedConnector::getUserByID(int id, Json::Value& userData) {
     //printf("%lu bytes retrieved\n", (long)chunk.size);
     std::string data((char*)chunk.memory);
     Json::Reader reader;
-    if(reader.parse(data, userData)) {
+    if(reader.parse(data, jsonData)) {
 
       free(chunk.memory);
       return true;
@@ -49,17 +48,18 @@ bool SharedConnector::getUserByID(int id, Json::Value& userData) {
       return false;
     }
   }
+}
 
+bool SharedConnector::getUserByID(int id, Json::Value& userData) {
+
+  string url = this->serverBaseURL + "/users/" + std::to_string(id);
+  return this->getJsonFromURL(url, userData);
 }
 
 
-bool SharedConnector::getAllUsers() {
+bool SharedConnector::getAllUsers(Json::Value& usersData) {
   string url = this->serverBaseURL + "/users";
-  curl_easy_setopt(this->curl, CURLOPT_URL, url.c_str());
-  curl_easy_setopt(this->curl, CURLOPT_HTTPGET, 1L);
-  this->res = curl_easy_perform(this->curl);
-  /* Check for errors */ 
-  return !(this->returnedError()); 
+  return this->getJsonFromURL(url, usersData);
 }
 
 bool SharedConnector::returnedError() {
