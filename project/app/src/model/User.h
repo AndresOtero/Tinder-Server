@@ -17,8 +17,9 @@ using namespace std;
 
 class User {
 public:
-	User(string id, string name, string email, string photoURL, 
-		unordered_map<string, set<string>> interests , Location* location);
+	User(string id, string name, string alias, string email, string photoURL, 
+		unordered_map<string, set<string>> interests , Location location);
+
 	virtual ~User();
 	string getId();
 	string getName();
@@ -35,7 +36,7 @@ private:
 	string email;
 	string photoURL;
 	unordered_map<string, set<string>> interests;
-	Location* location;
+	Location location;
 
 };
 

@@ -8,6 +8,8 @@
 #include "db/DBConnector.h"
 #include "dispatcher/ApiDispatcher.h"
 #include "sharedConnector/SharedConnector.h"
+#include "model/User.h"
+#include "model/UserFactory.h"
 
 int main() {
 	 Logger logger;

@@ -1,10 +1,11 @@
 #include "User.h"
 
-
-User::User(string id, string name, string email, string photoURL, 
-	unordered_map<string, set<string>> interests, Location* location){
+//Crear usando el userFactory!!
+User::User(string id, string name, string alias,string email, string photoURL, 
+	unordered_map<string, set<string>> interests, Location location){
 	this->id = id;
 	this->name = name;
+	this->alias = alias;
 	this->email = email;
 	this->photoURL = photoURL;
 	this->interests = interests;
@@ -34,9 +35,9 @@ string User::getPhotoURL() {
 }
 
 double User::getLatitude() {
-	return this->location->getLatitude();
+	return this->location.getLatitude();
 }
 
 double User::getLongitude() {
-	return this->location->getLongitude();
+	return this->location.getLongitude();
 }

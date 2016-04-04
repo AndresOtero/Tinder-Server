@@ -11,6 +11,7 @@
 
 class Location {
 public:
+	Location();
 	Location(double lat, double lon);
 	virtual ~Location();
 	double getLatitude();

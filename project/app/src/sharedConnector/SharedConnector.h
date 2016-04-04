@@ -10,17 +10,21 @@
 
 #include <string>
 #include <curl/curl.h>
+#include "json/json/json.h"
 
 class SharedConnector {
 public:
 	SharedConnector(std::string serverBaseURL);
 	virtual ~SharedConnector();
 	bool testConnection();
+	bool getAllUsers();
+	bool getUserByID(int id, Json::Value& userData);
 
 private:
 	std::string serverBaseURL;
 	CURL *curl;
 	CURLcode res;
+	bool returnedError();
 
 };
 

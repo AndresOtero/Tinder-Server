@@ -5,6 +5,11 @@ Location::Location(double lat, double lon) {
 	this->longitude = lon;
 }
 
+Location::Location() {
+	this->latitude = 0;
+	this->longitude = 0;
+}
+
 Location::~Location() {}
 
 double Location::getLatitude() {
