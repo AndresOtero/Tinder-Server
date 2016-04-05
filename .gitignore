@@ -1,2 +1,5 @@
 *~
 build/*
+logfile.log
+.log
+*.log

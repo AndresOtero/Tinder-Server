@@ -1,6 +1,8 @@
 #include "CallBacks.h"
 #include "Logger.h"
 #include "SharedConnector.h"
+using namespace std;
+
 
 SharedConnector::SharedConnector(std::string serverBaseURL){
   this->serverBaseURL = serverBaseURL;
@@ -43,8 +45,7 @@ bool SharedConnector::getJsonFromURL(std::string url, Json::Value& jsonData) {
     }
     else {
       free(chunk.memory);
-      Logger log;;
-      log.error("Error parsing Json.");
+      LOG_ERROR << "Error parsing Json.";
       return false;
     }
   }
@@ -52,7 +53,7 @@ bool SharedConnector::getJsonFromURL(std::string url, Json::Value& jsonData) {
 
 bool SharedConnector::getUserByID(int id, Json::Value& userData) {
 
-  string url = this->serverBaseURL + "/users/" + std::to_string(id);
+  std::string url = this->serverBaseURL + "/users/" + std::to_string(id);
   return this->getJsonFromURL(url, userData);
 }
 
@@ -64,11 +65,7 @@ bool SharedConnector::getAllUsers(Json::Value& usersData) {
 
 bool SharedConnector::returnedError() {
   if (this->res != CURLE_OK) {
-    Logger log;
-    string message = "curl_easy_perform() failed: ";
-    message = message + curl_easy_strerror(this->res);
-    log.error(message);
-
+    LOG_ERROR << "curl_easy_perform() failed: " << curl_easy_strerror(this->res);
     return true;
   }
   return false;
@@ -87,8 +84,6 @@ bool SharedConnector::testConnection(){
     return !(this->returnedError());
   }
 
-  Logger log;
-  string message = "curl_easy_init failed.";
-  log.error(message);
+  LOG_ERROR << "curl_easy_init failed.";
   return false;
 }

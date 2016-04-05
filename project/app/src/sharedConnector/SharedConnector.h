@@ -12,6 +12,7 @@
 #include <curl/curl.h>
 #include "json/json/json.h"
 
+
 class SharedConnector {
 public:
 	SharedConnector(std::string serverBaseURL);

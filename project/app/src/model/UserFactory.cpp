@@ -6,8 +6,7 @@
 User* UserFactory::getUserByID(int id, SharedConnector connector){
 	Json::Value root;
 	if (!connector.getUserByID(id, root)) {
-		Logger log;
-		log.error("Error obteniendo user con id " + std::to_string(id));
+		LOG_ERROR << "Error obteniendo user con id " << id;
 		return NULL;
 	}
 
@@ -26,8 +25,7 @@ list<User *> UserFactory::getAllUsers(SharedConnector connector) {
 	list<User *> users;
 	Json::Value root;
 	if (!connector.getAllUsers(root)) {
-		Logger log;
-		log.error("Error obteniendo la lista de users");
+		LOG_ERROR << "Error obteniendo la lista de users";
 		return users;
 	}
 
