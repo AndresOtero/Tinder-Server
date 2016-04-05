@@ -20,6 +20,7 @@ ApiDispatcher::~ApiDispatcher() {
 
 void ApiDispatcher::registerEndPoint(methods method, string uri,
 		function<void(WebContext&)> func) {
+}
 
-
+void ApiDispatcher::handle(RestRequest&, RestResponse&) {
 }

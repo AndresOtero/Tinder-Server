@@ -23,6 +23,7 @@ public:
 	virtual ~ApiDispatcher();
 	enum methods {GET='g', PUT='p', PUSH='g', DEL='d'};
 	void registerEndPoint(methods method, string uri, function<void (WebContext&)> func);
+	void handle(RestRequest &, RestResponse &);
 };
 
 #endif /* SRC_DISPATCHER_APIDISPATCHER_H_ */

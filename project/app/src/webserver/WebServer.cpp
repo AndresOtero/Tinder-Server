@@ -32,6 +32,7 @@ WebServer::~WebServer() {
 
 static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
   WebServer * server = (WebServer *) nc->user_data;
+  ApiDispatcher * dispatcher = server->getDispatcher();
   struct http_message *hm = (struct http_message *) ev_data;
   if (ev == MG_EV_HTTP_REQUEST) {
 	  string uri = server->getUri(hm);
@@ -40,7 +41,8 @@ static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
 	  RestResponse response;
 	  response.setStatus("200 OK");
 	  response.render(nc);
-	  mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n");
+	  dispatcher->handle(request, response);
+
   }
 
 }
@@ -69,6 +71,10 @@ void WebServer::start() {
 	  mg_mgr_free(&mgr);
 }
 
+ApiDispatcher* WebServer::getDispatcher() {
+	return dispatcher;
+}
+
 string WebServer::getUri(http_message* hm) {
 	  string uri (*(&hm->uri.p));
 	  std::size_t found = uri.find(" ");
@@ -76,3 +82,4 @@ string WebServer::getUri(http_message* hm) {
 	     uri = uri.substr(0,found);
 	   return uri;
 }
+
