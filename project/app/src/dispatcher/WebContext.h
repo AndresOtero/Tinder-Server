@@ -9,13 +9,20 @@
 #define APP_SRC_DISPATCHER_WEBCONTEXT_H_
 #include "webserver/RestRequest.h"
 #include "webserver/RestResponse.h"
+#include "PathVariableExtractor.h"
+#include <map>
+#include <string>
+using namespace std;
 
 class WebContext {
+
 private:
+	map<string, string> uriparams;
 	RestRequest * request;
 	RestResponse * response;
+	PathVariableExtractor * pv;
 public:
-	WebContext();
+	WebContext(RestRequest&, RestResponse&, PathVariableExtractor &);
 	virtual ~WebContext();
 };
 

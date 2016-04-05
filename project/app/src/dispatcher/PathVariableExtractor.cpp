@@ -6,9 +6,17 @@
  */
 
 #include "PathVariableExtractor.h"
+#include <regex>
+using namespace std;
 
-PathVariableExtractor::PathVariableExtractor() {
-	// TODO Auto-generated constructor stub
+
+PathVariableExtractor::PathVariableExtractor(string format, string path) {
+	regex exp ("#[^\\/]+#");
+	const string replace = "([^\\/]+)";
+	string expression = "^" + regex_replace(format, exp ,replace) + "$" ;
+
+
+
 
 }
 
@@ -16,3 +24,12 @@ PathVariableExtractor::~PathVariableExtractor() {
 	// TODO Auto-generated destructor stub
 }
 
+string PathVariableExtractor::get(string param) {
+	if(params.count(param) > 0) {
+		return params[param];
+	} else {
+		return "";
+	}
+
+
+}

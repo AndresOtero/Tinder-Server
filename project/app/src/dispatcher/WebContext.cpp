@@ -7,8 +7,10 @@
 
 #include <WebContext.h>
 
-WebContext::WebContext() {
-	// TODO Auto-generated constructor stub
+WebContext::WebContext(RestRequest& rq, RestResponse& rp, PathVariableExtractor & pv) {
+	this->pv = &pv;
+	this->request = &rq;
+	this->response = &rp;
 
 }
 

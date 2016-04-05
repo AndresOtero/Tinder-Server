@@ -10,8 +10,8 @@
 #include <string>
 
 #include "mongoose/mongoose.h"
-#include "../webserver/RestRequest.h"
-#include "../webserver/RestResponse.h"
+#include "webserver/RestRequest.h"
+#include "webserver/RestResponse.h"
 using namespace std;
 
 
@@ -20,6 +20,7 @@ private:
 	EndPoint * next;
 	string expression;
 	string uri;
+
 public:
 	EndPoint(string u);
 

@@ -9,8 +9,10 @@
 #include <regex>
 #include <iostream>
 #include <string>
-#include "../webserver/RestRequest.h"
-#include "../webserver/RestResponse.h"
+#include "webserver/RestRequest.h"
+#include "webserver/RestResponse.h"
+#include "PathVariableExtractor.h"
+#include "WebContext.h"
 #include "log/Logger.h"
 #include "NoSuchMethodHandlerException.h"
 
@@ -39,7 +41,8 @@ void EndPoint::handle(RestRequest & req, RestResponse & resp) {
 	string urireq = req.getUri();
 
 	if(regex_match(urireq, exp)) {
-
+		PathVariableExtractor pv (this->uri, urireq);
+		WebContext(req, resp, pv);
 	} else {
 		if(this->next) {
 			this->next->handle(req, resp);
