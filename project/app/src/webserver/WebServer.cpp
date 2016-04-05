@@ -40,9 +40,8 @@ static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
 	  request.setUri(uri);
 	  RestResponse response;
 	  response.setStatus("200 OK");
-	  response.render(nc);
 	  dispatcher->handle(request, response);
-
+	  response.render(nc);
   }
 
 }
@@ -59,7 +58,7 @@ void WebServer::start() {
 	  s_http_server_opts.document_root = ".";  // Serve current directory
 	  s_http_server_opts.dav_document_root = ".";  // Allow access via WebDav
 	  s_http_server_opts.enable_directory_listing = "yes";
-
+	  connection->user_data = this;
 
 	  string message = "Web server is now listening on port ";
 	  message = message +s_http_port;
@@ -72,7 +71,7 @@ void WebServer::start() {
 }
 
 ApiDispatcher* WebServer::getDispatcher() {
-	return dispatcher;
+	return this->dispatcher;
 }
 
 string WebServer::getUri(http_message* hm) {

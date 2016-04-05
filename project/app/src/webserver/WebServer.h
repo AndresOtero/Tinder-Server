@@ -25,7 +25,7 @@ public:
 	virtual ~WebServer();
 	void start();
 	string getUri(http_message *);
-	ApiDispatcher* getDispatcher();
+	ApiDispatcher* getDispatcher() ;
 };
 
 #endif /* SRC_WEBSERVER_WEBSERVER_H_ */

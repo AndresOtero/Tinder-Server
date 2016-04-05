@@ -12,6 +12,7 @@
 #include "../webserver/RestRequest.h"
 #include "../webserver/RestResponse.h"
 #include "log/Logger.h"
+#include "NoSuchMethodHandlerException.h"
 
 using namespace std;
 
@@ -35,10 +36,16 @@ void EndPoint::setNext(EndPoint* next) {
 
 void EndPoint::handle(RestRequest & req, RestResponse & resp) {
 	regex exp (this->expression);
-	req.getUri();
+	string urireq = req.getUri();
 
-	if(regex_match(uri, exp)) {
-		cout<<"match"<<endl;
+	if(regex_match(urireq, exp)) {
+
+	} else {
+		if(this->next) {
+			this->next->handle(req, resp);
+		} else {
+			throw NoSuchMethodHandlerException(urireq);
+		}
 	}
 
 }
