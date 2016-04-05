@@ -6,7 +6,6 @@
  */
 
 #include "DBConnector.h"
-#include "Logger.h"
 
 DBConnector::DBConnector(std::string dbName) {
 	rocksdb::Options options;
