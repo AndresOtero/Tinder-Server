@@ -20,6 +20,7 @@ public:
 	
 
 	virtual void handle(RestRequest &, RestResponse &) = 0;
+	virtual ~RequestDispatcher(){};
 };
 
 #endif /* SRC_WEBSERVER_REQUESTDISPATCHER_H_ */
