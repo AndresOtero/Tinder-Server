@@ -9,6 +9,7 @@
 #define APP_SRC_WEBSERVER_RESTRESPONSE_H_
 
 #include <string>
+#include "mongoose/mongoose.h"
 using namespace std;
 
 class RestResponse {
@@ -18,6 +19,7 @@ public:
 	RestResponse();
 	virtual ~RestResponse();
 	void setStatus(string status);
+	void render (mg_connection *nc);
 };
 
 #endif /* APP_SRC_WEBSERVER_RESTRESPONSE_H_ */

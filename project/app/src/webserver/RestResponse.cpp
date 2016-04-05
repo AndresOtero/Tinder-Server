@@ -8,7 +8,6 @@
 #include <RestResponse.h>
 
 RestResponse::RestResponse() {
-	// TODO Auto-generated constructor stub
 
 }
 
@@ -18,4 +17,7 @@ RestResponse::~RestResponse() {
 
 void RestResponse::setStatus(string status) {
 	this->status = status;
+}
+
+void RestResponse::render(mg_connection* nc) {
 }

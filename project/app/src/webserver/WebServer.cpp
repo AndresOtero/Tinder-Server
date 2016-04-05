@@ -38,7 +38,8 @@ static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
 	  RestRequest request;
 	  request.setUri(uri);
 	  RestResponse response;
-
+	  response.setStatus("200 OK");
+	  response.render(nc);
 	  mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n");
   }
 
