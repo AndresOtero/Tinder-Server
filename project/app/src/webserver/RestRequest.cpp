@@ -7,8 +7,9 @@
 
 #include <RestRequest.h>
 
-RestRequest::RestRequest() {
-	// TODO Auto-generated constructor stub
+RestRequest::RestRequest(http_message * hm) {
+	this->message = hm;
+	this->uri = extractUri(hm);
 
 }
 
@@ -17,12 +18,14 @@ RestRequest::~RestRequest() {
 }
 
 string RestRequest::getUri() {
-	return "";
+	return uri;
 }
 
-string RestRequest::otro() {
-	return "";
-}
 
-void RestRequest::setUri(string uri) {
+string RestRequest::extractUri(http_message* hm) {
+	  string uri (*(&hm->uri.p));
+	  std::size_t found = uri.find(" ");
+	   if (found!=std::string::npos)
+	     uri = uri.substr(0,found);
+	   return uri;
 }

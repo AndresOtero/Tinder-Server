@@ -21,7 +21,7 @@ using namespace std;
 static const char *s_http_port = "8000";
 static struct mg_serve_http_opts s_http_server_opts;
 
-WebServer::WebServer(ApiDispatcher & dispatcher) {
+WebServer::WebServer(RequestDispatcher & dispatcher) {
 	this->dispatcher = &dispatcher;
     connection = 0;
 }
@@ -32,12 +32,10 @@ WebServer::~WebServer() {
 
 static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
   WebServer * server = (WebServer *) nc->user_data;
-  ApiDispatcher * dispatcher = server->getDispatcher();
+  RequestDispatcher * dispatcher = server->getDispatcher();
   struct http_message *hm = (struct http_message *) ev_data;
   if (ev == MG_EV_HTTP_REQUEST) {
-	  string uri = server->getUri(hm);
-	  RestRequest request;
-	  request.setUri(uri);
+	  RestRequest request(hm);
 	  RestResponse response;
 	  response.setStatus("200 OK");
 	  dispatcher->handle(request, response);
@@ -70,15 +68,7 @@ void WebServer::start() {
 	  mg_mgr_free(&mgr);
 }
 
-ApiDispatcher* WebServer::getDispatcher() {
+RequestDispatcher * WebServer::getDispatcher() {
 	return this->dispatcher;
-}
-
-string WebServer::getUri(http_message* hm) {
-	  string uri (*(&hm->uri.p));
-	  std::size_t found = uri.find(" ");
-	   if (found!=std::string::npos)
-	     uri = uri.substr(0,found);
-	   return uri;
 }
 

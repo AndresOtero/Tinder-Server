@@ -7,14 +7,14 @@
 
 #ifndef SRC_DISPATCHER_APIDISPATCHER_H_
 #define SRC_DISPATCHER_APIDISPATCHER_H_
-
+#include "webserver/RequestDispatcher.h"
 
 #include <string>
 #include <functional>
 #include "dispatcher/WebContext.h"
 using namespace std;
 
-class ApiDispatcher {
+class ApiDispatcher: public RequestDispatcher {
 private:
 
 

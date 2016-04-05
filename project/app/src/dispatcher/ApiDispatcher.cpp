@@ -15,7 +15,6 @@ ApiDispatcher::ApiDispatcher() {
 }
 
 ApiDispatcher::~ApiDispatcher() {
-	// TODO Auto-generated destructor stub
 }
 
 void ApiDispatcher::registerEndPoint(methods method, string uri,
@@ -23,4 +22,5 @@ void ApiDispatcher::registerEndPoint(methods method, string uri,
 }
 
 void ApiDispatcher::handle(RestRequest&, RestResponse&) {
+
 }

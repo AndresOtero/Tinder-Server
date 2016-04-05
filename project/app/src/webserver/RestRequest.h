@@ -9,20 +9,21 @@
 #define APP_SRC_WEBSERVER_RESTREQUEST_H_
 #include <string>
 #include <map>
+#include "mongoose/mongoose.h"
 using namespace std;
 
 class RestRequest {
 private:
 	string uri;
-
+	http_message * message;
+	string extractUri(http_message* hm);
 
 
 public:
-	RestRequest();
+	RestRequest(http_message *);
 	virtual ~RestRequest();
 	string getUri();
-	string otro();
-	void setUri(string uri);
+
 };
 
 #endif /* APP_SRC_WEBSERVER_RESTREQUEST_H_ */

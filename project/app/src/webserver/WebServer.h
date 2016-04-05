@@ -11,7 +11,7 @@
 
 
 #include "mongoose/mongoose.h"
-#include "dispatcher/ApiDispatcher.h"
+#include "RequestDispatcher.h"
 #include <string>
 using namespace std;
 
@@ -19,13 +19,12 @@ using namespace std;
 class WebServer {
 private :
 	struct mg_connection * connection;
-	ApiDispatcher * dispatcher;
+	RequestDispatcher * dispatcher;
 public:
-	WebServer(ApiDispatcher &);
+	WebServer(RequestDispatcher &);
 	virtual ~WebServer();
 	void start();
-	string getUri(http_message *);
-	ApiDispatcher* getDispatcher() ;
+	RequestDispatcher* getDispatcher() ;
 };
 
 #endif /* SRC_WEBSERVER_WEBSERVER_H_ */
