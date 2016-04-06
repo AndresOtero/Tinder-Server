@@ -8,21 +8,22 @@
 #ifndef SRC_DISPATCHER_APIDISPATCHER_H_
 #define SRC_DISPATCHER_APIDISPATCHER_H_
 #include "webserver/RequestDispatcher.h"
-
+#include "webserver/RestRequest.h"
 #include <string>
 #include <functional>
-#include "dispatcher/WebContext.h"
+#include "WebContext.h"
+#include "EndPoint.h"
+#include <map>
 using namespace std;
 
 class ApiDispatcher: public RequestDispatcher {
 private:
-
-
+	map<RestRequest::Method, EndPoint *> endpoints;
+	function<void(WebContext&)> defFunction;
 public:
 	ApiDispatcher();
 	virtual ~ApiDispatcher();
-	enum methods {GET='g', PUT='p', PUSH='g', DEL='d'};
-	void registerEndPoint(methods method, string uri, function<void (WebContext&)> & func);
+	void registerEndPoint(RestRequest::Method method, string uri, function<void (WebContext&)> & func);
 	void handle(RestRequest &, RestResponse &);
 };
 

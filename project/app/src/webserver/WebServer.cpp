@@ -10,7 +10,6 @@
 
 #include <string>
 #include "mongoose/mongoose.h"
-#include "EndPoint.h"
 #include "log/Logger.h"
 #include "RestRequest.h"
 #include "RestResponse.h"

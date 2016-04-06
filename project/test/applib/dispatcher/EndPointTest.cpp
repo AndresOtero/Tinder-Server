@@ -2,7 +2,8 @@
 #include "EndPointTest.h"
 
 EndPointTest::EndPointTest() {
-	EndPoint ep ("asdas");
+
+//	EndPoint ep ("asdas", );
 }
 
 EndPointTest::~EndPointTest() {};

@@ -23,7 +23,8 @@ public:
 	RestRequest(http_message *);
 	virtual ~RestRequest();
 	string getUri();
-
+	enum Method {GET, PUT, PUSH, DEL};
+	string toString();
 };
 
 #endif /* APP_SRC_WEBSERVER_RESTREQUEST_H_ */

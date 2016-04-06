@@ -29,3 +29,8 @@ string RestRequest::extractUri(http_message* hm) {
 	     uri = uri.substr(0,found);
 	   return uri;
 }
+
+string RestRequest::toString() {
+	std::string method (*(&message->method.p));
+	return method + ": " + this->getUri();
+}
