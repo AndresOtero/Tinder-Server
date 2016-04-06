@@ -1,7 +1,7 @@
 /*
- * NoSuchMethodHandlerException.h
+ * PathVariableException.h
  *
- *  Created on: 5 de abr. de 2016
+ *  Created on: 6 de abr. de 2016
  *      Author: jonathan
  */
 
@@ -13,10 +13,9 @@
 using namespace std;
 using std::runtime_error;
 
-class PathVariableException: public runtime_error {
+class PathVariableException: public runtime_error  {
 public:
-
-	PathVariableException(string uri);
+	PathVariableException(string error);
 	virtual ~PathVariableException();
 };
 

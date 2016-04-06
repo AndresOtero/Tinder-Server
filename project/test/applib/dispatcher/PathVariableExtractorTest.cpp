@@ -1,5 +1,6 @@
 #include "dispatcher/PathVariableExtractor.h"
 #include "PathVariableExtractorTest.h"
+#include "dispatcher/PathVariableException.h"
 #include <string>
 using namespace std;
 
@@ -25,7 +26,17 @@ TEST_F(PathVariableExtractorTest, ExtractParamsOK) {
 	ASSERT_STREQ(expectedlastname.c_str(), lastname.c_str());
 }
 
-TEST_F(PathVariableExtractorTest, ByDefaultBazFalseIsFalse) {
+TEST_F(PathVariableExtractorTest, WrongPath) {
+	string format = "/api/v1/#name#/#lastname#";
+	string uri = "/api/v1/julio";
+    try {
+
+    	PathVariableExtractor pve ( format, uri );
+        FAIL() << "Expected std::PathVariableException";
+    }
+    catch(PathVariableException const & err) {
+        EXPECT_EQ(err.what(),std::string(uri + " doesn't match with " + format) );
+    }
 	ASSERT_TRUE(true);
 }
 

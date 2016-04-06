@@ -9,6 +9,7 @@
 #include <boost/regex.hpp>
 #include <iostream>
 #include "PathVariableException.h"
+#include "NoSuchMethodHandlerException.h"
 #include "log/Logger.h"
 using namespace std;
 
@@ -37,7 +38,7 @@ list<string> PathVariableExtractor::buildParamNames(string input) {
     }
     catch ( boost::bad_expression & ex )
     {
-        std::cout << ex.what() ;
+        throw PathVariableException(ex.what());
     }
     return names;
 }
@@ -52,11 +53,14 @@ void PathVariableExtractor::buildParams(string format, string path,
         boost::regex exp( gralExpression ) ;
         boost::match_results<std::string::const_iterator> what;
         std::string::const_iterator start = path.begin() ;
-        boost::regex_search(start, path.cend(), what, exp);
+        bool match= boost::regex_search(start, path.cend(), what, exp);
+        if (!match) {
+        	throw PathVariableException(path + " doesn't match with " + format);
+        }
 		int i = 0;
 		if(what.size()-1 != names.size()) {
 			LOG_DEBUG << "Wrong parameters count: " << path << "to "<< format;
-			throw "Wrong parameters count";
+			throw PathVariableException("Wrong parameters count");
 		}
 		for (std::list<string>::iterator it=names.begin(); it != names.end(); ++it) {
 			string name = *it;
@@ -65,7 +69,7 @@ void PathVariableExtractor::buildParams(string format, string path,
     }
     catch ( boost::bad_expression & ex )
     {
-        std::cout << ex.what() ;
+    	 throw PathVariableException(ex.what());
     }
 
 }
