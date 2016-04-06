@@ -10,19 +10,20 @@
 #include "webserver/RestRequest.h"
 #include "webserver/RestResponse.h"
 #include "PathVariableExtractor.h"
-#include <map>
 #include <string>
 using namespace std;
 
 class WebContext {
 
 private:
-	map<string, string> uriparams;
 	RestRequest * request;
 	RestResponse * response;
 	PathVariableExtractor * pv;
 public:
 	WebContext(RestRequest&, RestResponse&, PathVariableExtractor &);
+	string getParam(string);
+	RestRequest & getRequest();
+	RestResponse & getResponse();
 	virtual ~WebContext();
 };
 

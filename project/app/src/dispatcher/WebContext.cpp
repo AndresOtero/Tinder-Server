@@ -14,6 +14,18 @@ WebContext::WebContext(RestRequest& rq, RestResponse& rp, PathVariableExtractor 
 
 }
 
+string WebContext::getParam(string name) {
+	pv->get(name);
+}
+
+RestRequest& WebContext::getRequest() {
+	return *request;
+}
+
+RestResponse& WebContext::getResponse() {
+	return *response;
+}
+
 WebContext::~WebContext() {
 	// TODO Auto-generated destructor stub
 }
