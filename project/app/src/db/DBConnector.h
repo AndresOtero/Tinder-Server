@@ -13,13 +13,16 @@
 
 class DBConnector {
 public:
+	rocksdb::DB* db;
 	std::string openedDB;
 	DBConnector(std::string dbName);
 	virtual ~DBConnector();
 	bool isOk();
+	bool deleteKey(std::string key);
+	bool getValueForKey(std::string key, std::string& value);
+	bool putValueInKey(std::string key, std::string value);
 
 private:
-	rocksdb::DB* db;
 	rocksdb::Status status;
 };
 
