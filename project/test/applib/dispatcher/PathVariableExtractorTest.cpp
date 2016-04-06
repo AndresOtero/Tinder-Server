@@ -14,7 +14,9 @@ void PathVariableExtractorTest::SetUp() {};
 void PathVariableExtractorTest::TearDown() {};
 
 TEST_F(PathVariableExtractorTest, ExtractParamsOK) {
-	PathVariableExtractor pve ("/api/v1/[name]/[lastname]", "api/v1/julio/roca");
+	string format = "/api/v1/#name#/#lastname#";
+	string uri = "/api/v1/julio/roca";
+	PathVariableExtractor pve ( format, uri );
 	string name = pve.get("name");
 	string lastname= pve.get("lastname");
 	string expectedname = "julio";

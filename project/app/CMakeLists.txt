@@ -1,7 +1,7 @@
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 add_definitions(-DBOOST_LOG_DYN_LINK=1)
 FIND_PACKAGE(Threads)
-FIND_PACKAGE(Boost COMPONENTS log log_setup thread filesystem system)
+FIND_PACKAGE(Boost COMPONENTS log log_setup thread filesystem system regex)
 
 # Enable ExternalProject CMake module
 include(ExternalProject)
@@ -88,6 +88,7 @@ target_link_libraries (applib
     ${Boost_FILESYSTEM_LIBRARY}
     ${Boost_THREAD_LIBRARY}
     ${Boost_SYSTEM_LIBRARY}
+    ${Boost_REGEX_LIBRARY}
     pthread
     ${ZLIB_LIBRARIES}
     ${BZIP2_LIBRARIES}

@@ -9,12 +9,15 @@
 #define SRC_DISPATCHER_PATHVARIABLEEXTRACTOR_H_
 #include <string>
 #include <map>
+#include <list>
 using namespace std;
 
 
 class PathVariableExtractor {
 private:
 	map<string, string> params;
+	list<string> buildParamNames(string format);
+	void buildParams(string format,string path, list<string> names);
 public:
 	PathVariableExtractor(string format, string path);
 	virtual ~PathVariableExtractor();
