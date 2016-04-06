@@ -15,7 +15,7 @@ WebContext::WebContext(RestRequest& rq, RestResponse& rp, PathVariableExtractor 
 }
 
 string WebContext::getParam(string name) {
-	pv->get(name);
+	return pv->get(name);
 }
 
 RestRequest& WebContext::getRequest() {

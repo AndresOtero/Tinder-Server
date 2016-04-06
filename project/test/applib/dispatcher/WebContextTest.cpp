@@ -11,6 +11,7 @@
 #include "dispatcher/PathVariableExtractor.h"
 #include "dispatcher/WebContext.h"
 #include "string"
+#include "mongoose/mongoose.h"
 using namespace std;
 
 WebContextTest::WebContextTest() {
@@ -33,7 +34,9 @@ TEST_F(WebContextTest, GetParam) {
 
 
 	PathVariableExtractor pv("/url/#param1#", "/url/parametro") ;
-	RestRequest req(NULL);
+	http_message hm;
+	hm.uri = mg_mk_str("/uri");
+	RestRequest req(&hm);
 	RestResponse rep;
 	WebContext context(req, rep, pv);
 	string value = "parametro";
