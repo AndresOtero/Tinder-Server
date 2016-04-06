@@ -16,12 +16,12 @@ void PathVariableExtractorTest::TearDown() {};
 
 TEST_F(PathVariableExtractorTest, ExtractParamsOK) {
 	string format = "/api/v1/#name#/#lastname#";
-	string uri = "/api/v1/julio/roca";
+	string expectedname = "julio";
+	string expectedlastname = "roca";
+	string uri = "/api/v1/"+ expectedname+ "/" + expectedlastname;
 	PathVariableExtractor pve ( format, uri );
 	string name = pve.get("name");
 	string lastname= pve.get("lastname");
-	string expectedname = "julio";
-	string expectedlastname = "roca";
 	ASSERT_STREQ(expectedname.c_str(), name.c_str());
 	ASSERT_STREQ(expectedlastname.c_str(), lastname.c_str());
 }
@@ -37,10 +37,12 @@ TEST_F(PathVariableExtractorTest, WrongPath) {
     catch(PathVariableException const & err) {
         EXPECT_EQ(err.what(),std::string(uri + " doesn't match with " + format) );
     }
-	ASSERT_TRUE(true);
 }
 
-TEST_F(PathVariableExtractorTest, SometimesBazFalseIsTrue) {
-	ASSERT_TRUE(true);
+TEST_F(PathVariableExtractorTest, PathWithoutParams) {
+    	string format = "/api/v1/name/lastname";
+    	PathVariableExtractor pve ( format, format );
+    	ASSERT_STREQ("", pve.get("name").c_str());
+    	ASSERT_STREQ("", pve.get("lastname").c_str());
 }
 
