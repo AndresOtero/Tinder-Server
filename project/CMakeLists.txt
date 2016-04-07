@@ -17,7 +17,6 @@ if(test)
 				)
 endif()
 
-
 add_subdirectory (app) 
 add_subdirectory (server) 
 
