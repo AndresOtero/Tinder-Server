@@ -63,7 +63,7 @@ TEST_F(EndPointTest, HandledByNext) {
 	function<void(WebContext&)> otherHandler = [&caller](WebContext& wc){
 		caller.call();
 	};
-	EndPoint * ep2 = new EndPoint("/uri/#user#", otherHandler);
+	EndPoint * 	ep2 = new EndPoint("/uri/#user#", otherHandler);
 	ep.setNext(ep2);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan");
