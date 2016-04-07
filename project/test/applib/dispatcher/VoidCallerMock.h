@@ -13,14 +13,14 @@ class VoidCallerInterface {
 public:
 	VoidCallerInterface();
 	virtual ~VoidCallerInterface();
-	virtual int call(int ) = 0;
+	virtual void call() = 0;
 };
 
 class VoidCallerConcrete {
 public:
 	VoidCallerConcrete();
 	virtual ~VoidCallerConcrete();
-	MOCK_METHOD1(call, int(int value));
+	MOCK_METHOD0(call, void());
 };
 
 
