@@ -25,7 +25,6 @@ Para RocksDB hay que asegurarse de tener instalado libsnappy-dev libbz2-dev zlib
 
 Luego de haber hecho un make
 
-1. Parado en el directorio raíz del proyecto, correr el script **coverageEnvironmentVariables.sh**
-2. El script anterior tiene como salida dos exports de variables, hay que, manualmente, ejecutar esas lineas.
-3. Luego correr el script **coverageReport.sh**
-4. Si no hubo ningún tipo de error se debe generar un reporte en $ROOT_DIRECTORY/build/coverage-report/index.html
+
+1. Correr el script **coverageReport.sh**
+2. Si no hubo ningún tipo de error se debe generar un reporte en $ROOT_DIRECTORY/build/coverage-report/index.html
