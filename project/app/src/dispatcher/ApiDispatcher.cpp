@@ -24,13 +24,16 @@ ApiDispatcher::~ApiDispatcher() {
 }
 
 void ApiDispatcher::registerEndPoint(RestRequest::Method method, string uri, function<void(WebContext&)> & handler) {
+	EndPoint * ep = this->endpoints[method];
+	ep->setNext(new EndPoint(uri,handler));
 
 }
 
 void ApiDispatcher::handle(RestRequest& request, RestResponse& response) {
 	RestRequest::Method method = request.getMethod();
 	if (this->endpoints.count(method) > 0) {
-		this->endpoints[method]->handle(request,response);
+		EndPoint * ep = this->endpoints[method];
+		ep->handle(request,response);
 	}
 	else throw NoSuchMethodHandlerException(request.toString());
 }
