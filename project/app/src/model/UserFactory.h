@@ -20,6 +20,7 @@ public:
 	virtual ~UserFactory();
 	User* getUserByID(int id);
 	list<User *> getAllUsers();
+	list<User *> assembleUsersFromJson(Json::Value &root); //No usar, es public para tests.
 
 private:
 	bool getAllUsers(Json::Value& usersData);
