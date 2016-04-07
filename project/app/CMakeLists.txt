@@ -82,6 +82,7 @@ endif (ZLIB_FOUND)
 target_link_libraries (applib
     curl
     myrocksdb
+    cryptopp
     ${CMAKE_THREAD_LIBS_INIT} 
     ${Boost_LOG_SETUP_LIBRARY}
     ${Boost_LOG_LIBRARY}
