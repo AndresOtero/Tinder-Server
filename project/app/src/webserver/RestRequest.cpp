@@ -34,3 +34,14 @@ string RestRequest::toString() {
 	std::string method (*(&message->method.p));
 	return method + ": " + this->getUri();
 }
+
+RestRequest::Method RestRequest::getMethod() {
+	std::string method (*(&message->method.p));
+
+	if( method == "GET") return GET;
+	if( method == "PUT") return PUT;
+	if( method == "POST") return POST;
+	if( method == "DELETE") return DELETE;
+	return GET;
+
+}

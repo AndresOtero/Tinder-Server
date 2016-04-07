@@ -7,13 +7,16 @@
 
 #include "ApiDispatcherTest.h"
 #include "dispatcher/ApiDispatcher.h"
-
+#include "dispatcher/NoSuchMethodHandlerException.h"
 ApiDispatcherTest::ApiDispatcherTest() {
 	// TODO Auto-generated constructor stub
 
 }
 
 void ApiDispatcherTest::SetUp() {
+}
+
+void ApiDispatcherTest::TearDown() {
 }
 
 ApiDispatcherTest::~ApiDispatcherTest() {
@@ -35,7 +38,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
         FAIL() << "Expected std::NoSuchMethodHandlerException";
     }
     catch(NoSuchMethodHandlerException  const & err) {
-        EXPECT_EQ(err.what(),std::string("Handler for POST: /uri/juan not found"));
+        EXPECT_EQ(err.what(),std::string("Handler for GET: /uri/juan not found"));
     }
 
 }

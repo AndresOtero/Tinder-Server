@@ -14,8 +14,8 @@ ApiDispatcher::ApiDispatcher() {
 		throw NoSuchMethodHandlerException(wb.getRequest().toString());
 	};
 	this->endpoints.insert(std::make_pair(RestRequest::GET, new EndPoint("/////", this->defFunction)));
-	this->endpoints.insert(std::make_pair(RestRequest::DEL, new EndPoint("/////", this->defFunction)));
-	this->endpoints.insert(std::make_pair(RestRequest::PUSH, new EndPoint("/////", this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::DELETE, new EndPoint("/////", this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::POST, new EndPoint("/////", this->defFunction)));
 	this->endpoints.insert(std::make_pair(RestRequest::PUT, new EndPoint("/////", this->defFunction)));
 
 }
@@ -27,6 +27,10 @@ void ApiDispatcher::registerEndPoint(RestRequest::Method method, string uri, fun
 
 }
 
-void ApiDispatcher::handle(RestRequest&, RestResponse&) {
-
+void ApiDispatcher::handle(RestRequest& request, RestResponse& response) {
+	RestRequest::Method method = request.getMethod();
+	if (this->endpoints.count(method) > 0) {
+		this->endpoints[method]->handle(request,response);
+	}
+	else throw NoSuchMethodHandlerException(request.toString());
 }
