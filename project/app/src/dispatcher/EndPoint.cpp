@@ -43,12 +43,13 @@ void EndPoint::handle(RestRequest & req, RestResponse & resp) {
 
 	if(regex_match(urireq, exp)) {
 		PathVariableExtractor pv (this->uri, urireq);
-		WebContext(req, resp, pv);
+		WebContext context(req, resp, pv) ;
+		(*handler)(context);
 	} else {
 		if(this->next) {
 			this->next->handle(req, resp);
 		} else {
-			throw NoSuchMethodHandlerException(req.getUri());
+			throw NoSuchMethodHandlerException(req.toString());
 		}
 	}
 

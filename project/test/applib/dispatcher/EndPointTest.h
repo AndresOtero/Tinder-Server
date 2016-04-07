@@ -1,10 +1,16 @@
 #include "gtest/gtest.h"
+#include "dispatcher/WebContext.h"
+#include <functional>
+#include "VoidCallerMock.h"
+using namespace std;
+
 
 // The fixture for testing class Foo.
 class EndPointTest : public ::testing::Test {
 
 protected:
-
+	function<void(WebContext&)> voidHandler;
+	VoidCallerConcrete * callmock;
     // You can do set-up work for each test here.
     EndPointTest();
 
