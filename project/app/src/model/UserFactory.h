@@ -16,8 +16,15 @@ using namespace std;
 
 class UserFactory {
 public:
-	static User* getUserByID(int id, SharedConnector connector);
-	static list<User *> getAllUsers(SharedConnector connector);
+	UserFactory(SharedConnector* connector);
+	virtual ~UserFactory();
+	User* getUserByID(int id);
+	list<User *> getAllUsers();
+
+private:
+	bool getAllUsers(Json::Value& usersData);
+	bool getUserByID(int id, Json::Value& userData);
+	SharedConnector* connector;
 
 };
 

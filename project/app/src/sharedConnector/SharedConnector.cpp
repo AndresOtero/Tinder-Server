@@ -6,27 +6,30 @@ using namespace std;
 
 SharedConnector::SharedConnector(std::string serverBaseURL){
   this->serverBaseURL = serverBaseURL;
-  curl = curl_easy_init();
 }
 
-SharedConnector::~SharedConnector() {
-  curl_easy_cleanup(curl);
-}
+SharedConnector::~SharedConnector() {}
 
-bool SharedConnector::getJsonFromURL(std::string url, Json::Value& jsonData) {
+bool SharedConnector::getJsonFromURL(std::string endpoint, Json::Value& jsonData) {
+  //concateno baseurl con el endpoint recibido
+  string url = this->serverBaseURL + endpoint;
   //estructura en donde se van a guardar los datos.
   struct MemoryStruct chunk;
   chunk.memory = (char*)malloc(1);  /* will be grown as needed by the realloc above */ 
   chunk.size = 0;    /* no data at this point */
 
-  curl_easy_setopt(this->curl, CURLOPT_URL, url.c_str());
-  curl_easy_setopt(this->curl, CURLOPT_HTTPGET, 1L);
-  curl_easy_setopt(this->curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
+  //Inicio y configuro las opciones de curl
+  CURL *curl;
+  curl = curl_easy_init();
+  curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+  curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
+  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
   /* we pass our 'chunk' struct to the callback function */ 
-  curl_easy_setopt(this->curl, CURLOPT_WRITEDATA, (void *)&chunk);
-  this->res = curl_easy_perform(this->curl);
+  curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
+  CURLcode res = curl_easy_perform(curl);
+  curl_easy_cleanup(curl);
   /* Check for errors */ 
-  if(this->returnedError()) return false;
+  if(this->returnedError(res)) return false;
   else {
     /*
      * Now, our chunk.memory points to a memory block that is chunk.size
@@ -36,7 +39,7 @@ bool SharedConnector::getJsonFromURL(std::string url, Json::Value& jsonData) {
      */ 
     
     //printf("%lu bytes retrieved\n", (long)chunk.size);
-    std::string data((char*)chunk.memory);
+    string data((char*)chunk.memory);
     Json::Reader reader;
     if(reader.parse(data, jsonData)) {
 
@@ -51,21 +54,10 @@ bool SharedConnector::getJsonFromURL(std::string url, Json::Value& jsonData) {
   }
 }
 
-bool SharedConnector::getUserByID(int id, Json::Value& userData) {
 
-  std::string url = this->serverBaseURL + "/users/" + std::to_string(id);
-  return this->getJsonFromURL(url, userData);
-}
-
-
-bool SharedConnector::getAllUsers(Json::Value& usersData) {
-  string url = this->serverBaseURL + "/users";
-  return this->getJsonFromURL(url, usersData);
-}
-
-bool SharedConnector::returnedError() {
-  if (this->res != CURLE_OK) {
-    LOG_ERROR << "curl_easy_perform() failed: " << curl_easy_strerror(this->res);
+bool SharedConnector::returnedError(CURLcode res) {
+  if (res != CURLE_OK) {
+    LOG_ERROR << "curl_easy_perform() failed: " << curl_easy_strerror(res);
     return true;
   }
   return false;
@@ -73,15 +65,17 @@ bool SharedConnector::returnedError() {
 
 bool SharedConnector::testConnection(){
  
-  if(this->curl) {
-    curl_easy_setopt(this->curl, CURLOPT_URL, this->serverBaseURL.c_str());
+  CURL *curl;
+  curl = curl_easy_init();
+  if(curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, this->serverBaseURL.c_str());
     //curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-    curl_easy_setopt(this->curl, CURLOPT_NOBODY, 1L);
+    curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
  
     /* Perform the request, res will get the return code */ 
-    this->res = curl_easy_perform(this->curl);
+    CURLcode res = curl_easy_perform(curl);
     /* Check for errors */ 
-    return !(this->returnedError());
+    return !(this->returnedError(res));
   }
 
   LOG_ERROR << "curl_easy_init failed.";

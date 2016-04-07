@@ -2,10 +2,19 @@
 #include "json/json/json.h"
 #include "log/Logger.h"
 #include "Location.h"
+#include "sharedConnector/SharedConnector.h"
 
-User* UserFactory::getUserByID(int id, SharedConnector connector){
+UserFactory::UserFactory(SharedConnector* connector) {
+	this->connector = connector;
+}
+
+UserFactory::~UserFactory() {}
+
+
+User* UserFactory::getUserByID(int id){
 	Json::Value root;
-	if (!connector.getUserByID(id, root)) {
+	std::string url = "/users/" + std::to_string(id);
+	if (!this->connector->getJsonFromURL(url, root)) {
 		LOG_ERROR << "Error obteniendo user con id " << id;
 		return NULL;
 	}
@@ -21,10 +30,12 @@ User* UserFactory::getUserByID(int id, SharedConnector connector){
 	return newUser;
 }
 
-list<User *> UserFactory::getAllUsers(SharedConnector connector) {
+
+list<User *> UserFactory::getAllUsers() {
 	list<User *> users;
 	Json::Value root;
-	if (!connector.getAllUsers(root)) {
+	string url = "/users";
+	if (!this->connector->getJsonFromURL(url, root)) {
 		LOG_ERROR << "Error obteniendo la lista de users";
 		return users;
 	}
