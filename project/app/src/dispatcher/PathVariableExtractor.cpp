@@ -20,9 +20,7 @@ PathVariableExtractor::PathVariableExtractor(string format, string path) {
 
 }
 
-PathVariableExtractor::~PathVariableExtractor() {
-	// TODO Auto-generated destructor stub
-}
+PathVariableExtractor::~PathVariableExtractor() {}
 
 list<string> PathVariableExtractor::buildParamNames(string input) {
 	list<string> names;
@@ -40,7 +38,6 @@ list<string> PathVariableExtractor::buildParamNames(string input) {
     {
         throw PathVariableException(ex.what());
     }
-    return names;
 }
 
 void PathVariableExtractor::buildParams(string format, string path,

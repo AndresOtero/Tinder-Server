@@ -6,6 +6,7 @@ using ::testing::NiceMock;
 using ::testing::_;
 
 EndPointTest::EndPointTest() {
+	callmock= 0;
 }
 
 EndPointTest::~EndPointTest() {
@@ -36,7 +37,7 @@ TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
 	try {
 		EXPECT_CALL(*callmock,call()).Times(0);
 		ep.handle(req , rep);
-        FAIL() << "Expected std::PathVariableException";
+        FAIL() << "Expected NoSuchMethodHandlerException";
     }
     catch(NoSuchMethodHandlerException  const & err) {
         EXPECT_EQ(err.what(),std::string("Handler for POST: /uri not found"));
