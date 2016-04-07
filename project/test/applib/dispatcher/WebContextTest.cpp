@@ -39,6 +39,10 @@ TEST_F(WebContextTest, GetParam) {
 	RestRequest req(&hm);
 	RestResponse rep;
 	WebContext context(req, rep, pv);
+
+	EXPECT_TRUE(&req == &(context.getRequest()));
+	EXPECT_TRUE(&rep == &(context.getResponse()));
+
 	string value = "parametro";
 	ASSERT_STREQ(value.c_str(), context.getParam("param1").c_str());
 

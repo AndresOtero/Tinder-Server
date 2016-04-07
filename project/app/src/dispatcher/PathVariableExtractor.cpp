@@ -58,10 +58,6 @@ void PathVariableExtractor::buildParams(string format, string path,
         	throw PathVariableException(path + " doesn't match with " + format);
         }
 		int i = 0;
-		if(what.size()-1 != names.size()) {
-			LOG_DEBUG << "Wrong parameters count: " << path << "to "<< format;
-			throw PathVariableException("Wrong parameters count");
-		}
 		for (std::list<string>::iterator it=names.begin(); it != names.end(); ++it) {
 			string name = *it;
 			this->params.insert(std::make_pair(name, what[++i]));

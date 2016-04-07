@@ -76,4 +76,24 @@ TEST_F(EndPointTest, HandledByNext) {
 	ep.handle(req , rep);
 }
 
+TEST_F(EndPointTest, HandledByNextNext) {
+	EndPoint ep ("//////////", this->voidHandler);
+	VoidCallerConcrete caller;
+	function<void(WebContext&)> otherHandler = [&caller](WebContext& wc){
+		caller.call();
+	};
+	EndPoint * 	ep2 = new EndPoint("//////////", this->voidHandler);
+	EndPoint * 	ep3 = new EndPoint("/uri/#user#", otherHandler);
+	ep.setNext(ep2);
+	ep.setNext(ep3);
+	http_message hm;
+	hm.uri = mg_mk_str("/uri/juan");
+	hm.method = mg_mk_str("GET");
+	RestRequest req(&hm);
+	RestResponse rep;
+	EXPECT_CALL(*callmock,call()).Times(0);
+	EXPECT_CALL(caller,call()).Times(1);
+	ep.handle(req , rep);
+}
+
 
