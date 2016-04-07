@@ -30,7 +30,7 @@ TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
 	EndPoint ep ("//////////", this->voidHandler);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri");
-	hm.method = mg_mk_str("POST");
+	hm.method = mg_mk_str("DELETE");
 	RestRequest req(&hm);
 
 	RestResponse rep;
@@ -40,7 +40,7 @@ TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
         FAIL() << "Expected NoSuchMethodHandlerException";
     }
     catch(NoSuchMethodHandlerException  const & err) {
-        EXPECT_EQ(err.what(),std::string("Handler for POST: /uri not found"));
+        EXPECT_EQ(err.what(),std::string("Handler for DELETE: /uri not found"));
     }
 
 }

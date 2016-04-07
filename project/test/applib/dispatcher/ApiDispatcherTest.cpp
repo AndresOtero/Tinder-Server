@@ -40,7 +40,7 @@ ApiDispatcherTest::~ApiDispatcherTest() {
 TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan");
-	hm.method = mg_mk_str("GET");
+	hm.method = mg_mk_str("POST");
 	ApiDispatcher dispatcher;
 	RestRequest req(&hm);
 	RestResponse rep;
@@ -50,7 +50,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
         FAIL() << "Expected std::NoSuchMethodHandlerException";
     }
     catch(NoSuchMethodHandlerException  const & err) {
-        EXPECT_EQ(err.what(),std::string("Handler for GET: /uri/juan not found"));
+        EXPECT_EQ(err.what(),std::string("Handler for POST: /uri/juan not found"));
     }
 }
 TEST_F(ApiDispatcherTest, DispatchOKey) {
@@ -67,7 +67,7 @@ TEST_F(ApiDispatcherTest, DispatchOKey) {
 TEST_F(ApiDispatcherTest, defaultError) {
 	http_message hm;
 	hm.uri = mg_mk_str("/////");
-	hm.method = mg_mk_str("GET");
+	hm.method = mg_mk_str("PUT");
 	RestRequest req(&hm);
 	RestResponse rep;
 	try {
@@ -76,7 +76,7 @@ TEST_F(ApiDispatcherTest, defaultError) {
         FAIL() << "Expected std::NoSuchMethodHandlerException";
     }
     catch(NoSuchMethodHandlerException  const & err) {
-        EXPECT_EQ(err.what(),std::string("Handler for GET: ///// not found"));
+        EXPECT_EQ(err.what(),std::string("Handler for PUT: ///// not found"));
     }
 }
 
