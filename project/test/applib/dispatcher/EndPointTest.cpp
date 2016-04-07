@@ -34,6 +34,7 @@ TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
 
 	RestResponse rep;
 	try {
+		EXPECT_CALL(*callmock,call()).Times(0);
 		ep.handle(req , rep);
         FAIL() << "Expected std::PathVariableException";
     }
@@ -41,11 +42,10 @@ TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
         EXPECT_EQ(err.what(),std::string("Handler for POST: /uri not found"));
     }
 
-	EXPECT_CALL(*callmock,call()).Times(0);
 }
 
 
-TEST_F(EndPointTest, handle) {
+TEST_F(EndPointTest, Handle) {
 	EndPoint ep ("/uri/#user#", this->voidHandler);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan");
@@ -57,8 +57,23 @@ TEST_F(EndPointTest, handle) {
 
 }
 
-TEST_F(EndPointTest, SometimesBazFalseIsTrue) {
-	ASSERT_TRUE(true);
+TEST_F(EndPointTest, HandledByNext) {
+	EndPoint ep ("//////////", this->voidHandler);
+	VoidCallerConcrete caller;
+	function<void(WebContext&)> otherHandler = [&caller](WebContext& wc){
+		caller.call();
+	};
+	EndPoint * ep2 = new EndPoint("/uri/#user#", otherHandler);
+	ep.setNext(ep2);
+	http_message hm;
+	hm.uri = mg_mk_str("/uri/juan");
+	hm.method = mg_mk_str("GET");
+	RestRequest req(&hm);
+	RestResponse rep;
+	EXPECT_CALL(*callmock,call()).Times(0);
+	EXPECT_CALL(caller,call()).Times(1);
+
+	ep.handle(req , rep);
 }
 
 
