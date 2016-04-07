@@ -18,6 +18,7 @@ TEST_F(EndPointTest, ByDefaultBazTrueIsTrue) {
 	ASSERT_TRUE(true);
 }
 
+
 TEST_F(EndPointTest, ByDefaultBazFalseIsFalse) {
 	ASSERT_TRUE(true);
 }
