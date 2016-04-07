@@ -5,19 +5,19 @@
  *      Author: matias
  */
 
-#ifndef SRC_USERFACTORY_H_
-#define SRC_USERFACTORY_H_
+#ifndef SRC_PROFILESERVICES_H_
+#define SRC_PROFILESERVICES_H_
 
 #include "sharedConnector/SharedConnector.h"
-#include "User.h"
+#include "model/User.h"
 #include <list>
 
 using namespace std;
 
-class UserFactory {
+class ProfileServices {
 public:
-	UserFactory(SharedConnector* connector);
-	virtual ~UserFactory();
+	ProfileServices(SharedConnector* connector);
+	virtual ~ProfileServices();
 	User* getUserByID(int id);
 	list<User *> getAllUsers();
 	list<User *> assembleUsersFromJson(Json::Value &root); //No usar, es public para tests.
@@ -29,4 +29,4 @@ private:
 
 };
 
-#endif /* SRC_USERFACTORY_H_ */
+#endif /* SRC_PROFILESERVICES_H_ */

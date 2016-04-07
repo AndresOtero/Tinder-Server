@@ -1,19 +1,19 @@
-#include "UserFactoryTest.h"
-#include "model/UserFactory.h"
+#include "ProfileServicesTest.h"
+#include "services/profile/ProfileServices.h"
 #include <string>
 #include <iostream>
 
-UserFactoryTest::UserFactoryTest() {};
+ProfileServicesTest::ProfileServicesTest() {};
 
-UserFactoryTest::~UserFactoryTest() {};
+ProfileServicesTest::~ProfileServicesTest() {};
 
-void UserFactoryTest::SetUp() {};
+void ProfileServicesTest::SetUp() {};
 
-void UserFactoryTest::TearDown() {};
+void ProfileServicesTest::TearDown() {};
 
-TEST_F(UserFactoryTest, AssembleOneUserFromJson) {
+TEST_F(ProfileServicesTest, AssembleOneUserFromJson) {
 	//Simula la llamada de getUserByID donde hay que agregar la respuesta a un array.
-	UserFactory factory(NULL);
+	ProfileServices factory(NULL);
 	Json::Value array;
 	Json::Value root;
 	Json::Value content;
@@ -39,9 +39,9 @@ TEST_F(UserFactoryTest, AssembleOneUserFromJson) {
 }
 
 
-TEST_F(UserFactoryTest, AssembleMultipleUsersFromJson) {
+TEST_F(ProfileServicesTest, AssembleMultipleUsersFromJson) {
 	//Simula la llamada de getUserByID donde hay que agregar la respuesta a un array.
-	UserFactory factory(NULL);
+	ProfileServices factory(NULL);
 	Json::Value users;
 	Json::Value array;
 	Json::Value root;

@@ -1,16 +1,16 @@
-#include "UserFactory.h"
+#include "ProfileServices.h"
 #include "json/json/json.h"
 #include "log/Logger.h"
-#include "Location.h"
+#include "model/Location.h"
 #include "sharedConnector/SharedConnector.h"
 
-UserFactory::UserFactory(SharedConnector* connector) {
+ProfileServices::ProfileServices(SharedConnector* connector) {
 	this->connector = connector;
 }
 
-UserFactory::~UserFactory() {}
+ProfileServices::~ProfileServices() {}
 
-list<User *> UserFactory::assembleUsersFromJson(Json::Value &root) {
+list<User *> ProfileServices::assembleUsersFromJson(Json::Value &root) {
 	list<User *> users;
 	for( Json::ValueIterator itr = root.begin() ; itr != root.end() ; itr++ ) {
 	unordered_map<string, set<string>> interests;
@@ -28,7 +28,7 @@ list<User *> UserFactory::assembleUsersFromJson(Json::Value &root) {
 	return users;
 }
 
-User* UserFactory::getUserByID(int id){
+User* ProfileServices::getUserByID(int id){
 	Json::Value array;
 	Json::Value root;
 	std::string url = "/users/" + std::to_string(id);
@@ -41,7 +41,7 @@ User* UserFactory::getUserByID(int id){
 }
 
 
-list<User *> UserFactory::getAllUsers() {
+list<User *> ProfileServices::getAllUsers() {
 	Json::Value root;
 	string url = "/users";
 	if (!this->connector->getJsonFromURL(url, root) ) {

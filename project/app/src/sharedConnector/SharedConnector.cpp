@@ -10,6 +10,25 @@ SharedConnector::SharedConnector(std::string serverBaseURL){
 
 SharedConnector::~SharedConnector() {}
 
+bool SharedConnector::putJsonToURL(std::string endpoint, Json::Value& jsonData) {
+  //concateno baseurl con el endpoint recibido
+  string url = this->serverBaseURL + endpoint;
+  //preparo el json a mandar.
+  Json::FastWriter writer;
+  std::string jsonString = writer.write(jsonData);
+  //preparo el objeto curl
+  CURL *curl;
+  curl = curl_easy_init();
+  curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PUT");
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonString.c_str());
+  CURLcode res = curl_easy_perform(curl);
+  curl_easy_cleanup(curl);
+
+  if(this->returnedError(res)) return false;
+  return true;
+}
+
 bool SharedConnector::getJsonFromURL(std::string endpoint, Json::Value& jsonData) {
   //concateno baseurl con el endpoint recibido
   string url = this->serverBaseURL + endpoint;
