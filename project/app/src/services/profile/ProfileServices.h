@@ -21,6 +21,10 @@ public:
 	User* getUserByID(int id);
 	list<User *> getAllUsers();
 	list<User *> assembleUsersFromJson(Json::Value &root); //No usar, es public para tests.
+	bool updateUserProfile(User* user);
+	Json::Value assembleJsonFromUser(User* user);
+	bool saveNewUser(User* user);
+	bool deleteUserByID(int id);
 
 private:
 	bool getAllUsers(Json::Value& usersData);

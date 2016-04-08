@@ -16,6 +16,8 @@ public:
 	virtual ~Location();
 	double getLatitude();
 	double getLongitude();
+	void setLatitude(double latitude);
+	void setLongitude(double longitude);
 
 private:
 	double latitude;

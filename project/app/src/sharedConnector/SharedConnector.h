@@ -19,7 +19,9 @@ public:
 	virtual ~SharedConnector();
 	bool testConnection();
 	bool getJsonFromURL(std::string endpoint, Json::Value& jsonData);
-	bool putJsonToURL(std::string endpoint, Json::Value& jsonData);
+	bool putDataToURL(std::string endpoint, std::string data);
+	bool postDataToURL(std::string endpoint, std::string data);
+	bool deleteToURL(std::string endpoint);
 	std::string serverBaseURL;
 
 

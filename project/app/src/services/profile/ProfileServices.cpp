@@ -52,3 +52,53 @@ list<User *> ProfileServices::getAllUsers() {
 	Json::Value users = root.get("users","ERROR");
 	return this->assembleUsersFromJson(users);
 }
+
+
+bool ProfileServices::deleteUserByID(int id) {
+	string url = "/users/" + to_string(id);
+	if (!this->connector->deleteToURL(url)) {
+		LOG_ERROR << "Error deleting user con ID: " << to_string(id);
+		return false;
+	}
+	return true;
+}
+
+bool ProfileServices::updateUserProfile(User* user) {
+	string url = "/users/" + user->getId();
+	Json::Value root = this->assembleJsonFromUser(user);
+	Json::FastWriter writer;
+	string data = "user=" + writer.write(root);
+	if (this->connector->putDataToURL(url, data)) {
+		LOG_ERROR << "Error haciendo put para el user con id=" << user->getId();
+		return false;
+	}
+	return true;
+}
+
+bool ProfileServices::saveNewUser(User* user) {
+	string url = "/users/";
+	Json::Value root = this->assembleJsonFromUser(user);
+	Json::FastWriter writer;
+	string data = "user=" + writer.write(root);
+	if (this->connector->postDataToURL(url, data)) {
+				LOG_ERROR << "Error haciendo post del user nuevo";
+		return false;
+	}
+	return true;
+}
+
+Json::Value ProfileServices::assembleJsonFromUser(User* user) {
+	Json::Value userData;
+	Json::Value location;
+	location["latitude"] = user->getLatitude();
+	location["longitude"] = user->getLongitude();
+	userData["id"] = user->getId();
+	userData["name"] = user->getName();
+	userData["alias"] = user->getAlias();
+	userData["email"] = user->getEmail();
+	userData["photo_profile"] = user->getPhotoURL();
+	userData["location"] = location;
+	Json::FastWriter writer;
+	//LOG_ERROR << writer.write(root);
+	return userData;
+}

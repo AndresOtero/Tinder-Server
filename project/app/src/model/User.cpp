@@ -41,3 +41,27 @@ double User::getLatitude() {
 double User::getLongitude() {
 	return this->location.getLongitude();
 }
+
+void User::setName(string name){
+	this->name = name;
+}
+
+void User::setAlias(string alias) {
+	this->alias = alias;
+}
+
+void User::setEmail(string email) {
+	this->email = email;
+}
+
+void User::setPhotoURL(string url) {
+	this->photoURL = url;
+}
+
+void User::setLatitude(double latitude) {
+	this->location.setLatitude(latitude);
+}
+
+void User::setLongitude(double longitude) {
+	this->location.setLongitude(longitude);
+}

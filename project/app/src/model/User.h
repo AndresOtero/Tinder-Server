@@ -28,6 +28,12 @@ public:
 	string getPhotoURL();
 	double getLatitude();
 	double getLongitude();
+	void setName(string name);
+	void setAlias(string alias);
+	void setEmail(string email);
+	void setPhotoURL(string url);
+	void setLatitude(double latitude);
+	void setLongitude(double longitude);
 
 private:
 	string id;
