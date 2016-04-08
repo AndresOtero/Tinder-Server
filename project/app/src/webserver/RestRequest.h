@@ -26,6 +26,7 @@ public:
 	enum Method {GET, PUT, POST, DELETE};
 	string toString();
 	Method getMethod();
+	static string getDescription(RestRequest::Method);
 };
 
 #endif /* APP_SRC_WEBSERVER_RESTREQUEST_H_ */

@@ -21,9 +21,9 @@ private:
 	EndPoint * next;
 	string expression;
 	string uri;
-	function<void(WebContext&)> * handler;
+	function<void(WebContext&)> handler;
 public:
-	EndPoint(string u, function<void(WebContext&)> & handler);
+	EndPoint(string u, function<void(WebContext&)> handler);
 
 /** \brief getAccounts - inputs accounts from the keyboard
  * \details This function reads input from the keyboard.

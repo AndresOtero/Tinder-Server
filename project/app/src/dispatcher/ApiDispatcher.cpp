@@ -24,8 +24,9 @@ ApiDispatcher::ApiDispatcher() {
 ApiDispatcher::~ApiDispatcher() {
 }
 
-void ApiDispatcher::registerEndPoint(RestRequest::Method method, string uri, function<void(WebContext&)> & handler) {
+void ApiDispatcher::registerEndPoint(RestRequest::Method method, string uri, function<void(WebContext&)>  handler) {
 	EndPoint * ep = this->endpoints[method];
+	LOG_INFO << LOGGER_PREFIX << "Registering " << RestRequest::getDescription(method) << " " << uri;
 	ep->setNext(new EndPoint(uri,handler));
 
 }

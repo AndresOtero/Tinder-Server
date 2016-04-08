@@ -19,14 +19,14 @@
 using namespace std;
 
 
-EndPoint::EndPoint(string u, function<void(WebContext&)> & handler) {
+EndPoint::EndPoint(string u, function<void(WebContext&)> handler) {
 
 		this->uri = u;
 		this->next = 0;
 		regex exp ("#[^\\/]+#");
 		const string replace = "([^\\/]+)";
 		this->expression = "^" + regex_replace(u, exp ,replace) + "$" ;
-		this->handler = &handler;
+		this->handler = handler;
 }
 
 void EndPoint::setNext(EndPoint* next) {
@@ -44,7 +44,7 @@ void EndPoint::handle(RestRequest & req, RestResponse & resp) {
 	if(regex_match(urireq, exp)) {
 		PathVariableExtractor pv (this->uri, urireq);
 		WebContext context(req, resp, pv) ;
-		(*handler)(context);
+		handler(context);
 	} else {
 		if(this->next) {
 			this->next->handle(req, resp);

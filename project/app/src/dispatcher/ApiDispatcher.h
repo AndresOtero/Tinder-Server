@@ -23,7 +23,7 @@ private:
 public:
 	ApiDispatcher();
 	virtual ~ApiDispatcher();
-	void registerEndPoint(RestRequest::Method method, string uri, function<void (WebContext&)> & func);
+	void registerEndPoint(RestRequest::Method method, string uri, function<void (WebContext&)>  func);
 	void handle(RestRequest &, RestResponse &);
 };
 

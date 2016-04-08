@@ -8,6 +8,7 @@
 #include "db/DBConnector.h"
 #include "dispatcher/ApiDispatcher.h"
 #include "sharedConnector/SharedConnector.h"
+#include "api/UserResource.h"
 
 
 int main() {
@@ -23,6 +24,8 @@ int main() {
 
 	LOG_INFO << "Starting WebServer";
 	ApiDispatcher dispatcher;
+	UserResource user;
+	user.setup(dispatcher);
 	WebServer ws(dispatcher);
 
 	ws.start();
