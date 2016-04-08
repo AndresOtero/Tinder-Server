@@ -15,7 +15,7 @@ int main() {
 	LOG_INFO << "Testing conecction to shared server.";
 	SharedConnector sharedConnector = SharedConnector("http://tinder-shared.herokuapp.com");
 	if(!sharedConnector.testConnection()) LOG_ERROR << "Error probando conexion con el shared server";
-		else LOG_INFO << "CONNECTION [OK]";
+	else LOG_INFO << "CONNECTION [OK]";
 
 
 	LOG_INFO << "Starting DB";

@@ -19,3 +19,11 @@ double Location::getLatitude() {
 double Location::getLongitude() {
 	return this->longitude;
 }
+
+void Location::setLatitude(double latitude) {
+	this->latitude = latitude;
+}
+
+void Location::setLongitude(double longitude) {
+	this->longitude = longitude;
+}
