@@ -24,7 +24,7 @@ PathVariableExtractor::~PathVariableExtractor() {}
 
 list<string> PathVariableExtractor::buildParamNames(string input) {
 	list<string> names;
-    try {
+//    try {
         boost::regex exp( "#([^\\/]+)#" ) ;
         boost::match_results<std::string::const_iterator> what;
         std::string::const_iterator start = input.begin() ;
@@ -33,20 +33,20 @@ list<string> PathVariableExtractor::buildParamNames(string input) {
         	start = what[0].second ;
         }
         return names;
-    }
-    catch ( boost::bad_expression & ex )
-    {
-        throw PathVariableException(ex.what());
-    }
+//    }
+//    catch ( boost::bad_expression & ex )
+//    {
+//        throw PathVariableException(ex.what());
+//    }
 }
 
 void PathVariableExtractor::buildParams(string format, string path,
 		list<string> names) {
 	using namespace boost;
-	regex exp ("#[^\\/]+#");
+	regex replaceExp ("#[^\\/]+#");
 	const string replace = "([^\\/]+)";
-	string gralExpression = "^" + regex_replace(format, exp ,replace) + "$" ;
-    try {
+	string gralExpression = "^" + regex_replace(format, replaceExp ,replace) + "$" ;
+//    try {
         boost::regex exp( gralExpression ) ;
         boost::match_results<std::string::const_iterator> what;
         std::string::const_iterator start = path.begin() ;
@@ -59,11 +59,11 @@ void PathVariableExtractor::buildParams(string format, string path,
 			string name = *it;
 			this->params.insert(std::make_pair(name, what[++i]));
 		}
-    }
-    catch ( boost::bad_expression & ex )
-    {
-    	 throw PathVariableException(ex.what());
-    }
+//    }
+//    catch ( boost::bad_expression & ex )
+//    {
+//    	 throw PathVariableException(ex.what());
+//    }
 
 }
 

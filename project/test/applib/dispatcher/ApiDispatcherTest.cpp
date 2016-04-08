@@ -44,14 +44,9 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
 	ApiDispatcher dispatcher;
 	RestRequest req(&hm);
 	RestResponse rep;
-	try {
-		//EXPECT_CALL(*callmock,call()).Times(0);
-		dispatcher.handle(req, rep);
-        FAIL() << "Expected std::NoSuchMethodHandlerException";
-    }
-    catch(NoSuchMethodHandlerException  const & err) {
-        EXPECT_EQ(err.what(),std::string("Handler for POST: /uri/juan not found"));
-    }
+	dispatcher.handle(req, rep);
+    EXPECT_EQ(rep.getStatus(),std::string("403"));
+
 }
 TEST_F(ApiDispatcherTest, DispatchOKey) {
 	http_message hm;
@@ -70,13 +65,7 @@ TEST_F(ApiDispatcherTest, defaultError) {
 	hm.method = mg_mk_str("PUT");
 	RestRequest req(&hm);
 	RestResponse rep;
-	try {
-		//EXPECT_CALL(*callmock,call()).Times(0);
-		dispatcher->handle(req, rep);
-        FAIL() << "Expected std::NoSuchMethodHandlerException";
-    }
-    catch(NoSuchMethodHandlerException  const & err) {
-        EXPECT_EQ(err.what(),std::string("Handler for PUT: ///// not found"));
-    }
+	dispatcher->handle(req, rep);
+	EXPECT_EQ(rep.getStatus(),std::string("403"));
 }
 

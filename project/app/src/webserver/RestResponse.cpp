@@ -19,6 +19,10 @@ void RestResponse::setStatus(string status) {
 	this->status = status;
 }
 
+string RestResponse::getStatus() {
+	return status;
+}
+
 void RestResponse::render(mg_connection* nc) {
-	mg_printf(nc, "%s", "HTTP/1.1 %s \r\nContent-Length: 0\r\n\r\n", status);
+	mg_printf(nc, "HTTP/1.1 %s \r\nContent-Length: 0\r\n\r\n", status.c_str());
 }

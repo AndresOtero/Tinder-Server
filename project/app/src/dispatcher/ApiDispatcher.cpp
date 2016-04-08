@@ -7,8 +7,9 @@
 
 #include "ApiDispatcher.h"
 #include "NoSuchMethodHandlerException.h"
+#include "log/Logger.h"
 
-
+static string LOGGER_PREFIX = "DISPATCHER: ";
 ApiDispatcher::ApiDispatcher() {
 	this->defFunction = [](WebContext & wb){
 		throw NoSuchMethodHandlerException(wb.getRequest().toString());
@@ -33,7 +34,17 @@ void ApiDispatcher::handle(RestRequest& request, RestResponse& response) {
 	RestRequest::Method method = request.getMethod();
 	if (this->endpoints.count(method) > 0) {
 		EndPoint * ep = this->endpoints[method];
-		ep->handle(request,response);
+		try {
+			ep->handle(request,response);
+		} catch (NoSuchMethodHandlerException const & err) {
+			LOG_INFO << LOGGER_PREFIX << err.what();
+			response.setStatus("403");
+		}
+
 	}
-	else throw NoSuchMethodHandlerException(request.toString());
+	else {
+		NoSuchMethodHandlerException err (request.toString());
+		LOG_INFO << LOGGER_PREFIX << err.what();
+		response.setStatus("403");
+	}
 }

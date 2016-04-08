@@ -31,7 +31,11 @@ string RestRequest::extractUri(http_message* hm) {
 }
 
 string RestRequest::toString() {
-	std::string method (*(&message->method.p));
+	 string method (*(&message->method.p));
+	 std::size_t found = method.find(" ");
+	 if (found!=std::string::npos)
+	    method = method.substr(0,found);
+
 	return method + ": " + this->getUri();
 }
 

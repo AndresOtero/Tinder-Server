@@ -19,6 +19,7 @@ public:
 	RestResponse();
 	virtual ~RestResponse();
 	void setStatus(string status);
+	string getStatus();
 	void render (mg_connection *nc);
 };
 
