@@ -15,10 +15,12 @@ using namespace std;
 class RestResponse {
 private:
 	string status;
+	string body;
 public:
 	RestResponse();
 	virtual ~RestResponse();
 	void setStatus(string status);
+	void setContent(string body);
 	string getStatus();
 	void render (mg_connection *nc);
 };

@@ -8,11 +8,9 @@
 #include <RestResponse.h>
 
 RestResponse::RestResponse() {
-
 }
 
 RestResponse::~RestResponse() {
-	// TODO Auto-generated destructor stub
 }
 
 void RestResponse::setStatus(string status) {
@@ -23,6 +21,12 @@ string RestResponse::getStatus() {
 	return status;
 }
 
+void RestResponse::setContent(string body) {
+	this->body = body;
+}
+
 void RestResponse::render(mg_connection* nc) {
-	mg_printf(nc, "HTTP/1.1 %s \r\nContent-Length: 0\r\n\r\n", status.c_str());
+	int size = this->body.size();
+	mg_printf(nc, "HTTP/1.1 %s \r\nContent-Length: %i\r\n\r\n", status.c_str(), size);
+	mg_printf(nc, "%s", body.c_str());
 }
