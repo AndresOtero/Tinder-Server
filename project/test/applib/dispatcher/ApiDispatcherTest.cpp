@@ -9,6 +9,7 @@
 #include "dispatcher/ApiDispatcher.h"
 #include "dispatcher/NoSuchMethodHandlerException.h"
 #include "gmock/gmock.h"
+#include "webserver/Constants.h"
 using ::testing::NiceMock;
 using ::testing::_;
 
@@ -45,7 +46,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher.handle(req, rep);
-    EXPECT_EQ(rep.getStatus(),std::string("403"));
+    EXPECT_EQ(STATUS_403, rep.getStatus());
 
 }
 TEST_F(ApiDispatcherTest, DispatchOKey) {
@@ -66,6 +67,6 @@ TEST_F(ApiDispatcherTest, defaultError) {
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher->handle(req, rep);
-	EXPECT_EQ(rep.getStatus(),std::string("403"));
+	EXPECT_EQ(STATUS_403, rep.getStatus());
 }
 
