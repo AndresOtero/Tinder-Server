@@ -13,6 +13,7 @@
 #include "log/Logger.h"
 #include "RestRequest.h"
 #include "RestResponse.h"
+#include "Constants.h"
 using namespace std;
 
 
@@ -36,7 +37,7 @@ static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
   if (ev == MG_EV_HTTP_REQUEST) {
 	  RestRequest request(hm);
 	  RestResponse response;
-	  response.setStatus("200 OK");
+	  response.setStatus(STATUS_200);
 	  dispatcher->handle(request, response);
 	  response.render(nc);
   }

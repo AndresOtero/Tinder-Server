@@ -8,6 +8,7 @@
 #include "ApiDispatcher.h"
 #include "NoSuchMethodHandlerException.h"
 #include "log/Logger.h"
+#include "webserver/Constants.h"
 
 static string LOGGER_PREFIX = "DISPATCHER: ";
 ApiDispatcher::ApiDispatcher() {
@@ -39,13 +40,13 @@ void ApiDispatcher::handle(RestRequest& request, RestResponse& response) {
 			ep->handle(request,response);
 		} catch (NoSuchMethodHandlerException const & err) {
 			LOG_INFO << LOGGER_PREFIX << err.what();
-			response.setStatus("403");
+			response.setStatus(STATUS_403);
 		}
 
 	}
 	else {
-		NoSuchMethodHandlerException err (request.toString());
-		LOG_INFO << LOGGER_PREFIX << err.what();
-		response.setStatus("403");
+
+		LOG_INFO << LOGGER_PREFIX << "Not Allowed Method on " << request.getUri();
+		response.setStatus(STATUS_405);
 	}
 }

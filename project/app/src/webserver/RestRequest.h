@@ -23,7 +23,7 @@ public:
 	RestRequest(http_message *);
 	virtual ~RestRequest();
 	string getUri();
-	enum Method {GET, PUT, POST, DELETE};
+	enum Method {GET, PUT, POST, DELETE, UNKNOWN};
 	string toString();
 	Method getMethod();
 	static string getDescription(RestRequest::Method);

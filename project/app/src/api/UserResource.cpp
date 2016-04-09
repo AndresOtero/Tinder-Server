@@ -30,6 +30,7 @@ void UserResource::getUser(WebContext& context) {
 	value["root"] = value2;
 	Json::FastWriter writer;
 	context.getResponse().setContent(writer.write(value));
+	context.getResponse().setContentType(CONTENT_TYPE_JSON);
 
 }
 

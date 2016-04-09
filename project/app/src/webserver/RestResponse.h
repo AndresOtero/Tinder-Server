@@ -10,17 +10,24 @@
 
 #include <string>
 #include "mongoose/mongoose.h"
+#include "Constants.h"
 using namespace std;
+
+
+
 
 class RestResponse {
 private:
 	string status;
 	string body;
+	string contentType;
 public:
+
 	RestResponse();
 	virtual ~RestResponse();
 	void setStatus(string status);
 	void setContent(string body);
+	void setContentType(string contentyType);
 	string getStatus();
 	void render (mg_connection *nc);
 };
