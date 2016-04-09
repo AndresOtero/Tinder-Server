@@ -1,6 +1,6 @@
 #include "JsonWebToken.h"
-#include "json/json/json.h"	
 #include <cryptopp/base64.h>
+#include <time.h>
 
 using namespace CryptoPP;
 
@@ -14,7 +14,7 @@ std::string JsonWebToken::generateTokenForUser(std::string username) {
 	return header + "." + payload + "." + signature;
 }
 
-bool JsonWebToken::getUsernameFromToken(std::string token, std::string& username) {
+bool JsonWebToken::getUsernameFromToken(std::string token, Json::Value& returnPayload) {
 	int firstDot = token.find_first_of(".");
 	int lastDot = token.find_last_of(".");
 	std::string header = token.substr(0,firstDot);
@@ -26,7 +26,7 @@ bool JsonWebToken::getUsernameFromToken(std::string token, std::string& username
 	Json::Reader reader;
 	bool parsingSuccessful = reader.parse(decodedPayload, parsedFromString);
 	if (!parsingSuccessful) return false; //error en el json
-	username = parsedFromString.get("name", "ERROR").asString();
+	returnPayload = parsedFromString;
 	return true;
 }
 
@@ -50,9 +50,19 @@ std::string JsonWebToken::generateHeader() {
 }
 
 std::string JsonWebToken::generatePayload(std::string username) {
+	struct tm * timeinfo;
+	time_t rawtime;
+	time ( &rawtime );
+	timeinfo = localtime(&rawtime);
+	timeinfo->tm_hour++;
+	if (timeinfo->tm_hour > 23) {
+		timeinfo->tm_hour = 0;
+	}
+	std::string expTime(asctime (timeinfo));
 	Json::Value json;
 	json["iss"] = "Tinder2-Shared";
 	json["name"] = username;
+	json["exp"] = expTime;
 	Json::FastWriter writer;
 	return writer.write(json);
 }

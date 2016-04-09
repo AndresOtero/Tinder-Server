@@ -8,14 +8,15 @@
 #ifndef SRC_JSONWEBTOKEN_H_
 #define SRC_JSONWEBTOKEN_H_
 
- #include <string>
+#include <string>
+#include "json/json/json.h"	
 
 class JsonWebToken {
 public:
 	JsonWebToken();
 	virtual ~JsonWebToken();
 	std::string generateTokenForUser(std::string username);
-	bool getUsernameFromToken(std::string token, std::string& username);
+	bool getUsernameFromToken(std::string token, Json::Value& returnPayload);
 
 private:
 	std::string decodeBase64(std::string encoded);
