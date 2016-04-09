@@ -19,20 +19,28 @@ UserResource::UserResource() {
 void UserResource::setup(ApiDispatcher& dispatcher) {
     using placeholders::_1;
 	dispatcher.registerEndPoint(RestRequest::GET, "/user/#id#", (function<void (WebContext&)>)bind( &UserResource::getUser, this, _1 ));
-	dispatcher.registerEndPoint(RestRequest::POST, "/user/#id#", (function<void (WebContext&)>)bind( &UserResource::getUser, this, _1 ));
+	dispatcher.registerEndPoint(RestRequest::POST, "/user/#id#", (function<void (WebContext&)>)bind( &UserResource::putUser, this, _1 ));
 
 }
 
 void UserResource::getUser(WebContext& context) {
-	LOG_INFO << context.getParam("id");
 	Json::Value value;
 	Json::Value value2;
-	value2["tributo"] = "prueba";
+	value2["atributo"] = "prueba";
 	value["root"] = value2;
 	Json::FastWriter writer;
 	context.getResponse().setContent(writer.write(value));
 	context.getResponse().setContentType(CONTENT_TYPE_JSON);
+}
 
+void UserResource::putUser(WebContext& context) {
+	string content = context.getRequest().getContent();
+	Json::Reader reader;
+	Json::Value parsed;
+	bool parsingSuccessful = reader.parse(content, parsed);
+	Json::Value val = parsed["root"];
+
+	LOG_INFO << val["tributo"] << endl;
 }
 
 UserResource::~UserResource() {

@@ -14,6 +14,7 @@
 class UserResource: public RestResource {
 private:
 	void getUser(WebContext &);
+	void putUser(WebContext &);
 public:
 	UserResource();
 	void setup(ApiDispatcher & dispatcher);

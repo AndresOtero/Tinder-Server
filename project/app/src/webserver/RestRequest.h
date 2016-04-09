@@ -27,6 +27,7 @@ public:
 	enum Method {GET, PUT, POST, DELETE, UNKNOWN};
 	string toString();
 	Method getMethod();
+	string getContent();
 	static string getDescription(RestRequest::Method);
 };
 

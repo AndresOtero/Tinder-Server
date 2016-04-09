@@ -54,6 +54,10 @@ RestRequest::Method RestRequest::getMethod() {
 
 }
 
+string RestRequest::getContent() {
+	return this->content;
+}
+
 string RestRequest::getDescription(RestRequest::Method method) {
 	switch (method) {
 		case PUT:
