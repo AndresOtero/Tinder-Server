@@ -16,6 +16,7 @@ class RestRequest {
 private:
 	string uri;
 	http_message * message;
+	string content;
 	string extractUri(http_message* hm);
 
 
@@ -23,9 +24,10 @@ public:
 	RestRequest(http_message *);
 	virtual ~RestRequest();
 	string getUri();
-	enum Method {GET, PUT, POST, DELETE};
+	enum Method {GET, PUT, POST, DELETE, UNKNOWN};
 	string toString();
 	Method getMethod();
+	string getContent();
 	static string getDescription(RestRequest::Method);
 };
 

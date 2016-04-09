@@ -10,7 +10,8 @@
 RestRequest::RestRequest(http_message * hm) {
 	this->message = hm;
 	this->uri = extractUri(hm);
-
+    std::string data (*(&hm->body.p));
+    this->content = data;
 }
 
 RestRequest::~RestRequest() {
@@ -21,6 +22,13 @@ string RestRequest::getUri() {
 	return uri;
 }
 
+string parseMethod(	http_message * message) {
+	std::string method (*(&message->method.p));
+	 std::size_t found = method.find(" ");
+	 if (found!=std::string::npos)
+	    method = method.substr(0,found);
+	 return method;
+}
 
 string RestRequest::extractUri(http_message* hm) {
 	  string uri (*(&hm->uri.p));
@@ -31,23 +39,23 @@ string RestRequest::extractUri(http_message* hm) {
 }
 
 string RestRequest::toString() {
-	 string method (*(&message->method.p));
-	 std::size_t found = method.find(" ");
-	 if (found!=std::string::npos)
-	    method = method.substr(0,found);
+	 string method = parseMethod(this->message);
 
 	return method + ": " + this->getUri();
 }
 
 RestRequest::Method RestRequest::getMethod() {
-	std::string method (*(&message->method.p));
-
+	string method = parseMethod(this->message);
 	if( method == "GET") return GET;
 	if( method == "PUT") return PUT;
 	if( method == "POST") return POST;
 	if( method == "DELETE") return DELETE;
-	return GET;
+	return UNKNOWN;
 
+}
+
+string RestRequest::getContent() {
+	return this->content;
 }
 
 string RestRequest::getDescription(RestRequest::Method method) {
