@@ -10,7 +10,8 @@
 RestRequest::RestRequest(http_message * hm) {
 	this->message = hm;
 	this->uri = extractUri(hm);
-
+    std::string data (*(&hm->body.p));
+    this->content = data;
 }
 
 RestRequest::~RestRequest() {

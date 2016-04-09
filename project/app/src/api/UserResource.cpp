@@ -19,6 +19,7 @@ UserResource::UserResource() {
 void UserResource::setup(ApiDispatcher& dispatcher) {
     using placeholders::_1;
 	dispatcher.registerEndPoint(RestRequest::GET, "/user/#id#", (function<void (WebContext&)>)bind( &UserResource::getUser, this, _1 ));
+	dispatcher.registerEndPoint(RestRequest::POST, "/user/#id#", (function<void (WebContext&)>)bind( &UserResource::getUser, this, _1 ));
 
 }
 

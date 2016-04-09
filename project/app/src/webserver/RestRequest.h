@@ -16,6 +16,7 @@ class RestRequest {
 private:
 	string uri;
 	http_message * message;
+	string content;
 	string extractUri(http_message* hm);
 
 
