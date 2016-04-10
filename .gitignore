@@ -3,3 +3,4 @@ build/*
 logfile.log
 .log
 *.log
+.idea/

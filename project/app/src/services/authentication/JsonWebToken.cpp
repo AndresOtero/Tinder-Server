@@ -1,6 +1,5 @@
 #include "JsonWebToken.h"
 #include <cryptopp/base64.h>
-#include <time.h>
 
 using namespace CryptoPP;
 

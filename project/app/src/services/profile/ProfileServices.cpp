@@ -1,8 +1,5 @@
 #include "ProfileServices.h"
-#include "json/json/json.h"
-#include "log/Logger.h"
-#include "model/Location.h"
-#include "sharedConnector/SharedConnector.h"
+#include "../../log/Logger.h"
 
 ProfileServices::ProfileServices(SharedConnector* connector) {
 	this->connector = connector;
@@ -11,7 +8,7 @@ ProfileServices::ProfileServices(SharedConnector* connector) {
 ProfileServices::~ProfileServices() {}
 
 list<User *> ProfileServices::assembleUsersFromJson(Json::Value &root) {
-	list<User *> users;
+	std::list<User *> users;
 	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {
 		unordered_map<string, set<string>> interests;
 		Json::Value user = itr->get("user", "ERROR");
@@ -48,7 +45,7 @@ list<User *> ProfileServices::getAllUsers() {
 	string url = "/users";
 	if (!this->connector->getJsonFromURL(url, root) ) {
 		LOG_ERROR << "Error obteniendo la lista de users";
-		list<User *> users;
+		std::list<User *> users;
 		return users;
 	}
 	Json::Value users = root.get("users","ERROR");
@@ -100,7 +97,7 @@ Json::Value ProfileServices::assembleJsonFromUser(User* user) {
 	userData["email"] = user->getEmail();
 	userData["photo_profile"] = user->getPhotoURL();
 	userData["location"] = location;
-	Json::FastWriter writer;
+	//Json::FastWriter writer;
 	//LOG_ERROR << writer.write(root);
 	return userData;
 }

@@ -9,7 +9,7 @@
 #define SRC_AUTHENTICATIONSERVICE_H_
 
  #include <string>
- #include "db/DBConnector.h"
+ #include "../../db/DBConnector.h"
 
 class AuthenticationService {
 public:

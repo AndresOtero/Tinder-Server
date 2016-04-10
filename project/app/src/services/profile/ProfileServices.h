@@ -8,8 +8,9 @@
 #ifndef SRC_PROFILESERVICES_H_
 #define SRC_PROFILESERVICES_H_
 
-#include "sharedConnector/SharedConnector.h"
-#include "model/User.h"
+#include "../../sharedConnector/SharedConnector.h"
+#include "../../model/User.h"
+#include "../../json/json/json.h"
 #include <list>
 
 using namespace std;

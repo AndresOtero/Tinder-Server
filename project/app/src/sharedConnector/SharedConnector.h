@@ -10,7 +10,7 @@
 
 #include <string>
 #include <curl/curl.h>
-#include "json/json/json.h"
+#include "../json/json/json.h"
 
 
 class SharedConnector {

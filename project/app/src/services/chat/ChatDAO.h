@@ -9,7 +9,7 @@
 #define SRC_CHATDAO_H_
 
 #include <string>
-#include "db/DBConnector.h"
+#include "../../db/DBConnector.h"
 
 using namespace std;
 

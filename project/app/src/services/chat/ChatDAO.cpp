@@ -1,6 +1,5 @@
 #include "ChatDAO.h"
-#include "json/json/json.h"
-#include <time.h>
+#include "../../json/json/json.h"
 
 ChatDAO::ChatDAO(DBConnector* connector) {
 	this->connector = connector;
