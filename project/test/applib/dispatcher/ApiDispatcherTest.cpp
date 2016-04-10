@@ -21,6 +21,8 @@ ApiDispatcherTest::ApiDispatcherTest() {
 void ApiDispatcherTest::SetUp() {
 	this->defaultInvoked = new VoidCallerConcrete();
 	defaultHandler = [this] (WebContext& wc){
+		wc.getResponse().setContentType(CONTENT_TYPE_JSON);
+		wc.getResponse().setContent("{ 'prueba': 1}");
 		this->defaultInvoked->call();
 	};
 	dispatcher = new ApiDispatcher();
@@ -40,19 +42,19 @@ ApiDispatcherTest::~ApiDispatcherTest() {
 
 TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
 	http_message hm;
-	hm.uri = mg_mk_str("/uri/juan");
-	hm.method = mg_mk_str("POST");
+	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	hm.method = mg_mk_str("POST Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	ApiDispatcher dispatcher;
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher.handle(req, rep);
     EXPECT_EQ(STATUS_403, rep.getStatus());
-
 }
+
 TEST_F(ApiDispatcherTest, DispatchOKey) {
 	http_message hm;
-	hm.uri = mg_mk_str("/api/v1/juan");
-	hm.method = mg_mk_str("GET");
+	hm.uri = mg_mk_str("/api/v1/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	hm.method = mg_mk_str("GET Y MUCHOS OTROS DATOS DEL REQUEST");
 	RestRequest req(&hm);
 	RestResponse rep;
 	EXPECT_CALL(*defaultInvoked,call()).Times(1);
@@ -62,11 +64,35 @@ TEST_F(ApiDispatcherTest, DispatchOKey) {
 
 TEST_F(ApiDispatcherTest, defaultError) {
 	http_message hm;
-	hm.uri = mg_mk_str("/////");
-	hm.method = mg_mk_str("PUT");
+	hm.uri = mg_mk_str("///// Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	hm.method = mg_mk_str("PUT Y MUCHOS OTROS DATOS DEL REQUEST");
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher->handle(req, rep);
 	EXPECT_EQ(STATUS_403, rep.getStatus());
 }
+
+TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration2) {
+	http_message hm;
+	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	hm.method = mg_mk_str("DELETE Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	ApiDispatcher dispatcher;
+
+	RestRequest req(&hm);
+	RestResponse rep;
+	dispatcher.handle(req, rep);
+    EXPECT_EQ(STATUS_403, rep.getStatus());
+}
+
+TEST_F(ApiDispatcherTest, DispatchUknownMethod) {
+	http_message hm;
+	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	hm.method = mg_mk_str("OPTIONS Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	ApiDispatcher dispatcher;
+	RestRequest req(&hm);
+	RestResponse rep;
+	dispatcher.handle(req, rep);
+    EXPECT_EQ(STATUS_405, rep.getStatus());
+}
+
 
