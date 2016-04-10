@@ -8,8 +8,7 @@ ProfileServices::ProfileServices(SharedConnector* connector) {
 	this->connector = connector;
 }
 
-ProfileServices::~ProfileServices() {
-}
+ProfileServices::~ProfileServices() {}
 
 list<User *> ProfileServices::assembleUsersFromJson(Json::Value &root) {
 	list<User *> users;
@@ -31,34 +30,36 @@ list<User *> ProfileServices::assembleUsersFromJson(Json::Value &root) {
 	return users;
 }
 
-User* ProfileServices::getUserByID(int id) {
+User* ProfileServices::getUserByID(int id){
 	Json::Value array;
 	Json::Value root;
 	std::string url = "/users/" + std::to_string(id);
 	if (!this->connector->getJsonFromURL(url, root)) {
-		LOG_ERROR<< "Error obteniendo user con id " << id;
+		LOG_ERROR << "Error obteniendo user con id " << id;
 		return NULL;
 	}
 	array.append(root);
 	return this->assembleUsersFromJson(array).front();
 }
 
+
 list<User *> ProfileServices::getAllUsers() {
 	Json::Value root;
 	string url = "/users";
-	if (!this->connector->getJsonFromURL(url, root)) {
-		LOG_ERROR<< "Error obteniendo la lista de users";
+	if (!this->connector->getJsonFromURL(url, root) ) {
+		LOG_ERROR << "Error obteniendo la lista de users";
 		list<User *> users;
 		return users;
 	}
-	Json::Value users = root.get("users", "ERROR");
+	Json::Value users = root.get("users","ERROR");
 	return this->assembleUsersFromJson(users);
 }
+
 
 bool ProfileServices::deleteUserByID(int id) {
 	string url = "/users/" + to_string(id);
 	if (!this->connector->deleteToURL(url)) {
-		LOG_ERROR<< "Error deleting user con ID: " << to_string(id);
+		LOG_ERROR << "Error deleting user con ID: " << to_string(id);
 		return false;
 	}
 	return true;
@@ -70,7 +71,7 @@ bool ProfileServices::updateUserProfile(User* user) {
 	Json::FastWriter writer;
 	string data = "user=" + writer.write(root);
 	if (this->connector->putDataToURL(url, data)) {
-		LOG_ERROR<< "Error haciendo put para el user con id=" << user->getId();
+		LOG_ERROR << "Error haciendo put para el user con id=" << user->getId();
 		return false;
 	}
 	return true;
@@ -82,7 +83,7 @@ bool ProfileServices::saveNewUser(User* user) {
 	Json::FastWriter writer;
 	string data = "user=" + writer.write(root);
 	if (this->connector->postDataToURL(url, data)) {
-		LOG_ERROR<< "Error haciendo post del user nuevo";
+				LOG_ERROR << "Error haciendo post del user nuevo";
 		return false;
 	}
 	return true;
