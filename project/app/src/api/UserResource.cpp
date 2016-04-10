@@ -10,6 +10,7 @@
 #include <functional>
 #include "log/Logger.h"
 #include "json/json/json.h"
+#include "json/ParameterReader.h"
 using namespace std;
 
 UserResource::UserResource() {
@@ -38,9 +39,10 @@ void UserResource::putUser(WebContext& context) {
 	Json::Reader reader;
 	Json::Value parsed;
 	bool parsingSuccessful = reader.parse(content, parsed);
-	Json::Value val = parsed["root"];
-
-	LOG_INFO << val["tributo"] << endl;
+	StringReader strreader(parsed["root"]);
+	IntReader intrdr(parsed["root"]);
+	LOG_INFO <<  strreader.get("tributo",false) << endl;
+	LOG_INFO <<  intrdr.get("tributo2",false) << endl;
 }
 
 UserResource::~UserResource() {
