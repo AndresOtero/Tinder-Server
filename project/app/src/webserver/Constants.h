@@ -11,10 +11,13 @@
 #include <string>
 using namespace std;
 
-const static string STATUS_501 = "501 Not Implemented";
-const static string STATUS_200 = "200 OK";
-const static string STATUS_403 = "403 Forbidden";
-const static string STATUS_405 = "405 Method Not Allowed";
+const static string STATUS_200_OK = "200 OK";
+const static string STATUS_400_BAD_REQUEST = "400 Bad Request";
+const static string STATUS_401_UNAUTHORIZED= "401 Unauthorized";
+const static string STATUS_403_FORBIDDEN = "403 Forbidden";
+const static string STATUS_405_METHOD_NOT_ALLOWED = "405 Method Not Allowed";
+const static string STATUS_501_NOT_IMPLEMENTED = "501 Not Implemented";
+
 
 const static string CONTENT_TYPE_JSON = "application/json";
 
