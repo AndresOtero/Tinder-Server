@@ -1,7 +1,6 @@
 #include "AuthenticationServiceTest.h"
 #include "services/authentication/AuthenticationService.h"
-#include <string>
-#include "db/DBConnector.h"
+
 
 AuthenticationServiceTest::AuthenticationServiceTest() {};
 
@@ -44,4 +43,5 @@ TEST_F(AuthenticationServiceTest, ChangeUsernamePassword) {
 	ASSERT_TRUE(resultado);
 	ASSERT_FALSE(service.isLoginValid(usuario, password));
 	ASSERT_TRUE(service.isLoginValid(usuario, newPass));
+	connector.deleteKey(usuario);
 }
