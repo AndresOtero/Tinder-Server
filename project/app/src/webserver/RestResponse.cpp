@@ -8,7 +8,7 @@
 #include <RestResponse.h>
 #include "Constants.h"
 RestResponse::RestResponse() {
-	this->status = STATUS_200;
+	this->status = STATUS_200_OK;
 	this->contentType = CONTENT_TYPE_JSON;
 }
 

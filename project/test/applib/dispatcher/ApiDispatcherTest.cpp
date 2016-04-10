@@ -48,7 +48,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher.handle(req, rep);
-    EXPECT_EQ(STATUS_403, rep.getStatus());
+    EXPECT_EQ(STATUS_403_FORBIDDEN, rep.getStatus());
 }
 
 TEST_F(ApiDispatcherTest, DispatchOKey) {
@@ -69,7 +69,7 @@ TEST_F(ApiDispatcherTest, defaultError) {
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher->handle(req, rep);
-	EXPECT_EQ(STATUS_403, rep.getStatus());
+	EXPECT_EQ(STATUS_403_FORBIDDEN, rep.getStatus());
 }
 
 TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration2) {
@@ -81,7 +81,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration2) {
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher.handle(req, rep);
-    EXPECT_EQ(STATUS_403, rep.getStatus());
+    EXPECT_EQ(STATUS_403_FORBIDDEN, rep.getStatus());
 }
 
 TEST_F(ApiDispatcherTest, DispatchUknownMethod) {
@@ -92,7 +92,7 @@ TEST_F(ApiDispatcherTest, DispatchUknownMethod) {
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher.handle(req, rep);
-    EXPECT_EQ(STATUS_405, rep.getStatus());
+    EXPECT_EQ(STATUS_405_METHOD_NOT_ALLOWED, rep.getStatus());
 }
 
 

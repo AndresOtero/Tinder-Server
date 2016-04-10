@@ -9,7 +9,8 @@
 #include "dispatcher/ApiDispatcher.h"
 #include "sharedConnector/SharedConnector.h"
 #include "api/UserResource.h"
-
+#include "api/AuthResource.h"
+#include "services/authentication/AuthenticationService.h"
 
 int main() {
 	LOG_INFO << "Testing conecction to shared server.";
@@ -26,6 +27,10 @@ int main() {
 	ApiDispatcher dispatcher;
 	UserResource user;
 	user.setup(dispatcher);
+	AuthenticationService authService(&connector);
+	AuthResource auth (&authService);
+
+	auth.setup(dispatcher);
 	WebServer ws(dispatcher);
 
 	ws.start();
