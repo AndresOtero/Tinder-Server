@@ -21,6 +21,8 @@ ApiDispatcherTest::ApiDispatcherTest() {
 void ApiDispatcherTest::SetUp() {
 	this->defaultInvoked = new VoidCallerConcrete();
 	defaultHandler = [this] (WebContext& wc){
+		wc.getResponse().setContentType(CONTENT_TYPE_JSON);
+		wc.getResponse().setContent("{ 'prueba': 1}");
 		this->defaultInvoked->call();
 	};
 	dispatcher = new ApiDispatcher();
@@ -75,6 +77,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration2) {
 	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("DELETE Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	ApiDispatcher dispatcher;
+
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher.handle(req, rep);
