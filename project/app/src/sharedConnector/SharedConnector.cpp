@@ -27,7 +27,7 @@ bool SharedConnector::deleteToURL(std::string endpoint) {
   return true;
 }
 
-bool SharedConnector::postDataToURL(std::string endpoint, string data) {
+bool SharedConnector::postDataToURL(std::string endpoint, string data, Json::Value& response) {
 
   CURL *curl;
   CURLcode res;
@@ -45,9 +45,9 @@ bool SharedConnector::postDataToURL(std::string endpoint, string data) {
   /* First set the URL that is about to receive our POST. */ 
   string url = this->serverBaseURL + endpoint;
   struct curl_slist *headers = NULL;
-  curl_slist_append(headers, "Accept: application/json");
-  curl_slist_append(headers, "Content-Type: application/x-www-form-urlencoded");
-  curl_slist_append(headers, "charsets: utf-8");
+  headers = curl_slist_append(headers, "Accept: application/json");
+  headers = curl_slist_append(headers, "Content-Type: application/json");
+  headers = curl_slist_append(headers, "charsets: utf-8");
   curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers); 
   curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
   /* Now specify we want to POST data */ 
@@ -67,17 +67,22 @@ bool SharedConnector::postDataToURL(std::string endpoint, string data) {
   /* Perform the request, res will get the return code */ 
   res = curl_easy_perform(curl);
 
-  string response((char*)chunk.memory);
-  //LOG_ERROR << response;
+  string respuesta((char*)chunk.memory);
+  Json::Reader reader;
+  bool resultado = reader.parse(respuesta, response);
 
   /* always cleanup */ 
   curl_easy_cleanup(curl);
-  if(this->returnedError(res)) return false;
+  if(this->returnedError(res) || !resultado) {
+    free(chunk.memory);
+    return false;
+  }
+  free(chunk.memory);
   return true;
 }
 
 
-bool SharedConnector::putDataToURL(std::string endpoint, std::string data) {
+bool SharedConnector::putDataToURL(std::string endpoint, std::string data, Json::Value& response) {
   //concateno baseurl con el endpoint recibido
   string url = this->serverBaseURL + endpoint;
 
@@ -90,9 +95,9 @@ bool SharedConnector::putDataToURL(std::string endpoint, std::string data) {
   CURL *curl;
   curl = curl_easy_init();
   struct curl_slist *headers = NULL;
-  curl_slist_append(headers, "Accept: application/json");
-  curl_slist_append(headers, "Content-Type: application/x-www-form-urlencoded");
-  curl_slist_append(headers, "charsets: utf-8");
+  headers = curl_slist_append(headers, "Accept: application/json");
+  headers = curl_slist_append(headers, "Content-Type: application/json");
+  headers = curl_slist_append(headers, "charsets: utf-8");
   curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers); 
   curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
   curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PUT");
@@ -104,10 +109,15 @@ bool SharedConnector::putDataToURL(std::string endpoint, std::string data) {
   CURLcode res = curl_easy_perform(curl);
   curl_easy_cleanup(curl);
 
-  string response((char*)chunk.memory);
-  //LOG_ERROR << response;
+  string respuesta((char*)chunk.memory);
+  Json::Reader reader;
+  bool resultado = reader.parse(respuesta, response);
 
-  if(this->returnedError(res)) return false;
+  if(this->returnedError(res) || !resultado) {
+    free(chunk.memory);
+    return false;
+  }
+  free(chunk.memory);
   return true;
 }
 
@@ -130,7 +140,10 @@ bool SharedConnector::getJsonFromURL(std::string endpoint, Json::Value& jsonData
   CURLcode res = curl_easy_perform(curl);
   curl_easy_cleanup(curl);
   /* Check for errors */ 
-  if(this->returnedError(res)) return false;
+  if(this->returnedError(res)) {
+    free(chunk.memory);
+    return false;
+  }
   else {
     /*
      * Now, our chunk.memory points to a memory block that is chunk.size

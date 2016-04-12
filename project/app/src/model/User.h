@@ -34,6 +34,8 @@ public:
 	void setPhotoURL(string url);
 	void setLatitude(double latitude);
 	void setLongitude(double longitude);
+	void setId(string id);
+	unordered_map<string, set<string>> getInterests();
 
 private:
 	string id;

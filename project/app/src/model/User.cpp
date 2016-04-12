@@ -65,3 +65,11 @@ void User::setLatitude(double latitude) {
 void User::setLongitude(double longitude) {
 	this->location.setLongitude(longitude);
 }
+
+unordered_map<string, set<string>> User::getInterests() {
+	return this->interests;
+}
+
+void User::setId(string id) {
+	this->id = id;
+}

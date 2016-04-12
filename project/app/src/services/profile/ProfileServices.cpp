@@ -10,13 +10,9 @@ ProfileServices::~ProfileServices() {}
 
 unordered_map<string, set<string>> ProfileServices::populateInterests(Json::Value &root) {
 	unordered_map<string, set<string>> mapa;
-	Json::FastWriter writer;
-	string json = writer.write(root);
-	cout << json;
 	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {
 		string category = itr->get("category", "ERROR").asString();
 		string value = itr->get("value", "ERROR").asString();
-		cout << category << ": " << value;
 		unordered_map<std::string, set<string>>::const_iterator got = mapa.find(category);
 		if (got == mapa.end()) {
 			//todavia no esta esa categoria en el map
@@ -33,11 +29,11 @@ unordered_map<string, set<string>> ProfileServices::populateInterests(Json::Valu
 }
 
 list<User *> ProfileServices::assembleUsersFromJson(Json::Value &root) {
-	std::list<User *> users;
+	list<User *> users;
 	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {
 		Json::Value user = itr->get("user", "ERROR");
 		Json::FastWriter writer;
-		cout << writer.write(user);
+		//cout << writer.write(user);
 		Json::Value interestsJson = user.get("interests", "ERROR");
 		unordered_map<string, set<string>> interests = this->populateInterests(interestsJson);
 		string userid = user.get("id", "ERROR").asString();
@@ -92,10 +88,17 @@ bool ProfileServices::deleteUserByID(int id) {
 
 bool ProfileServices::updateUserProfile(User* user) {
 	string url = "/users/" + user->getId();
-	Json::Value root = this->assembleJsonFromUser(user);
+	Json::Value userJson = this->assembleJsonFromUser(user);
+	Json::Value root;
+	Json::Value version;
+	version["version"] = "0.1";
+	root["user"] = userJson;
+	root["metadata"] = version;
 	Json::FastWriter writer;
-	string data = "user=" + writer.write(root);
-	if (this->connector->putDataToURL(url, data)) {
+	string data = writer.write(root);
+	cout << data;
+	Json::Value response;
+	if (!this->connector->putDataToURL(url, data, response)) {
 		LOG_ERROR << "Error haciendo put para el user con id=" << user->getId();
 		return false;
 	}
@@ -104,19 +107,25 @@ bool ProfileServices::updateUserProfile(User* user) {
 
 bool ProfileServices::saveNewUser(User* user) {
 	string url = "/users/";
-	Json::Value root = this->assembleJsonFromUser(user);
+	Json::Value userJson = this->assembleJsonFromUser(user);
+	Json::Value root;
+	root["user"] = userJson;
 	Json::FastWriter writer;
-	string data = "user=" + writer.write(root);
-	if (this->connector->postDataToURL(url, data)) {
+	string data = writer.write(root);
+	Json::Value response;
+	if (!this->connector->postDataToURL(url, data, response)) {
 				LOG_ERROR << "Error haciendo post del user nuevo";
 		return false;
 	}
+	string id = response["user"]["id"].asString();
+	user->setId(id);
 	return true;
 }
 
 Json::Value ProfileServices::assembleJsonFromUser(User* user) {
 	Json::Value userData;
 	Json::Value location;
+	Json::Value interests;
 	location["latitude"] = user->getLatitude();
 	location["longitude"] = user->getLongitude();
 	userData["id"] = user->getId();
@@ -125,7 +134,15 @@ Json::Value ProfileServices::assembleJsonFromUser(User* user) {
 	userData["email"] = user->getEmail();
 	userData["photo_profile"] = user->getPhotoURL();
 	userData["location"] = location;
-	//Json::FastWriter writer;
-	//LOG_ERROR << writer.write(root);
+	unordered_map<string, set<string>> intereses = user->getInterests();
+	for ( auto it = intereses.begin(); it != intereses.end(); ++it ) {
+		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
+			Json::Value valor;
+			valor["category"] = it->first;
+			valor["value"] = *setit;
+			interests.append(valor);
+		}
+	}
+	userData["interests"] = interests;
 	return userData;
 }
