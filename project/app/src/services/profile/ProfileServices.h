@@ -28,8 +28,7 @@ public:
 	bool deleteUserByID(int id);
 
 private:
-	bool getAllUsers(Json::Value& usersData);
-	bool getUserByID(int id, Json::Value& userData);
+	unordered_map<string, set<string>> populateInterests(Json::Value &root);
 	SharedConnector* connector;
 
 };

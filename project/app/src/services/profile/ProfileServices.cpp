@@ -1,3 +1,4 @@
+#include <iostream>
 #include "ProfileServices.h"
 #include "../../log/Logger.h"
 
@@ -7,11 +8,38 @@ ProfileServices::ProfileServices(SharedConnector* connector) {
 
 ProfileServices::~ProfileServices() {}
 
+unordered_map<string, set<string>> ProfileServices::populateInterests(Json::Value &root) {
+	unordered_map<string, set<string>> mapa;
+	Json::FastWriter writer;
+	string json = writer.write(root);
+	cout << json;
+	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {
+		string category = itr->get("category", "ERROR").asString();
+		string value = itr->get("value", "ERROR").asString();
+		cout << category << ": " << value;
+		unordered_map<std::string, set<string>>::const_iterator got = mapa.find(category);
+		if (got == mapa.end()) {
+			//todavia no esta esa categoria en el map
+			set<string> newSet;
+			newSet.insert(value);
+			mapa[category] = newSet;
+		} else {
+			set<string> valores = got->second;
+			valores.insert(value);
+			mapa[category] = valores;
+		}
+	}
+	return mapa;
+}
+
 list<User *> ProfileServices::assembleUsersFromJson(Json::Value &root) {
 	std::list<User *> users;
 	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {
-		unordered_map<string, set<string>> interests;
 		Json::Value user = itr->get("user", "ERROR");
+		Json::FastWriter writer;
+		cout << writer.write(user);
+		Json::Value interestsJson = user.get("interests", "ERROR");
+		unordered_map<string, set<string>> interests = this->populateInterests(interestsJson);
 		string userid = user.get("id", "ERROR").asString();
 		string name = user.get("name", "ERROR").asString();
 		string alias = user.get("alias", "ERROR").asString();
