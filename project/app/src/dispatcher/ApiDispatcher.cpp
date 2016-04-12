@@ -40,13 +40,13 @@ void ApiDispatcher::handle(RestRequest& request, RestResponse& response) {
 			ep->handle(request,response);
 		} catch (NoSuchMethodHandlerException const & err) {
 			LOG_INFO << LOGGER_PREFIX << err.what();
-			response.setStatus(STATUS_403);
+			response.setStatus(STATUS_403_FORBIDDEN);
 		}
 
 	}
 	else {
 
 		LOG_INFO << LOGGER_PREFIX << "Not Allowed Method on " << request.getUri();
-		response.setStatus(STATUS_405);
+		response.setStatus(STATUS_405_METHOD_NOT_ALLOWED);
 	}
 }
