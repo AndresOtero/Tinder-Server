@@ -26,6 +26,7 @@ public:
 	Json::Value assembleJsonFromUser(User* user);
 	bool saveNewUser(User* user);
 	bool deleteUserByID(int id);
+	unordered_map<string, set<string>> getInterests();
 
 private:
 	unordered_map<string, set<string>> populateInterests(Json::Value &root);

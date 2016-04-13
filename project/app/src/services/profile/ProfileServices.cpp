@@ -150,3 +150,15 @@ Json::Value ProfileServices::assembleJsonFromUser(User* user) {
 	userData["interests"] = interests;
 	return userData;
 }
+
+unordered_map<string, set<string>> ProfileServices::getInterests() {
+	string url = "/interests/";
+	Json::Value root;
+	if (!this->connector->getJsonFromURL(url, root) ) {
+		LOG_ERROR << "Error obteniendo la lista de intereses";
+		unordered_map<string, set<string>> mapa;
+		return mapa;
+	}
+	unordered_map<string, set<string>> mapa = this->populateInterests(root["interests"]);
+	return mapa;
+}
