@@ -21,6 +21,8 @@ TEST_F(ProfileServicesTest, AssembleOneUserFromJson) {
 	location["longitude"] = 1.0;
 	location["latitude"] = 2.0;
 	content["id"] = 10;
+	content["age"] = 18;
+	content["sex"] = "M";
 	content["name"] = "prueba";
 	content["alias"] = "alias";
 	content["photo_profile"] = "photo";
@@ -52,6 +54,8 @@ TEST_F(ProfileServicesTest, AssembleMultipleUsersFromJson) {
 	content["id"] = 10;
 	content["name"] = "prueba";
 	content["alias"] = "alias";
+	content["age"] = 18;
+	content["sex"] = "M";
 	content["photo_profile"] = "photo";
 	content["email"] = "aasd@gmail.com";
 	content["location"] = location;
