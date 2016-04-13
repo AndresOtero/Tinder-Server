@@ -1,7 +1,7 @@
 #include "User.h"
 
 //Crear usando el userFactory!!
-User::User(string id, string name, string alias,string email, string photoURL, 
+User::User(string id, string name, string alias,string email, string sex, int age, string photoURL,
 	unordered_map<string, set<string>> interests, Location location){
 	this->id = id;
 	this->name = name;
@@ -10,6 +10,8 @@ User::User(string id, string name, string alias,string email, string photoURL,
 	this->photoURL = photoURL;
 	this->interests = interests;
 	this->location = location;
+	this->sex = sex;
+	this->age = age;
 }
 
 User::~User() {}
@@ -72,4 +74,20 @@ unordered_map<string, set<string>> User::getInterests() {
 
 void User::setId(string id) {
 	this->id = id;
+}
+
+void User::setSex(string sex) {
+	this->sex = sex;
+}
+
+void User::setAge(int age) {
+	this->age = age;
+}
+
+int User::getAge() {
+	return this->age;
+}
+
+string User::getSex() {
+	return this->sex;
 }

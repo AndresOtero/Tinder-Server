@@ -17,7 +17,7 @@ using namespace std;
 
 class User {
 public:
-	User(string id, string name, string alias, string email, string photoURL, 
+	User(string id, string name, string alias, string email, string sex, int age, string photoURL,
 		unordered_map<string, set<string>> interests , Location location);
 
 	virtual ~User();
@@ -36,8 +36,14 @@ public:
 	void setLongitude(double longitude);
 	void setId(string id);
 	unordered_map<string, set<string>> getInterests();
+	void setSex(string sex);
+	void setAge(int age);
+	int getAge();
+	string getSex();
 
 private:
+	int age;
+	string sex;
 	string id;
 	string name;
 	string alias;

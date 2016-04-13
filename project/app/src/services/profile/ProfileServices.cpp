@@ -41,10 +41,12 @@ list<User *> ProfileServices::assembleUsersFromJson(Json::Value &root) {
 		string alias = user.get("alias", "ERROR").asString();
 		string email = user.get("email", "ERROR").asString();
 		string photo = user.get("photo_profile", "ERROR").asString();
+		string sex = user.get("sex", "ERROR").asString();
+		int age = user.get("age", "ERROR").asInt();
 		Location location(
 				user.get("location", "ERROR").get("latitude", "ERROR").asDouble(),
 				user.get("location", "ERROR").get("longitude", "ERROR").asDouble());
-		User* newUser = new User(userid, name, alias, email, photo, interests,
+		User* newUser = new User(userid, name, alias, email, sex, age, photo, interests,
 				location);
 		users.push_back(newUser);
 	}
@@ -133,6 +135,8 @@ Json::Value ProfileServices::assembleJsonFromUser(User* user) {
 	userData["alias"] = user->getAlias();
 	userData["email"] = user->getEmail();
 	userData["photo_profile"] = user->getPhotoURL();
+	userData["age"] = user->getAge();
+	userData["sex"] = user->getSex();
 	userData["location"] = location;
 	unordered_map<string, set<string>> intereses = user->getInterests();
 	for ( auto it = intereses.begin(); it != intereses.end(); ++it ) {
