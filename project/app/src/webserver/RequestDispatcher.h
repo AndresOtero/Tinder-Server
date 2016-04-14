@@ -17,9 +17,14 @@ using namespace std;
 class RequestDispatcher {
 
 public:
-	
 
-	virtual void handle(RestRequest &, RestResponse &) = 0;
+	/**
+	 * Handle a request dispatching to the correct handler
+	 * @param request RestRequest
+	 * @param response RestResponse where tp build the response
+	 */
+
+	virtual void handle(RestRequest & request, RestResponse & response) = 0;
 	virtual ~RequestDispatcher(){};
 };
 

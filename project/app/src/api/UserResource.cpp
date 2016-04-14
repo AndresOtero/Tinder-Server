@@ -25,24 +25,26 @@ void UserResource::setup(ApiDispatcher& dispatcher) {
 }
 
 void UserResource::getUser(WebContext& context) {
-	Json::Value value;
-	Json::Value value2;
-	value2["atributo"] = "prueba";
-	value["root"] = value2;
-	Json::FastWriter writer;
-	context.getResponse().setContent(writer.write(value));
-	context.getResponse().setContentType(CONTENT_TYPE_JSON);
+//	Json::Value value;
+//	Json::Value value2;
+//	value2["atributo"] = "prueba";
+//	value["root"] = value2;
+//	Json::FastWriter writer;
+//	context.getResponse().setContent(writer.write(value));
+//	context.getResponse().setContentType(CONTENT_TYPE_JSON);
+	//TODO
 }
 
 void UserResource::putUser(WebContext& context) {
-	string content = context.getRequest().getContent();
-	Json::Reader reader;
-	Json::Value parsed;
-	bool parsingSuccessful = reader.parse(content, parsed);
-	StringReader strreader(parsed["root"]);
-	IntReader intrdr(parsed["root"]);
-	LOG_INFO <<  strreader.get("tributo",false) << endl;
-	LOG_INFO <<  intrdr.get("tributo2",false) << endl;
+//	string content = context.getRequest().getContent();
+//	Json::Reader reader;
+//	Json::Value parsed;
+//	bool parsingSuccessful = reader.parse(content, parsed);
+//	StringReader strreader(parsed["root"]);
+//	IntReader intrdr(parsed["root"]);
+//	LOG_INFO <<  strreader.get("tributo",false) << endl;
+//	LOG_INFO <<  intrdr.get("tributo2",false) << endl;
+	//TODO
 }
 
 UserResource::~UserResource() {
