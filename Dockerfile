@@ -1,11 +1,11 @@
 
 ####################################################
 ## Dockerfile para el uso del Application Server  ##
-## Basado en Ubuntu 14.04               		  ##
+## Basado en Ubuntu 15.10              		  ##
 ####################################################
 
 # Imagen Ubuntu oficial versión 14.04
-FROM jtierno/tinderapplicationserver
+FROM ubuntu:15.10
 
 MAINTAINER jtierno jtierno
 
@@ -14,5 +14,4 @@ COPY ./ /home
 RUN cd /home && chmod 777 config.sh
 RUN cd /home && ./config.sh
 WORKDIR /home/build
-
 CMD ["bash"]

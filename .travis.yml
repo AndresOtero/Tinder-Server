@@ -26,7 +26,7 @@ before_install:
   - sudo apt-get update -q
   - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 script:
-  - sudo ./config.h
+  - sudo ./config.h -oldboost
   - mkdir build
   - cd build
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. ../project && make
