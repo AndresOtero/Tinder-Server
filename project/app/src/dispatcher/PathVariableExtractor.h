@@ -1,10 +1,3 @@
-/*
- * PathVariableExtractor.h
- *
- *  Created on: 20 de mar. de 2016
- *      Author: jonathan
- */
-
 #ifndef SRC_DISPATCHER_PATHVARIABLEEXTRACTOR_H_
 #define SRC_DISPATCHER_PATHVARIABLEEXTRACTOR_H_
 #include <string>

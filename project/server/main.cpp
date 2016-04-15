@@ -14,7 +14,7 @@
 #include "services/authentication/AuthenticationService.h"
 
 int main() {
-	LOG_INFO << "Testing conecction to shared server.";
+	LOG_INFO << "Testing conection to shared server.";
 	SharedConnector sharedConnector = SharedConnector("http://tinder-shared.herokuapp.com");
 	if(!sharedConnector.testConnection()) LOG_ERROR << "Error probando conexion con el shared server";
 	else LOG_INFO << "CONNECTION [OK]";

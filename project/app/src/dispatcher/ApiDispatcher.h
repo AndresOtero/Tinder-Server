@@ -20,7 +20,15 @@ using namespace std;
 
 class ApiDispatcher: public RequestDispatcher {
 private:
+	/**
+	 * Requests Handlers by HTTP Methods
+	 *
+	 */
 	map<RestRequest::Method, EndPoint *> endpoints;
+
+	/**
+	 * Default Handler function from inexistent methods.
+	 */
 	function<void(WebContext&)> defFunction;
 public:
 	ApiDispatcher();
