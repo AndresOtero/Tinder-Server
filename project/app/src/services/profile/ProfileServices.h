@@ -27,6 +27,8 @@ public:
 	bool saveNewUser(User* user);
 	bool deleteUserByID(int id);
 	unordered_map<string, set<string>> getInterests();
+	bool saveNewInterest(string category, string value);
+
 
 private:
 	unordered_map<string, set<string>> populateInterests(Json::Value &root);
