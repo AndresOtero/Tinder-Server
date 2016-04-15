@@ -28,7 +28,5 @@ before_install:
 script:
   - chmod 777 ./config.sh
   - sudo ./config.sh -oldboost
-#  - mkdir build
-#  - cd build
-#  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. ../project && make
-#  - ./test/applib/testapp
+  - cd build
+  - ./test/applib/testapp
