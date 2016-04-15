@@ -4,10 +4,11 @@
 /* So enum value descriptions are displayed inline to the item */
 .breatheenumvalues li tt + p {
   display: inline;
+  background-color: blue;
 }
 
 /* So parameter descriptions are displayed inline to the item */
-.breatheparameterlist li tt + p {
+.breatheparameterlist li p {
   display: inline;
 }
 

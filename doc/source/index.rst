@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 
-Welcome to Tinder Application Server's documentation!
+Welcome to Tinder Application's documentation!
 =====================================================
 
 Contents:
@@ -14,7 +14,6 @@ Contents:
 
 .. doxygenclass:: ApiDispatcher
    :project: myproject
-   :members:
 
 Indices and tables
 ==================

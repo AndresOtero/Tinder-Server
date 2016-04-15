@@ -51,7 +51,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Tinder Application Server'
+project = u'Tinder Application'
 copyright = u'2016, Grupo'
 author = u'Grupo'
 
@@ -120,7 +120,7 @@ html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 html_theme_options = {
     # Navigation bar title. (Default: ``project`` value)
 
-    'navbar_title': "Demo",
+    'navbar_title': "Tinder Application",
 
     # Tab name for entire site. (Default: "Site")
     'navbar_site_name': "Site",
@@ -134,7 +134,7 @@ html_theme_options = {
     # an arbitrary url.
     'navbar_links': [
         ("Examples", "examples"),
-        ("Link", "http://example.com", True),
+        ("Sources", "http://example.com", True),
     ],
 
     # Render the next and previous page links in navbar. (Default: true)
@@ -169,13 +169,13 @@ html_theme_options = {
 
     # Location of link to source.
     # Options are "nav" (default), "footer" or anything else to exclude.
-    'source_link_position': "nav",
+    'source_link_position': "footer",
 
     # Bootswatch (http://bootswatch.com/) theme.
     #
     # Options are nothing (default) or the name of a valid theme
     # such as "amelia" or "cosmo".
-    'bootswatch_theme': "sandstone",
+    'bootswatch_theme': "spacelab",
 
     # Choose Bootstrap version.
     # Values: "3" (default) or "2" (in quotes)
@@ -210,6 +210,9 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_context = {
+    'css_files': ['_static/breathe.css'],
+}
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
 # directly to the root of the documentation.
@@ -273,7 +276,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'TinderApplicationServerdoc'
+htmlhelp_basename = 'TinderApplicationdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -295,7 +298,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'TinderApplicationServer.tex', u'Tinder Application Server Documentation',
+    (master_doc, 'TinderApplication.tex', u'Tinder Application Documentation',
      u'Grupo', 'manual'),
 ]
 
@@ -325,7 +328,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'tinderapplicationserver', u'Tinder Application Server Documentation',
+    (master_doc, 'tinderapplication', u'Tinder Application Documentation',
      [author], 1)
 ]
 
@@ -339,8 +342,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'TinderApplicationServer', u'Tinder Application Server Documentation',
-     author, 'TinderApplicationServer', 'Application Server For Tinder Android Application.',
+    (master_doc, 'TinderApplication', u'Tinder Application Documentation',
+     author, 'TinderApplication', 'Tinder Android Application.',
      'Miscellaneous'),
 ]
 
