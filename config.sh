@@ -30,7 +30,7 @@ cd build
 
 if if [ "$1" == "-oldboost" -o "$1" == "-travis" ]
 	then
-	 cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. ../project && make
+	 cmake -DCMAKE_CXX_COMPILER='g++-5' -B. ../project && make
 	else
 	 cmake CMAKE_BUILD_TYPE=Debug ../project && make	
 	fi
