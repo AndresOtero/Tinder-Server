@@ -1,4 +1,6 @@
-# Tinder-Server
+# Tinder Application
+
+Esta es una aplicación realizada dentro del marco de trabajo práctico propuesto par la asignatura 75.52 Taller de Programación ÏI
 
 Build Status: [![Build Status](https://travis-ci.org/Tinder2Team/Tinder-Server.svg?branch=master)](https://travis-ci.org/Tinder2Team/Tinder-Server)
 
