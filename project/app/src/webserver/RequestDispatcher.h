@@ -14,6 +14,14 @@
 #include "dispatcher/WebContext.h"
 using namespace std;
 
+
+/**
+ * @class RequestDispatcher
+ * This class dispatches requests to their correct handler
+ *
+ * @author jtierno
+ *
+ */
 class RequestDispatcher {
 
 public:

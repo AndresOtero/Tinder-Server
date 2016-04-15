@@ -14,7 +14,6 @@
  *
  *
  * @author jtierno
- * @section DESCRIPTION
 
  * Generic RestResource that represents a handler for a set of requests on an REST API
  */
