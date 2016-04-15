@@ -1,9 +1,3 @@
-/*
- * RestRequest.h
- *
- *  Created on: 30 de mar. de 2016
- *      Author: jonathan
- */
 
 #ifndef APP_SRC_WEBSERVER_RESTREQUEST_H_
 #define APP_SRC_WEBSERVER_RESTREQUEST_H_
@@ -12,6 +6,14 @@
 #include "mongoose/mongoose.h"
 using namespace std;
 
+
+/**
+ * @class RequestRequest
+ * This class dispatches requests to their correct handler
+ *
+ * @author jtierno
+ *
+ */
 class RestRequest {
 private:
 	string uri;

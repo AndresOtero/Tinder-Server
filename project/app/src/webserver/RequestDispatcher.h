@@ -1,9 +1,3 @@
-/*
- * ApiDispatcher.h
- *
- *  Created on: 19 de mar. de 2016
- *      Author: jonathan
- */
 
 #ifndef SRC_WEBSERVER_REQUESTDISPATCHER_H_
 #define SRC_WEBSERVER_REQUESTDISPATCHER_H_
@@ -27,7 +21,7 @@ class RequestDispatcher {
 public:
 
 	/**
-	 * Handle a request dispatching to the correct handler
+	 * Handles a request dispatching to the correct handler
 	 * @param request RestRequest
 	 * @param response RestResponse where tp build the response
 	 */
