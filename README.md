@@ -2,31 +2,14 @@
 
 Esta es una aplicación realizada dentro del marco de trabajo práctico propuesto para la asignatura 75.52 Taller de Programación II
 
-Build Status: [![Build Status](https://travis-ci.org/Tinder2Team/Tinder-Server.svg?branch=master)](https://travis-ci.org/Tinder2Team/Tinder-Server)
 
-## Configurar proyecto eclipse
+## Información General
 
-1. Correr el archivo **_"configEclipse.sh"_** parado en la raiz del proyecto, va a crear una carpeta llamada **_"build"_**.
-2. Dentro de eclipse **_"import.. -> Existing Project into Workspace"_**.
-3. Como root del proyecto hay que buscar el directorio **_"build"_** creado en el paso 1.
-4. Darle finish y con eso queda importado el proyecto en eclipse.
+- [:link: Página Web del poryecto](http://tinder2team.github.io/Tinder-Server/)
+- [:book: Repositorio de servidor de Aplicación](http://tinder2team.github.io/Tinder-Server/)
+- [:book: Repositorio del Shared Server](https://github.com/Tinder2Team/Tinder-Shared)
+- [:book: Repositorio del Cliente Android](https://github.com/Tinder2Team/Tinder-Client)
 
-Hasta nuevo aviso, si se agrega un nuevo archivo, hay que correr
-**_cmake ../project/ -Dtest=on_**
+## Status
 
-Hay que instalar el paquete libboost-all-dev
-Para RocksDB hay que asegurarse de tener instalado libsnappy-dev libbz2-dev zlib1g-dev libcurl4-gnutls-dev libcrypto++-dev
-
-## Generar reporte de cobertura
-
-### Dependencias
-- gcovr (paquete aptitude)
-- lcov (pquete aptitude)
-
-### Cómo generar el reporte html
-
-Luego de haber hecho un make
-
-
-1. Correr el script **coverageReport.sh**
-2. Si no hubo ningún tipo de error se debe generar un reporte en $ROOT_DIRECTORY/build/coverage-report/index.html
+[![Build Status](https://travis-ci.org/Tinder2Team/Tinder-Server.svg?branch=master)](https://travis-ci.org/Tinder2Team/Tinder-Server)
