@@ -13,3 +13,10 @@ Esta es una aplicación realizada dentro del marco de trabajo práctico propuest
 ## Status
 
 [![Build Status](https://travis-ci.org/Tinder2Team/Tinder-Server.svg?branch=master)](https://travis-ci.org/Tinder2Team/Tinder-Server)
+[![Docker Pulls](https://img.shields.io/docker/pulls/martineq/tp7552.svg)](https://hub.docker.com/r/martineq/tp7552/)
+
+##Docker
+
+Para correr el servidor con Docker, la imágen del servidor se encuentra publicada, con lo cual es posible correrla de la siguiente manera:
+
+sudo docker run -p 0.0.0.0:8000:8000 jtierno/tinder-server /bin/sh -c "./server/server"
