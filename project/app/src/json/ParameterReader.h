@@ -12,6 +12,14 @@
 #include <functional>
 using namespace std;
 
+
+/**
+ * @class ParameterReader
+ *
+ * Generic reader to access a json object
+ * @return the Request
+ */
+
 template<class T>
 class ParameterReader {
 protected:
@@ -29,20 +37,35 @@ protected:
 		}
 	}
 public:
+	/**
+	 * Constructor
+	 * @param Json from where read.
+	 */
 	ParameterReader(Json::Value value){
 		this->root = value;
 		Json::FastWriter as;
 
 	};
 	virtual ~ParameterReader() {};
-	T get(string key, bool required) {
 
+	/**
+	 * Getter of value, validating if empty
+	 * @return the value
+	 * @throws an string with a description
+	 */
+
+	T get(string key, bool required) {
 		return this->get(key, required, [key] (Json::Value & val) {return val[key];});
 	}
 
 };
 
-
+/**
+ * @class StringReader
+ *
+ * Reader for string value
+ * @return the Request
+ */
 class StringReader: public ParameterReader<string> {
 public:
 	StringReader(Json::Value value) :	ParameterReader(value) {};
@@ -55,6 +78,13 @@ public:
 	}
 };
 
+/**
+ * @class BoolReader
+ *
+ * Reader for boolean value
+ * @return the Request
+ */
+
 class BoolReader: public ParameterReader<bool> {
 public:
 	BoolReader(Json::Value value) :	ParameterReader(value) {};
@@ -66,6 +96,13 @@ public:
 		return ParameterReader<bool>::get(key, required, converter);
 	}
 };
+
+/**
+ * @class IntReader
+ *
+ * Reader for int value
+ * @return the Request
+ */
 
 class IntReader: public ParameterReader<int> {
 public:

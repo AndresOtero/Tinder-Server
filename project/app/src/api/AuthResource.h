@@ -1,9 +1,3 @@
-/*
- * AuthResource.h
- *
- *  Created on: 10 de abr. de 2016
- *      Author: jonathan
- */
 
 #ifndef APP_SRC_API_AUTHRESOURCE_H_
 #define APP_SRC_API_AUTHRESOURCE_H_

@@ -10,7 +10,9 @@
 
 #include <string>
 using namespace std;
-
+/**
+ *
+ */
 const static string STATUS_200_OK = "200 OK";
 const static string STATUS_400_BAD_REQUEST = "400 Bad Request";
 const static string STATUS_401_UNAUTHORIZED= "401 Unauthorized";

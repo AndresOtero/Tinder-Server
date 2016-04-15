@@ -1,9 +1,3 @@
-/*
- * PathVariableException.h
- *
- *  Created on: 6 de abr. de 2016
- *      Author: jonathan
- */
 
 #ifndef APP_SRC_DISPATCHER_PATHVARIABLEEXCEPTION_H_
 #define APP_SRC_DISPATCHER_PATHVARIABLEEXCEPTION_H_

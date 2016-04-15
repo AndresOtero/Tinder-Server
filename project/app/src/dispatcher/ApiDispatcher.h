@@ -1,10 +1,3 @@
-/*
- * ApiDispatcher.h
- *
- *  Created on: 19 de mar. de 2016
- *      Author: jonathan
- */
-
 #ifndef SRC_DISPATCHER_APIDISPATCHER_H_
 #define SRC_DISPATCHER_APIDISPATCHER_H_
 #include "webserver/RequestDispatcher.h"
@@ -29,6 +22,7 @@ class ApiDispatcher: public RequestDispatcher {
 private:
 	/**
 	 * Requests Handlers by HTTP Methods
+	 *
 	 */
 	map<RestRequest::Method, EndPoint *> endpoints;
 
