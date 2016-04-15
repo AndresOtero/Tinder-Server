@@ -20,14 +20,14 @@ matrix:
       env: COMPILER=g++-5
 
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y build-essential autotools-dev libicu-dev libsnappy-dev libbz2-dev zlib1g-dev gcovr lcov libcurl4-gnutls-dev libcrypto++-dev
-  - sudo add-apt-repository ppa:afrank/boost -y
-  - sudo apt-get update -q
-  - sudo apt-get install libboost1.57-all libboost1.57-all-dev
+ # - sudo apt-get update -qq
+ # - sudo apt-get install -y build-essential autotools-dev libicu-dev libsnappy-dev libbz2-dev zlib1g-dev gcovr lcov libcurl4-gnutls-dev libcrypto++-dev
+ # - sudo add-apt-repository ppa:afrank/boost -y
+ # - sudo apt-get update -q
+ # - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 script:
-  - chmod 777 config.h
-  - sudo ./config.h -oldboost
+  - chmod 777
+  - sudo ./config.sh -oldboost
 #  - mkdir build
 #  - cd build
 #  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. ../project && make
