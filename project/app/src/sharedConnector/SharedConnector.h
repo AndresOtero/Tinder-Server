@@ -21,6 +21,7 @@ public:
 	bool getJsonFromURL(std::string endpoint, Json::Value& jsonData);
 	bool putDataToURL(std::string endpoint, std::string data, Json::Value& response);
 	bool postDataToURL(std::string endpoint, std::string data, Json::Value& response);
+	bool postDataToURL(std::string endpoint, std::string data, std::string &response);
 	bool deleteToURL(std::string endpoint);
 	std::string serverBaseURL;
 

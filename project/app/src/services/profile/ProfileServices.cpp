@@ -162,3 +162,22 @@ unordered_map<string, set<string>> ProfileServices::getInterests() {
 	unordered_map<string, set<string>> mapa = this->populateInterests(root["interests"]);
 	return mapa;
 }
+
+bool ProfileServices::saveNewInterest(string category, string value) {
+	string url = "/interests/";
+	string response;
+	Json::Value root;
+	Json::Value interest;
+	interest["category"] = category;
+	interest["value"] = value;
+	root["interest"] = interest;
+	Json::FastWriter writer;
+	string data = writer.write(root);
+	if (!this->connector->postDataToURL(url, data, response)) {
+		LOG_ERROR << "Error haciendo post del interest nuevo";
+		return false;
+	}
+	return true;
+}
+
+
