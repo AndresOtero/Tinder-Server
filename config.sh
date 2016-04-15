@@ -1,9 +1,10 @@
 #!/bin/bash
 # Instalación de dependencias y herramientas
 echo "Instalación de dependencias..."
-apt-get update 
+apt-get update -q
 apt-get install -y \
 autotools-dev \
+libicu-dev \
 build-essential \
 cmake \
 libbz2-dev \
@@ -12,7 +13,8 @@ zlib1g-dev \
 libsnappy-dev \
 libcurl4-gnutls-dev \
 doxygen \
-lcov
+lcov \
+gcovr
 
 if [ "$1" == "-oldboost" ]
 then
@@ -26,6 +28,13 @@ fi
 mkdir -p build
 cd build
 
-cmake CMAKE_BUILD_TYPE=Debug ../project && make
+if if [ "$1" == "-oldboost" -o "$1" == "-travis" ]
+	then
+	 cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. ../project && make
+	else
+	 cmake CMAKE_BUILD_TYPE=Debug ../project && make	
+	fi
+
+
 
 
