@@ -25,7 +25,7 @@ if(test)
 	add_subdirectory (test)
 endif()
 
-option(BUILD_DOXY_DOC "build doxygen documentation" OFF)
+option(BUILD_DOXY_DOC "build doxygen documentation" ON)
 if(BUILD_DOXY_DOC)
     find_package(Doxygen)
     if(NOT DOXYGEN_FOUND)
