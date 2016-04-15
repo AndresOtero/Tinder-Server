@@ -11,11 +11,29 @@
 #include <string>
 #include "../../json/json/json.h"
 
+/**
+ * @class JsonWebToken
+ *
+ * Provides the functionality to create and validate jwt.
+ */
 class JsonWebToken {
 public:
 	JsonWebToken();
 	virtual ~JsonWebToken();
+
+	/**
+	 * Generates a jwt for the given username. It does not check if the username exists.
+	 *
+	 * @param username to generate the jwt for.
+	 */
 	std::string generateTokenForUser(std::string username);
+
+	/**
+	 * Checks if the jwt received is valid and returns the payload of it if it is.
+	 *
+	 * @param token to decode and validate.
+	 * @param returnPayload the payload of the decoded jwt is stored here.
+	 */
 	bool getUsernameFromToken(std::string token, Json::Value& returnPayload);
 
 private:
