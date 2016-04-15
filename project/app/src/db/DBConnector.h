@@ -11,15 +11,53 @@
 #include "rocksdb/db.h"
 #include <string>
 
+/**
+ * @class DBConnector
+ * It provides the necessary methods to access RocksDB, save and retrieve information.
+ */
 class DBConnector {
 public:
 	rocksdb::DB* db;
+
+	/**
+	 * Name of the opened DB.
+	 */
 	std::string openedDB;
+
+	/**
+	 * Default constructor.
+	 *
+	 * @param dbName name of the db to be opened. If it is not found, it is created.
+	 */
 	DBConnector(std::string dbName);
 	virtual ~DBConnector();
+
+	/**
+	 * Returns true if the db is opened and ready to be used. False if not.
+	 */
 	bool isOk();
+
+	/**
+	 * Deletes the key received from the DB. It returns true if the operation was successful, false if no.
+	 *
+	 * @param key to delete from the db.
+	 */
 	bool deleteKey(std::string key);
+
+	/**
+	 * Retrieves the value stored in the given key. It returns true if the operation was successful, false if not.
+	 *
+	 * @param key to search for in the DB.
+	 * @param value the value stored in the db is saved here.
+	 */
 	bool getValueForKey(std::string key, std::string& value);
+
+	/**
+	 * Saves the given value in the given key. If the key already exists, it overwrites the value stored.
+	 *
+	 * @param key to store the value in.
+	 * @param value to be stored in the given key.
+	 */
 	bool putValueInKey(std::string key, std::string value);
 
 private:
