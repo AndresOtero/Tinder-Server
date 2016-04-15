@@ -19,4 +19,6 @@ Esta es una aplicación realizada dentro del marco de trabajo práctico propuest
 
 Para correr el servidor con Docker, la imágen del servidor se encuentra publicada, con lo cual es posible correrla de la siguiente manera:
 
-sudo docker run -p 0.0.0.0:8000:8000 jtierno/tinder-server /bin/sh -c "./server/server"
+```sh
+$ sudo docker run -p 0.0.0.0:8000:8000 jtierno/tinder-server /bin/sh -c "./server/server"
+```
