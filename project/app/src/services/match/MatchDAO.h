@@ -54,14 +54,18 @@ public:
 	 */
 	Json::Value getMatches(string username, string id);
 
+	/**
+	 * Checks if the username A liked username B before.
+	 * @param usernameA username of userA
+	 * @param idA id of the username A
+	 * @param usernameB username of the second user.
+	 * @param idB id of the second username.
+	 */
+	bool checkForLike(string usernameA, string idA, string usernameB, string idB);
+
 private:
 	DBConnector* connector;
 	string assembleKey(string username, string id);
-
-	/**
-	 * Checks if the username A liked username B before.
-	 */
-	bool checkForMatch(string usernameA, string idA, string usernameB, string idB);
 
 	void addMatch(string usernameA, string idA, string usernameB, string idB);
 };

@@ -27,12 +27,13 @@ public:
 	 * Method to send messages between users. Returns true if the message was sent correctly and false if not. If
 	 * the users do not like each other the message can not be sent and false will be returned.
 	 *
+	 * @param msg message to be sent.
 	 * @param from user sending the message
 	 * @param fromid id of the user sending the message.
 	 * @param to user that will receive the message
 	 * @param toid id of the user receiving the message.
 	 */
-	bool sendMessageFromTo(string from, string fromid, string to, string toid);
+	bool sendMessageFromTo(string msg, string from, string fromid, string to, string toid);
 
 	/**
 	 * Returns a json with all the messages between both users. If no messages are found, an empty json is returned.

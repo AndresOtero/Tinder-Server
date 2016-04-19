@@ -11,7 +11,7 @@ MatchDAO::MatchDAO(DBConnector *connector) {
 
 MatchDAO::~MatchDAO() { }
 
-bool MatchDAO::checkForMatch(string usernameA, string idA, string usernameB, string idB) {
+bool MatchDAO::checkForLike(string usernameA, string idA, string usernameB, string idB) {
 	string key = this->assembleKey(usernameA, idA);
 	string value;
 	if(!this->connector->getValueForKey(key, value)) return false;
@@ -43,7 +43,7 @@ bool MatchDAO::saveLike(string username, string userid, string match, string mat
 		Json::Reader reader;
 		bool parseResult = reader.parse(value, json);
 		//Do not add twice the like.
-		if(this->checkForMatch(username, userid, match, matchid)) return true;
+		if(this->checkForLike(username, userid, match, matchid)) return true;
 		if (!parseResult) {
 			LOG_ERROR << "DB data corrupted. Error parsing " << value <<" .";
 			return false;
@@ -57,7 +57,7 @@ bool MatchDAO::saveLike(string username, string userid, string match, string mat
 	Json::FastWriter writer;
 	string toSave = writer.write(json);
 	this->connector->putValueInKey(key, toSave);
-	if(this->checkForMatch(match, matchid, username, userid)) this->addMatch(match, matchid, username, userid);
+	if(this->checkForLike(match, matchid, username, userid)) this->addMatch(match, matchid, username, userid);
 	return true;
 }
 
