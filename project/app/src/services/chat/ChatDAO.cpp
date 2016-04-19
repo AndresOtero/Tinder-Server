@@ -7,8 +7,8 @@ ChatDAO::ChatDAO(DBConnector* connector) {
 
 ChatDAO::~ChatDAO() {}
 
-bool ChatDAO::saveMsgFromTo(string msg, string from, string to) {
-	string key(from + "-" + to);
+bool ChatDAO::saveMsgFromTo(string msg, string from, string idfrom, string to, string idto) {
+	string key(from + ":" + idfrom + "-" + to + ":" + idto);
 	Json::Value nuevoMsg;
 	struct tm * timeinfo;
 	time_t rawtime;
@@ -29,7 +29,7 @@ bool ChatDAO::saveMsgFromTo(string msg, string from, string to) {
 	return connector->putValueInKey(key, toSave);  
 }
 
-bool ChatDAO::getMsgBetween(string from, string to, string &msgs) {
-	string key(from + "-" + to);
+bool ChatDAO::getMsgBetween(string from, string idfrom, string to, string idto, string &msgs) {
+	string key(from + ":" + idfrom + "-" + to + ":" + idto);
 	return this->connector->getValueForKey(key, msgs);
 }
