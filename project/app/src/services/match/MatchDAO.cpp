@@ -29,6 +29,25 @@ bool MatchDAO::checkForLike(string usernameA, string idA, string usernameB, stri
 	return false;
 }
 
+bool MatchDAO::checkForMatch(string usernameA, string idA, string usernameB, string idB) {
+	string key = this->assembleKey(usernameA, idA);
+	string value;
+	if(!this->connector->getValueForKey(key, value)) return false;
+	Json::Reader reader;
+	Json::Value json;
+	if(!reader.parse(value, json)) {
+		LOG_ERROR << "DB data corrupted. Error parsing " << value <<" .";
+		return false;
+	}
+	Json::Value matches = json["matches"];
+	for (Json::ValueIterator itr = matches.begin(); itr != matches.end(); itr++) {
+		if(itr->get("username", "ERROR").asString() == usernameB && itr->get("id", "ERROR").asString() == idB)
+			return true;
+	}
+	return false;
+}
+
+
 bool MatchDAO::saveLike(string username, string userid, string match, string matchid) {
 	string key = this->assembleKey(username, userid);
 	string value;

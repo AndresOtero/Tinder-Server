@@ -49,6 +49,7 @@ TEST_F(MatchDAOTest, MatchTest) {
 	ASSERT_TRUE(likes == 1);
 	matches = match.getNumberOfMatches("matias", "1");
 	ASSERT_TRUE(matches == 0);
+	ASSERT_FALSE(match.checkForMatch("matias", "1", "maria", "2"));
 	ASSERT_TRUE(match.saveLike("maria", "2", "matias", "1"));
 	likes = match.getNumberOfLikes("maria", "2");
 	ASSERT_TRUE(likes == 1);
@@ -56,6 +57,8 @@ TEST_F(MatchDAOTest, MatchTest) {
 	ASSERT_TRUE(matches == 1);
 	matches = match.getNumberOfMatches("matias", "1");
 	ASSERT_TRUE(matches == 1);
+	ASSERT_TRUE(match.checkForMatch("matias", "1", "maria", "2"));
+	ASSERT_TRUE(match.checkForMatch("maria", "2", "matias", "1"));
 	connector.deleteKey("matias:1");
 	connector.deleteKey("maria:2");
 }

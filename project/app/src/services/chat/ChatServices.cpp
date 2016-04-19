@@ -13,9 +13,7 @@ ChatServices::ChatServices(ChatDAO *chatDao, MatchDAO* matchDao) {
 ChatServices::~ChatServices() { }
 
 bool ChatServices::sendMessageFromTo(string msg, string from, string fromid, string to, string toid) {
-	bool AlikesB = this->match->checkForLike(from, fromid, to, toid);
-	bool BlikesA = this->match->checkForLike(to, toid, from, fromid);
-	if (!AlikesB || !BlikesA) return false;
+	if (!this->match->checkForMatch(from, fromid, to, toid)) return false;
 	bool saveResult = this->chat->saveMsgFromTo(msg, from, fromid, to, toid);
 	return saveResult;
 }
