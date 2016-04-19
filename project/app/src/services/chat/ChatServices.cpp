@@ -12,11 +12,11 @@ ChatServices::ChatServices(ChatDAO *chatDao, MatchDAO* matchDao) {
 
 ChatServices::~ChatServices() { }
 
-bool ChatServices::sendMessageFromTo(string from, string to) {
+bool ChatServices::sendMessageFromTo(string from, string fromid, string to, string toid) {
 	return false;
 }
 
-Json::Value ChatServices::getConversationBetweenUsers(string userA, string userB) {
+Json::Value ChatServices::getConversationBetweenUsers(string userA, string idA, string userB, string idB) {
 	return Json::Value();
 }
 
