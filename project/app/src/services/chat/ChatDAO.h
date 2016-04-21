@@ -9,6 +9,9 @@
 #define SRC_CHATDAO_H_
 
 #include <string>
+#include <list>
+#include "../../model/Message.h"
+#include "../../model/User.h"
 #include "../../db/DBConnector.h"
 
 using namespace std;
@@ -32,23 +35,22 @@ public:
 	 * Saves the message received. It does not do any validation of the sender and receiver.
 	 *
 	 * @param msg to store.
-	 * @param from username of the sender of the message.
-	 * @param to username of the receiver of the message.
 	 */
-	bool saveMsgFromTo(string msg, string from, string to);
+	bool saveMsgFromTo(Message* msg);
 
 	/**
 	 * Saves in the param msgs all the messages from one username to the other. Returns true or false
 	 * if the query to the db was successful.
 	 *
-	 * @param from username that is the sender of the messages to get.
-	 * @param to username that is the receiver of the messages to get.
-	 * @param msgs string were all the messages retrieved are saved.
+	 * @param sender username that is the sender of the messages to get.
+	 * @param receiver username that is the receiver of the messages to get.
+	 * @param msgs list of all the messages in the db.
 	 */
-	bool getMsgBetween(string from, string to, string& msgs);
+	bool getMsgBetween(User* sender, User* receiver, list<Message*>* msgs);
 
 private:
 	DBConnector* connector;
+	string assembleKey(User* A, User* B);
 };
 
 
