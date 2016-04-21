@@ -24,45 +24,27 @@
 
 <p>Esta es una aplicación realizada dentro del marco de trabajo práctico propuesto para la asignatura 75.52 Taller de Programación II</p>
 
-<p>Build Status: <a href="https://travis-ci.org/Tinder2Team/Tinder-Server"><img src="https://travis-ci.org/Tinder2Team/Tinder-Server.svg?branch=master" alt="Build Status"></a></p>
-
 <h2>
-<a id="configurar-proyecto-eclipse" class="anchor" href="#configurar-proyecto-eclipse" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configurar proyecto eclipse</h2>
-
-<ol>
-<li>Correr el archivo <strong><em>"configEclipse.sh"</em></strong> parado en la raiz del proyecto, va a crear una carpeta llamada <strong><em>"build"</em></strong>.</li>
-<li>Dentro de eclipse <strong><em>"import.. -&gt; Existing Project into Workspace"</em></strong>.</li>
-<li>Como root del proyecto hay que buscar el directorio <strong><em>"build"</em></strong> creado en el paso 1.</li>
-<li>Darle finish y con eso queda importado el proyecto en eclipse.</li>
-</ol>
-
-<p>Hasta nuevo aviso, si se agrega un nuevo archivo, hay que correr
-<strong><em>cmake ../project/ -Dtest=on</em></strong></p>
-
-<p>Hay que instalar el paquete libboost-all-dev
-Para RocksDB hay que asegurarse de tener instalado libsnappy-dev libbz2-dev zlib1g-dev libcurl4-gnutls-dev libcrypto++-dev</p>
-
-<h2>
-<a id="generar-reporte-de-cobertura" class="anchor" href="#generar-reporte-de-cobertura" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Generar reporte de cobertura</h2>
-
-<h3>
-<a id="dependencias" class="anchor" href="#dependencias" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencias</h3>
+<a id="información-general" class="anchor" href="#informaci%C3%B3n-general" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Información General</h2>
 
 <ul>
-<li>gcovr (paquete aptitude)</li>
-<li>lcov (pquete aptitude)</li>
+<li><a href="http://tinder2team.github.io/Tinder-Server/"><img class="emoji" title=":link:" alt=":link:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f517.png" height="20" width="20" align="absmiddle"> Página Web del poryecto</a></li>
+<li><a href="http://tinder2team.github.io/Tinder-Server/"><img class="emoji" title=":book:" alt=":book:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d6.png" height="20" width="20" align="absmiddle"> Repositorio de servidor de Aplicación</a></li>
+<li><a href="https://github.com/Tinder2Team/Tinder-Shared"><img class="emoji" title=":book:" alt=":book:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d6.png" height="20" width="20" align="absmiddle"> Repositorio del Shared Server</a></li>
+<li><a href="https://github.com/Tinder2Team/Tinder-Client"><img class="emoji" title=":book:" alt=":book:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d6.png" height="20" width="20" align="absmiddle"> Repositorio del Cliente Android</a></li>
 </ul>
 
-<h3>
-<a id="cómo-generar-el-reporte-html" class="anchor" href="#c%C3%B3mo-generar-el-reporte-html" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cómo generar el reporte html</h3>
+<h2>
+<a id="status" class="anchor" href="#status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Status</h2>
 
-<p>Luego de haber hecho un make</p>
+<p><a href="https://travis-ci.org/Tinder2Team/Tinder-Server"><img src="https://travis-ci.org/Tinder2Team/Tinder-Server.svg?branch=master" alt="Build Status"></a></p>
 
-<ol>
-<li>Correr el script <strong>coverageReport.sh</strong>
-</li>
-<li>Si no hubo ningún tipo de error se debe generar un reporte en $ROOT_DIRECTORY/build/coverage-report/index.html</li>
-</ol>
+<h2>
+<a id="docker" class="anchor" href="#docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Docker</h2>
+
+<p>Para correr el servidor con Docker, la imágen del servidor se encuentra publicada, con lo cual es posible correrla de la siguiente manera:</p>
+
+<div class="highlight highlight-source-shell"><pre>$   sudo docker run -p 0.0.0.0:8000:8000 jtierno/tinder-server /bin/sh -c <span class="pl-s"><span class="pl-pds">"</span>./server/server<span class="pl-pds">"</span></span></pre></div>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/Tinder2Team/Tinder-Server">75.52 Tinder Application</a> is maintained by <a href="https://github.com/Tinder2Team">Tinder2Team</a>.</span>
