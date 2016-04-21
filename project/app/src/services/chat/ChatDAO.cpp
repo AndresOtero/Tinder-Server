@@ -1,3 +1,5 @@
+#include <Message.h>
+#include <Logger.h>
 #include "ChatDAO.h"
 #include "../../json/json/json.h"
 
@@ -7,29 +9,57 @@ ChatDAO::ChatDAO(DBConnector* connector) {
 
 ChatDAO::~ChatDAO() {}
 
-bool ChatDAO::saveMsgFromTo(string msg, string from, string idfrom, string to, string idto) {
-	string key(from + ":" + idfrom + "-" + to + ":" + idto);
+bool ChatDAO::saveMsgFromTo(Message* msg) {
+	string key = this->assembleKey(msg->getSender(), msg->getReceiver());
 	Json::Value nuevoMsg;
-	struct tm * timeinfo;
-	time_t rawtime;
-	time ( &rawtime );
-	timeinfo = localtime(&rawtime);
-	string timeStamp(asctime(timeinfo));
+	string timeStamp(asctime(msg->getTime()));
 	nuevoMsg["time"] = timeStamp;
-	nuevoMsg["msg"] = msg;
+	nuevoMsg["msg"] = msg->getContent();
 	string previous;
 	bool resultado = this->connector->getValueForKey(key, previous);
-	string toSave;
-	Json::FastWriter writer;
+	Json::Value toSaveJson;
 	//Si no habia mensajes entre los dos
-	if (!resultado) toSave = writer.write(nuevoMsg);
-	else {
-		toSave = previous + "," + writer.write(nuevoMsg);
+	if (!resultado) {
+		toSaveJson = Json::Value(Json::arrayValue);
 	}
+	else {
+		Json::Reader reader;
+		reader.parse(previous, toSaveJson);
+	}
+	toSaveJson.append(nuevoMsg);
+	Json::FastWriter writer;
+	string toSave = writer.write(toSaveJson);
 	return connector->putValueInKey(key, toSave);  
 }
 
-bool ChatDAO::getMsgBetween(string from, string idfrom, string to, string idto, string &msgs) {
+bool ChatDAO::getMsgBetween(User* sender, User* receiver, list<Message*>* msgs) {
+	string key = this->assembleKey(sender, receiver);
+	string jsonString;
+	bool result = this->connector->getValueForKey(key, jsonString);
+	if (!result) return false;
+	Json::Reader reader;
+	Json::Value json;
+	if(!reader.parse(jsonString, json)){
+		LOG_ERROR << "DB Corrupted, error parsing." << jsonString << " .";
+		return false;
+	}
+	Json::FastWriter writer;
+	string prueba = writer.write(json);
+	for (Json::ValueIterator itr = json.begin(); itr != json.end(); itr++) {
+		struct tm savedTime;
+		if(!strptime(itr->get("time", "error").asString().c_str(), "%a %b %e %H:%M:%S %Y", &savedTime))
+			LOG_ERROR << "Error parsing time.";
+		Message* nuevo = new Message(itr->get("msg", "error").asString(), &savedTime ,sender, receiver);
+		msgs->push_front(nuevo);
+	}
+	return true;
+}
+
+string ChatDAO::assembleKey(User *A, User *B) {
+	string from = A->getAlias();
+	string idfrom = A->getId();
+	string to = B->getAlias();
+	string idto = B->getId();
 	string key(from + ":" + idfrom + "-" + to + ":" + idto);
-	return this->connector->getValueForKey(key, msgs);
+	return key;
 }

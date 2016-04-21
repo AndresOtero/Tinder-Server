@@ -7,6 +7,7 @@
 
 #include <DBConnector.h>
 #include <json/json.h>
+#include <User.h>
 
 using namespace std;
 /**
@@ -26,57 +27,48 @@ public:
 
 	/**
 	 * Saves the match in the db. Returns true if the like was stored successfully.
-	 * @param username is the name of the user that liked the other.
-	 * @param userid is the id of the user that liked the other.
-	 * @param match is the name of the user that was liked by username.
-	 * @param matchid is the id of the user that was liked by the username.
+	 * @param user is the user that just liked another one.
+	 * @param liked is user that first user liked.
 	 */
-	bool saveLike(string username, string userid, string match, string matchid);
+	bool saveLike(User* user, User* liked);
 
 	/**
 	 * Returns the number of likes that a user has received.
-	 * @param username is the name of the user to retrieve the number of likes he has received.
-	 * @param id is the id of the user you want to get the number of likes.
+	 * @param user user to get the number of likes he did.
 	 */
-	int getNumberOfLikes(string username, string id);
+	int getNumberOfLikes(User* user);
 
 	/**
 	 * Returns the number of users the number of matches a user has.
-	 * @param username is the name of the user to retrieve the number of matches he has.
-	 * @param id is the id of the user you want to get.
+	 * @param user to get the number of matches he has.
 	 */
-	int getNumberOfMatches(string username, string id);
+	int getNumberOfMatches(User* user);
 
 	/**
 	 * Returns a Json::Value with all the users that have matched the requested user.
-	 * @param username is the name of the user to retrieve the  matches he has.
-	 * @param id is the id of the user you want to get.
+	 * @param user is the user to retrieve the  matches he has.
 	 */
-	Json::Value getMatches(string username, string id);
+	Json::Value getMatches(User* user);
 
 	/**
 	 * Checks if the username A liked username B before.
-	 * @param usernameA username of userA
-	 * @param idA id of the username A
-	 * @param usernameB username of the second user.
-	 * @param idB id of the second username.
+	 * @param userA is the user we want to know if he has liked B or not.
+	 * @param userB is the user we want to know if was liked before.
 	 */
-	bool checkForLike(string usernameA, string idA, string usernameB, string idB);
+	bool checkForLike(User* userA, User* userB);
 
 	/**
 	 * Checks if the username A and B have matched.
-	 * @param usernameA username of userA
-	 * @param idA id of the username A
-	 * @param usernameB username of the second user.
-	 * @param idB id of the second username.
+	 * @param userA one of the users to know if they match
+	 * @param userB the other user
 	 */
-	bool checkForMatch(string usernameA, string idA, string usernameB, string idB);
+	bool checkForMatch(User* userA, User* userB);
 
 private:
 	DBConnector* connector;
 	string assembleKey(string username, string id);
 
-	void addMatch(string usernameA, string idA, string usernameB, string idB);
+	void addMatch(User* a, User* b);
 };
 
 

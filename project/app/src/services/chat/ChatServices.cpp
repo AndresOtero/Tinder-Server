@@ -2,6 +2,7 @@
 // Created by matias on 4/18/16.
 //
 
+#include <Logger.h>
 #include "ChatServices.h"
 
 
@@ -12,13 +13,16 @@ ChatServices::ChatServices(ChatDAO *chatDao, MatchDAO* matchDao) {
 
 ChatServices::~ChatServices() { }
 
-bool ChatServices::sendMessageFromTo(string msg, string from, string fromid, string to, string toid) {
-	if (!this->match->checkForMatch(from, fromid, to, toid)) return false;
-	bool saveResult = this->chat->saveMsgFromTo(msg, from, fromid, to, toid);
+bool ChatServices::sendMessageFromTo(Message* msg) {
+	if (!this->match->checkForMatch(msg->getSender(), msg->getReceiver())) return false;
+	bool saveResult = this->chat->saveMsgFromTo(msg);
 	return saveResult;
 }
 
-Json::Value ChatServices::getConversationBetweenUsers(string userA, string idA, string userB, string idB) {
-	return Json::Value();
+list<Message*>* ChatServices::getConversationBetweenUsers(User* userA, User* userB) {
+	std::list<Message*>* lista = new list<Message*>();
+	this->chat->getMsgBetween(userA, userB, lista);
+	this->chat->getMsgBetween(userB, userA, lista);
+	return lista;
 }
 

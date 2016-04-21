@@ -7,6 +7,7 @@
 
 
 #include <MatchDAO.h>
+#include <Message.h>
 #include "ChatDAO.h"
 
 /**
@@ -28,21 +29,15 @@ public:
 	 * the users do not like each other the message can not be sent and false will be returned.
 	 *
 	 * @param msg message to be sent.
-	 * @param from user sending the message
-	 * @param fromid id of the user sending the message.
-	 * @param to user that will receive the message
-	 * @param toid id of the user receiving the message.
 	 */
-	bool sendMessageFromTo(string msg, string from, string fromid, string to, string toid);
+	bool sendMessageFromTo(Message* msg);
 
 	/**
 	 * Returns a json with all the messages between both users. If no messages are found, an empty json is returned.
-	 * @param userA one of the users of the conversation.
-	 * @param idA id of the user A.
-	 * @param userB the other user of the conversation.
-	 * @param idB id of the user B.
+	 * @param A one of the users of the conversation.
+	 * @param B second user of the conversation.
 	 */
-	Json::Value getConversationBetweenUsers(string userA, string idA, string userB, string idB);
+	list<Message*>* getConversationBetweenUsers(User* A, User* B);
 
 private:
 	ChatDAO* chat;

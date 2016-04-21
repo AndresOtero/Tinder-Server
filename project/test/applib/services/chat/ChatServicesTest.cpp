@@ -1,4 +1,3 @@
-//
 // Created by matias on 4/19/16.
 //
 
@@ -21,7 +20,15 @@ TEST_F(ChatServicesTest, sendMessageToNotLikedPerson) {
 	ChatDAO chat(&chatConnector);
 	MatchDAO match(&dbConnector);
 	ChatServices service(&chat, &match);
-	ASSERT_FALSE(service.sendMessageFromTo("prueba", "matias", "1", "maria", "2"));
+	Location location;
+	unordered_map<string, set<string>> intereses;
+	User userA("1", "caca", "matias", "", "M", 18,"", intereses, location);
+	User userB("2", "caca", "maria", "", "F", 18,"", intereses, location);
+	Message msg("prueba", &userA, &userB);
+	ASSERT_FALSE(service.sendMessageFromTo(&msg));
+	match.saveLike(&userA, &userB);
+	ASSERT_FALSE(service.sendMessageFromTo(&msg));
+	dbConnector.deleteKey("matias:1");
 }
 
 TEST_F(ChatServicesTest, sendMessageToLikedPerson) {
@@ -30,10 +37,14 @@ TEST_F(ChatServicesTest, sendMessageToLikedPerson) {
 	ChatDAO chat(&chatConnector);
 	MatchDAO match(&dbConnector);
 	ChatServices service(&chat, &match);
-	match.saveLike("matias", "1", "maria", "2");
-	match.saveLike("maria", "2", "matias", "1");
-	string msg("mensaje de prueba");
-	ASSERT_TRUE(service.sendMessageFromTo(msg, "matias", "1", "maria", "2"));
+	Location location;
+	unordered_map<string, set<string>> intereses;
+	User userA("1", "caca", "matias", "", "M", 18,"", intereses, location);
+	User userB("2", "caca", "maria", "", "F", 18,"", intereses, location);
+	Message msg("prueba", &userA, &userB);
+	match.saveLike(&userA, &userB);
+	match.saveLike(&userB, &userA);
+	ASSERT_TRUE(service.sendMessageFromTo(&msg));
 	chatConnector.deleteKey("matias:1-maria:2");
 	dbConnector.deleteKey("matias:1");
 	dbConnector.deleteKey("maria:2");
