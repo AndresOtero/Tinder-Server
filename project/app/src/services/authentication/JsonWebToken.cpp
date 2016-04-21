@@ -14,8 +14,8 @@ std::string JsonWebToken::generateTokenForUser(std::string username) {
 }
 
 bool JsonWebToken::getUsernameFromToken(std::string token, Json::Value& returnPayload) {
-	int firstDot = token.find_first_of(".");
-	int lastDot = token.find_last_of(".");
+	unsigned long firstDot = token.find_first_of(".");
+	unsigned long lastDot = token.find_last_of(".");
 	std::string header = token.substr(0,firstDot);
 	std::string payload = token.substr(firstDot+1, lastDot-(firstDot + 1));
 	std::string signature = token.substr(lastDot+1, token.length()-(lastDot + 1));

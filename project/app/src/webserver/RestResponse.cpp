@@ -7,6 +7,7 @@
 
 #include <RestResponse.h>
 #include "Constants.h"
+#include <climits>
 RestResponse::RestResponse() {
 	this->status = STATUS_200_OK;
 	this->contentType = CONTENT_TYPE_JSON;
@@ -32,11 +33,11 @@ void RestResponse::setContentType(string contentyType) {
 }
 
 void RestResponse::render(mg_connection* nc) {
-	int size = this->body.size();
+	unsigned long int size = this->body.size();
 	mg_printf(nc, "HTTP/1.1 %s\r\n"
 			"Content-Length: %i\r\n"
 			"Content-Type: %s; charset=UTF-8\r\n\r\n",
-			status.c_str(), size, contentType.c_str());
+			status.c_str(), (int)size, contentType.c_str());
 	mg_printf(nc, "%s", body.c_str());
 }
 

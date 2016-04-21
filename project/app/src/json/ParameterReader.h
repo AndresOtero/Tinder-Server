@@ -24,7 +24,7 @@ template<class T>
 class ParameterReader {
 protected:
 	Json::Value root;
-	T get(string key, bool required, function<T(Json::Value & value)> converter) {
+	virtual T get(string key, bool required, function<T(Json::Value & value)> converter) {
 		Json::Value value = root[key];
 		Json::FastWriter as;
 		if(value != Json::nullValue) {
@@ -36,6 +36,7 @@ protected:
 			return T();
 		}
 	}
+
 public:
 	/**
 	 * Constructor
@@ -74,7 +75,7 @@ public:
 		function<string (Json::Value & value)> converter = [key] (Json::Value & val) {
 			return val[key].asString();
 		};
-		return ParameterReader<string>::get(key, required, converter);
+		return ParameterReader::get(key, required, converter);
 	}
 };
 

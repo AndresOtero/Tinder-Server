@@ -62,19 +62,14 @@ string RestRequest::getDescription(RestRequest::Method method) {
 	switch (method) {
 		case PUT:
 			return "PUT";
-			break;
 		case POST:
 			return "POST";
-			break;
 		case GET:
 			return "GET";
-			break;
 		case DELETE:
 			return "DELETE";
-			break;
 		default:
-			break;
+			return "";
 	}
-	return "";
 
 }
