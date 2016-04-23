@@ -51,6 +51,14 @@ public:
 	string getUri();
 
 	/**
+	 * Getter for header in request
+	 * @param name header's name
+	 * @return header content if exists, else empty string
+	 */
+	string getHeader(string name);
+
+
+	/**
 	 * Enum with HTTP METHODS
 	 */
 	enum Method {

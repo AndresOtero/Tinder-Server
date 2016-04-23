@@ -5,6 +5,7 @@
 
 #include <User.h>
 #include <ProfileServices.h>
+#include <SecurityFilter.h>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -26,7 +27,9 @@ int main() {
 
 
 	LOG_INFO << "Starting WebServer";
-	ApiDispatcher dispatcher;
+	AuthenticationService authservice(&connector);
+	SecurityFilter securityFilter(authservice);
+	ApiDispatcher dispatcher(securityFilter);
 	UserResource user;
 	user.setup(dispatcher);
 	AuthenticationService authService(&connector);

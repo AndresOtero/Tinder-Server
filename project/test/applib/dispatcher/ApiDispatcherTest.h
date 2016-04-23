@@ -15,6 +15,7 @@ using namespace std;
 
 class ApiDispatcherTest: public ::testing::Test  {
 protected:
+	Filter filter;
 	function<void(WebContext&)> defaultHandler;
 	VoidCallerConcrete * defaultInvoked;
 	ApiDispatcher * dispatcher;

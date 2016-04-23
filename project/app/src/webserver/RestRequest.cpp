@@ -71,5 +71,19 @@ string RestRequest::getDescription(RestRequest::Method method) {
 		default:
 			return "";
 	}
+}
 
+string RestRequest::getHeader(string name) {
+	bool found = false;
+	string result = "";
+	int i;
+	for (i = 0; i < MG_MAX_HTTP_HEADERS && !found; ++i) {
+		string currentName (*(&this->message->header_names[i].p));
+		if(currentName == name ){
+			string val(*(&this->message->header_names[i].p));
+			result = val;
+			found = true;
+		}
+	}
+	return result;
 }

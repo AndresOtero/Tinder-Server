@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "dispatcher/WebContext.h"
 #include <functional>
+#include <Filter.h>
 #include "VoidCallerMock.h"
 using namespace std;
 
@@ -11,6 +12,7 @@ class EndPointTest : public ::testing::Test {
 protected:
 	function<void(WebContext&)> voidHandler;
 	VoidCallerConcrete * callmock;
+    Filter filter;
     // You can do set-up work for each test here.
     EndPointTest();
 

@@ -7,27 +7,9 @@
 
 #include "EndPoint.h"
 #include <regex>
-#include <iostream>
-#include <string>
-#include "webserver/RestRequest.h"
-#include "webserver/RestResponse.h"
-#include "PathVariableExtractor.h"
-#include "WebContext.h"
-#include "log/Logger.h"
 #include "NoSuchMethodHandlerException.h"
-
 using namespace std;
 
-
-EndPoint::EndPoint(string u, function<void(WebContext&)> handler) {
-
-		this->uri = u;
-		this->next = 0;
-		regex exp ("#[^\\/]+#");
-		const string replace = "([^\\/]+)";
-		this->expression = "^" + regex_replace(u, exp ,replace) + "$" ;
-		this->handler = handler;
-}
 
 void EndPoint::setNext(EndPoint* next) {
  if(this->next == 0) {
@@ -60,4 +42,15 @@ EndPoint::~EndPoint() {
 		delete this->next;
 	}
 }
+
+EndPoint::EndPoint(string uri, Filter &filter, function<void(WebContext &)> handler): filter(filter) {
+	this->uri = uri;
+	this->next = 0;
+	regex exp ("#[^\\/]+#");
+	const string replace = "([^\\/]+)";
+	this->expression = "^" + regex_replace(uri, exp ,replace) + "$" ;
+	this->handler = handler;
+}
+
+
 

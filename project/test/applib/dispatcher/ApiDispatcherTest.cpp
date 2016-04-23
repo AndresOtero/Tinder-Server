@@ -19,13 +19,14 @@ ApiDispatcherTest::ApiDispatcherTest() {
 }
 
 void ApiDispatcherTest::SetUp() {
+
 	this->defaultInvoked = new VoidCallerConcrete();
 	defaultHandler = [this] (WebContext& wc){
 		wc.getResponse().setContentType(CONTENT_TYPE_JSON);
 		wc.getResponse().setContent("{ 'prueba': 1}");
 		this->defaultInvoked->call();
 	};
-	dispatcher = new ApiDispatcher();
+	dispatcher = new ApiDispatcher(filter);
 	dispatcher->registerEndPoint(RestRequest::GET, "/api/v1/#username#", this->defaultHandler);
 }
 
@@ -44,7 +45,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("POST Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
-	ApiDispatcher dispatcher;
+	ApiDispatcher dispatcher(filter);
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher.handle(req, rep);
@@ -76,7 +77,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration2) {
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("DELETE Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
-	ApiDispatcher dispatcher;
+	ApiDispatcher dispatcher(filter);
 
 	RestRequest req(&hm);
 	RestResponse rep;
@@ -88,7 +89,7 @@ TEST_F(ApiDispatcherTest, DispatchUknownMethod) {
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("OPTIONS Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
-	ApiDispatcher dispatcher;
+	ApiDispatcher dispatcher(filter);
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher.handle(req, rep);

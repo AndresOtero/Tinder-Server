@@ -27,7 +27,8 @@ void EndPointTest::TearDown() {
 };
 
 TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
-	EndPoint ep ("//////////", this->voidHandler);
+
+	EndPoint ep("//////////", filter,this->voidHandler);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri");
 	hm.method = mg_mk_str("DELETE");
@@ -47,7 +48,7 @@ TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
 
 
 TEST_F(EndPointTest, Handle) {
-	EndPoint ep ("/uri/#user#", this->voidHandler);
+	EndPoint ep("/uri/#user#", filter, this->voidHandler);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan");
 	hm.method = mg_mk_str("GET");
@@ -59,12 +60,12 @@ TEST_F(EndPointTest, Handle) {
 }
 
 TEST_F(EndPointTest, HandledByNext) {
-	EndPoint ep ("//////////", this->voidHandler);
+	EndPoint ep("//////////", filter, this->voidHandler);
 	VoidCallerConcrete caller;
 	function<void(WebContext&)> otherHandler = [&caller](WebContext& wc){
 		caller.call();
 	};
-	EndPoint * 	ep2 = new EndPoint("/uri/#user#", otherHandler);
+	EndPoint * 	ep2 = new EndPoint("/uri/#user#", filter, otherHandler);
 	ep.setNext(ep2);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan");
@@ -78,13 +79,13 @@ TEST_F(EndPointTest, HandledByNext) {
 }
 
 TEST_F(EndPointTest, HandledByNextNext) {
-	EndPoint ep ("//////////", this->voidHandler);
+	EndPoint ep("//////////", filter, this->voidHandler);
 	VoidCallerConcrete caller;
 	function<void(WebContext&)> otherHandler = [&caller](WebContext& wc){
 		caller.call();
 	};
-	EndPoint * 	ep2 = new EndPoint("//////////", this->voidHandler);
-	EndPoint * 	ep3 = new EndPoint("/uri/#user#", otherHandler);
+	EndPoint * 	ep2 = new EndPoint("//////////", filter, this->voidHandler);
+	EndPoint * 	ep3 = new EndPoint("/uri/#user#", filter, otherHandler);
 	ep.setNext(ep2);
 	ep.setNext(ep3);
 	http_message hm;

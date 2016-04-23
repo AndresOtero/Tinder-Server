@@ -30,8 +30,13 @@ private:
 	 * Default Handler function from inexistent methods.
 	 */
 	function<void(WebContext&)> defFunction;
+
+	/**
+	 * Filter for Requests
+	 */
+	Filter & filter;
 public:
-	ApiDispatcher();
+	ApiDispatcher(Filter &filter);
 	virtual ~ApiDispatcher();
 	/**
 	 * Register a handler for a uri and http method

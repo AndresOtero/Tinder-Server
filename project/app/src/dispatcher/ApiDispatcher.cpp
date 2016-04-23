@@ -11,14 +11,15 @@
 #include "webserver/Constants.h"
 
 static string LOGGER_PREFIX = "DISPATCHER: ";
-ApiDispatcher::ApiDispatcher() {
+ApiDispatcher::ApiDispatcher(Filter &filter) : filter(filter) {
+
 	this->defFunction = [](WebContext & wb){
 		throw NoSuchMethodHandlerException(wb.getRequest().toString());
 	};
-	this->endpoints.insert(std::make_pair(RestRequest::GET, new EndPoint("/////", this->defFunction)));
-	this->endpoints.insert(std::make_pair(RestRequest::DELETE, new EndPoint("/////", this->defFunction)));
-	this->endpoints.insert(std::make_pair(RestRequest::POST, new EndPoint("/////", this->defFunction)));
-	this->endpoints.insert(std::make_pair(RestRequest::PUT, new EndPoint("/////", this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::GET, new EndPoint("/////", filter, this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::DELETE, new EndPoint("/////", filter, this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::POST, new EndPoint("/////", filter, this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::PUT, new EndPoint("/////", filter, this->defFunction)));
 
 }
 
@@ -28,7 +29,7 @@ ApiDispatcher::~ApiDispatcher() {
 void ApiDispatcher::registerEndPoint(RestRequest::Method method, string uri, function<void(WebContext&)>  handler) {
 	EndPoint * ep = this->endpoints[method];
 	LOG_INFO << LOGGER_PREFIX << "Registering " << RestRequest::getDescription(method) << " " << uri;
-	ep->setNext(new EndPoint(uri,handler));
+	ep->setNext(new EndPoint(uri, filter, handler));
 
 }
 
