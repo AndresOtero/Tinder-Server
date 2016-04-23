@@ -14,6 +14,8 @@ Contents:
 
 .. doxygenclass:: ApiDispatcher
    :project: myproject
+   :members:
+   :private-members:
 
 Indices and tables
 ==================
