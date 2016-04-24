@@ -45,6 +45,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration) {
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("POST Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	hm.header_names [0] = mg_mk_str("");
 	ApiDispatcher dispatcher(filter);
 	RestRequest req(&hm);
 	RestResponse rep;
@@ -56,6 +57,7 @@ TEST_F(ApiDispatcherTest, DispatchOKey) {
 	http_message hm;
 	hm.uri = mg_mk_str("/api/v1/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("GET Y MUCHOS OTROS DATOS DEL REQUEST");
+	hm.header_names [0] = mg_mk_str("");
 	RestRequest req(&hm);
 	RestResponse rep;
 	EXPECT_CALL(*defaultInvoked,call()).Times(1);
@@ -67,6 +69,7 @@ TEST_F(ApiDispatcherTest, defaultError) {
 	http_message hm;
 	hm.uri = mg_mk_str("///// Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("PUT Y MUCHOS OTROS DATOS DEL REQUEST");
+	hm.header_names [0] = mg_mk_str("");
 	RestRequest req(&hm);
 	RestResponse rep;
 	dispatcher->handle(req, rep);
@@ -77,6 +80,7 @@ TEST_F(ApiDispatcherTest, DispatchWithoutConfiguration2) {
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("DELETE Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	hm.header_names [0] = mg_mk_str("");
 	ApiDispatcher dispatcher(filter);
 
 	RestRequest req(&hm);
@@ -89,6 +93,7 @@ TEST_F(ApiDispatcherTest, DispatchUknownMethod) {
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
 	hm.method = mg_mk_str("OPTIONS Y MUCHOS OTROS DATOS DEL REQUEST DE MONGOOSE");
+	hm.header_names [0] = mg_mk_str("");
 	ApiDispatcher dispatcher(filter);
 	RestRequest req(&hm);
 	RestResponse rep;
