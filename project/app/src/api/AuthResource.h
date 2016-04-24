@@ -41,6 +41,15 @@ public:
      */
 	void authenticate(WebContext & wc);
 
+	/**
+	* Create an user
+	*
+ 	* @param wc WebContext Rest request context
+ 	*
+ 	*/
+	void create(WebContext & wc);
+
+
 	virtual ~AuthResource();
 };
 

@@ -22,18 +22,18 @@ int main() {
 
 
 	LOG_INFO << "Starting DB";
-	DBConnector connector = DBConnector("/tmp/testdb/");
-	if(!connector.isOk()) LOG_ERROR << ("Error abriendo la DB.");
+	DBConnector authenticationDB = DBConnector("/tmp/authentication/");
+	if(!authenticationDB.isOk()) LOG_ERROR << ("Error abriendo la DB de autenticación.");
 
 
 	LOG_INFO << "Starting WebServer";
-	AuthenticationService authservice(&connector);
+	AuthenticationService authservice(&authenticationDB);
 	SecurityFilter securityFilter(authservice);
 	securityFilter.excludeRegex("/auth");
 	ApiDispatcher dispatcher(securityFilter);
 	UserResource user;
 	user.setup(dispatcher);
-	AuthenticationService authService(&connector);
+	AuthenticationService authService(&authenticationDB);
 	AuthResource auth (&authService);
 
 	auth.setup(dispatcher);

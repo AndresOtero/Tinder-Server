@@ -16,8 +16,11 @@
  *
  * Provides functionality to authenticate a user.
  *
- * @authorMLuraschi
+ * @author MLuraschi
  */
+
+//TODO HABRÍA QUE TENER UN TIPO DE EXCEPCION, ESTOS METODOS NO TIENEN QUE DEVOLVER TRUE O FALSE, SINO UNA EXCEPCIÓN
+//CON SU ERROR, PARA PODER DEVOLVER ALGO DE INFO AL FRONTEND
 class AuthenticationService {
 public:
 	/**

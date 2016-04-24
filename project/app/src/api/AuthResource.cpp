@@ -20,6 +20,7 @@ AuthResource::AuthResource(AuthenticationService* service) {
 void AuthResource::setup(ApiDispatcher& dispatcher) {
 	using placeholders::_1;
 	dispatcher.registerEndPoint(RestRequest::POST, "/auth",	(function<void(WebContext&)> ) bind(&AuthResource::authenticate,this, _1));
+	dispatcher.registerEndPoint(RestRequest::PUT, "/auth",	(function<void(WebContext&)> ) bind(&AuthResource::create,this, _1));
 
 }
 
@@ -55,3 +56,30 @@ AuthResource::~AuthResource() {
 	// TODO Auto-generated destructor stub
 }
 
+void AuthResource::create(WebContext & wc) {
+	string content = wc.getRequest().getContent();
+	Json::Reader reader;
+	Json::Value parsed;
+	bool parsingSuccessful = reader.parse(content, parsed);
+	if (parsingSuccessful) {
+		try {
+			StringReader strreader(parsed);
+			string user = strreader.get("user", true);
+			string password = strreader.get("password", true);
+			//TODO NO ESTA BUENO QUE ESTO ESTÉ ACÁ, ES LÓGICA DE NEGOCIO
+			if(this->service->isUsernameTaken(user)) {
+				Json::Value value;
+				value["error"] = "Username not available";
+				Json::FastWriter writer;
+				wc.getResponse().setContent(writer.write(value));
+			} else {
+				this->service->changePasswordForUser(user, password);
+			}
+		} catch (string & e) {
+			LOG_DEBUG<< e;
+			wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
+		}
+	} else {
+		wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
+	}
+}
