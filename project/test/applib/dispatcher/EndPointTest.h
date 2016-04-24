@@ -12,7 +12,6 @@ class EndPointTest : public ::testing::Test {
 protected:
 	function<void(WebContext&)> voidHandler;
 	VoidCallerConcrete * callmock;
-    Filter filter;
     // You can do set-up work for each test here.
     EndPointTest();
 

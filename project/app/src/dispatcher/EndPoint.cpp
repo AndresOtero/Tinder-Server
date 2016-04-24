@@ -55,6 +55,7 @@ EndPoint::EndPoint(string uri, function<void(WebContext &)> handler) {
 	const string replace = "([^\\/]+)";
 	this->expression = "^" + regex_replace(uri, exp ,replace) + "$" ;
 	this->handler = handler;
+	this->filter = 0;
 }
 
 EndPoint::EndPoint(string uri, Filter &filter, function<void(WebContext &)> handler) {

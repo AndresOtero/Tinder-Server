@@ -28,10 +28,11 @@ void EndPointTest::TearDown() {
 
 TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
 
-	EndPoint ep("//////////", filter,this->voidHandler);
+	EndPoint ep("//////////",this->voidHandler);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri");
 	hm.method = mg_mk_str("DELETE");
+	hm.header_names [0] = mg_mk_str("");
 	RestRequest req(&hm);
 
 	RestResponse rep;
@@ -48,10 +49,11 @@ TEST_F(EndPointTest, NotMatchNoNextToDispatch) {
 
 
 TEST_F(EndPointTest, Handle) {
-	EndPoint ep("/uri/#user#", filter, this->voidHandler);
+	EndPoint ep("/uri/#user#", this->voidHandler);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan");
 	hm.method = mg_mk_str("GET");
+	hm.header_names [0] = mg_mk_str("");
 	RestRequest req(&hm);
 	RestResponse rep;
 	EXPECT_CALL(*callmock,call()).Times(1);
@@ -60,16 +62,17 @@ TEST_F(EndPointTest, Handle) {
 }
 
 TEST_F(EndPointTest, HandledByNext) {
-	EndPoint ep("//////////", filter, this->voidHandler);
+	EndPoint ep("//////////", this->voidHandler);
 	VoidCallerConcrete caller;
 	function<void(WebContext&)> otherHandler = [&caller](WebContext& wc){
 		caller.call();
 	};
-	EndPoint * 	ep2 = new EndPoint("/uri/#user#", filter, otherHandler);
+	EndPoint * 	ep2 = new EndPoint("/uri/#user#", otherHandler);
 	ep.setNext(ep2);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan");
 	hm.method = mg_mk_str("GET");
+	hm.header_names [0] = mg_mk_str("");
 	RestRequest req(&hm);
 	RestResponse rep;
 	EXPECT_CALL(*callmock,call()).Times(0);
@@ -79,18 +82,19 @@ TEST_F(EndPointTest, HandledByNext) {
 }
 
 TEST_F(EndPointTest, HandledByNextNext) {
-	EndPoint ep("//////////", filter, this->voidHandler);
+	EndPoint ep("//////////", this->voidHandler);
 	VoidCallerConcrete caller;
 	function<void(WebContext&)> otherHandler = [&caller](WebContext& wc){
 		caller.call();
 	};
-	EndPoint * 	ep2 = new EndPoint("//////////", filter, this->voidHandler);
-	EndPoint * 	ep3 = new EndPoint("/uri/#user#", filter, otherHandler);
+	EndPoint * 	ep2 = new EndPoint("//////////",  this->voidHandler);
+	EndPoint * 	ep3 = new EndPoint("/uri/#user#", otherHandler);
 	ep.setNext(ep2);
 	ep.setNext(ep3);
 	http_message hm;
 	hm.uri = mg_mk_str("/uri/juan");
 	hm.method = mg_mk_str("GET");
+	hm.header_names [0] = mg_mk_str("");
 	RestRequest req(&hm);
 	RestResponse rep;
 	EXPECT_CALL(*callmock,call()).Times(0);

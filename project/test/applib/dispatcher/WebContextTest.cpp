@@ -35,6 +35,7 @@ TEST_F(WebContextTest, GetParam) {
 	PathVariableExtractor pv("/url/#param1#", "/url/parametro") ;
 	http_message hm;
 	hm.uri = mg_mk_str("/uri");
+	hm.header_names[0] = mg_mk_str("");
 	RestRequest req(&hm);
 	RestResponse rep;
 	WebContext context(req, rep, pv);
