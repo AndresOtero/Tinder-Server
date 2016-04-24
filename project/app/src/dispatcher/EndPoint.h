@@ -41,7 +41,7 @@ private:
 	/**
 	 * Filtering options
 	 */
-	Filter & filter;
+	Filter * filter;
 public:
 	/**
 	 * Constructor with uri to handle
@@ -49,6 +49,13 @@ public:
 	 * @param handler function that handle the uri
 	 */
     EndPoint(string uri, Filter &filter, function<void(WebContext &)> handler);
+
+    /**
+     * Constructor with uri to handle
+     * @param uri uri to be handled
+     * @param handler function that handle the uri
+     */
+    EndPoint(string uri, function<void(WebContext &)> handler);
 
 	/**
 	 * Set next EndPoint in chain

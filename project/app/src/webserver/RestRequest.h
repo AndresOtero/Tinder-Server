@@ -5,6 +5,10 @@
 #include <map>
 #include "mongoose/mongoose.h"
 using namespace std;
+static const string METHOD_TOKEN = " ";
+static const string URI_TOKEN = " ";
+
+static const string HEADER_NAME_TOKEN = ":";
 
 
 /**
@@ -31,11 +35,13 @@ private:
 	string content;
 
 	/**
-	 * Extracts uri from mongoose message
-	 * @return uri
+	 * Request Headers
 	 */
-	string extractUri(http_message* hm);
-
+	map<string, string> headers;
+	/**
+	 * Parse request headers
+	 */
+	void parseHeaders();
 
 public:
 	/**

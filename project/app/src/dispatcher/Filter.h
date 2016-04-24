@@ -15,7 +15,9 @@ protected:
         return true;
     };
 public:
-    Filter () {};
+    Filter () {
+        next = 0;
+    };
     void setNext(Filter & next) {
         this->next = &next;
     };

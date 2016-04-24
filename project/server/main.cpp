@@ -29,6 +29,7 @@ int main() {
 	LOG_INFO << "Starting WebServer";
 	AuthenticationService authservice(&connector);
 	SecurityFilter securityFilter(authservice);
+	securityFilter.excludeRegex("/auth");
 	ApiDispatcher dispatcher(securityFilter);
 	UserResource user;
 	user.setup(dispatcher);

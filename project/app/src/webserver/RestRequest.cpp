@@ -7,11 +7,23 @@
 
 #include <RestRequest.h>
 
+
+string parseToToken(mg_str & str, string token) {
+	std::string value (*(&str.p));
+	std::size_t found = value.find(token);
+	if (found!=std::string::npos)
+		value = value.substr(0,found);
+	return value;
+
+}
+
+
 RestRequest::RestRequest(http_message * hm) {
 	this->message = hm;
-	this->uri = extractUri(hm);
+	this->uri = parseToToken(hm->uri, URI_TOKEN);
     std::string data (*(&hm->body.p));
     this->content = data;
+	parseHeaders();
 }
 
 RestRequest::~RestRequest() {
@@ -22,30 +34,15 @@ string RestRequest::getUri() {
 	return uri;
 }
 
-string parseMethod(	http_message * message) {
-	std::string method (*(&message->method.p));
-	 std::size_t found = method.find(" ");
-	 if (found!=std::string::npos)
-	    method = method.substr(0,found);
-	 return method;
-}
-
-string RestRequest::extractUri(http_message* hm) {
-	  string uri (*(&hm->uri.p));
-	  std::size_t found = uri.find(" ");
-	   if (found!=std::string::npos)
-	     uri = uri.substr(0,found);
-	   return uri;
-}
 
 string RestRequest::toString() {
-	 string method = parseMethod(this->message);
+	 string method = parseToToken(this->message->method, METHOD_TOKEN);
 
 	return method + ": " + this->getUri();
 }
 
 RestRequest::Method RestRequest::getMethod() {
-	string method = parseMethod(this->message);
+	string method = parseToToken(this->message->method, METHOD_TOKEN);
 	if( method == "GET") return GET;
 	if( method == "PUT") return PUT;
 	if( method == "POST") return POST;
@@ -74,16 +71,24 @@ string RestRequest::getDescription(RestRequest::Method method) {
 }
 
 string RestRequest::getHeader(string name) {
-	bool found = false;
-	string result = "";
-	int i;
-	for (i = 0; i < MG_MAX_HTTP_HEADERS && !found; ++i) {
-		string currentName (*(&this->message->header_names[i].p));
-		if(currentName == name ){
-			string val(*(&this->message->header_names[i].p));
-			result = val;
-			found = true;
+	if(headers.count(name) > 0) {
+		return headers[name];
+	} else {
+		return "";
+	}
+
+}
+
+void RestRequest::parseHeaders() {
+	bool end = false;
+	for (int i = 0; i < MG_MAX_HTTP_HEADERS && !end; ++i) {
+		mg_str & originalstr = this->message->header_names[i];
+		if(originalstr.len > 0) {
+			string currentName = parseToToken(originalstr, HEADER_NAME_TOKEN);
+			this->headers.insert(std::make_pair(currentName, parseToToken(this->message->header_values[i], "\r")));
+		} else {
+			end = true;
 		}
 	}
-	return result;
+
 }

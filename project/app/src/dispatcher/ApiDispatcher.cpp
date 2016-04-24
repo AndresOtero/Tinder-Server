@@ -16,10 +16,10 @@ ApiDispatcher::ApiDispatcher(Filter &filter) : filter(filter) {
 	this->defFunction = [](WebContext & wb){
 		throw NoSuchMethodHandlerException(wb.getRequest().toString());
 	};
-	this->endpoints.insert(std::make_pair(RestRequest::GET, new EndPoint("/////", filter, this->defFunction)));
-	this->endpoints.insert(std::make_pair(RestRequest::DELETE, new EndPoint("/////", filter, this->defFunction)));
-	this->endpoints.insert(std::make_pair(RestRequest::POST, new EndPoint("/////", filter, this->defFunction)));
-	this->endpoints.insert(std::make_pair(RestRequest::PUT, new EndPoint("/////", filter, this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::GET, new EndPoint("/////", this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::DELETE, new EndPoint("/////",  this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::POST, new EndPoint("/////", this->defFunction)));
+	this->endpoints.insert(std::make_pair(RestRequest::PUT, new EndPoint("/////", this->defFunction)));
 
 }
 

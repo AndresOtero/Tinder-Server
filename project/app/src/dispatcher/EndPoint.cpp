@@ -25,8 +25,13 @@ void EndPoint::handle(RestRequest & req, RestResponse & resp) {
 
 	if(regex_match(urireq, exp)) {
 		PathVariableExtractor pv (this->uri, urireq);
-		WebContext context(req, resp, pv) ;
-		handler(context);
+		WebContext context(req, resp, pv);
+		if(filter) {
+			filter->filter(context, this->handler);
+		} else {
+			handler(context);
+		}
+
 	} else {
 		if(this->next) {
 			this->next->handle(req, resp);
@@ -43,7 +48,7 @@ EndPoint::~EndPoint() {
 	}
 }
 
-EndPoint::EndPoint(string uri, Filter &filter, function<void(WebContext &)> handler): filter(filter) {
+EndPoint::EndPoint(string uri, function<void(WebContext &)> handler) {
 	this->uri = uri;
 	this->next = 0;
 	regex exp ("#[^\\/]+#");
@@ -52,5 +57,14 @@ EndPoint::EndPoint(string uri, Filter &filter, function<void(WebContext &)> hand
 	this->handler = handler;
 }
 
+EndPoint::EndPoint(string uri, Filter &filter, function<void(WebContext &)> handler) {
+	this->uri = uri;
+	this->next = 0;
+	regex exp ("#[^\\/]+#");
+	const string replace = "([^\\/]+)";
+	this->expression = "^" + regex_replace(uri, exp ,replace) + "$" ;
+	this->handler = handler;
+	this->filter = &filter;
+}
 
 
