@@ -9,6 +9,7 @@
 #define SRC_AUTHENTICATIONSERVICE_H_
 
 #include <string>
+#include <UserDAO.h>
 #include "../../db/DBConnector.h"
 #include "AuthenticationException.h"
 
@@ -20,16 +21,14 @@
  * @author MLuraschi
  */
 
-//TODO HABRÍA QUE TENER UN TIPO DE EXCEPCION, ESTOS METODOS NO TIENEN QUE DEVOLVER TRUE O FALSE, SINO UNA EXCEPCIÓN
-//CON SU ERROR, PARA PODER DEVOLVER ALGO DE INFO AL FRONTEND
 class AuthenticationService {
 public:
 	/**
 	 * Default constructor
 	 *
-	 * @param connector The DBConnector that has the users DB opened.
+	 * @param dao dao containing the corresponding db.
 	 */
-	AuthenticationService(DBConnector* connector);
+	AuthenticationService(UserDAO* dao);
 	virtual ~AuthenticationService();
 
 	/**
@@ -66,12 +65,8 @@ public:
 	bool saveNewUser(std::string username, std::string password);
 
 private:
-	/**
-	 * Connector to the database
-	 *
-	 * @see DBConnector
-	 */
-	DBConnector* connector;
+
+	UserDAO* dao;
 };
 
 #endif /* SRC_AUTHENTICATIONSERVICE_H_ */

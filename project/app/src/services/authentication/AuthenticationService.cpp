@@ -1,36 +1,31 @@
+#include <Logger.h>
 #include "AuthenticationService.h"
 
-AuthenticationService::AuthenticationService(DBConnector* connector) {
-	this->connector = connector;
+AuthenticationService::AuthenticationService(UserDAO* dao) {
+	this->dao = dao;
 }
 
 AuthenticationService::~AuthenticationService() {}
 
 bool AuthenticationService::isLoginValid(std::string username, std::string password) {
-	std::string value;
-	if (!connector->getValueForKey(username, value)) return false;
-	if (value != password) return false;
-	return true;
+	return this->dao->validateUsernamePassword(username, password);
 }
 
 bool AuthenticationService::isUsernameTaken(std::string username) {
-	std::string value;
-	return (connector->getValueForKey(username, value));
+	return this->dao->isUsernameTaken(username);
 }
 
 bool AuthenticationService::changePasswordForUser(std::string username, std::string currentPassword,std::string newPassword){
-	if (!this->isLoginValid(username, currentPassword)) {
-		throw AuthenticationException("Combination of username and password invalid.");
+	if (currentPassword == newPassword) {
+		LOG_ERROR << "Current password and new password can not be the same.";
+		throw AuthenticationException("Current Password and new password received are the same.");
 	}
-	return (this->connector->putValueInKey(username, newPassword));
+	return this->dao->changePasswordForUser(username, currentPassword, newPassword);
 }
 
 
 bool AuthenticationService::saveNewUser(std::string username, std::string password) {
-	if (this->isUsernameTaken(username)) {
-		throw AuthenticationException("Username " + username + " already exists.");
-	}
-	return this->connector->putValueInKey(username, password);
+	return this->dao->saveNewUsername(username, password);
 }
 
 

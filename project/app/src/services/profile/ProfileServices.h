@@ -12,6 +12,7 @@
 #include "../../model/User.h"
 #include "../../json/json/json.h"
 #include <list>
+#include <UserDAO.h>
 
 using namespace std;
 
@@ -28,11 +29,12 @@ public:
 	 * @param connector that has the connection to the shared server opened.
 	 * @see SharedConnector
 	 */
-	ProfileServices(SharedConnector* connector);
+	ProfileServices(UserDAO* dao);
 	virtual ~ProfileServices();
 
 	/**
-	 * Gets from the shared server the user with the received ID. It returns a pointer to it.
+	 * Asks the DAO to return the User* with the received id. If the user is not found it throws
+	 * UserNotFoundException
 	 *
 	 * @param id of the username to get.
 	 */
@@ -54,14 +56,8 @@ public:
 	 *
 	 * @param user to upload the changes from.
 	 */
-	bool updateUserProfile(User* user);
+	void updateUserProfile(User* user);
 
-	/**
-	 * Given a user, it returns a Json with the information of the user.
-	 *
-	 * @param user to read the values from.
-	 */
-	Json::Value assembleJsonFromUser(User* user);
 
 	/**
 	 * Given a user it uploads it as a new user to the shared server. It also sets the id of the user
@@ -72,11 +68,12 @@ public:
 	bool saveNewUser(User* user);
 
 	/**
-	 * It deletes the user with the given ID from the shared server.
+	 * It deletes the user with the given ID from the shared server. If the user is not found it throws
+	 * UserNotFoundException.
 	 *
 	 * @param id of the user to delete.
 	 */
-	bool deleteUserByID(int id);
+	void deleteUserByID(int id);
 
 	/**
 	 * It gets all the interests saved in the shared server.
@@ -94,8 +91,7 @@ public:
 
 private:
 	unordered_map<string, set<string>> populateInterests(Json::Value &root);
-	SharedConnector* connector;
-
+	UserDAO* dao;
 };
 
 #endif /* SRC_PROFILESERVICES_H_ */
