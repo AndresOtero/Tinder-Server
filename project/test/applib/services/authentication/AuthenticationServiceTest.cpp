@@ -12,7 +12,8 @@ void AuthenticationServiceTest::TearDown() {};
 
 TEST_F(AuthenticationServiceTest, ValidateUsernamePassword) {
 	DBConnector connector("/tmp/usersTestDB");
-	AuthenticationService service(&connector);
+	UserDAO dao(nullptr, &connector);
+	AuthenticationService service(&dao);
 	std::string usuario = "username";
 	std::string password = "pass";
 	ASSERT_FALSE(service.isUsernameTaken(usuario));
@@ -29,7 +30,8 @@ TEST_F(AuthenticationServiceTest, ValidateUsernamePassword) {
 
 TEST_F(AuthenticationServiceTest, ChangeUsernamePassword) {
 	DBConnector connector("/tmp/usersTestDB");
-	AuthenticationService service(&connector);
+	UserDAO dao(nullptr, &connector);
+	AuthenticationService service(&dao);
 	std::string usuario = "username";
 	std::string password = "pass";
 
@@ -49,7 +51,8 @@ TEST_F(AuthenticationServiceTest, ChangeUsernamePassword) {
 
 TEST_F(AuthenticationServiceTest, saveNewUser) {
 	DBConnector connector("/tmp/usersTestDB");
-	AuthenticationService service(&connector);
+	UserDAO dao(nullptr, &connector);
+	AuthenticationService service(&dao);
 	std::string usuario = "username";
 	std::string password = "pass";
 
