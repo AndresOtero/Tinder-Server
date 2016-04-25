@@ -11,7 +11,9 @@
 #include "json/ParameterReader.h"
 #include "services/authentication/JsonWebToken.h"
 #include "log/Logger.h"
+
 using namespace std;
+static const string LOG_PREFIX = "AuthResource: ";
 
 AuthResource::AuthResource(AuthenticationService* service) {
 	this->service = service;
@@ -66,18 +68,17 @@ void AuthResource::create(WebContext & wc) {
 			StringReader strreader(parsed);
 			string user = strreader.get("user", true);
 			string password = strreader.get("password", true);
-			//TODO CAMBIAR ESTO, YA EXISTE EL METODO PARA EVITAR ESTA CAGADA
-			if(this->service->isUsernameTaken(user)) {
-				Json::Value value;
-				value["error"] = "Username not available";
-				Json::FastWriter writer;
-				wc.getResponse().setContent(writer.write(value));
-			} else {
-				this->service->saveNewUser(user, password);
-			}
+			this->service->saveNewUser(user, password);
 		} catch (string & e) {
-			LOG_DEBUG<< e;
+			LOG_DEBUG<< LOG_PREFIX << "Error parsing request " << e;
 			wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
+		} catch (AuthenticationException & e) {
+			LOG_DEBUG<< LOG_PREFIX<< "Error creating user " << e.what();
+			wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
+			Json::Value result;
+			result["error"] = e.what();
+			Json::FastWriter writer;
+			wc.getResponse().setContent(writer.write(result));
 		}
 	} else {
 		wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
