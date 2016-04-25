@@ -19,8 +19,8 @@ AuthResource::AuthResource(AuthenticationService* service) {
 
 void AuthResource::setup(ApiDispatcher& dispatcher) {
 	using placeholders::_1;
-	dispatcher.registerEndPoint(RestRequest::POST, "/auth",	(function<void(WebContext&)> ) bind(&AuthResource::authenticate,this, _1));
-	dispatcher.registerEndPoint(RestRequest::PUT, "/auth",	(function<void(WebContext&)> ) bind(&AuthResource::create,this, _1));
+	dispatcher.registerEndPoint(RestRequest::PUT, "/auth",	(function<void(WebContext&)> ) bind(&AuthResource::authenticate,this, _1));
+	dispatcher.registerEndPoint(RestRequest::POST, "/auth",	(function<void(WebContext&)> ) bind(&AuthResource::create,this, _1));
 
 }
 
