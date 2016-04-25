@@ -27,13 +27,14 @@ int main() {
 
 
 	LOG_INFO << "Starting WebServer";
-	AuthenticationService authservice(&authenticationDB);
+	UserDAO userDAO(&sharedConnector, &authenticationDB);
+	AuthenticationService authservice(&userDAO);
 	SecurityFilter securityFilter(authservice);
 	securityFilter.excludeRegex("/auth");
 	ApiDispatcher dispatcher(securityFilter);
 	UserResource user;
 	user.setup(dispatcher);
-	AuthenticationService authService(&authenticationDB);
+	AuthenticationService authService(&userDAO);
 	AuthResource auth (&authService);
 
 	auth.setup(dispatcher);
