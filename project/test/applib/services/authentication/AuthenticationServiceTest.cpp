@@ -39,9 +39,23 @@ TEST_F(AuthenticationServiceTest, ChangeUsernamePassword) {
 	ASSERT_TRUE(service.isLoginValid(usuario, password));
 
 	std::string newPass = "nueva";
-	resultado = service.changePasswordForUser(usuario, newPass);
+	resultado = service.changePasswordForUser(usuario, password,newPass);
 	ASSERT_TRUE(resultado);
 	ASSERT_FALSE(service.isLoginValid(usuario, password));
 	ASSERT_TRUE(service.isLoginValid(usuario, newPass));
+	ASSERT_ANY_THROW(service.changePasswordForUser(usuario, "caca", newPass));
+	connector.deleteKey(usuario);
+}
+
+TEST_F(AuthenticationServiceTest, saveNewUser) {
+	DBConnector connector("/tmp/usersTestDB");
+	AuthenticationService service(&connector);
+	std::string usuario = "username";
+	std::string password = "pass";
+
+	bool resultado = service.saveNewUser(usuario, password);
+	ASSERT_TRUE(resultado);
+	ASSERT_TRUE(service.isLoginValid(usuario, password));
+	ASSERT_ANY_THROW(service.saveNewUser(usuario, password));
 	connector.deleteKey(usuario);
 }
