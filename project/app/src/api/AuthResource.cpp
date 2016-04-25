@@ -66,14 +66,14 @@ void AuthResource::create(WebContext & wc) {
 			StringReader strreader(parsed);
 			string user = strreader.get("user", true);
 			string password = strreader.get("password", true);
-			//TODO NO ESTA BUENO QUE ESTO ESTÉ ACÁ, ES LÓGICA DE NEGOCIO
+			//TODO CAMBIAR ESTO, YA EXISTE EL METODO PARA EVITAR ESTA CAGADA
 			if(this->service->isUsernameTaken(user)) {
 				Json::Value value;
 				value["error"] = "Username not available";
 				Json::FastWriter writer;
 				wc.getResponse().setContent(writer.write(value));
 			} else {
-				this->service->changePasswordForUser(user, password);
+				this->service->saveNewUser(user, password);
 			}
 		} catch (string & e) {
 			LOG_DEBUG<< e;

@@ -18,7 +18,19 @@ bool AuthenticationService::isUsernameTaken(std::string username) {
 	return (connector->getValueForKey(username, value));
 }
 
-bool AuthenticationService::changePasswordForUser(std::string username, std::string password) {
-	//Si el usuario no existe lo agrega. Para crear un nuevo usuario usar primero isUsernameTaken()
-	return (connector->putValueInKey(username, password));
+bool AuthenticationService::changePasswordForUser(std::string username, std::string currentPassword,std::string newPassword){
+	if (!this->isLoginValid(username, currentPassword)) {
+		throw AuthenticationException("Combination of username and password invalid.");
+	}
+	return (this->connector->putValueInKey(username, newPassword));
 }
+
+
+bool AuthenticationService::saveNewUser(std::string username, std::string password) {
+	if (this->isUsernameTaken(username)) {
+		throw AuthenticationException("Username " + username + " already exists.");
+	}
+	return this->connector->putValueInKey(username, password);
+}
+
+
