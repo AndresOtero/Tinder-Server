@@ -113,12 +113,6 @@ private:
 	DBConnector* dbConnector;
 	SharedConnector* sharedConnector;
 
-	/**
-	 * Given a user, it returns a Json with the information of the user.
-	 *
-	 * @param user to read the values from.
-	 */
-	Json::Value assembleJsonFromUser(User *user);
 
 	/**
 	 * Given a Json, it returns all the users contained in it. The caller must delete de users after using them.
@@ -127,7 +121,6 @@ private:
 	 */
 	list<User *> assembleUsersFromJson(Json::Value &root);
 
-	unordered_map<string, set<string>> populateInterests(Json::Value &root);
 };
 
 

@@ -12,6 +12,7 @@
 #include <string>
 #include <unordered_map>
 #include <set>
+#include <json/json.h>
 
 using namespace std;
 
@@ -40,6 +41,14 @@ public:
 	 */
 	User(string id, string name, string alias, string email, string sex, int age, string photoURL,
 		unordered_map<string, set<string>> interests , Location location);
+
+	/**
+ 	* From Json Creation
+ 	*
+	* @param value a user json representation
+	*
+	*/
+	User (Json::Value & value);
 
 	virtual ~User();
 
@@ -156,6 +165,16 @@ public:
 	 */
 	string getSex();
 
+	/**
+	 * Return json Representation;
+	 */
+	Json::Value toJson();
+
+
+	/**
+	 *
+	 */
+	static unordered_map<string, set<string>> populateInterests(Json::Value &root);
 private:
 	int age;
 	string sex;
