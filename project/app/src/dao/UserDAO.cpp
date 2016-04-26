@@ -89,7 +89,7 @@ bool UserDAO::saveNewUser(User* user) {
 		LOG_ERROR << "Error haciendo post del user nuevo";
 		return false;
 	}
-	string id = response["user"]["id"].asString();
+	int id = response["user"]["id"].asInt();
 	user->setId(id);
 	return true;
 }

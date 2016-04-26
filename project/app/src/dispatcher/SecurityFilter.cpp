@@ -8,6 +8,7 @@
 SecurityFilter::~SecurityFilter() { };
 
 bool SecurityFilter::doFilter(WebContext &context) {
+    //context.setUserid("anonymous");
     if (isSecured(context.getRequest().getUri())) {
         const string token = context.getRequest().getHeader("SECURITY-TOKEN");
         if (token.size() == 0) {
@@ -17,8 +18,12 @@ bool SecurityFilter::doFilter(WebContext &context) {
         JsonWebToken tokenizr;
         Json::Value values;
         if (tokenizr.getUsernameFromToken(token, values)) {
+            //context.setUsername(values.get("user", "Invalid Token").asString());
+            //TODO OBTENER EL ID DEL SERVICIO DE AUTENTICACION Y PONERLO EN EL CONTAINER.
+            context.setUserid(0);
             return true;
         }
+
         return false;
     }
     return true;

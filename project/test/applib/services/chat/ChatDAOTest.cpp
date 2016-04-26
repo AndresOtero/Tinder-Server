@@ -22,9 +22,9 @@ TEST_F(ChatDAOTest, saveMSGToDBAndRetrieve) {
 	Location location;
 	unordered_map<string, set<string>> intereses;
 	connector.deleteKey("matias:1-maria:2");
-	User userA("1", "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB("2", "caca", "maria", "", "F", 18,"", intereses, location);
-	string mensaje("cacota enorme");
+	User userA(1, "hola", "matias", "", "M", 18,"", intereses, location);
+	User userB(2, "chau", "maria", "", "F", 18,"", intereses, location);
+	string mensaje("muy enorme");
 	Message msg(mensaje, &userA, &userB);
 	bool resultado = dao.saveMsgFromTo(&msg);
 	ASSERT_TRUE(resultado);
@@ -46,8 +46,8 @@ TEST_F(ChatDAOTest, retrieveMultipleMsgs) {
 	ChatDAO dao(&connector);
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	User userA("1", "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB("2", "caca", "maria", "", "F", 18,"", intereses, location);
+	User userA(1, "caca", "matias", "", "M", 18,"", intereses, location);
+	User userB(2, "caca", "maria", "", "F", 18,"", intereses, location);
 	string mensaje1("cacota enorme");
 	Message msg(mensaje1, &userA, &userB);
 	bool resultado = dao.saveMsgFromTo(&msg);

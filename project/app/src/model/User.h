@@ -16,6 +16,7 @@
 
 using namespace std;
 
+
 /**
  * @class User
  * Represents a user of the DB.
@@ -39,7 +40,7 @@ public:
 	 * @param location of the user to represent.
 	 *
 	 */
-	User(string id, string name, string alias, string email, string sex, int age, string photoURL,
+	User(int id, string name, string alias, string email, string sex, int age, string photoURL,
 		unordered_map<string, set<string>> interests , Location location);
 
 	/**
@@ -55,7 +56,7 @@ public:
 	/**
 	 * Returns de id of the user.
 	 */
-	string getId();
+	int getId();
 
 	/**
 	 * Returns the name of the user;
@@ -134,7 +135,7 @@ public:
 	 *
 	 * @param id new value to set.
 	 */
-	void setId(string id);
+	void setId(int id);
 
 	/**
 	 * Returns the insterests of the user
@@ -178,7 +179,7 @@ public:
 private:
 	int age;
 	string sex;
-	string id;
+	int id;
 	string name;
 	string alias;
 	string email;

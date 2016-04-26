@@ -1,6 +1,7 @@
 #ifndef APP_SRC_API_USERRESOURCE_H_
 #define APP_SRC_API_USERRESOURCE_H_
 
+#include <ProfileServices.h>
 #include "dispatcher/RestResource.h"
 #include "dispatcher/WebContext.h"
 
@@ -23,8 +24,13 @@ private:
      */
 	void getUser(WebContext & wc);
 	void putUser(WebContext & wc);
+	ProfileServices & service;
 public:
-	UserResource();
+	/**
+	 * Constructor with dependencies
+	 * @param service ProfileServices with business logic.
+	 */
+	UserResource(ProfileServices & service);
 	void setup(ApiDispatcher & dispatcher);
 	virtual ~UserResource();
 };

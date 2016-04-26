@@ -20,8 +20,8 @@ TEST_F(MatchDAOTest, noMatchTestAndAddTwice) {
 	MatchDAO match(&connector);
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	User userA("1", "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB("2", "caca", "maria", "", "F", 18,"", intereses, location);
+	User userA(1, "caca", "matias", "", "M", 18,"", intereses, location);
+	User userB(2, "caca", "maria", "", "F", 18,"", intereses, location);
 	int likes = match.getNumberOfLikes(&userA);
 	ASSERT_TRUE(likes == 0);
 	int matches = match.getNumberOfMatches(&userA);
@@ -46,8 +46,8 @@ TEST_F(MatchDAOTest, MatchTest) {
 	MatchDAO match(&connector);
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	User userA("1", "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB("2", "caca", "maria", "", "F", 18,"", intereses, location);
+	User userA(1, "caca", "matias", "", "M", 18,"", intereses, location);
+	User userB(2, "caca", "maria", "", "F", 18,"", intereses, location);
 	int likes = match.getNumberOfLikes(&userA);
 	ASSERT_TRUE(likes == 0);
 	int matches = match.getNumberOfMatches(&userA);
@@ -69,4 +69,5 @@ TEST_F(MatchDAOTest, MatchTest) {
 	ASSERT_TRUE(match.checkForMatch(&userB, &userA));
 	connector.deleteKey("matias:1");
 	connector.deleteKey("maria:2");
+
 }

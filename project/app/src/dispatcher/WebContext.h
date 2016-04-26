@@ -32,6 +32,11 @@ private:
 	 * Variables in uri reader
 	 */
 	PathVariableExtractor * pv;
+
+	/**
+	 * Logged in id;
+	 */
+	 int userid;
 public:
 	/**
 	 * Constructor with dependencies.
@@ -61,6 +66,19 @@ public:
 
 	RestResponse & getResponse();
 	virtual ~WebContext();
+
+
+	/**
+	 * User id getter
+	 * @return userid from user loggedin
+	 */
+	int getUserid() ;
+
+	/**
+ 	* User id setter
+ 	* @param userid from user loggedin
+ 	*/
+	void setUserid(int userid);
 };
 
 #endif /* APP_SRC_DISPATCHER_WEBCONTEXT_H_ */

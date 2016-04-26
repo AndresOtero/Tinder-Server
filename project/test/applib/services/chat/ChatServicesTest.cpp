@@ -22,8 +22,8 @@ TEST_F(ChatServicesTest, sendMessageToNotLikedPerson) {
 	ChatServices service(&chat, &match);
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	User userA("1", "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB("2", "caca", "maria", "", "F", 18,"", intereses, location);
+	User userA(1, "caca", "matias", "", "M", 18,"", intereses, location);
+	User userB(2, "caca", "maria", "", "F", 18,"", intereses, location);
 	Message msg("prueba", &userA, &userB);
 	ASSERT_FALSE(service.sendMessageFromTo(&msg));
 	match.saveLike(&userA, &userB);
@@ -39,8 +39,8 @@ TEST_F(ChatServicesTest, sendMessageToLikedPerson) {
 	ChatServices service(&chat, &match);
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	User userA("1", "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB("2", "caca", "maria", "", "F", 18,"", intereses, location);
+	User userA(1, "caca", "matias", "", "M", 18,"", intereses, location);
+	User userB(2, "caca", "maria", "", "F", 18,"", intereses, location);
 	Message msg("prueba", &userA, &userB);
 	match.saveLike(&userA, &userB);
 	match.saveLike(&userB, &userA);

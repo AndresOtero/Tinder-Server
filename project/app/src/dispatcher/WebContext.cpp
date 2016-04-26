@@ -27,6 +27,14 @@ RestResponse& WebContext::getResponse() {
 }
 
 WebContext::~WebContext() {
-	// TODO Auto-generated destructor stub
 }
 
+
+
+int WebContext::getUserid()  {
+	return userid;
+}
+
+void WebContext::setUserid(int userid) {
+	WebContext::userid = userid;
+}

@@ -13,38 +13,44 @@
 #include "json/ParameterReader.h"
 using namespace std;
 
-UserResource::UserResource() {
+UserResource::UserResource(ProfileServices & services): service(service)  {
 
 }
 
 void UserResource::setup(ApiDispatcher& dispatcher) {
     using placeholders::_1;
-	dispatcher.registerEndPoint(RestRequest::GET, "/user/#id#", (function<void (WebContext&)>)bind( &UserResource::getUser, this, _1 ));
-	dispatcher.registerEndPoint(RestRequest::POST, "/user/#id#", (function<void (WebContext&)>)bind( &UserResource::putUser, this, _1 ));
+	dispatcher.registerEndPoint(RestRequest::GET, "/user", (function<void (WebContext&)>)bind( &UserResource::getUser, this, _1 ));
+	dispatcher.registerEndPoint(RestRequest::POST, "/user", (function<void (WebContext&)>)bind( &UserResource::putUser, this, _1 ));
 
 }
 
 void UserResource::getUser(WebContext& context) {
-//	Json::Value value;
-//	Json::Value value2;
-//	value2["atributo"] = "prueba";
-//	value["root"] = value2;
-//	Json::FastWriter writer;
-//	context.getResponse().setContent(writer.write(value));
-//	context.getResponse().setContentType(CONTENT_TYPE_JSON);
-	//TODO
+	User * user = service.getUserByID(context.getUserid());
+	Json::Value result = user->toJson();
+	delete user;
+	Json::FastWriter writer;
+	context.getResponse().setContent(writer.write(result));
 }
 
 void UserResource::putUser(WebContext& context) {
-//	string content = context.getRequest().getContent();
-//	Json::Reader reader;
-//	Json::Value parsed;
-//	bool parsingSuccessful = reader.parse(content, parsed);
-//	StringReader strreader(parsed["root"]);
-//	IntReader intrdr(parsed["root"]);
-//	LOG_INFO <<  strreader.get("tributo",false) << endl;
-//	LOG_INFO <<  intrdr.get("tributo2",false) << endl;
-	//TODO
+	Json::Value parsedFromString;
+	Json::Reader reader;
+	bool parsingSuccessfull = reader.parse(context.getRequest().getContent(), parsedFromString);
+	if(parsingSuccessfull) {
+		User user(parsedFromString);
+
+/*
+		if(context.getUserid() != "") {
+			user.setId(context.getUserid());
+			service.updateUserProfile(&user);
+		} else {
+			service.saveNewUser(&user);
+		}
+*/
+
+
+	}
+
 }
 
 UserResource::~UserResource() {

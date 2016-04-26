@@ -1,7 +1,7 @@
 #include "User.h"
 
 //Crear usando el userFactory!!
-User::User(string id, string name, string alias,string email, string sex, int age, string photoURL,
+User::User(int id, string name, string alias,string email, string sex, int age, string photoURL,
 	unordered_map<string, set<string>> interests, Location location){
 	this->id = id;
 	this->name = name;
@@ -16,7 +16,7 @@ User::User(string id, string name, string alias,string email, string sex, int ag
 
 User::~User() {}
 
-string User::getId() {
+int User::getId() {
 	return this->id;
 }
 
@@ -72,7 +72,7 @@ unordered_map<string, set<string>> User::getInterests() {
 	return this->interests;
 }
 
-void User::setId(string id) {
+void User::setId(int id) {
 	this->id = id;
 }
 
@@ -122,7 +122,7 @@ User::User(Json::Value & user) {
 	Json::FastWriter writer;
 	Json::Value interestsJson = user.get("interests", "ERROR");
 	unordered_map<string, set<string>> interests = this->populateInterests(interestsJson);
-	this->id = user.get("id", "ERROR").asString();
+	this->id = user.get("id", "ERROR").asInt();
 	this->name = user.get("name", "ERROR").asString();
 	this->alias = user.get("alias", "ERROR").asString();
 	this->email = user.get("email", "ERROR").asString();
@@ -132,6 +132,7 @@ User::User(Json::Value & user) {
 	this->location = Location(
 			user.get("location", "ERROR").get("latitude", "ERROR").asDouble(),
 			user.get("location", "ERROR").get("longitude", "ERROR").asDouble());
+
 }
 
 unordered_map<string, set<string>> User::populateInterests(Json::Value &root) {

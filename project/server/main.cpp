@@ -32,7 +32,8 @@ int main() {
 	SecurityFilter securityFilter(authservice);
 	securityFilter.excludeRegex("/auth");
 	ApiDispatcher dispatcher(securityFilter);
-	UserResource user;
+	ProfileServices profileService(&userDAO);
+	UserResource user(profileService);
 	user.setup(dispatcher);
 	AuthenticationService authService(&userDAO);
 	AuthResource auth (&authService);

@@ -14,7 +14,7 @@ User* ProfileServices::getUserByID(int id){
 	User* user = this->dao->getUserById(id);
 	if(!user) {
 		LOG_ERROR << "Error getting user with ID: " << to_string(id);
-		throw UserNotFoundException(to_string(id));
+		throw UserNotFoundException(id);
 	}
 	return user;
 }
@@ -28,7 +28,7 @@ list<User *> ProfileServices::getAllUsers() {
 void ProfileServices::deleteUserByID(int id) {
 	if (!this->dao->deleteUserByID(id)) {
 		LOG_ERROR << "Error deleting user con ID: " << to_string(id);
-		throw UserNotFoundException(to_string(id));
+		throw UserNotFoundException(id);
 	}
 	LOG_INFO << "User with ID: " << to_string(id) << " deleted.";
 	return;

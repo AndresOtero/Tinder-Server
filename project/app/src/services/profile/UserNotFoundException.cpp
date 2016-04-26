@@ -3,9 +3,10 @@
 //
 
 #include "UserNotFoundException.h"
-
-UserNotFoundException::UserNotFoundException(string msg) :
-		runtime_error("User with id: " + msg + " not found.") { }
+#include <string>
+using namespace std;
+UserNotFoundException::UserNotFoundException(int id) :
+		runtime_error("User with id: " + to_string(id) + " not found.") { }
 
 
 UserNotFoundException::~UserNotFoundException() { }

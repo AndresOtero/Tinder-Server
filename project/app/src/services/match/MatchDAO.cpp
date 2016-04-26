@@ -24,7 +24,7 @@ bool MatchDAO::checkForLike(User* userA, User* userB) {
 	Json::Value likes = json["likes"];
 	for (Json::ValueIterator itr = likes.begin(); itr != likes.end(); itr++) {
 		if(itr->get("username", "ERROR").asString() == userB->getAlias() &&
-				itr->get("id", "ERROR").asString() == userB->getId())
+				itr->get("id", "ERROR").asInt() == userB->getId())
 			return true;
 	}
 	return false;
@@ -43,7 +43,7 @@ bool MatchDAO::checkForMatch(User* userA, User* userB) {
 	Json::Value matches = json["matches"];
 	for (Json::ValueIterator itr = matches.begin(); itr != matches.end(); itr++) {
 		if(itr->get("username", "ERROR").asString() == userB->getAlias() &&
-				itr->get("id", "ERROR").asString() == userB->getId())
+				itr->get("id", "ERROR").asInt() == userB->getId())
 			return true;
 	}
 	return false;
@@ -154,8 +154,10 @@ Json::Value MatchDAO::getMatches(User* user) {
 	return json["matches"];
 }
 
-string MatchDAO::assembleKey(string username, string id) {
-	return username +":"+id;
+string MatchDAO::assembleKey(string username, int id) {
+	std::stringstream ss;
+	ss << username << ":" << id;
+	return ss.str();
 }
 
 
