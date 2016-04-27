@@ -4,13 +4,13 @@
 
 #include <JsonWebToken.h>
 #include "SecurityFilter.h"
-
+#include "ApiConstants.h"
 SecurityFilter::~SecurityFilter() { };
 
 bool SecurityFilter::doFilter(WebContext &context) {
     //context.setUserid("anonymous");
     if (isSecured(context.getRequest().getUri())) {
-        const string token = context.getRequest().getHeader("SECURITY-TOKEN");
+        const string token = context.getRequest().getHeader(SECURITY_TOKEN_HEADER);
         if (token.size() == 0) {
             context.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
             return false;

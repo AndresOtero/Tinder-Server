@@ -11,7 +11,7 @@
 #include "json/ParameterReader.h"
 #include "services/authentication/JsonWebToken.h"
 #include "log/Logger.h"
-
+#include "ApiConstants.h"
 using namespace std;
 static const string LOG_PREFIX = "AuthResource: ";
 
@@ -40,7 +40,7 @@ void AuthResource::authenticate(WebContext& wc) {
 			if (authenticated) {
 				JsonWebToken jwt;
 				string token = jwt.generateTokenForUser(user);
-				wc.getResponse().setContent("{\"token\": \"" + token + "\"}");
+				wc.getResponse().setContent("{\""+SECURITY_TOKEN_PARAM +"\": \"" + token + "\"}");
 				wc.getResponse().setStatus(STATUS_200_OK);
 			} else {
 				wc.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
@@ -58,6 +58,7 @@ AuthResource::~AuthResource() {
 	// TODO Auto-generated destructor stub
 }
 
+//devuelve el token y si es necesario crear un profile().
 void AuthResource::create(WebContext & wc) {
 	string content = wc.getRequest().getContent();
 	Json::Reader reader;
@@ -69,6 +70,15 @@ void AuthResource::create(WebContext & wc) {
 			string user = strreader.get("user", true);
 			string password = strreader.get("password", true);
 			this->service->saveNewUser(user, password);
+			JsonWebToken jwt;
+			string token = jwt.generateTokenForUser(user);
+			//TODO CUANDO ESTÉ LO DE MATY SETEAR UN STATUS CODE O NO
+			Json::Value json;
+			json[STATUS_CODE_PARAM] = STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED;
+			json[SECURITY_TOKEN_PARAM] = token;
+			Json::FastWriter writer;
+			wc.getResponse().setContent(writer.write(json));
+
 		} catch (string & e) {
 			LOG_DEBUG<< LOG_PREFIX << "Error parsing request " << e;
 			wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
