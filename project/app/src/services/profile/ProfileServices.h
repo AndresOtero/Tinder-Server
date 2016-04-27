@@ -46,11 +46,6 @@ public:
 	list<User *> getAllUsers();
 
 	/**
-	 * Given a Json it extracts the information of the users and returns them. This is not for public usage.
-	 */
-	list<User *> assembleUsersFromJson(Json::Value &root); //No usar, es public para tests.
-
-	/**
 	 * Given a user it uploads the changes in the profile to the shared server. It returns true or false if the
 	 * put was successful.
 	 *
