@@ -85,7 +85,7 @@ public:
 
 	void addInterest(int userid, string category, string value);
 
-	void searchInterest(string query);
+	unordered_map<string, set<string>> searchInterest(string query);
 
 	void removeInterest(int userid, string category, string value);
 private:

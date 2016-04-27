@@ -67,7 +67,7 @@ void ProfileServices::addInterest(int userid, string category, string value) {
 	//TODO MATY TIENE TU NOMBRE ESTO
 }
 
-void ProfileServices::searchInterest(string query) {
+unordered_map<string, set<string>> ProfileServices::searchInterest(string query) {
 	//TODO tiene que buscar entre todos los intereses por categoria o valor.
 }
 
