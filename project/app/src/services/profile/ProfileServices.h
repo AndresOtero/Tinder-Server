@@ -83,7 +83,11 @@ public:
 	 */
 	bool saveNewInterest(string category, string value);
 
+	void addInterest(int userid, string category, string value);
 
+	void searchInterest(string query);
+
+	void removeInterest(int userid, string category, string value);
 private:
 	unordered_map<string, set<string>> populateInterests(Json::Value &root);
 	UserDAO* dao;

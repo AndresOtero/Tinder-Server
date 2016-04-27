@@ -63,4 +63,25 @@ bool ProfileServices::saveNewInterest(string category, string value) {
 	return true;
 }
 
+void ProfileServices::addInterest(int userid, string category, string value) {
+	//TODO MATY TIENE TU NOMBRE ESTO
+}
+
+void ProfileServices::searchInterest(string query) {
+	//TODO tiene que buscar entre todos los intereses por categoria o valor.
+}
+
+void ProfileServices::removeInterest(int userid, string category, string value) {
+	//TODO tiene que remover un interes de la lista de usuarios.
+}
+
+
+
+
+
+
+
+
+
+
 
