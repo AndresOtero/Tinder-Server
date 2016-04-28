@@ -5,6 +5,8 @@
 #ifndef TINDER_SERVER_MATCHDAOTEST_H
 #define TINDER_SERVER_MATCHDAOTEST_H
 
+static const char *const DB_FILE = "/tmp/testsMatch";
+
 #include "gtest/gtest.h"
 
 class MatchDAOTest : public ::testing::Test{
@@ -28,7 +30,8 @@ protected:
 	// before the destructor).
 	virtual void TearDown();
 
-	// The mock bar library shaed by all tests
+	DBConnector * connector;
+	MatchDAO * dao;
 };
 
 

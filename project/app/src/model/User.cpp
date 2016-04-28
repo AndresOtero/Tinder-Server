@@ -1,11 +1,11 @@
 #include "User.h"
 
 //Crear usando el userFactory!!
-User::User(int id, string name, string alias,string email, string sex, int age, string photoURL,
-	unordered_map<string, set<string>> interests, Location location){
+User::User(string id, string name, int externalId, string email, string sex, int age, string photoURL,
+		   unordered_map<string, set<string>> interests, Location location){
 	this->id = id;
 	this->name = name;
-	this->alias = alias;
+	this->externalId = externalId;
 	this->email = email;
 	this->photoURL = photoURL;
 	this->interests = interests;
@@ -16,7 +16,7 @@ User::User(int id, string name, string alias,string email, string sex, int age, 
 
 User::~User() {}
 
-int User::getId() {
+string User::getId() {
 	return this->id;
 }
 
@@ -24,8 +24,8 @@ string User::getName() {
 	return	this->name;
 }
 
-string User::getAlias() {
-	return this->alias;
+int User::getExternalId() {
+	return this->externalId;
 }
 
 string User::getEmail() {
@@ -48,8 +48,8 @@ void User::setName(string name){
 	this->name = name;
 }
 
-void User::setAlias(string alias) {
-	this->alias = alias;
+void User::setExternalId(int alias) {
+	this->externalId = alias;
 }
 
 void User::setEmail(string email) {
@@ -72,7 +72,7 @@ unordered_map<string, set<string>> User::getInterests() {
 	return this->interests;
 }
 
-void User::setId(int id) {
+void User::setId(string id) {
 	this->id = id;
 }
 
@@ -94,19 +94,25 @@ string User::getSex() {
 
 Json::Value User::toJson() {
 	Json::Value userData;
-	Json::Value location;
-	Json::Value interests;
-	location["latitude"] = this->getLatitude();
-	location["longitude"] = this->getLongitude();
 	userData["id"] = this->getId();
-	userData["name"] = this->getName();
-	userData["alias"] = this->getAlias();
-	userData["email"] = this->getEmail();
-	userData["photo_profile"] = this->getPhotoURL();
-	userData["age"] = this->getAge();
-	userData["sex"] = this->getSex();
+	userData["externalId"] = this->getExternalId();
+
+	userData = bodyToJson(userData, *this);
+	return userData;
+}
+
+Json::Value &User::bodyToJson(Json::Value &userData, User &user) {
+	Json::Value interests;
+	Json::Value location;
+	location["latitude"] = user.getLatitude();
+	location["longitude"] = user.getLongitude();
+	userData["name"] = user.getName();
+	userData["email"] = user.getEmail();
+	userData["photo_profile"] = user.getPhotoURL();
+	userData["age"] = user.getAge();
+	userData["sex"] = user.getSex();
 	userData["location"] = location;
-	for ( auto it = this->interests.begin(); it != this->interests.end(); ++it ) {
+	for (auto it = user.interests.begin(); it != user.interests.end(); ++it ) {
 		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
 			Json::Value valor;
 			valor["category"] = it->first;
@@ -120,26 +126,28 @@ Json::Value User::toJson() {
 
 User::User(Json::Value & user) {
 	Json::FastWriter writer;
-	Json::Value interestsJson = user.get("interests", "ERROR");
+	Json::Value interestsJson = user.get("interests", "");
 	unordered_map<string, set<string>> interests = this->populateInterests(interestsJson);
-	this->id = user.get("id", "ERROR").asInt();
-	this->name = user.get("name", "ERROR").asString();
-	this->alias = user.get("alias", "ERROR").asString();
-	this->email = user.get("email", "ERROR").asString();
-	this->photoURL = user.get("photo_profile", "ERROR").asString();
-	this->sex = user.get("sex", "ERROR").asString();
-	this->age = user.get("age", "ERROR").asInt();
-	this->location = Location(
-			user.get("location", "ERROR").get("latitude", "ERROR").asDouble(),
-			user.get("location", "ERROR").get("longitude", "ERROR").asDouble());
+	this->externalId = user.get("id", -1).asInt();
+	this->id = user.get("alias", "").asString();
+	readCommonBody(user, *this);
+}
 
+void User::readCommonBody(const Json::Value &values, User &user) {
+	user.setName(values.get("name", "").asString());
+	user.setEmail(values.get("email", "").asString());
+	user.setPhotoURL(values.get("photo_profile", "").asString());
+	user.setSex(values.get("sex", "").asString());
+	user.setAge(values.get("age", "").asInt());
+	user.setLatitude(values.get("location", "").get("latitude", "").asDouble());
+	user.setLongitude(values.get("location", "").get("longitude", "").asDouble());
 }
 
 unordered_map<string, set<string>> User::populateInterests(Json::Value &root) {
 	unordered_map<string, set<string>> mapa;
 	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {
-		string category = itr->get("category", "ERROR").asString();
-		string value = itr->get("value", "ERROR").asString();
+		string category = itr->get("category", "").asString();
+		string value = itr->get("value", "").asString();
 		unordered_map<std::string, set<string>>::const_iterator got = mapa.find(category);
 		if (got == mapa.end()) {
 			//todavia no esta esa categoria en el map
@@ -153,4 +161,27 @@ unordered_map<string, set<string>> User::populateInterests(Json::Value &root) {
 		}
 	}
 	return mapa;
+}
+
+void User::toExternalJson(Json::Value &userData) {
+	userData["id"] = this->getExternalId();
+	userData["externalId"] = this->getId();
+	userData = bodyToJson(userData, *this);
+}
+
+User *User::fromExternalJson(Json::Value &value) {
+	User * user = new User();
+	Json::FastWriter writer;
+	Json::Value interestsJson = value.get("interests", "");
+	unordered_map<string, set<string>> interests = populateInterests(interestsJson);
+	user->setId(value.get("alias", "").asString());
+	user->setExternalId(value.get("id", -1).asInt());
+	User::readCommonBody(value, *user);
+	return user;
+}
+
+
+User::User() {
+
+
 }

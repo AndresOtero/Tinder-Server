@@ -5,69 +5,68 @@
 #include <DBConnector.h>
 #include <MatchDAO.h>
 #include "MatchDAOTest.h"
-
+#include "boost/filesystem.hpp"
 MatchDAOTest::MatchDAOTest() { }
 
 MatchDAOTest::~MatchDAOTest() { }
 
-void MatchDAOTest::SetUp() { }
+void MatchDAOTest::SetUp() {
+	this->connector = new DBConnector(DB_FILE);
+	this->dao = new MatchDAO(connector);
+}
 
-void MatchDAOTest::TearDown() { }
+void MatchDAOTest::TearDown() {
+	delete this->connector;
+	delete this->dao;
+	boost::filesystem::remove_all(DB_FILE);
+}
 
 TEST_F(MatchDAOTest, noMatchTestAndAddTwice) {
-	DBConnector connector("/tmp/testsMatch");
-	connector.deleteKey("matias:1");
-	MatchDAO match(&connector);
+
+
+
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	User userA(1, "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB(2, "caca", "maria", "", "F", 18,"", intereses, location);
-	int likes = match.getNumberOfLikes(&userA);
-	ASSERT_TRUE(likes == 0);
-	int matches = match.getNumberOfMatches(&userA);
-	ASSERT_TRUE(matches == 0);
-	ASSERT_TRUE(match.saveLike(&userA, &userB));
-	likes = match.getNumberOfLikes(&userA);
-	ASSERT_TRUE(likes == 1);
-	matches = match.getNumberOfMatches(&userA);
-	ASSERT_TRUE(matches == 0);
-	ASSERT_TRUE(match.saveLike(&userA, &userB));
-	likes = match.getNumberOfLikes(&userA);
-	ASSERT_TRUE(likes == 1);
-	matches = match.getNumberOfMatches(&userA);
-	ASSERT_TRUE(matches == 0);
-	connector.deleteKey("matias:1");
+	User userA("matias", "foo",1 , "", "M", 18,"", intereses, location);
+	User userB("maria", "foo", 2 , "", "F", 18,"", intereses, location);
+	int likes = dao->getNumberOfLikes(&userA);
+	ASSERT_EQ(0, likes );
+	int matches = dao->getNumberOfMatches(&userA);
+	ASSERT_EQ(0,matches);
+	ASSERT_TRUE(dao->saveLike(&userA, &userB));
+	likes = dao->getNumberOfLikes(&userA);
+	ASSERT_EQ(1, likes);
+	matches = dao->getNumberOfMatches(&userA);
+	ASSERT_EQ(0, matches);
+	ASSERT_TRUE(dao->saveLike(&userA, &userB));
+	likes = dao->getNumberOfLikes(&userA);
+	ASSERT_EQ(1, likes);
+	matches = dao->getNumberOfMatches(&userA);
+	ASSERT_EQ(0, matches);
 }
 
 TEST_F(MatchDAOTest, MatchTest) {
-	DBConnector connector("/tmp/testsMatch");
-	connector.deleteKey("matias:1");
-	connector.deleteKey("maria:2");
-	MatchDAO match(&connector);
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	User userA(1, "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB(2, "caca", "maria", "", "F", 18,"", intereses, location);
-	int likes = match.getNumberOfLikes(&userA);
+	User userA("matias", "foo",1 , "", "M", 18,"", intereses, location);
+	User userB("maria", "foo", 2 , "", "F", 18,"", intereses, location);
+	int likes = dao->getNumberOfLikes(&userA);
 	ASSERT_TRUE(likes == 0);
-	int matches = match.getNumberOfMatches(&userA);
+	int matches = dao->getNumberOfMatches(&userA);
 	ASSERT_TRUE(matches == 0);
-	ASSERT_TRUE(match.saveLike(&userA, &userB));
-	likes = match.getNumberOfLikes(&userA);
+	ASSERT_TRUE(dao->saveLike(&userA, &userB));
+	likes = dao->getNumberOfLikes(&userA);
 	ASSERT_TRUE(likes == 1);
-	matches = match.getNumberOfMatches(&userA);
+	matches = dao->getNumberOfMatches(&userA);
 	ASSERT_TRUE(matches == 0);
-	ASSERT_FALSE(match.checkForMatch(&userA, &userB));
-	ASSERT_TRUE(match.saveLike(&userB, &userA));
-	likes = match.getNumberOfLikes(&userB);
+	ASSERT_FALSE(dao->checkForMatch(&userA, &userB));
+	ASSERT_TRUE(dao->saveLike(&userB, &userA));
+	likes = dao->getNumberOfLikes(&userB);
 	ASSERT_TRUE(likes == 1);
-	matches = match.getNumberOfMatches(&userB);
+	matches = dao->getNumberOfMatches(&userB);
 	ASSERT_TRUE(matches == 1);
-	matches = match.getNumberOfMatches(&userA);
+	matches = dao->getNumberOfMatches(&userA);
 	ASSERT_TRUE(matches == 1);
-	ASSERT_TRUE(match.checkForMatch(&userA, &userB));
-	ASSERT_TRUE(match.checkForMatch(&userB, &userA));
-	connector.deleteKey("matias:1");
-	connector.deleteKey("maria:2");
+	ASSERT_TRUE(dao->checkForMatch(&userA, &userB));
 
 }

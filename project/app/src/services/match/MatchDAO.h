@@ -66,7 +66,6 @@ public:
 
 private:
 	DBConnector* connector;
-	string assembleKey(string username, int id);
 
 	void addMatch(User* a, User* b);
 };

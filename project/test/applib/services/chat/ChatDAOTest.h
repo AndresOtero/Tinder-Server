@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 
+static const char *const DB_FILE = "/tmp/testChatDB/";
+
 // The fixture for testing class Foo.
 class ChatDAOTest : public ::testing::Test {
 
@@ -22,5 +24,5 @@ protected:
     // before the destructor).
     virtual void TearDown();
 
-    // The mock bar library shaed by all tests
+    DBConnector * connector;
 };

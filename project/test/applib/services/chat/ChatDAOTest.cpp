@@ -5,25 +5,29 @@
 #include <string>
 #include <User.h>
 #include <Message.h>
-
+#include <stdio.h>
+#include <boost/filesystem.hpp>
 ChatDAOTest::ChatDAOTest() {}
 
 ChatDAOTest::~ChatDAOTest() {};
 
 void ChatDAOTest::SetUp() {
+	this->connector = new DBConnector(DB_FILE);
+};
+
+void ChatDAOTest::TearDown() {
+	delete this->connector;
+	boost::filesystem::remove_all(DB_FILE);
 
 };
 
-void ChatDAOTest::TearDown() {};
-
 TEST_F(ChatDAOTest, saveMSGToDBAndRetrieve) {
-	DBConnector connector = DBConnector("/tmp/testChatDB/");
-	ChatDAO dao(&connector);
+
+	ChatDAO dao(connector);
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	connector.deleteKey("matias:1-maria:2");
-	User userA(1, "hola", "matias", "", "M", 18,"", intereses, location);
-	User userB(2, "chau", "maria", "", "F", 18,"", intereses, location);
+	User userA("matias", "hola",1 , "", "M", 18,"", intereses, location);
+	User userB("maria", "chau", 2 , "", "F", 18,"", intereses, location);
 	string mensaje("muy enorme");
 	Message msg(mensaje, &userA, &userB);
 	bool resultado = dao.saveMsgFromTo(&msg);
@@ -38,16 +42,14 @@ TEST_F(ChatDAOTest, saveMSGToDBAndRetrieve) {
 	Message* limpiar  = lista->front();
 	delete limpiar;
 	//Limpio la DB
-	connector.deleteKey("matias:1-maria:2");
 }
 
 TEST_F(ChatDAOTest, retrieveMultipleMsgs) {
-	DBConnector connector = DBConnector("/tmp/testChatDB/");
-	ChatDAO dao(&connector);
+	ChatDAO dao(connector);
 	Location location;
 	unordered_map<string, set<string>> intereses;
-	User userA(1, "caca", "matias", "", "M", 18,"", intereses, location);
-	User userB(2, "caca", "maria", "", "F", 18,"", intereses, location);
+	User userA("matias", "hola",1 , "", "M", 18,"", intereses, location);
+	User userB("maria", "chau", 2 , "", "F", 18,"", intereses, location);
 	string mensaje1("cacota enorme");
 	Message msg(mensaje1, &userA, &userB);
 	bool resultado = dao.saveMsgFromTo(&msg);
@@ -66,8 +68,6 @@ TEST_F(ChatDAOTest, retrieveMultipleMsgs) {
 		contador++;
 		delete (*itr); //Voy limpiando los mensajes que cree.
 	}
-	ASSERT_TRUE(contador == 2);
+	ASSERT_EQ(2, contador);
 
-	//Limpio la DB
-	connector.deleteKey("matias:1-maria:2");
 }

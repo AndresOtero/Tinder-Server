@@ -22,7 +22,7 @@ public:
      * @param dispatcher ApiDispatcher where register hadlers
      */
 	virtual void setup(ApiDispatcher & dispatcher) = 0;
-	static Json::Value readJson(WebContext & wc);
+	static void readJson(WebContext &wc, Json::Value &);
 	static void writeJson(WebContext &wc, Json::Value &value);
 };
 

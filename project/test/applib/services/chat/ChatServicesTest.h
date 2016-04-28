@@ -6,6 +6,10 @@
 #define TINDER_SERVER_CHATSERVICESTEST_H
 
 
+static const char *const MATCH_DB_FILE = "/tmp/matchtest";
+
+static const char *const CHAT_DB_FILE = "/tmp/chattest";
+
 #include <gtest/gtest.h>
 
 class ChatServicesTest : public ::testing::Test{
@@ -24,6 +28,12 @@ public:
 	// Code here will be called immediately after each test (right
 	// before the destructor).
 	virtual void TearDown();
+
+	DBConnector * matchDbConnector;
+	DBConnector * chatDbConnector;
+	ChatDAO * chatDao;
+	MatchDAO * matchDao;
+
 };
 
 
