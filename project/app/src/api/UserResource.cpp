@@ -33,24 +33,12 @@ void UserResource::getUser(WebContext& context) {
 }
 
 void UserResource::putUser(WebContext& context) {
-	Json::Value parsedFromString;
-	Json::Reader reader;
-	bool parsingSuccessfull = reader.parse(context.getRequest().getContent(), parsedFromString);
-	if(parsingSuccessfull) {
-		User user(parsedFromString);
+	Json::Value json;
 
-/*
-		if(context.getUserid() != "") {
-			user.setId(context.getUserid());
-			service.updateUserProfile(&user);
-		} else {
-			service.saveNewUser(&user);
-		}
-*/
-
-
-	}
-
+	RestResource::readJson(context, json);
+	User user(json);
+	user.setId(context.getUserid());
+	/*service.saveNewUser()*/
 }
 
 UserResource::~UserResource() {

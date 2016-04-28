@@ -11,10 +11,11 @@ ProfileServices::~ProfileServices() {}
 
 
 User* ProfileServices::getUserByID(int id){
+	//TODO ESTO NO DEBERÍA SEGUIR EXISTIENDO
 	User* user = this->dao->getUserById(id);
 	if(!user) {
 		LOG_ERROR << "Error getting user with ID: " << to_string(id);
-		throw UserNotFoundException(id);
+		//throw UserNotFoundException(id);
 	}
 	return user;
 }
@@ -26,9 +27,10 @@ list<User *> ProfileServices::getAllUsers() {
 
 
 void ProfileServices::deleteUserByID(int id) {
+	//TODO ESTO NO DEBERÍA EXISTIR TAMPOCO NO MANEJAMOS IDS ARRIBA, ADEMAS NO VAMOS A ESTAR BORRANDO USERS DESDE ESTA APP, O SI?
 	if (!this->dao->deleteUserByID(id)) {
 		LOG_ERROR << "Error deleting user con ID: " << to_string(id);
-		throw UserNotFoundException(id);
+//		throw UserNotFoundException(id);
 	}
 	LOG_INFO << "User with ID: " << to_string(id) << " deleted.";
 	return;
@@ -63,25 +65,23 @@ bool ProfileServices::saveNewInterest(string category, string value) {
 	return true;
 }
 
-void ProfileServices::addInterest(int userid, string category, string value) {
+void ProfileServices::addInterest(string userid, string category, string value) {
 	//TODO MATY TIENE TU NOMBRE ESTO
 }
 
 unordered_map<string, set<string>> ProfileServices::searchInterest(string query) {
 	//TODO tiene que buscar entre todos los intereses por categoria o valor.
+	unordered_map<string, set<string>> result;
+	return result;
 }
 
-void ProfileServices::removeInterest(int userid, string category, string value) {
+void ProfileServices::removeInterest(string userid, string category, string value) {
 	//TODO tiene que remover un interes de la lista de usuarios.
 }
 
-
-
-
-
-
-
-
+User *ProfileServices::getUserByID(string id) {
+	return nullptr;
+}
 
 
 

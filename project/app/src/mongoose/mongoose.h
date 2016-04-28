@@ -543,7 +543,7 @@ void cc3200_set_non_blocking_mode(int fd);
 
 struct hostent {
   char *h_name;       /* official name of host */
-  char **h_aliases;   /* alias list */
+  char **h_aliases;   /* externalId list */
   int h_addrtype;     /* host address type */
   int h_length;       /* length of address */
   char **h_addr_list; /* list of addresses */

@@ -2,7 +2,7 @@
 #ifndef APP_SRC_DISPATCHER_RESTRESOURCE_H_
 #define APP_SRC_DISPATCHER_RESTRESOURCE_H_
 #include "ApiDispatcher.h"
-
+#include "json/json.h"
 /**
  * @class RestResource
  *
@@ -22,7 +22,7 @@ public:
      * @param dispatcher ApiDispatcher where register hadlers
      */
 	virtual void setup(ApiDispatcher & dispatcher) = 0;
-	static Json::Value readJson(WebContext & wc);
+	static void readJson(WebContext &wc, Json::Value &);
 	static void writeJson(WebContext &wc, Json::Value &value);
 };
 

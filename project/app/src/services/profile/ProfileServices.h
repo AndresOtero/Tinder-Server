@@ -39,6 +39,13 @@ public:
 	 * @param id of the username to get.
 	 */
 	User* getUserByID(int id);
+	/**
+	 * Asks the DAO to return the User* with the received id. If the user is not found it throws
+	 * UserNotFoundException
+	 *
+	 * @param id of the user to get.
+	 */
+	User* getUserByID(string id);
 
 	/**
 	 * Gets all the users stored in the shared server. It returns a list of all the users.
@@ -83,11 +90,12 @@ public:
 	 */
 	bool saveNewInterest(string category, string value);
 
-	void addInterest(int userid, string category, string value);
+	void addInterest(string userid, string category, string value);
 
 	unordered_map<string, set<string>> searchInterest(string query);
 
-	void removeInterest(int userid, string category, string value);
+	void removeInterest(string userid, string category, string value);
+
 private:
 	unordered_map<string, set<string>> populateInterests(Json::Value &root);
 	UserDAO* dao;

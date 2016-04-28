@@ -41,19 +41,21 @@ void InterestResource::searchInterests(WebContext &wc) {
 }
 
 void InterestResource::addInterest(WebContext &wc) {
-    Json::Value json = RestResource::readJson(wc);
+    Json::Value json;
+    RestResource::readJson(wc, json);
     string category = json.get("category", "EMPTY FIELD").asString();
     string value = json.get("value", "EMPTY FIELD").asString();
-    int userid = wc.getUserid();
+    string userid = wc.getUserid();
     profileServices.addInterest(userid, category, value);
 
 }
 
 void InterestResource::removeInterest(WebContext &wc) {
-    Json::Value json = RestResource::readJson(wc);
+    Json::Value json;
+    RestResource::readJson(wc, json);
     string category = json.get("category", "EMPTY FIELD").asString();
     string value = json.get("value", "EMPTY FIELD").asString();
-    int userid = wc.getUserid();
+    string userid = wc.getUserid();
     profileServices.removeInterest(userid, category, value);
 }
 

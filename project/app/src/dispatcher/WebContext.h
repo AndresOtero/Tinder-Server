@@ -36,7 +36,7 @@ private:
 	/**
 	 * Logged in id;
 	 */
-	 int userid;
+	 string userid;
 public:
 	/**
 	 * Constructor with dependencies.
@@ -72,13 +72,13 @@ public:
 	 * User id getter
 	 * @return userid from user loggedin
 	 */
-	int getUserid() ;
+	string getUserid() ;
 
 	/**
  	* User id setter
  	* @param userid from user loggedin
  	*/
-	void setUserid(int userid);
+	void setUserid(string userid);
 };
 
 #endif /* APP_SRC_DISPATCHER_WEBCONTEXT_H_ */

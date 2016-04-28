@@ -31,7 +31,7 @@ public:
 	 *
 	 * @param id of the user to represent.
 	 * @param name of the user to represent.
-	 * @param alias of the user to represent.
+	 * @param externalId of the user to represent.
 	 * @param email of the user to represent.
 	 * @param sex of the user to represent.
 	 * @param age of the user to represent.
@@ -40,10 +40,13 @@ public:
 	 * @param location of the user to represent.
 	 *
 	 */
-	User(int id, string name, string alias, string email, string sex, int age, string photoURL,
-		unordered_map<string, set<string>> interests , Location location);
+	User(string id, string name, int externalId, string email, string sex, int age, string photoURL,
+		 unordered_map<string, set<string>> interests, Location location);
 
-	/**
+
+	User();
+
+/**
  	* From Json Creation
  	*
 	* @param value a user json representation
@@ -56,7 +59,7 @@ public:
 	/**
 	 * Returns de id of the user.
 	 */
-	int getId();
+	string getId();
 
 	/**
 	 * Returns the name of the user;
@@ -64,9 +67,9 @@ public:
 	string getName();
 
 	/**
-	 * Return the alias of the user.
+	 * Return the externalId of the user.
 	 */
-	string getAlias();
+	int getExternalId();
 
 	/**
 	 * Returns the email of the user.
@@ -96,11 +99,11 @@ public:
 	void setName(string name);
 
 	/**
-	 * Changes the alias of the user.
+	 * Changes the externalId of the user.
 	 *
-	 * @param alias new value to set.
+	 * @param externalId new value to set.
 	 */
-	void setAlias(string alias);
+	void setExternalId(int alias);
 
 	/**
 	 * Changes the email of the user.
@@ -135,7 +138,7 @@ public:
 	 *
 	 * @param id new value to set.
 	 */
-	void setId(int id);
+	void setId(string id);
 
 	/**
 	 * Returns the insterests of the user
@@ -170,23 +173,34 @@ public:
 	 * Return json Representation;
 	 */
 	Json::Value toJson();
-
-
 	/**
+	 *	Converts to external user json format.
+	 *	@return a external json representation
 	 *
 	 */
+	void toExternalJson(Json::Value &userData);
+
+	/**
+	 * Read a user from a json with external user format
+	 * @param value json values
+	 */
+	static User * fromExternalJson(Json::Value & value);
+
 	static unordered_map<string, set<string>> populateInterests(Json::Value &root);
 private:
 	int age;
 	string sex;
-	int id;
+	string id;
 	string name;
-	string alias;
+	int externalId;
 	string email;
 	string photoURL;
 	unordered_map<string, set<string>> interests;
 	Location location;
 
+	static void readCommonBody(const Json::Value &values, User &user);
+
+	static Json::Value &bodyToJson(Json::Value &userData, User &user);
 };
 
 #endif /* SRC_USER_H_ */

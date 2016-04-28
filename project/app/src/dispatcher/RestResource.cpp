@@ -1,14 +1,13 @@
 #include "RestResource.h"
 
 
-Json::Value RestResource::readJson(WebContext &wc) {
+
+void RestResource::readJson(WebContext &wc, Json::Value & value) {
     Json::Reader reader;
-    Json::Value parsed;
-    bool success = reader.parse(wc.getRequest().getContent(), parsed);
-    if(success) {
-        return parsed;
+    bool success = reader.parse(wc.getRequest().getContent(), value);
+    if(!success) {
+        throw "Error reading json";
     }
-    throw "Error reading json";
 
 }
 

@@ -1,11 +1,14 @@
 file(GLOB_RECURSE SRCS *.cpp)
-
-add_executable(testapp ${SRCS} services/match/MatchDAOTest.cpp services/match/MatchDAOTest.h services/chat/ChatServicesTest.cpp services/chat/ChatServicesTest.h dao/UserDAOTest.cpp dao/UserDAOTest.h)
+find_package(Boost COMPONENTS regex system filesystem REQUIRED)
+add_executable(testapp ${SRCS})
 
 target_link_libraries(testapp
     applib
     libgtest
     libgmock
+        ${Boost_FILESYSTEM_LIBRARY}
+        ${Boost_SYSTEM_LIBRARY}
+        ${Boost_REGEX_LIBRARY}
 )
 
 add_test(NAME testapp COMMAND testapp)
