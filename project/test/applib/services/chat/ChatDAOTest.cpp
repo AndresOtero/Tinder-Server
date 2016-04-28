@@ -50,7 +50,7 @@ TEST_F(ChatDAOTest, retrieveMultipleMsgs) {
 	unordered_map<string, set<string>> intereses;
 	User userA("matias", "hola",1 , "", "M", 18,"", intereses, location);
 	User userB("maria", "chau", 2 , "", "F", 18,"", intereses, location);
-	string mensaje1("cacota enorme");
+	string mensaje1("foo enorme");
 	Message msg(mensaje1, &userA, &userB);
 	bool resultado = dao.saveMsgFromTo(&msg);
 	ASSERT_TRUE(resultado);
