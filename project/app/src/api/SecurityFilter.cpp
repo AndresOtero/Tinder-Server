@@ -18,8 +18,8 @@ bool SecurityFilter::doFilter(WebContext &context) {
         JsonWebToken tokenizr;
         Json::Value values;
         if (tokenizr.getUsernameFromToken(token, values)) {
-            //context.setUsername(values.get("user", "Invalid Token").asString());
-            //TODO OBTENER EL ID DEL SERVICIO DE AUTENTICACION Y PONERLO EN EL CONTAINER.
+            string user = values.get("user", "User is Empty").asString();
+            context.setUserid(user);
             context.setUserid(0);
             return true;
         }

@@ -12,7 +12,7 @@ MatchDAO::MatchDAO(DBConnector *connector) {
 MatchDAO::~MatchDAO() { }
 
 bool MatchDAO::checkForLike(User* userA, User* userB) {
-	string key = this->assembleKey(userA->getAlias(), userA->getId());
+	string key = userA->getId();
 	string value;
 	if(!this->connector->getValueForKey(key, value)) return false;
 	Json::Reader reader;
@@ -23,15 +23,14 @@ bool MatchDAO::checkForLike(User* userA, User* userB) {
 	}
 	Json::Value likes = json["likes"];
 	for (Json::ValueIterator itr = likes.begin(); itr != likes.end(); itr++) {
-		if(itr->get("username", "ERROR").asString() == userB->getAlias() &&
-				itr->get("id", "ERROR").asInt() == userB->getId())
+		if(itr->get("id", "ERROR").asString() == userB->getId())
 			return true;
 	}
 	return false;
 }
 
 bool MatchDAO::checkForMatch(User* userA, User* userB) {
-	string key = this->assembleKey(userA->getAlias(), userA->getId());
+	string key = userA->getId();
 	string value;
 	if(!this->connector->getValueForKey(key, value)) return false;
 	Json::Reader reader;
@@ -42,8 +41,7 @@ bool MatchDAO::checkForMatch(User* userA, User* userB) {
 	}
 	Json::Value matches = json["matches"];
 	for (Json::ValueIterator itr = matches.begin(); itr != matches.end(); itr++) {
-		if(itr->get("username", "ERROR").asString() == userB->getAlias() &&
-				itr->get("id", "ERROR").asInt() == userB->getId())
+		if(itr->get("id", "ERROR").asString() == userB->getId())
 			return true;
 	}
 	return false;
@@ -51,7 +49,7 @@ bool MatchDAO::checkForMatch(User* userA, User* userB) {
 
 
 bool MatchDAO::saveLike(User* userA, User* userB) {
-	string key = this->assembleKey(userA->getAlias(), userA->getId());
+	string key = userA->getId();
 	string value;
 	bool isInDB = this->connector->getValueForKey(key,value);
 	Json::Value json;
@@ -71,7 +69,7 @@ bool MatchDAO::saveLike(User* userA, User* userB) {
 		}
 	}
 	Json::Value newLike;
-	newLike["username"] = userB->getAlias();
+	//newLike["username"] = userB->getExternalId();
 	newLike["id"] = userB->getId();
 	json["numLikes"] = json["numLikes"].asInt() + 1;
 	json["likes"].append(newLike);
@@ -83,8 +81,8 @@ bool MatchDAO::saveLike(User* userA, User* userB) {
 }
 
 void MatchDAO::addMatch(User* userA, User* userB) {
-	string keyA = this->assembleKey(userA->getAlias(), userA->getId());
-	string keyB = this->assembleKey(userB->getAlias(), userB->getId());
+	string keyA = userA->getId();
+	string keyB = userB->getId();
 	string valueA;
 	string valueB;
 	this->connector->getValueForKey(keyA, valueA);
@@ -96,9 +94,9 @@ void MatchDAO::addMatch(User* userA, User* userB) {
 	reader.parse(valueB, jsonB);
 	Json::Value matchA;
 	Json::Value matchB;
-	matchA["username"] = userB->getAlias();
 	matchA["id"] = userB->getId();
-	matchB["username"] = userA->getAlias();
+	//matchA["externalid"] = userB->getId();
+	//matchB["username"] = userA->getExternalId();
 	matchB["id"] = userA->getId();
 	jsonA["numMatches"] = jsonA["numMatches"].asInt() + 1;
 	jsonA["matches"].append(matchA);
@@ -111,7 +109,7 @@ void MatchDAO::addMatch(User* userA, User* userB) {
 
 int MatchDAO::getNumberOfLikes(User* user) {
 	string value;
-	string key = this->assembleKey(user->getAlias(), user->getId());
+	string key = user->getId();
 	bool resultado = this->connector->getValueForKey(key, value);
 	if(!resultado) return 0;
 	Json::Reader reader;
@@ -126,7 +124,7 @@ int MatchDAO::getNumberOfLikes(User* user) {
 
 int MatchDAO::getNumberOfMatches(User* user) {
 	string value;
-	string key = this->assembleKey(user->getAlias(), user->getId());
+	string key =  user->getId();
 	bool resultado = this->connector->getValueForKey(key, value);
 	if(!resultado) return 0;
 	Json::Reader reader;
@@ -140,7 +138,7 @@ int MatchDAO::getNumberOfMatches(User* user) {
 }
 
 Json::Value MatchDAO::getMatches(User* user) {
-	string key = this->assembleKey(user->getAlias(), user->getId());
+	string key = user->getId();
 	string value;
 	bool isInDB = this->connector->getValueForKey(key,value);
 	if(!isInDB) return Json::Value(Json::arrayValue);
@@ -154,11 +152,7 @@ Json::Value MatchDAO::getMatches(User* user) {
 	return json["matches"];
 }
 
-string MatchDAO::assembleKey(string username, int id) {
-	std::stringstream ss;
-	ss << username << ":" << id;
-	return ss.str();
-}
+
 
 
 

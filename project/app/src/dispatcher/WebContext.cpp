@@ -31,10 +31,10 @@ WebContext::~WebContext() {
 
 
 
-int WebContext::getUserid()  {
+string WebContext::getUserid()  {
 	return userid;
 }
 
-void WebContext::setUserid(int userid) {
-	WebContext::userid = userid;
+void WebContext::setUserid(string userid) {
+	this->userid = userid;
 }

@@ -79,7 +79,8 @@ bool UserDAO::updateUserProfile(User* user) {
 
 bool UserDAO::saveNewUser(User* user) {
 	string url = "/users/";
-	Json::Value userJson = user->toJson();
+	Json::Value userJson;
+	user->toExternalJson(userJson);
 	Json::Value root;
 	root["user"] = userJson;
 	Json::FastWriter writer;
@@ -90,7 +91,7 @@ bool UserDAO::saveNewUser(User* user) {
 		return false;
 	}
 	int id = response["user"]["id"].asInt();
-	user->setId(id);
+	user->setExternalId(id);
 	return true;
 }
 

@@ -12,7 +12,7 @@ using std::runtime_error;
 
 class UserNotFoundException: public runtime_error {
 public:
-	UserNotFoundException(int id);
+	UserNotFoundException(string id);
 	virtual ~UserNotFoundException();
 };
 

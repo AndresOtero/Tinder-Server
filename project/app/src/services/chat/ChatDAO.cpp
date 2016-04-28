@@ -56,12 +56,11 @@ bool ChatDAO::getMsgBetween(User* sender, User* receiver, list<Message*>* msgs) 
 }
 
 string ChatDAO::assembleKey(User *A, User *B) {
-	string from = A->getAlias();
-	int idfrom = A->getId();
-	string to = B->getAlias();
-	int idto = B->getId();
+	string idfrom = A->getId();
+	string idto = B->getId();
+
 	std::stringstream ss;
-	ss << from << ":" << idfrom << "-" << to << ":" << idto;
+	ss << idfrom << "-" << idto;
 	string key(ss.str());
 	return key;
 }
