@@ -18,16 +18,16 @@ void ChatResource::setup(ApiDispatcher &dispatcher) {
     dispatcher.registerEndPoint(RestRequest::GET, "/chat/#user#", (function<void (WebContext&)>)bind( &ChatResource::getConversation, this, _1 ));
     dispatcher.registerEndPoint(RestRequest::POST, "/chat", (function<void (WebContext&)>)bind( &ChatResource::sendMessage, this, _1 ));
 }
-
 void ChatResource::getConversation(WebContext &wc) {
     string user = wc.getParam("user");
-    wc.getUserid()
+    wc.getUserid();
     //service.getConversationBetweenUsers(, user);
 
 }
 
 void ChatResource::sendMessage(WebContext &wc) {
-    Json::Value params = RestResource::readJson(wc);
+    Json::Value params;
+    RestResource::readJson(wc, params);
 }
 
 
