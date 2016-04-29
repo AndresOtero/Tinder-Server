@@ -29,12 +29,12 @@ import sphinx_bootstrap_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-sys.path.append( "breathe-4.2.0/" )
-extensions = ['breathe']
+#sys.path.append( "breathe-4.2.0/" )
+#extensions = ['breathe']
 
-breathe_projects = { "myproject": "../../build/doxy-doc/xml/" }
+#breathe_projects = { "myproject": "../../build/doxy-doc/xml/" }
 
-breathe_default_project = "myproject"
+#breathe_default_project = "myproject"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -210,9 +210,9 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_context = {
-    'css_files': ['_static/breathe.css'],
-}
+#html_context = {
+#    'css_files': ['_static/breathe.css'],
+#}
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
 # directly to the root of the documentation.
