@@ -6,6 +6,7 @@
 #include <User.h>
 #include <ProfileServices.h>
 #include <SecurityFilter.h>
+#include <InterestResource.h>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -28,6 +29,7 @@ int main() {
 
 	LOG_INFO << "Starting WebServer";
 	UserDAO userDAO(&sharedConnector, &authenticationDB);
+
 	AuthenticationService authservice(&userDAO);
 	SecurityFilter securityFilter(authservice);
 	securityFilter.excludeRegex("/auth");
@@ -37,8 +39,11 @@ int main() {
 	user.setup(dispatcher);
 	AuthenticationService authService(&userDAO);
 	AuthResource auth (&authService);
-
 	auth.setup(dispatcher);
+	InterestResource interestResource(profileService);
+	interestResource.setup(dispatcher);
+
+
 	WebServer ws(dispatcher);
 
 	ws.start();
