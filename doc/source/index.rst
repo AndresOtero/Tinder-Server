@@ -4,10 +4,12 @@
    contain the root `toctree` directive.
 
 
-Welcome to Match Application's documentation!
+Bienvenido a la documentación de "Match Application"
 =====================================================
+Aqui encontrará todo lo referente a la documentación
+tecnica de la aplicación, manuales de usuario, tecnologias
+utilizadas por los desarolladores, etc.
 
-Contents:
 
 .. toctree::
    :maxdepth: 2
