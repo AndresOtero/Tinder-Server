@@ -18,9 +18,8 @@ bool SecurityFilter::doFilter(WebContext &context) {
         JsonWebToken tokenizr;
         Json::Value values;
         if (tokenizr.getUsernameFromToken(token, values)) {
-            string user = values.get("user", "User is Empty").asString();
+            string user = values.get("name", "User is Empty").asString();
             context.setUserid(user);
-            context.setUserid(0);
             return true;
         }
 
