@@ -31,6 +31,7 @@ import sphinx_bootstrap_theme
 # ones.
 #sys.path.append( "breathe-4.2.0/" )
 #extensions = ['breathe']
+sys.path.append(os.path.abspath('.'))
 
 #breathe_projects = { "myproject": "../../build/doxy-doc/xml/" }
 
