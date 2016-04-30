@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 
-Welcome to Tinder Application's documentation!
+Welcome to Match Application's documentation!
 =====================================================
 
 Contents:
