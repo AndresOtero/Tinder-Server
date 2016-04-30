@@ -13,7 +13,7 @@ void InterestResource::setup(ApiDispatcher & dispatcher) {
     using placeholders::_1;
     dispatcher.registerEndPoint(RestRequest::POST, "/interest",	(function<void(WebContext&)> )
             bind(&InterestResource::addInterest,this, _1));
-    dispatcher.registerEndPoint(RestRequest::GET, "/interest/#query#",	(function<void(WebContext&)> )
+    dispatcher.registerEndPoint(RestRequest::GET, "/interest",	(function<void(WebContext&)> )
             bind(&InterestResource::searchInterests,this, _1));
     dispatcher.registerEndPoint(RestRequest::DELETE, "/interest",	(function<void(WebContext&)> )
             bind(&InterestResource::removeInterest,this, _1));
@@ -21,11 +21,7 @@ void InterestResource::setup(ApiDispatcher & dispatcher) {
 }
 
 void InterestResource::searchInterests(WebContext &wc) {
-    const string query = wc.getParam("query");
-    if(query.size() == 0) {
-        wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
-    }
-    const unordered_map<string, set<string>> map = profileServices.searchInterest(query);
+    const unordered_map<string, set<string>> map = profileServices.getInterests();
     Json::Value interests;
     for ( auto it = map.begin(); it != map.end(); ++it ) {
         for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {

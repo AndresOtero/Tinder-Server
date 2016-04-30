@@ -69,12 +69,6 @@ void ProfileServices::addInterest(string userid, string category, string value) 
 	//TODO MATY TIENE TU NOMBRE ESTO
 }
 
-unordered_map<string, set<string>> ProfileServices::searchInterest(string query) {
-	//TODO tiene que buscar entre todos los intereses por categoria o valor.
-	unordered_map<string, set<string>> result;
-	return result;
-}
-
 void ProfileServices::removeInterest(string userid, string category, string value) {
 	//TODO tiene que remover un interes de la lista de usuarios.
 }
