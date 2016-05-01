@@ -20,6 +20,9 @@ public:
         */
 	bool isUsernameTaken(string username);
 
+
+	AuthenticationDAO(DBConnector &dbConnector);
+
 	/**
          * Save or update user with his password.
          *
@@ -28,7 +31,9 @@ public:
          */
 	bool saveUser(string username, string password);
 
-	DBConnector* dbConnector;
+
+	string getPassword(string user);
+	DBConnector & dbConnector;
 };
 
 

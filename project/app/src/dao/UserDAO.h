@@ -21,7 +21,7 @@ public:
 	/**
 	* Default constructor. Deleting both connectors should be done by the caller.
 	*/
-	UserDAO(SharedConnector* shared, DBConnector* db);
+	UserDAO(SharedConnector *shared);
 
 	virtual ~UserDAO();
 
@@ -75,42 +75,9 @@ public:
 	*/
 	bool updateUserProfile(User *user);
 
-	/**
-	 * Given a username and password combination, it returns true if the combination matches an entry in the DB
-	 *
-	 * @param username username to look for in the db.
-	 * @param password password that has to be in the username account.
-	 */
-	bool validateUsernamePassword(std::string username, std::string password);
-
-	/**
-	 * It checks if the username received is already in the db.
-	 *
-	 * @param username username to look for in the DB.
-	 */
-	bool isUsernameTaken(std::string username);
-
-	/**
-	 * Changes the password for the user. Returns true if th change was successful. If the current password does not
-	 * match or the username does not exists it throws an exception.
-	 *
-	 * @param username to change the password from.
-	 * @param currentPassword current password of the username that wants to change it.
-	 * @param new Password password that the username wants to have.
-	 */
-	bool changePasswordForUser(std::string username, std::string currentPassword,std::string newPassword);
-
-	/**
-	 * Creates a new user with the received password. If the username is taken it throws an exception.
-	 *
-	 * @param username to create.
-	 * @param password to set to the username.
-	 */
-	bool saveNewUsername(std::string username, std::string password);
 
 
 private:
-	DBConnector* dbConnector;
 	SharedConnector* sharedConnector;
 
 
