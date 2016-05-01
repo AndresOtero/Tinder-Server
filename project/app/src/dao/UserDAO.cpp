@@ -4,14 +4,12 @@
 
 #include <json/json.h>
 #include <Logger.h>
-#include <AuthenticationException.h>
 #include "UserDAO.h"
 
 
 //TODO mensajes en ingles.
-UserDAO::UserDAO(SharedConnector* shared, DBConnector* db) {
-	this->sharedConnector = shared;
-	this->dbConnector = db;
+UserDAO::UserDAO(SharedConnector *shared) {
+
 }
 
 UserDAO::~UserDAO() { }
@@ -126,32 +124,5 @@ bool UserDAO::saveNewInterest(string category, string value) {
 	return true;
 }
 
-
-bool UserDAO::validateUsernamePassword(std::string username, std::string password) {
-	std::string value;
-	if (!this->dbConnector->getValueForKey(username, value)) return false;
-	return !(value != password);
-}
-
-
-
-bool UserDAO::isUsernameTaken(std::string username) {
-	std::string value;
-	return (this->dbConnector->getValueForKey(username, value));
-}
-
-bool UserDAO::changePasswordForUser(std::string username, std::string currentPassword,std::string newPassword){
-	if (!this->validateUsernamePassword(username, currentPassword)) {
-		throw AuthenticationException("Combination of username and password invalid.");
-	}
-	return (this->dbConnector->putValueInKey(username, newPassword));
-}
-
-bool UserDAO::saveNewUsername(std::string username, std::string password) {
-	if (this->isUsernameTaken(username)) {
-		throw AuthenticationException("Username " + username + " already exists.");
-	}
-	return this->dbConnector->putValueInKey(username, password);
-}
 
 

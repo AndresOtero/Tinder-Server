@@ -1,5 +1,6 @@
 #include <Message.h>
 #include <Logger.h>
+#include <DBException.h>
 #include "ChatDAO.h"
 #include "../../json/json/json.h"
 
@@ -9,14 +10,14 @@ ChatDAO::ChatDAO(DBConnector* connector) {
 
 ChatDAO::~ChatDAO() {}
 
-bool ChatDAO::saveMsgFromTo(Message* msg) {
+void ChatDAO::saveMsgFromTo(Message *msg) {
 	string key = this->assembleKey(msg->getSender(), msg->getReceiver());
 	Json::Value nuevoMsg;
 	string timeStamp(asctime(msg->getTime()));
 	nuevoMsg["time"] = timeStamp;
 	nuevoMsg["msg"] = msg->getContent();
-	string previous;
-	bool resultado = this->connector->getValueForKey(key, previous);
+	bool resultado = this->connector->exist(key);
+	string previous = this->connector->getValueForKey(key);
 	Json::Value toSaveJson;
 	//Si no habia mensajes entre los dos
 	if (!resultado) {
@@ -29,19 +30,19 @@ bool ChatDAO::saveMsgFromTo(Message* msg) {
 	toSaveJson.append(nuevoMsg);
 	Json::FastWriter writer;
 	string toSave = writer.write(toSaveJson);
-	return connector->putValueInKey(key, toSave);  
+	connector->putValueInKey(key, toSave);
 }
 
-bool ChatDAO::getMsgBetween(User* sender, User* receiver, list<Message*>* msgs) {
+void ChatDAO::getMsgBetween(User* sender, User* receiver, list<Message*>* msgs) {
 	string key = this->assembleKey(sender, receiver);
-	string jsonString;
-	bool result = this->connector->getValueForKey(key, jsonString);
-	if (!result) return false;
+	if(!this->connector->exist(key)) return;
+
+	string jsonString = this->connector->getValueForKey(key);
 	Json::Reader reader;
 	Json::Value json;
 	if(!reader.parse(jsonString, json)){
 		LOG_ERROR << "DB Corrupted, error parsing." << jsonString << " .";
-		return false;
+		throw DBException("DB corrupted");
 	}
 	Json::FastWriter writer;
 	string prueba = writer.write(json);
@@ -52,7 +53,6 @@ bool ChatDAO::getMsgBetween(User* sender, User* receiver, list<Message*>* msgs) 
 		Message* nuevo = new Message(itr->get("msg", "error").asString(), &savedTime ,sender, receiver);
 		msgs->push_front(nuevo);
 	}
-	return true;
 }
 
 string ChatDAO::assembleKey(User *A, User *B) {
