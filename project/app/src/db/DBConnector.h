@@ -42,7 +42,7 @@ public:
 	 *
 	 * @param key to delete from the db.
 	 */
-	bool deleteKey(std::string key);
+	void deleteKey(std::string key);
 
 	/**
 	 * Retrieves the value stored in the given key. It returns true if the operation was successful, false if not.
@@ -50,7 +50,7 @@ public:
 	 * @param key to search for in the DB.
 	 * @param value the value stored in the db is saved here.
 	 */
-	bool getValueForKey(std::string key, std::string& value);
+	std::string getValueForKey(std::string key);
 
 	/**
 	 * Saves the given value in the given key. If the key already exists, it overwrites the value stored.
@@ -58,8 +58,9 @@ public:
 	 * @param key to store the value in.
 	 * @param value to be stored in the given key.
 	 */
-	bool putValueInKey(std::string key, std::string value);
+	void putValueInKey(std::string key, std::string value);
 
+	bool exist(std::string key);
 private:
 	rocksdb::Status status;
 };

@@ -15,29 +15,29 @@ bool AuthenticationService::isLoginValid(std::string username, std::string passw
 
 
 
-bool AuthenticationService::changePassword(std::string username, std::string currentPassword, std::string newPassword) {
+void AuthenticationService::changePassword(std::string username, std::string currentPassword, std::string newPassword) {
 	string storedPassword = this->dao->getPassword(username);
 	if(storedPassword != currentPassword){
 		LOG_ERROR << "Not match stored password.";
-		throw AuthenticationException("Not match stored password");
+		throw ChatException("Not match stored password");
 	}
 
 
 
 	if (currentPassword == newPassword) {
 		LOG_ERROR << "Current password and new password can not be the same.";
-		throw AuthenticationException("Current Password and new password received are the same.");
+		throw ChatException("Current Password and new password received are the same.");
 	}
 
-	return this->dao->saveUser(username, newPassword);
+	this->dao->saveUser(username, newPassword);
 }
 
 
-bool AuthenticationService::saveNewUser(std::string username, std::string password) {
+void AuthenticationService::saveNewUser(std::string username, std::string password) {
 	if(this->dao->isUsernameTaken(username)) {
-		throw AuthenticationException("User Already Exist.");
+		throw ChatException("User Already Exist.");
 	}
-	return this->dao->saveUser(username, password);
+	this->dao->saveUser(username, password);
 }
 
 

@@ -82,7 +82,7 @@ void AuthResource::create(WebContext & wc) {
 		} catch (string & e) {
 			LOG_DEBUG<< LOG_PREFIX << "Error parsing request " << e;
 			wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
-		} catch (AuthenticationException & e) {
+		} catch (ChatException & e) {
 			LOG_DEBUG<< LOG_PREFIX<< "Error creating user " << e.what();
 			wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
 			Json::Value result;

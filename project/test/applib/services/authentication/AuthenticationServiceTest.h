@@ -1,7 +1,11 @@
+#include <DBConnector.h>
 #include "gtest/gtest.h"
+
+static const char *const DB_FILE = "/tmp/usersTestDB";
 
 // The fixture for testing class Foo.
 class AuthenticationServiceTest : public ::testing::Test {
+
 
 protected:
 
@@ -22,5 +26,5 @@ protected:
     // before the destructor).
     virtual void TearDown();
 
-    // The mock bar library shaed by all tests
+    DBConnector * connector;
 };

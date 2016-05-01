@@ -6,6 +6,8 @@
 #include <ChatServices.h>
 #include "ChatServicesTest.h"
 #include <boost/filesystem.hpp>
+#include <AuthenticationException.h>
+
 ChatServicesTest::ChatServicesTest() { }
 
 ChatServicesTest::~ChatServicesTest() { }
@@ -33,8 +35,14 @@ TEST_F(ChatServicesTest, sendMessageToNotLikedPerson) {
 	User userA("matias", "hola",1 , "", "M", 18,"", intereses, location);
 	User userB("maria", "chau", 2 , "", "F", 18,"", intereses, location);
 	Message msg("prueba", &userA, &userB);
-	ASSERT_FALSE(service.sendMessageFromTo(&msg));
-	ASSERT_FALSE(service.sendMessageFromTo(&msg));
+	try {
+		service.sendMessageFromTo(&msg);
+		FAIL();
+	} catch (ChatException & ex) {
+		ASSERT_EQ("Not match found", string(ex.what()));
+	}
+
+
 
 }
 
@@ -47,7 +55,7 @@ TEST_F(ChatServicesTest, sendMessageToLikedPerson) {
 	Message msg("prueba", &userA, &userB);
 	matchDao->saveLike(&userA, &userB);
 	matchDao->saveLike(&userB, &userA);
-	ASSERT_TRUE(service.sendMessageFromTo(&msg));
+	service.sendMessageFromTo(&msg);
 }
 
 

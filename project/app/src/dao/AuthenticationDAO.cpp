@@ -6,18 +6,16 @@
 
 
 bool AuthenticationDAO::isUsernameTaken(string username) {
-	string value;
-	return (this->dbConnector.getValueForKey(username, value));
+	return  this->dbConnector.exist(username);
+
 }
 
-bool AuthenticationDAO::saveUser(string username, string password) {
-	return this->dbConnector.putValueInKey(username, password);
+void AuthenticationDAO::saveUser(string username, string password) {
+	this->dbConnector.putValueInKey(username, password);
 }
 
 string AuthenticationDAO::getPassword(string username) {
-	string value;
-	this->dbConnector.getValueForKey(username, value);
-	return value;
+	return this->dbConnector.getValueForKey(username);
 }
 
 AuthenticationDAO::AuthenticationDAO(DBConnector &dbConnector) : dbConnector(dbConnector) { }
