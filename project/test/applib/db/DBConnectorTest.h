@@ -1,10 +1,12 @@
 #include "gtest/gtest.h"
 
+static const char *const DB_FILE = "/tmp/testdb/";
+
 // The fixture for testing class Foo.
 class DBConnectorTest : public ::testing::Test {
 
 protected:
-
+    DBConnector * connector;
     // You can do set-up work for each test here.
     DBConnectorTest();
 

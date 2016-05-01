@@ -30,7 +30,7 @@ public:
 	 *
 	 * @param msg message to be sent.
 	 */
-	bool sendMessageFromTo(Message* msg);
+	void sendMessageFromTo(Message *msg);
 
 	/**
 	 * Returns a json with all the messages between both users. If no messages are found, an empty json is returned.

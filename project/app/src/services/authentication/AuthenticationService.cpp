@@ -1,31 +1,43 @@
 #include <Logger.h>
+#include <AuthenticationDAO.h>
 #include "AuthenticationService.h"
 
-AuthenticationService::AuthenticationService(UserDAO* dao) {
+AuthenticationService::AuthenticationService(AuthenticationDAO *dao) {
 	this->dao = dao;
 }
 
 AuthenticationService::~AuthenticationService() {}
 
 bool AuthenticationService::isLoginValid(std::string username, std::string password) {
-	return this->dao->validateUsernamePassword(username, password);
+	string actual = this->dao->getPassword(username);
+	return !(actual != password);
 }
 
-bool AuthenticationService::isUsernameTaken(std::string username) {
-	return this->dao->isUsernameTaken(username);
-}
 
-bool AuthenticationService::changePasswordForUser(std::string username, std::string currentPassword,std::string newPassword){
+
+void AuthenticationService::changePassword(std::string username, std::string currentPassword, std::string newPassword) {
+	string storedPassword = this->dao->getPassword(username);
+	if(storedPassword != currentPassword){
+		LOG_ERROR << "Not match stored password.";
+		throw ChatException("Not match stored password");
+	}
+
+
+
 	if (currentPassword == newPassword) {
 		LOG_ERROR << "Current password and new password can not be the same.";
-		throw AuthenticationException("Current Password and new password received are the same.");
+		throw ChatException("Current Password and new password received are the same.");
 	}
-	return this->dao->changePasswordForUser(username, currentPassword, newPassword);
+
+	this->dao->saveUser(username, newPassword);
 }
 
 
-bool AuthenticationService::saveNewUser(std::string username, std::string password) {
-	return this->dao->saveNewUsername(username, password);
+void AuthenticationService::saveNewUser(std::string username, std::string password) {
+	if(this->dao->isUsernameTaken(username)) {
+		throw ChatException("User Already Exist.");
+	}
+	this->dao->saveUser(username, password);
 }
 
 
