@@ -9,10 +9,12 @@
 #define SRC_USER_H_
 
 #include "Location.h"
+#include "Interest.h"
 #include <string>
 #include <unordered_map>
 #include <set>
 #include <json/json.h>
+#include <list>
 
 using namespace std;
 
@@ -141,9 +143,9 @@ public:
 	void setId(string id);
 
 	/**
-	 * Returns the insterests of the user
+	 * Returns a list with interests in it. It is responsability of the caller to delete the Interests in it.
 	 */
-	unordered_map<string, set<string>> getInterests();
+	list<Interest*> getInterests();
 
 	/**
 	 * Changes the sex of the user.
