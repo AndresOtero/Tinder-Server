@@ -36,7 +36,7 @@ public:
 	 *
 	 * @param msg to store.
 	 */
-	bool saveMsgFromTo(Message* msg);
+	void saveMsgFromTo(Message *msg);
 
 	/**
 	 * Saves in the param msgs all the messages from one username to the other. Returns true or false
@@ -46,7 +46,7 @@ public:
 	 * @param receiver username that is the receiver of the messages to get.
 	 * @param msgs list of all the messages in the db.
 	 */
-	bool getMsgBetween(User* sender, User* receiver, list<Message*>* msgs);
+	void getMsgBetween(User* sender, User* receiver, list<Message*>* msgs);
 
 private:
 	DBConnector* connector;

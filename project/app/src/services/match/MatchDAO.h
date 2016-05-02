@@ -26,11 +26,11 @@ public:
 	virtual ~MatchDAO();
 
 	/**
-	 * Saves the match in the db. Returns true if the like was stored successfully.
+	 * Saves the match in the db.
 	 * @param user is the user that just liked another one.
 	 * @param liked is user that first user liked.
 	 */
-	bool saveLike(User* user, User* liked);
+	void saveLike(User *user, User *liked);
 
 	/**
 	 * Returns the number of likes that a user has received.
