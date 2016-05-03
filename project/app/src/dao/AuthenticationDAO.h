@@ -29,7 +29,7 @@ public:
          * @param username to create.
          * @param password to set to the username.
          */
-	bool saveUser(string username, string password);
+	void saveUser(string username, string password);
 
 
 	string getPassword(string user);

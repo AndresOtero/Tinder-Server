@@ -48,7 +48,7 @@ public:
 	 * @param currentPassword current password of the username that wants to change it.
 	 * @param newPassword password that the username wants to have.
 	 */
-	bool changePassword(std::string username, std::string currentPassword, std::string newPassword);
+	void changePassword(std::string username, std::string currentPassword, std::string newPassword);
 
 	/**
 	 * Creates a new user with the received password. If the username is taken it throws an exception.
@@ -56,7 +56,7 @@ public:
 	 * @param username to create.
 	 * @param password to set to the username.
 	 */
-	bool saveNewUser(std::string username, std::string password);
+	void saveNewUser(std::string username, std::string password);
 
 private:
 

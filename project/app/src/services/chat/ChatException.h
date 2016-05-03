@@ -2,8 +2,8 @@
 // Created by matias on 4/24/16.
 //
 
-#ifndef TINDER_SERVER_AUTHENTICATIONEXCEPTION_H
-#define TINDER_SERVER_AUTHENTICATIONEXCEPTION_H
+#ifndef TINDER_SERVER_CHATEXCEPTION_H
+#define TINDER_SERVER_CHATEXCEPTION_H
 
 #include <stdexcept>
 #include <string>

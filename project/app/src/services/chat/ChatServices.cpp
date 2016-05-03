@@ -3,6 +3,7 @@
 //
 
 #include <Logger.h>
+#include <AuthenticationException.h>
 #include "ChatServices.h"
 
 
@@ -13,10 +14,11 @@ ChatServices::ChatServices(ChatDAO *chatDao, MatchDAO* matchDao) {
 
 ChatServices::~ChatServices() { }
 
-bool ChatServices::sendMessageFromTo(Message* msg) {
-	if (!this->match->checkForMatch(msg->getSender(), msg->getReceiver())) return false;
-	bool saveResult = this->chat->saveMsgFromTo(msg);
-	return saveResult;
+void ChatServices::sendMessageFromTo(Message *msg) {
+	if (!this->match->checkForMatch(msg->getSender(), msg->getReceiver())){
+		throw ChatException("Not match found");
+	}
+	this->chat->saveMsgFromTo(msg);
 }
 
 list<Message*>* ChatServices::getConversationBetweenUsers(User* userA, User* userB) {

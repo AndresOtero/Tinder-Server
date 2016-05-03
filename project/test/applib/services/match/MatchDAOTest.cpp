@@ -11,6 +11,7 @@ MatchDAOTest::MatchDAOTest() { }
 MatchDAOTest::~MatchDAOTest() { }
 
 void MatchDAOTest::SetUp() {
+	boost::filesystem::remove_all(DB_FILE);
 	this->connector = new DBConnector(DB_FILE);
 	this->dao = new MatchDAO(connector);
 }
@@ -33,12 +34,12 @@ TEST_F(MatchDAOTest, noMatchTestAndAddTwice) {
 	ASSERT_EQ(0, likes );
 	int matches = dao->getNumberOfMatches(&userA);
 	ASSERT_EQ(0,matches);
-	ASSERT_TRUE(dao->saveLike(&userA, &userB));
+	dao->saveLike(&userA, &userB);
 	likes = dao->getNumberOfLikes(&userA);
 	ASSERT_EQ(1, likes);
 	matches = dao->getNumberOfMatches(&userA);
 	ASSERT_EQ(0, matches);
-	ASSERT_TRUE(dao->saveLike(&userA, &userB));
+	dao->saveLike(&userA, &userB);
 	likes = dao->getNumberOfLikes(&userA);
 	ASSERT_EQ(1, likes);
 	matches = dao->getNumberOfMatches(&userA);
@@ -51,22 +52,22 @@ TEST_F(MatchDAOTest, MatchTest) {
 	User userA("matias", "foo",1 , "", "M", 18,"", intereses, location);
 	User userB("maria", "foo", 2 , "", "F", 18,"", intereses, location);
 	int likes = dao->getNumberOfLikes(&userA);
-	ASSERT_TRUE(likes == 0);
+	ASSERT_EQ(0, likes);
 	int matches = dao->getNumberOfMatches(&userA);
-	ASSERT_TRUE(matches == 0);
-	ASSERT_TRUE(dao->saveLike(&userA, &userB));
+	ASSERT_EQ(0, matches);
+	dao->saveLike(&userA, &userB);
 	likes = dao->getNumberOfLikes(&userA);
-	ASSERT_TRUE(likes == 1);
+	ASSERT_EQ(1, likes);
 	matches = dao->getNumberOfMatches(&userA);
-	ASSERT_TRUE(matches == 0);
+	ASSERT_EQ(0, matches);
 	ASSERT_FALSE(dao->checkForMatch(&userA, &userB));
-	ASSERT_TRUE(dao->saveLike(&userB, &userA));
+	dao->saveLike(&userB, &userA);
 	likes = dao->getNumberOfLikes(&userB);
-	ASSERT_TRUE(likes == 1);
+	ASSERT_EQ(1, likes);
 	matches = dao->getNumberOfMatches(&userB);
-	ASSERT_TRUE(matches == 1);
+	ASSERT_EQ(1, matches);
 	matches = dao->getNumberOfMatches(&userA);
-	ASSERT_TRUE(matches == 1);
+	ASSERT_EQ(1, matches);
 	ASSERT_TRUE(dao->checkForMatch(&userA, &userB));
 
 }

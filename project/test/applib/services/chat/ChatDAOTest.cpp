@@ -30,13 +30,13 @@ TEST_F(ChatDAOTest, saveMSGToDBAndRetrieve) {
 	User userB("maria", "chau", 2 , "", "F", 18,"", intereses, location);
 	string mensaje("muy enorme");
 	Message msg(mensaje, &userA, &userB);
-	bool resultado = dao.saveMsgFromTo(&msg);
-	ASSERT_TRUE(resultado);
+	dao.saveMsgFromTo(&msg);
+
 
 	std::string retrieved;
 	std::list<Message*>* lista = new list<Message*>();
-	bool resultado2 = dao.getMsgBetween(&userA, &userB, lista);
-	ASSERT_TRUE(resultado2);
+	dao.getMsgBetween(&userA, &userB, lista);
+
 	ASSERT_TRUE(lista->front()->getContent() == mensaje);
 
 	Message* limpiar  = lista->front();
@@ -52,16 +52,13 @@ TEST_F(ChatDAOTest, retrieveMultipleMsgs) {
 	User userB("maria", "chau", 2 , "", "F", 18,"", intereses, location);
 	string mensaje1("foo enorme");
 	Message msg(mensaje1, &userA, &userB);
-	bool resultado = dao.saveMsgFromTo(&msg);
-	ASSERT_TRUE(resultado);
+	dao.saveMsgFromTo(&msg);
 	string mensaje2 = "chau gato";
 	Message msg2(mensaje2, &userA, &userB);
-	resultado = dao.saveMsgFromTo(&msg2);
-	ASSERT_TRUE(resultado);
+	dao.saveMsgFromTo(&msg2);
 
 	std::list<Message*> lista;
-	bool resultado2 = dao.getMsgBetween(&userA, &userB, &lista);
-	ASSERT_TRUE(resultado2);
+	dao.getMsgBetween(&userA, &userB, &lista);
 
 	int contador = 0;
 	for( std::list<Message*>::iterator itr = lista.begin() ; itr != lista.end() ; itr++ ) {
