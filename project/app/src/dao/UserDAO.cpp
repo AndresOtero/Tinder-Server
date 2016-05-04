@@ -9,7 +9,7 @@
 
 //TODO mensajes en ingles.
 UserDAO::UserDAO(SharedConnector *shared) {
-
+    this->sharedConnector = shared;
 }
 
 UserDAO::~UserDAO() { }

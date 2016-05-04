@@ -8,12 +8,15 @@
 #include <api/UserResource.h>
 #include "webserver/RestRequest.h"
 #include <functional>
+#include <UserNotFoundException.h>
 #include "log/Logger.h"
 #include "json/json/json.h"
 #include "json/ParameterReader.h"
+#include "ApiConstants.h"
+
 using namespace std;
 
-UserResource::UserResource(ProfileServices & services): service(service)  {
+UserResource::UserResource(ProfileServices & services): service(services)  {
 
 }
 
@@ -25,11 +28,18 @@ void UserResource::setup(ApiDispatcher& dispatcher) {
 }
 
 void UserResource::getUser(WebContext& context) {
-	User * user = service.getUserByID(context.getUserid());
-	Json::Value result = user->toJson();
-	delete user;
-	Json::FastWriter writer;
-	context.getResponse().setContent(writer.write(result));
+	try {
+		User * user = service.getUserByID(context.getUserid());
+		Json::Value result = user->toJson();
+		delete user;
+		Json::FastWriter writer;
+		context.getResponse().setContent(writer.write(result));
+	} catch (UserNotFoundException & e) {
+		Json::Value result;
+		result[STATUS_CODE_PARAM] = STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED;
+		this->writeJson(context, result);
+	}
+
 }
 
 void UserResource::putUser(WebContext& context) {

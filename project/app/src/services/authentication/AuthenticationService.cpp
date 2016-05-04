@@ -1,9 +1,12 @@
 #include <Logger.h>
 #include <AuthenticationDAO.h>
+#include <ProfileServices.h>
+#include <UserNotFoundException.h>
 #include "AuthenticationService.h"
 
-AuthenticationService::AuthenticationService(AuthenticationDAO *dao) {
+AuthenticationService::AuthenticationService(AuthenticationDAO *dao, ProfileServices  * profileService) {
 	this->dao = dao;
+	this->profileService = profileService;
 }
 
 AuthenticationService::~AuthenticationService() {}
@@ -15,8 +18,8 @@ bool AuthenticationService::isLoginValid(std::string username, std::string passw
 
 
 
-void AuthenticationService::changePassword(std::string username, std::string currentPassword, std::string newPassword) {
-	string storedPassword = this->dao->getPassword(username);
+void AuthenticationService::changePassword(std::string userid, std::string currentPassword, std::string newPassword) {
+	string storedPassword = this->dao->getPassword(userid);
 	if(storedPassword != currentPassword){
 		LOG_ERROR << "Not match stored password.";
 		throw ChatException("Not match stored password");
@@ -29,15 +32,22 @@ void AuthenticationService::changePassword(std::string username, std::string cur
 		throw ChatException("Current Password and new password received are the same.");
 	}
 
-	this->dao->saveUser(username, newPassword);
+	this->dao->saveUser(userid, newPassword);
 }
 
 
-void AuthenticationService::saveNewUser(std::string username, std::string password) {
+bool AuthenticationService::saveNewUser(std::string username, std::string password) {
 	if(this->dao->isUsernameTaken(username)) {
 		throw ChatException("User Already Exist.");
 	}
 	this->dao->saveUser(username, password);
+	try {
+		this->profileService->getUserByID(username);
+		return false;
+	} catch (UserNotFoundException & e) {
+		return true;
+	}
+
 }
 
 

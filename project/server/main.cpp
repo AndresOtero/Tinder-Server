@@ -32,14 +32,15 @@ int main() {
 	UserDAO userDAO(&sharedConnector);
 	AuthenticationDAO authDAO (authenticationDB);
 	TranslationDAO transDAO (translationDB);
-
-	AuthenticationService authService(&authDAO);
+	ProfileServices profileService(&userDAO, &transDAO);
+	AuthenticationService authService(&authDAO, &profileService);
 
 	SecurityFilter securityFilter(authService);
 	securityFilter.excludeRegex("/auth");
 	ApiDispatcher dispatcher(securityFilter);
-	ProfileServices profileService(&userDAO, &transDAO);
+
 	UserResource user(profileService);
+
 	user.setup(dispatcher);
 
 	AuthResource auth (&authService);

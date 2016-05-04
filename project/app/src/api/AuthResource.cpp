@@ -69,12 +69,16 @@ void AuthResource::create(WebContext & wc) {
 			StringReader strreader(parsed);
 			string user = strreader.get("user", true);
 			string password = strreader.get("password", true);
-			this->service->saveNewUser(user, password);
+			bool requiredUser = this->service->saveNewUser(user, password);
 			JsonWebToken jwt;
 			string token = jwt.generateTokenForUser(user);
-			//TODO CUANDO ESTÉ LO DE MATY SETEAR UN STATUS CODE O NO
 			Json::Value json;
-			json[STATUS_CODE_PARAM] = STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED;
+			if(requiredUser){
+				json[STATUS_CODE_PARAM] = STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED;
+			} else {
+				json[STATUS_CODE_PARAM] = STATUS_CODE_DONE;
+			}
+
 			json[SECURITY_TOKEN_PARAM] = token;
 			Json::FastWriter writer;
 			wc.getResponse().setContent(writer.write(json));
