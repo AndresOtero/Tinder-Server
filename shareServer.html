@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Share Server &mdash; Tinder Application 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Tinder Application 0.0.1 documentation" href="index.html" />
+    <link rel="next" title="Application Server" href="applicationServer.html" />
+    <link rel="prev" title="Bienvenido a la documentación de “Match Application”" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Tinder Application</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="http://example.com">Sources</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Share Server</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#documentacion-tecnica-frontend"><em>Documentación técnica Frontend</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tecnologias-principales">Tecnologías principales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#descripcion-de-solucion-implementada">Descripción de solución implementada</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-de-usuario"><em>Manual de usuario</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#web-de-administracion">Web de administración</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#home">Home</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creacion-de-usuario">Creación de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edicion-de-foto-de-usuario">Edición de foto de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edicion-de-usuario">Edición de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizacion-de-usuario">Visualización de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creacion-de-intereses">Creación de intereses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#listar-intereses">Listar intereses</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#servidor">Servidor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#documentacion-tecnica-backend"><em>Documentación técnica Backend</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Tecnologías principales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#descripcion-de-la-solucion-implementada">Descripción de la solución implementada</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#estructura-general">Estructura general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#express-js">Express JS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#service-layer">Service Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#models">Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#workflow">Workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="applicationServer.html"><strong>Application Server</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#tecnologias-principales"><em>Tecnologías principales</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#descripcion-de-solucion-implementada"><em>Descripción de solución implementada</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#estructura-general">Estructura general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#webserver">Webserver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#dispatcher">Dispatcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#secuencia-de-respuesta-a-una-peticion-web">Secuencia de respuesta a una petición web</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#service">Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#dao">DAO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#connector">Connector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#manual-de-usuario"><em>Manual de usuario</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#nativo-solo-ubuntu-14-04-y-15-10">Nativo (Solo Ubuntu 14.04 y 15.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#docker-plataformas-compatibles-con-docker">Docker (Plataformas compatibles con Docker)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#manual-tecnico"><em>Manual tecnico</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#tests">Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#code-coverage">Code Coverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#documentacion-automatica">Documentación automática</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tickets.html"><strong>Gestión de tareas/Tickets</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tickets.html#application-server"><em>APPLICATION SERVER</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tickets.html#detalle-de-tickets-github">Detalle de Tickets Github</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tickets.html#shared-server"><em>SHARED SERVER</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tickets.html#id1">Detalle de Tickets Github</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linksInteres.html"><strong>Links de Interés</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#repositorios"><em>Repositorios</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#tickets-github"><em>Tickets GitHub</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#herramientas"><em>Herramientas</em></a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><strong>Share Server</strong></a><ul>
+<li><a class="reference internal" href="#documentacion-tecnica-frontend"><em>Documentación técnica Frontend</em></a><ul>
+<li><a class="reference internal" href="#tecnologias-principales">Tecnologías principales</a></li>
+<li><a class="reference internal" href="#descripcion-de-solucion-implementada">Descripción de solución implementada</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manual-de-usuario"><em>Manual de usuario</em></a><ul>
+<li><a class="reference internal" href="#web-de-administracion">Web de administración</a><ul>
+<li><a class="reference internal" href="#home">Home</a></li>
+<li><a class="reference internal" href="#creacion-de-usuario">Creación de usuario</a></li>
+<li><a class="reference internal" href="#edicion-de-foto-de-usuario">Edición de foto de usuario</a></li>
+<li><a class="reference internal" href="#edicion-de-usuario">Edición de usuario</a></li>
+<li><a class="reference internal" href="#visualizacion-de-usuario">Visualización de usuario</a></li>
+<li><a class="reference internal" href="#creacion-de-intereses">Creación de intereses</a></li>
+<li><a class="reference internal" href="#listar-intereses">Listar intereses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#servidor">Servidor</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documentacion-tecnica-backend"><em>Documentación técnica Backend</em></a><ul>
+<li><a class="reference internal" href="#id1">Tecnologías principales</a></li>
+<li><a class="reference internal" href="#descripcion-de-la-solucion-implementada">Descripción de la solución implementada</a><ul>
+<li><a class="reference internal" href="#estructura-general">Estructura general</a></li>
+<li><a class="reference internal" href="#express-js">Express JS</a></li>
+<li><a class="reference internal" href="#service-layer">Service Layer</a></li>
+<li><a class="reference internal" href="#models">Models</a></li>
+<li><a class="reference internal" href="#workflow">Workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: Bienvenido a la documentación de “Match Application”"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Bienvenido a ...</span>
+    </a>
+  </li>
+  <li>
+    <a href="applicationServer.html" title="Next Chapter: Application Server"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Application S... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="share-server">
+<h1><strong>Share Server</strong><a class="headerlink" href="#share-server" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="documentacion-tecnica-frontend">
+<h2><em>Documentación técnica Frontend</em><a class="headerlink" href="#documentacion-tecnica-frontend" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tecnologias-principales">
+<h3>Tecnologías principales<a class="headerlink" href="#tecnologias-principales" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Notepad++: como editor de texto para el desarrollo de código.</li>
+<li>HTML como estándar utilizado a la hora de desarrollar la aplicaciones web para definir su estructura básica.</li>
+<li>Jquery: como biblioteca de JavaScript para simplificar la manera de cómo interactuar con los documentos HTML, manipular el árbol DOM, manejar eventos, desarrollar animaciones y agregar interacción con la técnica AJAX a la aplicaciones web.</li>
+<li>Boostrap: como framework (conjunto de herramientas) para el diseño con tipografía, formularios, botones, cuadros, menús de - navegación y otros elementos de diseño basado en HTML y CSS, así como, extensiones de JavaScript opcionales adicionales en la aplicaciones web.</li>
+<li>AngularJS: como framework de JavaScript para crear y mantener la aplicación web con el objetivo de aumentar la aplicación (basada en navegador con capacidad de Modelo Vista Controlador (MVC), en un esfuerzo para hacer que el desarrollo y las pruebas sean más fáciles).</li>
+</ul>
+</div>
+<div class="section" id="descripcion-de-solucion-implementada">
+<h3>Descripción de solución implementada<a class="headerlink" href="#descripcion-de-solucion-implementada" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Dentro de la carpeta “views” se encuentran los .html que contienen toda la estructura de la aplicación web (inputs, formularios, botones, labels, etc). El objetivo de estos archivos es que el usuario pueda ir navegando a través de la página web y realizar las consultas que él considere necesarias y a medida que lo hace pueda hacer cambios sobre la base de datos.</li>
+<li>Dentro de la carpeta “views” se encuentra el controller.js que es un archivo de JavaScript que contiene la lógica de cómo extraer/agregar/consultar información de los datos y que maneja el flujo e intercambio de estos con la base de datos. También encontramos jquery.js que contiene toda la librería para poder utilizar las funciones que nos provee Jquery.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="manual-de-usuario">
+<h2><em>Manual de usuario</em><a class="headerlink" href="#manual-de-usuario" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="web-de-administracion">
+<h3>Web de administración<a class="headerlink" href="#web-de-administracion" title="Permalink to this headline">¶</a></h3>
+<p>Para poder administrar los datos almacenados en el servidor se proporciona una página web con las operaciones básicas sobre intereses y usuarios.</p>
+<p>URL:  <a class="reference external" href="http://tinder-shared.herokuapp.com">http://tinder-shared.herokuapp.com</a></p>
+<div class="section" id="home">
+<h4>Home<a class="headerlink" href="#home" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/users">http://tinder-shared.herokuapp.com/#/users</a></li>
+<li>Navegación: “”</li>
+</ul>
+<div class="figure align-center" id="id2">
+<img alt="_images/index.png" src="_images/index.png" />
+<p class="caption"><span class="caption-text">En esta sección es posible listar todos los usuarios y filtrarlos por id.</span></p>
+</div>
+</div>
+<div class="section" id="creacion-de-usuario">
+<h4>Creación de usuario<a class="headerlink" href="#creacion-de-usuario" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/users/add">http://tinder-shared.herokuapp.com/#/users/add</a></li>
+<li>Navegación: “Usuarios/Crear”</li>
+</ul>
+<div class="figure align-center" id="id3">
+<img alt="_images/usuario_crear.png" src="_images/usuario_crear.png" />
+<p class="caption"><span class="caption-text">En esta sección es posible crear un usuario completando el formulario y seleccionando los intereses.</span></p>
+</div>
+</div>
+<div class="section" id="edicion-de-foto-de-usuario">
+<h4>Edición de foto de usuario<a class="headerlink" href="#edicion-de-foto-de-usuario" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/user/edit/photo">http://tinder-shared.herokuapp.com/#/user/edit/photo</a></li>
+<li>Navegación: “Usuarios/Editar Foto”</li>
+</ul>
+<div class="figure align-center" id="id4">
+<img alt="_images/usuario_fotoperfil.png" src="_images/usuario_fotoperfil.png" />
+<p class="caption"><span class="caption-text">En esta sección es posible editar la foto de un usuario como una url (actualmente la misma no se encuentra reflejada en el usuario, más adelante funcionará para subir la foto de un usuario, aunque es posible que esto se fusione con la edición de usuario.</span></p>
+</div>
+</div>
+<div class="section" id="edicion-de-usuario">
+<h4>Edición de usuario<a class="headerlink" href="#edicion-de-usuario" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/users/edit">http://tinder-shared.herokuapp.com/#/users/edit</a></li>
+<li>Navegación: “Usuarios/Modificar”</li>
+</ul>
+<div class="figure align-center" id="id5">
+<img alt="_images/usuario_modificar.png" src="_images/usuario_modificar.png" />
+<p class="caption"><span class="caption-text">Allí podemos ingresar el ID del y presionando el botón se cargan los datos del usuario.. Una vez completo el formulario, con el botón “Modificar usuario” se confirman los datos, obteniendo el correspondiente mensaje del estado de la operación.</span></p>
+</div>
+</div>
+<div class="section" id="visualizacion-de-usuario">
+<h4>Visualización de usuario<a class="headerlink" href="#visualizacion-de-usuario" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/user/8">http://tinder-shared.herokuapp.com/#/user/8</a> (8 es el id del usuario)</li>
+<li>Navegación: Desde el listado de usuarios, clickear en el botón “Ver” de un usuario.</li>
+</ul>
+<div class="figure align-center" id="id6">
+<img alt="_images/usuario_planilla.png" src="_images/usuario_planilla.png" />
+<p class="caption"><span class="caption-text">Aquí se puede tener una vista más detallada de los usuarios.</span></p>
+</div>
+</div>
+<div class="section" id="creacion-de-intereses">
+<h4>Creación de intereses<a class="headerlink" href="#creacion-de-intereses" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/interests/add">http://tinder-shared.herokuapp.com/#/interests/add</a></li>
+<li>Navegación: “Intereses/Crear”</li>
+</ul>
+<div class="figure align-center" id="id7">
+<img alt="_images/intereses_crear.png" src="_images/intereses_crear.png" />
+<p class="caption"><span class="caption-text">Allí podemos ingresar los datos del interés a registrar. Finalmente haciendo clic en el botón “Agregar Interés” se agregara a la base de datos ese interés. Ya sea que la operación haya sido exitosa o no, se informará con un mensaje del estado final.</span></p>
+</div>
+</div>
+<div class="section" id="listar-intereses">
+<h4>Listar intereses<a class="headerlink" href="#listar-intereses" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/interests">http://tinder-shared.herokuapp.com/#/interests</a></li>
+<li>Navegación: “Intereses/Listar”</li>
+</ul>
+<div class="figure align-center" id="id8">
+<img alt="_images/intereses_listar.png" src="_images/intereses_listar.png" />
+<p class="caption"><span class="caption-text">En esta sección es posible listar todos los intereses agrupados por categorías.</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="servidor">
+<h3>Servidor<a class="headerlink" href="#servidor" title="Permalink to this headline">¶</a></h3>
+<p>Para poder ejecutar el servidor de forma local es necesario tener instaladas las siguientes dependencias:
+- NodeJs
+- Npm for NodeJs</p>
+<p>Una vez instaladas las dependencias es necesario pararse en el directorio raíz de la aplicación y ejecutar el comando</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">npm</span> <span class="pre">start</span></code></p>
+<p>Al finalizar el startup de la aplicación el servidor quedará escuchando peticiones en la siguiente url:</p>
+<p><a class="reference external" href="http://localhost:3000">http://localhost:3000</a></p>
+</div>
+</div>
+<div class="section" id="documentacion-tecnica-backend">
+<h2><em>Documentación técnica Backend</em><a class="headerlink" href="#documentacion-tecnica-backend" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Tecnologías principales<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Javascript: Lenguaje base.</li>
+<li>Node JS: Web Server basado en Chrome V8.</li>
+<li>Express JS: Framework para enrutamiento.</li>
+<li>Postgres DB: Base de Datos Postgresql.</li>
+<li>pg: Connector de base de datos nodejs-postgres.</li>
+<li>Heroku: Hosting gratuito utilizado para ambiente de desarrollo.</li>
+</ul>
+</div>
+<div class="section" id="descripcion-de-la-solucion-implementada">
+<h3>Descripción de la solución implementada<a class="headerlink" href="#descripcion-de-la-solucion-implementada" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="estructura-general">
+<h4>Estructura general<a class="headerlink" href="#estructura-general" title="Permalink to this headline">¶</a></h4>
+<p>La arquitectura del Shared Server es bastante simple. A continuación se detalla cada componente de la arquitectura y su función.</p>
+<div class="figure align-center">
+<img alt="_images/taller2sharedserver.png" src="_images/taller2sharedserver.png" />
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="express-js">
+<h4>Express JS<a class="headerlink" href="#express-js" title="Permalink to this headline">¶</a></h4>
+<p>Los usuarios se comunican con el servidor usando la API RESTful proporcionada, el ruteador, que utiliza el framework Express JS, se encarga de manejar y derivar la ruta que fue proporcionada. Utilizando Express se facilita el manejo de rutas dado que resulta muy simple e intuitivo.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="service-layer">
+<h4>Service Layer<a class="headerlink" href="#service-layer" title="Permalink to this headline">¶</a></h4>
+<p>Se creó una capa de servicios la cual es utilizada en los pedidos de la API dependiendo del pedido solicitado. Contiene métodos y validaciones necesarias. Se conecta con la base de datos utilizando un conector.
+Existen 2 servicios principales:</p>
+<ul class="simple">
+<li>User Service: se encarga de los pedidos relacionados con usuarios. (crear, borrar, consultar, editar)</li>
+<li>Interest Service: se encarga de los intereses. (crear, consultar)</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="models">
+<h4>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h4>
+<p>Se utilizan modelos simples para representar las entidades y tablas de la base SQL. La comunicación con la base de datos se hace mediante un conector (SQLize) el cual se conecta e interactúa con la base de datos utilizando el módulo ‘pg’.
+Una vez que se procesa el pedido se devuelve en formato json siguiendo la API Restful especificada.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="workflow">
+<h4>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h4>
+<div class="figure align-center">
+<img alt="_images/workflow.png" src="_images/workflow.png" />
+</div>
+<p>Utilizando el ruteador de Express JS, se accede a la ruta (pedido http) solicitada. En esa ruta se parsean los datos enviados y se los delega al Service indicado (userService o interestService).</p>
+<p>El Service, se encarga de procesar los datos que han sido enviados y de hacer los llamados correspondientes al conector de la base de datos.</p>
+<p>Una vez que los datos han sido impactados/obtenidos (crear, modificar, borrar, consultar), se devuelve al usuario el resultado correspondiente.
+El resultado puede ser el esperado, como también puede ser un código de error, si se produce alguna eventualidad en el proceso.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/shareServer.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, Grupo.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

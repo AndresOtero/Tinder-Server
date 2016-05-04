@@ -1,0 +1,9 @@
+0000001 | 2016-04-27, 23:38:22.185082 [info] - Testing conection to shared server.
+0000002 | 2016-04-27, 23:38:22.673857 [info] - CONNECTION [OK]
+0000003 | 2016-04-27, 23:38:22.674250 [info] - Starting DB
+0000004 | 2016-04-27, 23:38:22.695658 [info] - Starting WebServer
+0000005 | 2016-04-27, 23:38:22.699567 [info] - DISPATCHER: Registering GET /user
+0000006 | 2016-04-27, 23:38:22.700553 [info] - DISPATCHER: Registering POST /user
+0000007 | 2016-04-27, 23:38:22.702125 [info] - DISPATCHER: Registering PUT /auth
+0000008 | 2016-04-27, 23:38:22.703648 [info] - DISPATCHER: Registering POST /auth
+0000009 | 2016-04-27, 23:38:22.706067 [info] - Web server is now listening on port 8000

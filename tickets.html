@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Gestión de tareas/Tickets &mdash; Tinder Application 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Tinder Application 0.0.1 documentation" href="index.html" />
+    <link rel="next" title="Links de Interés" href="linksInteres.html" />
+    <link rel="prev" title="Application Server" href="applicationServer.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Tinder Application</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="http://example.com">Sources</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="shareServer.html"><strong>Share Server</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shareServer.html#documentacion-tecnica-frontend"><em>Documentación técnica Frontend</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#tecnologias-principales">Tecnologías principales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#descripcion-de-solucion-implementada">Descripción de solución implementada</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shareServer.html#manual-de-usuario"><em>Manual de usuario</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#web-de-administracion">Web de administración</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#home">Home</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#creacion-de-usuario">Creación de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#edicion-de-foto-de-usuario">Edición de foto de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#edicion-de-usuario">Edición de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#visualizacion-de-usuario">Visualización de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#creacion-de-intereses">Creación de intereses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#listar-intereses">Listar intereses</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#servidor">Servidor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shareServer.html#documentacion-tecnica-backend"><em>Documentación técnica Backend</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#id1">Tecnologías principales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#descripcion-de-la-solucion-implementada">Descripción de la solución implementada</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#estructura-general">Estructura general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#express-js">Express JS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#service-layer">Service Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#models">Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#workflow">Workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="applicationServer.html"><strong>Application Server</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#tecnologias-principales"><em>Tecnologías principales</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#descripcion-de-solucion-implementada"><em>Descripción de solución implementada</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#estructura-general">Estructura general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#webserver">Webserver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#dispatcher">Dispatcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#secuencia-de-respuesta-a-una-peticion-web">Secuencia de respuesta a una petición web</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#service">Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#dao">DAO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#connector">Connector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#manual-de-usuario"><em>Manual de usuario</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#nativo-solo-ubuntu-14-04-y-15-10">Nativo (Solo Ubuntu 14.04 y 15.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#docker-plataformas-compatibles-con-docker">Docker (Plataformas compatibles con Docker)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#manual-tecnico"><em>Manual tecnico</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#tests">Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#code-coverage">Code Coverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#documentacion-automatica">Documentación automática</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Gestión de tareas/Tickets</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#application-server"><em>APPLICATION SERVER</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detalle-de-tickets-github">Detalle de Tickets Github</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shared-server"><em>SHARED SERVER</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Detalle de Tickets Github</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linksInteres.html"><strong>Links de Interés</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#repositorios"><em>Repositorios</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#tickets-github"><em>Tickets GitHub</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#herramientas"><em>Herramientas</em></a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><strong>Gestión de tareas/Tickets</strong></a><ul>
+<li><a class="reference internal" href="#application-server"><em>APPLICATION SERVER</em></a><ul>
+<li><a class="reference internal" href="#detalle-de-tickets-github">Detalle de Tickets Github</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shared-server"><em>SHARED SERVER</em></a><ul>
+<li><a class="reference internal" href="#id1">Detalle de Tickets Github</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="applicationServer.html" title="Previous Chapter: Application Server"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Application S...</span>
+    </a>
+  </li>
+  <li>
+    <a href="linksInteres.html" title="Next Chapter: Links de Interés"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Links de Interés &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="gestion-de-tareas-tickets">
+<h1><strong>Gestión de tareas/Tickets</strong><a class="headerlink" href="#gestion-de-tareas-tickets" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="application-server">
+<h2><em>APPLICATION SERVER</em><a class="headerlink" href="#application-server" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">En esta entrega se basa en definir las bases de la aplicación para poder implementar la totalidad de la funcionalidad en las próximas entregas. A grandes rasgos esta entrega se compone de:</div>
+</div>
+<ul class="simple">
+<li>Configuración/Investigación de tecnologías base: Cmake, Mongoose y RocksDB.</li>
+<li>Configuracion/Investigación de tecnologías secundarias: Gtests, Gmock, Curl, Sphinx, Docker y Travis.</li>
+<li>Diseño e integración de la base de datos.</li>
+<li>Integración de operaciones básicas con Shared Server.</li>
+<li>Diseño de componentes genéricos para generar una api rest.</li>
+<li>Arquitectura general de la aplicación.</li>
+</ul>
+<div class="section" id="detalle-de-tickets-github">
+<h3>Detalle de Tickets Github<a class="headerlink" href="#detalle-de-tickets-github" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Startup del Application Server</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Hacer la configuración básica del servidor con cmake.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configuración de Base de datos</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> Configurar RocksDB y hacerlo linkear con cmake</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Diseño de la base de datos</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> Definir qué se va almacenar en la base de datos y cómo.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Definir consultas a la Base de Datos</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> Crear las clases que mapean la base de datos a la logica de la aplicación con sus respectivas consultas para obtener datos de la base..</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configurar Biblioteca REST</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Configurar Mongoose.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configuración tecnologías auxiliares</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Configurar el sistema de log, cobertura, tests unitarios, documentación automática.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Generar estructura REST</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Generar una serie de clases que resuelvan el direccionamiento REST.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Conectar Shared y Application Server</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> Se deben crear las clases en el Application Server para poder hacer consultas al Shared Server.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configurar Integración continua</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> Configurar Travis para mantener la integración continua</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Realizar una correcta administración de las dependencias que requiera la aplicación servidor y para poder simplificar el proceso de despliegue (deploy) del mismo</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Mediante el uso de la herramienta Docker</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> DAO de Usuarios</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> Crear una DAO de acceso a datos de usuario para independizar a los connector. Qué connector se usa para obtener cada dato debería ser indistinto al servicio de perfiles. De esta forma se pueden intercambiar connectors sin la necesidad de alterar clases del modelo.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Manual de instalación y uso</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Documentar cómo instalar y utilizar el application server.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Documentar las capas WEBSERVER, DISPATCHER y API de la aplicación</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Generar los diagramas y la documentación correspondiente de estas capas</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Documentar las capas Service, DAO y Connector</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Documentar las capas inferiores de la aplicación con diagramas, etc.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Documentar arquitectura de la aplicación</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Generar la documentación de la arquitectura de la aplicación</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configurar sphinx</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Configurar sphinx para que tome la salida de doxygen y sume la documentación de clases</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Endpoint De seguridad</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Armar un endpoint que permita iniciar la sesión en el servidor devolviendo el jwt</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configurar docker</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Configurar docker para poder hacer la entrega de este ejecutable</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Subir la versión de libboost en Travis</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Para instalar la 1.54 por tener ubuntu 14.04(trusty) e instalarla de los sources oficiales, hay que hacer que se instale la 1.58</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Doxygen</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Configurar Doxygen para crear la documentación automática</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Definir clases genéricas api rest</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Armar las clases que resuelvan el problema de la api rest para luego poder implementar la funcionalidad</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configurar tests unitarios</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Configuración de  tests unitarios para probar el app server</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Almacenamiento de conversaciones</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> El servidor debe persistir las conversaciones para que las mismas puedan existir en una ejecución posterior del servidor.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Servicio de Conversaciones</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> El servidor brindará un servicio para el delivery de conversaciones. El servidor debe tener un registro de las conexiones activas en el servidor para saber hacia dónde dirigir el mensaje en curso. Para poder iniciar una conversación entre dos usuarios es necesario que exista un match entre ellos.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Servicio de Match</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> En caso de que el usuario esté interesado en el candidato, el servidor deberá almacenar este interés para que en caso de que el candidato esté interesado, estos se puedan poner en contacto.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Servicio de Autenticación</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> El servidor dispondrá de un servicio para la autenticación de los clientes. Este servicio consta de una solicitud de autenticación, que viene junto con las credenciales del usuario. La respuesta a la solicitud es un token (identificador) de la sesión del usuario.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Implementar POST, PUT y DELETE con el SharedServer</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> Implementar las actualizaciones información de los usuarios desde el application server al shared server.</div>
+</div>
+</div>
+</div>
+<div class="section" id="shared-server">
+<h2><em>SHARED SERVER</em><a class="headerlink" href="#shared-server" title="Permalink to this headline">¶</a></h2>
+<p>En esta primer entrega se va a implementar la totalidad de la funcionalidad de este servidor, ya que es el puntapié inicial para poder implementar el resto de las aplicaciones que conformarán el sistema global.</p>
+<div class="section" id="id1">
+<h3>Detalle de Tickets Github<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> StartUp de aplicación Node.JS con Express.JS</div>
+<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
+<div class="line"><strong>Descripción:</strong> Generar el código preliminar que inicie el servidor Node con su interfaz REST.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configurar Heroku</div>
+<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
+<div class="line"><strong>Descripción:</strong> Crear un nodo en heroku y configurarlo con el shared server</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configurar PostgresSQL</div>
+<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
+<div class="line"><strong>Descripción:</strong> Crear una db en Heroku PostgresSQL y conectarla con el shared server.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Modelo base de datos</div>
+<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
+<div class="line"><strong>Descripción:</strong> Diseñar el esquema de base de datos que permitirá almacenar la información para solventar la funcionalidad brindada.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Implementar la API REST</div>
+<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
+<div class="line"><strong>Descripción:</strong> Implementar la api propuesta por el enunciado en su totalidad.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Manejo de Errores API REST</div>
+<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
+<div class="line"><strong>Descripción:</strong> Implementar el manejo de los errores de la API REST</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Web de administración</div>
+<div class="line"><strong>Responsable:</strong> Uciel Rodriguez</div>
+<div class="line"><strong>Descripción:</strong> Implementar la página web para administrar los usuarios del Shared Server.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Web de administración (formularios)</div>
+<div class="line"><strong>Responsable:</strong> Uciel Rodriguez</div>
+<div class="line"><strong>Descripción:</strong> En jquery y angularJS para la extracción y cargado de datos de usuarios.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Web de administración flujo de datos</div>
+<div class="line"><strong>Responsable:</strong> Uciel Rodriguez</div>
+<div class="line"><strong>Descripción:</strong> En jquery y angularJS para conectarse con la Restful API con el fin de hacer consultas y volcar datos a la base de datos.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Interfaz gráfica de la Web de administración</div>
+<div class="line"><strong>Responsable:</strong> Uciel Rodriguez</div>
+<div class="line"><strong>Descripción:</strong> Cargando estilos y formas de visualizar con bootstrap</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Configurar Integración continua</div>
+<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
+<div class="line"><strong>Descripción:</strong> Configurar Travis para mantener la integración continua</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Usar Json Params en vez de HTTP</div>
+<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
+<div class="line"><strong>Descripción:</strong> Para hacer más sencillo el manejo de datos</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Tarea:</strong> Correcciones en la web</div>
+<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
+<div class="line"><strong>Descripción:</strong> Fix en las vistas</div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/tickets.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, Grupo.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
