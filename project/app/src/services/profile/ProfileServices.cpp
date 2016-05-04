@@ -1,21 +1,22 @@
 #include <iostream>
+#include <TranslationException.h>
 #include "ProfileServices.h"
 #include "../../log/Logger.h"
 #include "UserNotFoundException.h"
 
-ProfileServices::ProfileServices(UserDAO* dao) {
+ProfileServices::ProfileServices(UserDAO *dao, TranslationDAO *transDao) {
 	this->dao = dao;
+	this->translationDAO = transDao;
 }
 
 ProfileServices::~ProfileServices() {}
 
 
 User* ProfileServices::getUserByID(int id){
-	//TODO ESTO NO DEBERÍA SEGUIR EXISTIENDO
 	User* user = this->dao->getUserById(id);
 	if(!user) {
 		LOG_ERROR << "Error getting user with ID: " << to_string(id);
-		//throw UserNotFoundException(id);
+		throw UserNotFoundException( to_string(id));
 	}
 	return user;
 }
@@ -66,8 +67,35 @@ bool ProfileServices::saveNewInterest(string category, string value) {
 }
 
 User *ProfileServices::getUserByID(string id) {
-	return nullptr;
+    int externalId = translateId(id);
+
+    return dao->getUserById(externalId);;
 }
+
+int ProfileServices::translateId(string id) {
+    try {
+         return translationDAO->get(id);
+    } catch (TranslationException  & e) {
+        this->reloadMapping();
+        try {
+            return translationDAO->get(id);
+        } catch (TranslationException & e) {
+            //if fail again, cannot get user.
+            throw UserNotFoundException(id);
+        }
+    }
+}
+
+void ProfileServices::reloadMapping() {
+    const list<User *> users = dao->getAllUsers();
+    for(auto iterator = users.begin(); iterator != users.end(); ++iterator) {
+        User * user = *iterator;
+        translationDAO->save(user->getId(), user->getExternalId());
+        delete user;
+    }
+}
+
+
 
 
 

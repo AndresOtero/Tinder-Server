@@ -42,7 +42,7 @@ list<User *> UserDAO::assembleUsersFromJson(Json::Value &root) {
 	std::list<User *> users;
 	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {
 		Json::Value val = itr->get("user", "ERROR");
-		users.push_back(new User(val));
+		users.push_back(User::fromExternalJson(val));
 	}
 	return users;
 }
@@ -59,7 +59,8 @@ bool UserDAO::deleteUserByID(int id) {
 
 bool UserDAO::updateUserProfile(User* user) {
 	string url = "/users/" + user->getId();
-	Json::Value userJson = user->toJson();
+	Json::Value userJson;
+	user->toExternalJson(userJson);
 	Json::Value root;
 	Json::Value version;
 	version["version"] = "0.1";
