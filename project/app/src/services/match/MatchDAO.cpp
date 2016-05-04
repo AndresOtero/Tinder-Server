@@ -10,7 +10,6 @@
 
 MatchDAO::MatchDAO(DBConnector *connector) {
 	this->connector = connector;
-	this->dailyLimit = 10; //Ver si esto se deberia configurar.
 }
 
 MatchDAO::~MatchDAO() { }
@@ -48,40 +47,12 @@ bool MatchDAO::checkForMatch(User* userA, User* userB) {
 	return false;
 }
 
-
-int MatchDAO::getRemainingCandidates(User *user) {
+tm* MatchDAO::getLastRequestTime(User *user) {
 	Json::Value json = this->getUserEntry(user);
-	std::istringstream lastDate(json["today"].asString());
-	struct tm lastDateStruct;
-	lastDate >> std::get_time( &lastDateStruct, "%d/%m/%Y" );
-	std::time_t seconds = std::mktime( & lastDateStruct );
-	time_t currentDay = time(NULL);
-	struct tm* timeStruct = localtime(&currentDay);
-	string timeStamp(to_string(timeStruct->tm_mday) + "/" + to_string(timeStruct->tm_mon + 1) + "/" +
-	                 to_string(timeStruct->tm_year + 1970));
-	std::istringstream today(timeStamp);
-	struct tm todayStruct;
-	lastDate >> std::get_time( &todayStruct, "%d/%m/%Y" );
-	std::time_t secondsToday = std::mktime( & todayStruct );
-	if (seconds < secondsToday) {
-		Json::FastWriter writer;
-		json["remainingToday"] = this->dailyLimit;
-		this->connector->putValueInKey(user->getId(), writer.write(json));
-		return this->dailyLimit;
-	}
-	return json["remainingToday"].asInt();
-}
-
-void MatchDAO::decreaseRemaining(User *user, int num) {
-	int remaining = this->getRemainingCandidates(user);
-	Json::Value json = this->getUserEntry(user);
-	if (num >= remaining) {
-		json["remainingToday"] = 0;
-	} else {
-		json["remainingToday"] = json["remainingToday"].asInt() - num;
-	}
-	Json::FastWriter writer;
-	this->connector->putValueInKey(user->getId(), writer.write(json));
+	std::istringstream lastDate(json["lastRequest"].asString());
+	tm* lastDateStruct = (tm*) malloc(sizeof(tm));
+	lastDate >> std::get_time( lastDateStruct, "%d/%m/%Y" );
+	return lastDateStruct;
 }
 
 
@@ -91,8 +62,7 @@ void MatchDAO::initializeUserEntry(User *user) {
 	struct tm* timeStruct = localtime(&currentDay);
 	string timeStamp(to_string(timeStruct->tm_mday) + "/" + to_string(timeStruct->tm_mon + 1) + "/" +
 			                 to_string(timeStruct->tm_year + 1970));
-	json["today"] = timeStamp;
-	json["remainingToday"] = this->dailyLimit;
+	json["lastRequest"] = timeStamp;
 	json["numLikes"] = 0;
 	json["numMatches"] = 0;
 	json["likes"] = Json::Value(Json::arrayValue);
@@ -103,17 +73,14 @@ void MatchDAO::initializeUserEntry(User *user) {
 
 
 void MatchDAO::saveLike(User *userA, User *userB) {
-	if(this->checkForLike(userA, userB)) return;
 	Json::Value json = this->getUserEntry(userA);
 	Json::Value newLike;
-	//newLike["username"] = userB->getExternalId();
 	newLike["id"] = userB->getId();
 	json["numLikes"] = json["numLikes"].asInt() + 1;
 	json["likes"].append(newLike);
 	Json::FastWriter writer;
 	string toSave = writer.write(json);
 	this->connector->putValueInKey(userA->getId(), toSave);
-	if(this->checkForLike(userB, userA)) this->addMatch(userA, userB);
 }
 
 void MatchDAO::addMatch(User* userA, User* userB) {
@@ -122,8 +89,6 @@ void MatchDAO::addMatch(User* userA, User* userB) {
 	Json::Value matchA;
 	Json::Value matchB;
 	matchA["id"] = userB->getId();
-	//matchA["externalid"] = userB->getId();
-	//matchB["username"] = userA->getExternalId();
 	matchB["id"] = userA->getId();
 	jsonA["numMatches"] = jsonA["numMatches"].asInt() + 1;
 	jsonA["matches"].append(matchA);

@@ -65,25 +65,22 @@ public:
 	bool checkForMatch(User* userA, User* userB);
 
 	/**
-	 * Returns the remaining candidates the user can request today.
+	 * Adds a match between the two users. It does not check if they like each other or not.
 	 *
-	 * @param user user to return the remaining candidate.
+	 * @param a first user.
+	 * @param b second user.
 	 */
-	int getRemainingCandidates(User* user);
+	void addMatch(User* a, User* b);
 
 	/**
-    * Decreases the remaining candidate the user can request today by the amount received. If the amount received
-    * is greater than the remaining number, it sets the remaining amount to cero.
-    *
-    * @param user user to decrease the amount to.
-    * @param num amount to decrease.
-    */
-	void decreaseRemaining(User* user, int num);
+	 * Returns the date date when the user last requested for candidates. The tm* has to be freed by the caller.
+	 *
+	 * @param user user to get the last day for.
+	 */
+	tm* getLastRequestTime(User *user);
 
 private:
 	DBConnector* connector;
-	int dailyLimit;
-	void addMatch(User* a, User* b);
 	void initializeUserEntry(User* user);
 	Json::Value getUserEntry(User* user);
 };
