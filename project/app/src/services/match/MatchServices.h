@@ -6,8 +6,15 @@
 #define TINDER_SERVER_MATCHSERVICES_H
 
 
+#include <UserDAO.h>
+#include "MatchDAO.h"
+
 class MatchServices {
 
+
+private:
+	MatchDAO* MatchDao;
+	UserDAO* userDao;
 };
 
 

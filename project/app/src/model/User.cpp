@@ -68,8 +68,14 @@ void User::setLongitude(double longitude) {
 	this->location.setLongitude(longitude);
 }
 
-unordered_map<string, set<string>> User::getInterests() {
-	return this->interests;
+list<Interest*> User::getInterests() {
+	std::list<Interest*> lista;
+	for(auto it = this->interests.begin(); it != this->interests.end(); ++it) {
+		for(auto setit = it->second.begin(); setit != it->second.end(); ++setit) {
+			lista.push_front(new Interest(it->first, *setit));
+		}
+	}
+	return lista;
 }
 
 void User::setId(string id) {
