@@ -5,11 +5,11 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Gestión de tareas/Tickets &mdash; Match Application</title>
+    <title>Gestión de Tareas/Tickets &mdash; Match Application</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.3.6/slate/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -67,10 +67,22 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="shareServer.html"><strong>Share Server</strong></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="shareServer.html#documentacion-tecnica-frontend"><em>Documentación técnica Frontend</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#tecnologias-principales">Tecnologías principales</a></li>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#descripcion-de-solucion-implementada">Descripción de solución implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shareServer.html"><strong>Shared Server</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shareServer.html#tecnologias-principales"><em>Tecnologías principales</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#frontend">FrontEnd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#backend">Backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shareServer.html#descripcion-de-solucion-implementada"><em>Descripción de solución implementada</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#id1">FrontEnd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shareServer.html#id2">Backend</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#estructura-general">Estructura general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#express-js">Express JS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#service-layer">Service Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#models">Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shareServer.html#workflow">Workflow</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="shareServer.html#manual-de-usuario"><em>Manual de usuario</em></a><ul>
@@ -85,18 +97,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="shareServer.html#servidor">Servidor</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="shareServer.html#documentacion-tecnica-backend"><em>Documentación técnica Backend</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#id1">Tecnologías principales</a></li>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#descripcion-de-la-solucion-implementada">Descripción de la solución implementada</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#estructura-general">Estructura general</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#express-js">Express JS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#service-layer">Service Layer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#models">Models</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#workflow">Workflow</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -119,7 +119,7 @@
 <li class="toctree-l3"><a class="reference internal" href="applicationServer.html#docker-plataformas-compatibles-con-docker">Docker (Plataformas compatibles con Docker)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#manual-tecnico"><em>Manual tecnico</em></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#manual-tecnico"><em>Manual técnico</em></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="applicationServer.html#tests">Tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="applicationServer.html#code-coverage">Code Coverage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="applicationServer.html#documentacion-automatica">Documentación automática</a></li>
@@ -127,12 +127,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Gestión de tareas/Tickets</strong></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#application-server"><em>APPLICATION SERVER</em></a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Gestión de Tareas/Tickets</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#application-server"><em>Application Server</em></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#detalle-de-tickets-github">Detalle de Tickets Github</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#shared-server"><em>SHARED SERVER</em></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#shared-server"><em>Shared Server</em></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Detalle de Tickets Github</a></li>
 </ul>
 </li>
@@ -174,9 +174,9 @@
     <div class="col-md-12 content">
       
   <div class="section" id="gestion-de-tareas-tickets">
-<h1><strong>Gestión de tareas/Tickets</strong><a class="headerlink" href="#gestion-de-tareas-tickets" title="Enlazar permanentemente con este título">¶</a></h1>
+<h1><strong>Gestión de Tareas/Tickets</strong><a class="headerlink" href="#gestion-de-tareas-tickets" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="section" id="application-server">
-<h2><em>APPLICATION SERVER</em><a class="headerlink" href="#application-server" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><em>Application Server</em><a class="headerlink" href="#application-server" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="line-block">
 <div class="line">En esta entrega se basa en definir las bases de la aplicación para poder implementar la totalidad de la funcionalidad en las próximas entregas. A grandes rasgos esta entrega se compone de:</div>
 </div>
@@ -328,7 +328,7 @@
 </div>
 </div>
 <div class="section" id="shared-server">
-<h2><em>SHARED SERVER</em><a class="headerlink" href="#shared-server" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><em>Shared Server</em><a class="headerlink" href="#shared-server" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>En esta primer entrega se va a implementar la totalidad de la funcionalidad de este servidor, ya que es el puntapié inicial para poder implementar el resto de las aplicaciones que conformarán el sistema global.</p>
 <div class="section" id="id1">
 <h3>Detalle de Tickets Github<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -416,7 +416,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2016, Grupo.<br/>
+        &copy; Copyright 2016, Grupo 9.<br/>
       Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.<br/>
     </p>
   </div>

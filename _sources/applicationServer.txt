@@ -91,7 +91,7 @@ Para este método sólo es necesario tener instalado Docker, de esta manera, só
 
 y el servidor en ambos qué casos queda levantado en el puerto 8000 esperando por peticiones.
 
-*Manual tecnico*
+*Manual técnico*
 ======================================
 Para las siguientes tareas, es necesario previamente haber configurado el proyecto (ver Manual de Usuario)
 
