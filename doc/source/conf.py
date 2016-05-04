@@ -204,9 +204,9 @@ html_short_title = 'Match'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['static']
 
-#html_context = {
-#    'css_files': ['_static/breathe.css'],
-#}
+html_context = {
+    'css_files': ['_static/style.css'],
+}
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
 # directly to the root of the documentation.
