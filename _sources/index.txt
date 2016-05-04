@@ -15,15 +15,10 @@ utilizadas por los desarolladores, etc.
 
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
 
    shareServer
    applicationServer
    tickets
    linksInteres
    
-
-.. doxygenclass:: ApiDispatcher
-   :project: myproject
-   :members:
-   :private-members:
