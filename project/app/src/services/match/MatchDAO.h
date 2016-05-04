@@ -64,10 +64,28 @@ public:
 	 */
 	bool checkForMatch(User* userA, User* userB);
 
+	/**
+	 * Returns the remaining candidates the user can request today.
+	 *
+	 * @param user user to return the remaining candidate.
+	 */
+	int getRemainingCandidates(User* user);
+
+	/**
+    * Decreases the remaining candidate the user can request today by the amount received. If the amount received
+    * is greater than the remaining number, it sets the remaining amount to cero.
+    *
+    * @param user user to decrease the amount to.
+    * @param num amount to decrease.
+    */
+	void decreaseRemaining(User* user, int num);
+
 private:
 	DBConnector* connector;
-
+	int dailyLimit;
 	void addMatch(User* a, User* b);
+	void initializeUserEntry(User* user);
+	Json::Value getUserEntry(User* user);
 };
 
 
