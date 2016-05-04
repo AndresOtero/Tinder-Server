@@ -17,6 +17,7 @@ void ChatServicesTest::SetUp() {
 	this->matchDao = new MatchDAO(this->matchDbConnector);
 	this->chatDbConnector = new DBConnector(CHAT_DB_FILE);
 	this->chatDao = new ChatDAO(this->chatDbConnector);
+	this->matchServices = new MatchServices(this->matchDao, NULL); //Aca no hace falta el UserDAO*
 };
 
 void ChatServicesTest::TearDown() {
@@ -53,8 +54,8 @@ TEST_F(ChatServicesTest, sendMessageToLikedPerson) {
 	User userA("matias", "foo",1 , "", "M", 18,"", intereses, location);
 	User userB("maria", "foo", 2 , "", "F", 18,"", intereses, location);
 	Message msg("prueba", &userA, &userB);
-	matchDao->saveLike(&userA, &userB);
-	matchDao->saveLike(&userB, &userA);
+	this->matchServices->likeAUser(&userA, &userB);
+	this->matchServices->likeAUser(&userB, &userA);
 	service.sendMessageFromTo(&msg);
 }
 
