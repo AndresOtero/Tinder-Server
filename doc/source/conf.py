@@ -52,9 +52,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Tinder Application'
-copyright = u'2016, Grupo'
-author = u'Grupo'
+project = u'Match Application'
+copyright = u'2016, Grupo 9'
+author = u'Grupo 9'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -176,7 +176,7 @@ html_theme_options = {
     #
     # Options are nothing (default) or the name of a valid theme
     # such as "amelia" or "cosmo".
-    'bootswatch_theme': "slate",
+    'bootswatch_theme': "spacelab",
 
     # Choose Bootstrap version.
     # Values: "3" (default) or "2" (in quotes)

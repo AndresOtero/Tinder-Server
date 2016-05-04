@@ -1,8 +1,8 @@
 ==============================================
-**Gestión de tareas/Tickets**
+**Gestión de Tareas/Tickets**
 ==============================================
 
-*APPLICATION SERVER*
+*Application Server*
 ======================================
 | En esta entrega se basa en definir las bases de la aplicación para poder implementar la totalidad de la funcionalidad en las próximas entregas. A grandes rasgos esta entrega se compone de:
 
@@ -124,7 +124,7 @@ Detalle de Tickets Github
 | **Descripción:** Implementar las actualizaciones información de los usuarios desde el application server al shared server.
 
 
-*SHARED SERVER*
+*Shared Server*
 ======================================
 En esta primer entrega se va a implementar la totalidad de la funcionalidad de este servidor, ya que es el puntapié inicial para poder implementar el resto de las aplicaciones que conformarán el sistema global.
 
