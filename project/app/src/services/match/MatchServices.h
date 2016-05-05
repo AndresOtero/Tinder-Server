@@ -5,8 +5,8 @@
 #ifndef TINDER_SERVER_MATCHSERVICES_H
 #define TINDER_SERVER_MATCHSERVICES_H
 
-
-#include <UserDAO.h>
+#include <User.h>
+#include <ProfileServices.h>
 #include "MatchDAO.h"
 
 /**
@@ -20,7 +20,7 @@ public:
 	 * @param matchDao DAO to use to get the information from matches.
 	 * @param userDAO DAO to use to get information from users.
 	 */
-	MatchServices(MatchDAO* matchDAO, UserDAO* userDAO);
+	MatchServices(MatchDAO* matchDAO, ProfileServices* profile);
 	virtual ~MatchServices();
 
 	/**
@@ -47,10 +47,24 @@ public:
 	 */
 	list<User*> getCandidatesForUser(User* user);
 
+	/**
+	 * Returns the number of likes that the user has.
+	 * @param user user to get the number of likes.
+	 */
+	int getNumberOfLikes(User* user);
+
+	/**
+	 * Returns the number of matches that the user has.
+	 * @param user user to get the number of matches.
+	 */
+	int getNumberOfMatches(User* user);
+
 private:
 	MatchDAO* matchDao;
-	UserDAO* userDao;
+	ProfileServices* profileServices;
+
 	bool hasRemainingCandidates(User* user);
+	list<User*> getUsersFromIDs(list<string> &ids);
 };
 
 
