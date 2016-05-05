@@ -201,8 +201,8 @@ User *User::fromExternalJson(Json::Value &value) {
 	unordered_map<string, set<string>> interests = populateInterests(interestsJson);
 	user->interests = interests;
 	user->setExternalId(value.get("id", -1).asInt());
-	user->setId(value.get("email", "").asString());
 	User::readCommonBody(value, *user);
+	user->setId(value.get("email", "").asString());
 	return user;
 }
 

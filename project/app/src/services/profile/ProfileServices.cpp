@@ -47,6 +47,8 @@ void ProfileServices::saveOrUpdateProfile(User *user) {
         int externalId = this->translateId(user->getId(), true);
         //if is registered
         user->setExternalId(externalId);
+        //mantengo sincronizado el email.
+        user->setEmail(user->getId());
         this->dao->updateUser(user);
     } catch (UserNotFoundException &e) {
         //if not registered
