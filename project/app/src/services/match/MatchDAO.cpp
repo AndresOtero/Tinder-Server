@@ -110,10 +110,26 @@ int MatchDAO::getNumberOfMatches(User* user) {
 	return json.get("numMatches", 0).asInt();
 }
 
-Json::Value MatchDAO::getMatches(User* user) {
+list<string> MatchDAO::getMatches(User* user) {
 	Json::Value json = this->getUserEntry(user);
-	return json["matches"];
+	list<string> lista;
+	for (Json::ValueIterator itr = json["matches"].begin(); itr != json["matches"].end(); itr++) {
+		lista.push_front(itr->get("id", "ERROR").asString());
+	}
+	return lista;
 }
+
+
+list <string> MatchDAO::getLikes(User *user) {
+	Json::Value json = this->getUserEntry(user);
+	list<string> lista;
+	for (Json::ValueIterator itr = json["likes"].begin(); itr != json["likes"].end(); itr++) {
+		lista.push_front(itr->get("id", "ERROR").asString());
+	}
+	return lista;
+}
+
+
 
 
 
