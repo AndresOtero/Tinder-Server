@@ -33,7 +33,7 @@ void InterestResource::searchInterests(WebContext &wc) {
     }
     Json::Value result;
     result["interests"] = interests;
-    RestResource::writeJson(wc, result);
+    RestResource::writeJsonResponse(wc, result);
 }
 
 void InterestResource::addInterest(WebContext &wc) {
