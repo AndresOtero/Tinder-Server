@@ -1,95 +1,125 @@
 #include <iostream>
 #include <TranslationException.h>
+#include <ConnectionException.h>
+#include <ServiceException.h>
 #include "ProfileServices.h"
 #include "../../log/Logger.h"
 #include "UserNotFoundException.h"
 
+const static string LOG_PREFIX = "PROFILESERVICE: ";
+
 ProfileServices::ProfileServices(UserDAO *dao, TranslationDAO *transDao) {
-	this->dao = dao;
-	this->translationDAO = transDao;
+    this->dao = dao;
+    this->translationDAO = transDao;
 }
 
-ProfileServices::~ProfileServices() {}
+ProfileServices::~ProfileServices() { }
 
 
-User* ProfileServices::getUserByID(int id){
-	User* user = this->dao->getUserById(id);
-	if(!user) {
-		LOG_ERROR << "Error getting user with ID: " << to_string(id);
-		throw UserNotFoundException( to_string(id));
-	}
-	return user;
+User *ProfileServices::getUserByID(int id) {
+    User *user = this->dao->getUserById(id);
+    if (!user) {
+        LOG_ERROR << LOG_PREFIX << "Error getting user with ID: " << to_string(id);
+        throw UserNotFoundException(to_string(id));
+    }
+    return user;
 }
 
 
 list<User *> ProfileServices::getAllUsers() {
-	return this->dao->getAllUsers();
+    return this->dao->getAllUsers();
 }
 
 
 void ProfileServices::deleteUserByID(int id) {
-	//TODO ESTO NO DEBERÍA EXISTIR TAMPOCO NO MANEJAMOS IDS ARRIBA, ADEMAS NO VAMOS A ESTAR BORRANDO USERS DESDE ESTA APP, O SI?
-	if (!this->dao->deleteUserByID(id)) {
-		LOG_ERROR << "Error deleting user con ID: " << to_string(id);
-//		throw UserNotFoundException(id);
-	}
-	LOG_INFO << "User with ID: " << to_string(id) << " deleted.";
-	return;
+    try {
+        this->dao->deleteUserByID(id);
+    } catch (ConnectionException &e) {
+        LOG_ERROR << LOG_PREFIX << "Error deleting user con ID: " << to_string(id) << ":  " << e.what();
+        throw ServiceException(e.what());
+    }
+
+
 }
 
-void ProfileServices::updateUserProfile(User* user) {
-	if (!this->dao->updateUserProfile(user)) {
-		LOG_ERROR << "Error update user with id: " << user->getId();
-		throw UserNotFoundException(user->getId());
-	}
-	return;
-}
+void ProfileServices::saveOrUpdateProfile(User *user) {
+    try {
+        int externalId = this->translateId(user->getId(), true);
+        //if is registered
+        user->setExternalId(externalId);
+        this->dao->updateUser(user);
+    } catch (UserNotFoundException &e) {
+        //if not registered
+        this->dao->saveNewUser(user);
+    } catch (ConnectionException &e) {
+        LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
+        throw ServiceException(e.what());
+    }
 
-bool ProfileServices::saveNewUser(User* user) {
-	if (!this->dao->saveNewUser(user)) {
-				LOG_ERROR << "Error haciendo post del user nuevo";
-		return false;
-	}
-	return true;
 }
 
 
 unordered_map<string, set<string>> ProfileServices::getInterests() {
-	return this->dao->getInterests();
+    try {
+        return this->dao->getInterests();
+    } catch (ConnectionException &e) {
+        LOG_ERROR << LOG_PREFIX << LOG_PREFIX << "Connection error: " << e.what();
+        throw ServiceException(e.what());
+    }
 }
 
-bool ProfileServices::saveNewInterest(string category, string value) {
-	if (!this->dao->saveNewInterest(category, value)) {
-		LOG_ERROR << "Error haciendo post del interest nuevo";
-		return false;
-	}
-	return true;
+void ProfileServices::saveNewInterest(string category, string value) {
+    try {
+        this->dao->saveNewInterest(category, value);
+    } catch (ConnectionException &e) {
+        LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
+        throw ServiceException(e.what());
+    }
 }
 
 User *ProfileServices::getUserByID(string id) {
-    int externalId = translateId(id);
+        int externalId;
+        try {
+            externalId = translateId(id, true);
+        } catch (ConnectionException &e) {
+            LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
+            throw ServiceException(e.what());
+        } catch (UserNotFoundException &e) {
+            LOG_WARNING << LOG_PREFIX << e.what();
+            //retry
+            this->translationDAO->remove(id);
+            throw e;
+        }
+        return dao->getUserById(externalId);;
 
-    return dao->getUserById(externalId);;
+
 }
 
-int ProfileServices::translateId(string id) {
+int ProfileServices::translateId(string id, bool shouldUpdate) {
     try {
-         return translationDAO->get(id);
-    } catch (TranslationException  & e) {
-        this->reloadMapping();
-        try {
-            return translationDAO->get(id);
-        } catch (TranslationException & e) {
-            //if fail again, cannot get user.
-            throw UserNotFoundException(id);
+        return translationDAO->get(id);
+    } catch (TranslationException &e) {
+        if (shouldUpdate) {
+
+
+            this->reloadMapping();
+            try {
+                return translationDAO->get(id);
+            } catch (TranslationException &e) {
+                //if fail again, cannot get user.
+                throw UserNotFoundException(id);
+            }
+        } else {
+            throw e;
         }
     }
 }
 
 void ProfileServices::reloadMapping() {
+    LOG_INFO << LOG_PREFIX << "Populating translation table";
     const list<User *> users = dao->getAllUsers();
-    for(auto iterator = users.begin(); iterator != users.end(); ++iterator) {
-        User * user = *iterator;
+    for (auto iterator = users.begin(); iterator != users.end(); ++iterator) {
+        User *user = *iterator;
         translationDAO->save(user->getId(), user->getExternalId());
         delete user;
     }

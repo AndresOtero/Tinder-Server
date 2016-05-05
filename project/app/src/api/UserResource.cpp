@@ -9,6 +9,7 @@
 #include "webserver/RestRequest.h"
 #include <functional>
 #include <UserNotFoundException.h>
+#include <ServiceException.h>
 #include "log/Logger.h"
 #include "json/json/json.h"
 #include "json/ParameterReader.h"
@@ -38,17 +39,24 @@ void UserResource::getUser(WebContext& context) {
 		Json::Value result;
 		result[STATUS_CODE_PARAM] = STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED;
 		this->writeJson(context, result);
+	} catch (ServiceException &e) {
+		context.getResponse().setStatus(STATUS_500_INTERNAL_SERVER_ERROR);
 	}
 
 }
 
 void UserResource::putUser(WebContext& context) {
-	Json::Value json;
+	try {
+		Json::Value json;
+		RestResource::readJson(context, json);
+		User user(json);
+		user.setId(context.getUserid());
+		service.saveOrUpdateProfile(&user);
+	} catch (ServiceException &e) {
+		context.getResponse().setStatus(STATUS_500_INTERNAL_SERVER_ERROR);
+	}
 
-	RestResource::readJson(context, json);
-	User user(json);
-	user.setId(context.getUserid());
-	/*service.saveNewUser()*/
+
 }
 
 UserResource::~UserResource() {

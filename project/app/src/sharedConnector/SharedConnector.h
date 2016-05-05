@@ -11,7 +11,7 @@
 #include <string>
 #include <curl/curl.h>
 #include "../json/json/json.h"
-
+using namespace std;
 /**
  * @class SharedConnector
  *
@@ -34,23 +34,21 @@ public:
 	bool testConnection();
 
 	/**
-	 * Using the verb Get it hits the endpoint received and parses the respond as Json. It returns true or false if the
-	 * call was successful.
+	 * Using the verb Get it hits the endpoint received and parses the respond as Json.
 	 *
 	 * @param endpoint endpoint to hit. It is going to be appended to the baseURL stored.
 	 * @param jsonData the parsed response is going to be stored here.
 	 */
-	bool getJsonFromURL(std::string endpoint, Json::Value& jsonData);
+	void getJsonFromURL(std::string endpoint, Json::Value &jsonData);
 
 	/**
-	 * Using the verb Put it send data to the endpoint received and stores the response. It returns true or false if
-	 * the call wass successful.
+	 * Using the verb Put it send data to the endpoint received and stores the response.
 	 *
 	 * @param endpoint to hit with the verb. It is appended to the base URL.
 	 * @param data to send to the endpoint.
 	 * @param response the response of the request is stored there.
 	 */
-	bool putDataToURL(std::string endpoint, std::string data, Json::Value& response);
+	void putDataToURL(std::string endpoint, std::string data, Json::Value &response);
 
 	/**
 	 * Using the verb Post it send data to the endpoint received and stores the response. It returns true or false if
@@ -60,7 +58,7 @@ public:
 	 * @param data to send to the endpoint.
 	 * @param response the response of the request is stored there.
 	 */
-	bool postDataToURL(std::string endpoint, std::string data, Json::Value& response);
+	void postDataToURL(std::string endpoint, std::string data, Json::Value &response);
 
 	/**
 	 * Using the verb Post it send data to the endpoint received and stores the response as a Json. It returns true or false if
@@ -70,19 +68,19 @@ public:
 	 * @param data to send to the endpoint.
 	 * @param response the response of the request is stored there.
 	 */
-	bool postDataToURL(std::string endpoint, std::string data, std::string &response);
+	void postDataToURL(std::string endpoint, std::string data, std::string &response);
 
 	/**
 	 * It send the verb DELETE to the given endpoint in the base url.
 	 *
 	 * @param endpoint to append to the base url.
 	 */
-	bool deleteToURL(std::string endpoint);
+	void deleteToURL(std::string endpoint);
 	std::string serverBaseURL;
 
 
 private:
-	bool returnedError(CURLcode res);
+	string returnedError(CURLcode res);
 
 };
 

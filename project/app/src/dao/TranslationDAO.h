@@ -20,6 +20,7 @@ public:
     void save(string id, int externalId);
     int get(string id);
     bool exist(string id);
+    void remove(string id);
 };
 
 

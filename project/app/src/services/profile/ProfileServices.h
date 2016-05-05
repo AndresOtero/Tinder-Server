@@ -53,16 +53,9 @@ public:
 	 *
 	 * @param user to upload the changes from.
 	 */
-	void updateUserProfile(User* user);
+	void saveOrUpdateProfile(User *user);
 
 
-	/**
-	 * Given a user it uploads it as a new user to the shared server. It also sets the id of the user
-	 * with the one given by the Shared Server. It returns true or false if the Post was successful.
-	 *
-	 * @param user to upload to the shared server. Modification of the Id is in place.
-	 */
-	bool saveNewUser(User* user);
 
 	/**
 	 * It deletes the user with the given ID from the shared server. If the user is not found it throws
@@ -83,7 +76,7 @@ public:
 	 * @param category category to append the new value to. If it does not exist, it is created.
 	 * @param value to add to the category.
 	 */
-	bool saveNewInterest(string category, string value);
+	void saveNewInterest(string category, string value);
 
 
 
@@ -93,7 +86,7 @@ private:
 	TranslationDAO * translationDAO;
 	void reloadMapping();
 
-	int translateId(string id);
+	int translateId(string id, bool shouldUpdate);
 
 	/**
 	 * Asks the DAO to return the User* with the received id. If the user is not found it throws

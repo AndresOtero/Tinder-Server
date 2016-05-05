@@ -1,6 +1,7 @@
 #include "CallBacks.h"
 #include "../log/Logger.h"
 #include "SharedConnector.h"
+#include "ConnectionException.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ SharedConnector::SharedConnector(std::string serverBaseURL) {
 
 SharedConnector::~SharedConnector() { }
 
-bool SharedConnector::deleteToURL(std::string endpoint) {
+void SharedConnector::deleteToURL(std::string endpoint) {
 	CURL *curl;
 	CURLcode res;
 
@@ -24,11 +25,11 @@ bool SharedConnector::deleteToURL(std::string endpoint) {
 
 	/* always cleanup */
 	curl_easy_cleanup(curl);
-	if (this->returnedError(res)) return false;
-	return true;
+	string error = this->returnedError(res);
+	if(error.size() > 0) throw ConnectionException(error);
 }
 
-bool SharedConnector::postDataToURL(std::string endpoint, string data, string &response) {
+void SharedConnector::postDataToURL(std::string endpoint, string data, string &response) {
 	CURL *curl;
 	CURLcode res;
 	//Estructura donde se guardan los datos a enviar.
@@ -71,27 +72,25 @@ bool SharedConnector::postDataToURL(std::string endpoint, string data, string &r
 
 	/* always cleanup */
 	curl_easy_cleanup(curl);
-	if (this->returnedError(res)) {
-		free(chunk.memory);
-		return false;
-	}
+	string error = this->returnedError(res);
 	free(chunk.memory);
-	return true;
+	if(error.size() > 0) {
+		throw ConnectionException(error);
+	}
 }
 
-bool SharedConnector::postDataToURL(std::string endpoint, string data, Json::Value &response) {
+void SharedConnector::postDataToURL(std::string endpoint, string data, Json::Value &response) {
 	string respuesta;
-	bool postResult = this->postDataToURL(endpoint,data,respuesta);
-	if(!postResult) return false;
+	this->postDataToURL(endpoint,data,respuesta);
+
 
 	Json::Reader reader;
 	bool resultado = reader.parse(respuesta, response);
-	if(!resultado) return false;
-	return true;
+	if(!resultado) throw ConnectionException("Error parsing response");
 }
 
 
-bool SharedConnector::putDataToURL(std::string endpoint, std::string data, Json::Value &response) {
+void SharedConnector::putDataToURL(std::string endpoint, std::string data, Json::Value &response) {
 	//concateno baseurl con el endpoint recibido
 	string url = this->serverBaseURL + endpoint;
 
@@ -122,15 +121,13 @@ bool SharedConnector::putDataToURL(std::string endpoint, std::string data, Json:
 	Json::Reader reader;
 	bool resultado = reader.parse(respuesta, response);
 
-	if (this->returnedError(res) || !resultado) {
-		free(chunk.memory);
-		return false;
-	}
+	string error = this->returnedError(res);
 	free(chunk.memory);
-	return true;
+	if(error.size() > 0) throw ConnectionException(error);
+	if(!resultado) throw ConnectionException("Error parsing response");
 }
 
-bool SharedConnector::getJsonFromURL(std::string endpoint, Json::Value &jsonData) {
+void SharedConnector::getJsonFromURL(std::string endpoint, Json::Value &jsonData) {
 	//concateno baseurl con el endpoint recibido
 	string url = this->serverBaseURL + endpoint;
 	//estructura en donde se van a guardar los datos.
@@ -149,41 +146,23 @@ bool SharedConnector::getJsonFromURL(std::string endpoint, Json::Value &jsonData
 	CURLcode res = curl_easy_perform(curl);
 	curl_easy_cleanup(curl);
 	/* Check for errors */
-	if (this->returnedError(res)) {
-		free(chunk.memory);
-		return false;
-	}
-	else {
-		/*
-		 * Now, our chunk.memory points to a memory block that is chunk.size
-		 * bytes big and contains the remote file.
-		 *
-		 * Do something nice with it!
-		 */
+	string error = this->returnedError(res);
+	string data((char *) chunk.memory);
+	Json::Reader reader;
+	bool okparse = reader.parse(data, jsonData);
+	free(chunk.memory);
 
-		//printf("%lu bytes retrieved\n", (long)chunk.size);
-		string data((char *) chunk.memory);
-		Json::Reader reader;
-		if (reader.parse(data, jsonData)) {
+	if(error.size() > 0) throw ConnectionException(error);
+	if(!okparse) throw ConnectionException("Error parsing response: "+ data);
 
-			free(chunk.memory);
-			return true;
-		}
-		else {
-			free(chunk.memory);
-			LOG_ERROR << "Error parsing Json.";
-			return false;
-		}
-	}
 }
 
 
-bool SharedConnector::returnedError(CURLcode res) {
+string SharedConnector::returnedError(CURLcode res) {
 	if (res != CURLE_OK) {
-		LOG_ERROR << "curl_easy_perform() failed: " << curl_easy_strerror(res);
-		return true;
+		return  "curl_easy_perform() failed: " + string(curl_easy_strerror(res));
 	}
-	return false;
+	return "";
 }
 
 bool SharedConnector::testConnection() {
@@ -198,7 +177,8 @@ bool SharedConnector::testConnection() {
 		/* Perform the request, res will get the return code */
 		CURLcode res = curl_easy_perform(curl);
 		/* Check for errors */
-		return !(this->returnedError(res));
+
+		return this->returnedError(res).size() == 0;
 	}
 
 	LOG_ERROR << "curl_easy_init failed.";
