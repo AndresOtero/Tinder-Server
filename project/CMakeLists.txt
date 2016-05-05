@@ -13,7 +13,7 @@ project (tinder-server C CXX)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 set(CMAKE_CXX_STANDARD 11)
-if(COVERAGE && TEST)
+if(COVERAGE AND TEST)
 	include(CodeCoverage)
 	SET(CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS} -g -O0 -Wall --coverage")
 	SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0 -Wall -W --coverage")
@@ -45,7 +45,7 @@ if(TEST)
 endif()
 
 
-if(BUILD_DOXY_DOC && TESTS)
+if(BUILD_DOXY_DOC AND TESTS)
     find_package(Doxygen)
     if(NOT DOXYGEN_FOUND)
         message(WARNING "Doxygen not found, unable to generate documentation")

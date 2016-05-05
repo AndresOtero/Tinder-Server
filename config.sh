@@ -27,7 +27,7 @@ while test $# -gt 0; do
                         echo "-coverallupload				habilita la subida de coverall y -coverage 					"
                         echo "-doxydoc				habilita documentación doxy 					"
                         echo "-dependencies				instala dependencias"
-                        echo "--dev 					atajo para -test -doxydoc -coverall 		"
+                        echo "--dev 					atajo para -test -doxydoc -coverage		"
                         exit 0
                         ;;
                 -g++-5)
@@ -97,7 +97,7 @@ CMAKE_PARAMS=""
 
 if [ "$TESTS" = true ]
 	then
-	CMAKE_PARAMS="$CMAKE_PARAMS -TESTS=ON"
+	CMAKE_PARAMS="$CMAKE_PARAMS -TESTS=ON CMAKE_BUILD_TYPE=Debug"
 fi
 if [ "$COVERAGE" = true ]
 	then
@@ -119,11 +119,8 @@ fi
 
 
 
-mkdir -p build
-cd build
 
 
-echo $CMAKE_PARAMS
 
 if [ "$DEPENDENCIES" = true  ]
 then
@@ -152,13 +149,10 @@ echo "Instalación de dependencias..."
 		apt-get install -y libboost-all-dev
 	fi
 fi
-
-#if [ "$1" == "-oldboost" -o "$1" == "-travis" ]
-#	then
-#	 cmake  ../project && make
-#	else
-	 #cmake CMAKE_BUILD_TYPE=Debug ../project && make	
-	#fi
+z
+mkdir -p build
+cd build
+cmake "$CMAKE_PARAMS" ../project && make
 
 
 

@@ -27,6 +27,6 @@ before_install:
  # - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 script:
   - chmod 777 ./config.sh
-  - sudo ./config.sh -oldboost -travis
+  - sudo ./config.sh -oldboost -coverallupload --dev
   - cd build
   - ./test/applib/testapp
