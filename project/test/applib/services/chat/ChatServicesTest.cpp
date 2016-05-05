@@ -43,8 +43,6 @@ TEST_F(ChatServicesTest, sendMessageToNotLikedPerson) {
 		ASSERT_EQ("Not match found", string(ex.what()));
 	}
 
-
-
 }
 
 TEST_F(ChatServicesTest, sendMessageToLikedPerson) {

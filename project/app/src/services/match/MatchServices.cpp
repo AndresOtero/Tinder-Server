@@ -20,6 +20,16 @@ void MatchServices::likeAUser(User *userA, User *userB) {
 	if (this->matchDao->checkForLike(userB, userA)) this->matchDao->addMatch(userA, userB);
 }
 
+
+int MatchServices::getNumberOfLikes(User *user) {
+	return this->matchDao->getNumberOfLikes(user);
+}
+
+int MatchServices::getNumberOfMatches(User *user) {
+	return this->matchDao->getNumberOfMatches(user);
+}
+
+
 list<User *> MatchServices::getMatchesForUser(User *user) {
 	//TODO falta implementar el translator de id internos a externos.
 	return list<User *>();

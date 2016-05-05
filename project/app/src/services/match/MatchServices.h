@@ -47,6 +47,18 @@ public:
 	 */
 	list<User*> getCandidatesForUser(User* user);
 
+	/**
+	 * Returns the number of likes that the user has.
+	 * @param user user to get the number of likes.
+	 */
+	int getNumberOfLikes(User* user);
+
+	/**
+	 * Returns the number of matches that the user has.
+	 * @param user user to get the number of matches.
+	 */
+	int getNumberOfMatches(User* user);
+
 private:
 	MatchDAO* matchDao;
 	UserDAO* userDao;
