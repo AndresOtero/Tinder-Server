@@ -7,6 +7,7 @@
 #include "ChatServicesTest.h"
 #include <boost/filesystem.hpp>
 #include <AuthenticationException.h>
+#include <ChatException.h>
 
 ChatServicesTest::ChatServicesTest() { }
 
