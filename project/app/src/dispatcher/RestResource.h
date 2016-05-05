@@ -23,7 +23,10 @@ public:
      */
 	virtual void setup(ApiDispatcher & dispatcher) = 0;
 	static void readJson(WebContext &wc, Json::Value &);
-	static void writeJson(WebContext &wc, Json::Value &value);
+	static void writeJsonResponse(WebContext &wc, Json::Value &value, int apiStatus);
+	static void writeJsonResponse(WebContext &wc, Json::Value &value);
+    static void writeJsonResponse(WebContext &wc);
+    static void writeJsonResponse(WebContext &wc, int apiStatus);
 };
 
 
