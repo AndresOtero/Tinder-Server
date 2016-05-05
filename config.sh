@@ -97,24 +97,24 @@ CMAKE_PARAMS=""
 
 if [ "$TESTS" = true ]
 	then
-	CMAKE_PARAMS="$CMAKE_PARAMS -TESTS=ON CMAKE_BUILD_TYPE=Debug"
+	CMAKE_PARAMS="$CMAKE_PARAMS -DTESTS=ON "
 fi
 if [ "$COVERAGE" = true ]
 	then
-	CMAKE_PARAMS="$CMAKE_PARAMS -COVERALL=ON"
+	CMAKE_PARAMS="$CMAKE_PARAMS -DCOVERALL=ON -DCMAKE_BUILD_TYPE=Debug"
 fi
 if [ "$COVERALLUPLOAD" = true ]
 	then
-	CMAKE_PARAMS="$CMAKE_PARAMS -COVERALLS_UPLOAD=ON"
+	CMAKE_PARAMS="$CMAKE_PARAMS -DCOVERALLS_UPLOAD=ON"
 fi
 if [ "$DOXYDOC" = true ]
 	then
-	CMAKE_PARAMS="$CMAKE_PARAMS -BUILD_DOXY_DOC=ON"
+	CMAKE_PARAMS="$CMAKE_PARAMS -DBUILD_DOXY_DOC=ON"
 fi
 
 if [ "$GCINCO" = true ]
 	then
-	CMAKE_PARAMS="$CMAKE_PARAMS -DCMAKE_CXX_COMPILER='g++-5' -B."
+	CMAKE_PARAMS="$CMAKE_PARAMS -DCMAKE_CXX_COMPILER='g++-5'"
 fi
 
 
@@ -149,10 +149,10 @@ echo "Instalación de dependencias..."
 		apt-get install -y libboost-all-dev
 	fi
 fi
-z
+
 mkdir -p build
 cd build
-cmake "$CMAKE_PARAMS" ../project && make
+cmake "$CMAKE_PARAMS -B ."  ../project/ && make
 
 
 

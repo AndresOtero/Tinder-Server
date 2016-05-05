@@ -5,7 +5,7 @@ option(COVERAGE "Enable code coverage." OFF)
 option(BUILD_DOXY_DOC "build doxygen documentation" OFF)
 
 # Setea las opciones para la herramienta coveralls-cmake
-option(COVERALLS "Activa el soporte para Coveralls.io" OFF)
+option(COVERAGE "Activa el soporte para Coveralls.io" OFF)
 option(COVERALLS_UPLOAD "Sube el json generado de coveralls" OFF)
 
 
@@ -31,7 +31,7 @@ endif()
 
 
 # Seteo la ruta donde se encuentran los scripts de la herramienta coveralls-cmake
-set(RUTA_COVERALLS_CMAKE "${RUTA_TOOLS}/coveralls-cmake/cmake")
+
 
 # Agrega directorios para la búsqueda de módulos CMake dentro de la variable CMAKE_MODULE_PATH
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${RUTA_COVERALLS_CMAKE})
@@ -46,6 +46,7 @@ endif()
 
 
 if(BUILD_DOXY_DOC AND TESTS)
+	message(INFO "Doxygen ENABLED")
     find_package(Doxygen)
     if(NOT DOXYGEN_FOUND)
         message(WARNING "Doxygen not found, unable to generate documentation")
@@ -59,16 +60,6 @@ if(BUILD_DOXY_DOC AND TESTS)
 			COMMENT "Generating API documentation with Doxygen" VERBATIM
 		)
 		endif(DOXYGEN_FOUND)
-        #set(DOXY_DOC_DEST_DIR ${CMAKE_BINARY_DIR} CACHE PATH "Path to the doxygen output")                      ## used in the doxyfile.in
-        #set(DOXY_DOC_INPUT_ROOT_DIRS ${CMAKE_HOME_DIRECTORY}/app CACHE PATH "Path from where to start to parse")    ## used in the doxyfile.in
-        #set(DOXY_DOC_EXCLUDE_PATTERNS_DIRS ${CMAKE_BINARY_DIR} CACHE STRING "Regex patterns exclusion")          ## used in the doxyfile.in
-        #set(DOXY_DOC_COMMON_IMG_PATH ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "Path from which doxygen will be able to found referenced images")## used in the doxyfile.in
-        #configure_file(doxyfile.in ${CMAKE_BINARY_DIR}/doxyfile @ONLY)
-        #message(STATUS ${CMAKE_HOME_DIRECTORY})
-        #add_custom_target(doxyDoc COMMAND ${DOXYGEN_EXECUTABLE} "${CMAKE_BINARY_DIR}/doxyfile"
-         #   WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY}
-          #  COMMENT "Building user's documentation into doxyDoc build dir..."
-        #)
     endif()
 endif()
 
@@ -77,18 +68,21 @@ endif()
 ###################################################
 
 # Si activo Coveralls en la llamada de CMake
-if (COVERALLS)
+	
+#if (COVERAGE)
 	# Agrego el módulo CMake correspondiente...
-	include(Coveralls)
+#	include(Coveralls)
 
 	# ...Agrego los flags de coverage (-fprofile-arcs -ftest-coverage)...
-	coveralls_turn_on_coverage()
+#	coveralls_turn_on_coverage()
 
 	# ... Y preparo la herramienta coveralls-cmake
 	# 1er argumento: Lista de archivos fuente
 	# 2do argumento: "ON" para subir al sitio Coveralls.io
 	# 3er argumento: Ruta alternativa de ubicación de la herramienta coveralls-cmake
-	coveralls_setup("${SRC_TESTEABLE}"
-			${COVERALLS_UPLOAD}
-			"${RUTA_COVERALLS_CMAKE}")
-endif(COVERALLS)
+	
+#	file(GLOB_RECURSE APP_SOURCES "app/src/*.cpp" "app/src/*.c" )
+#	coveralls_setup("${APP_SOURCES}"
+#			${COVERALLS_UPLOAD}
+#			"${CMAKE_MODULE_PATH}")
+#endif(COVERAGE)

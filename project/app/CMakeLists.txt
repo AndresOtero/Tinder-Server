@@ -43,9 +43,9 @@ include_directories(${ROCKSDB_SRC})
 
 set(CMAKE_C_FLAGS "-DMG_ENABLE_THREADS")
 
-file(GLOB_RECURSE APP_SOURCES "src/*.cpp" "src/*.c")
+file(GLOB_RECURSE APP_SOURCES "src/*.cpp" "src/*.c" PARENT_SCOPE)
 file(GLOB_RECURSE APP_HEADERS "src/*.h")
-add_library(applib STATIC ${APP_SOURCES} ${APP_HEADERS} src/services/match/MatchDAO.cpp src/services/match/MatchDAO.h src/services/chat/ChatServices.cpp src/services/chat/ChatServices.h src/model/Message.cpp src/model/Message.h src/services/match/MatchServices.cpp src/services/match/MatchServices.h src/services/authentication/AuthenticationException.cpp src/services/authentication/AuthenticationException.h src/dao/UserDAO.cpp src/dao/UserDAO.h src/dao/UserNotFoundException.cpp src/dao/UserNotFoundException.h src/model/Interest.cpp src/model/Interest.h src/services/match/NoMoreCandidatesException.cpp src/services/match/NoMoreCandidatesException.h)
+add_library(applib STATIC ${APP_SOURCES} ${APP_HEADERS})
 
 
 set (APP_INCLUDE_DIRS "" PARENT_SCOPE)
