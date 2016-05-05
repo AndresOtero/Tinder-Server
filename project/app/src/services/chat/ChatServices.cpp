@@ -5,6 +5,7 @@
 #include <Logger.h>
 #include <AuthenticationException.h>
 #include "ChatServices.h"
+#include "ChatException.h"
 
 
 ChatServices::ChatServices(ChatDAO *chatDao, MatchDAO* matchDao) {

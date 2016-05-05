@@ -23,7 +23,7 @@ private:
      * @see AuthenticationService
      */
 	void getUser(WebContext & wc);
-	void putUser(WebContext & wc);
+	void saveUser(WebContext &wc);
 	ProfileServices & service;
 public:
 	/**

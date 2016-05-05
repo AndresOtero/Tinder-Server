@@ -45,10 +45,16 @@ public:
 	int getNumberOfMatches(User* user);
 
 	/**
-	 * Returns a Json::Value with all the users that have matched the requested user.
+	 * Returns a list of strings with the ids of all the users that have matched the requested user.
 	 * @param user is the user to retrieve the  matches he has.
 	 */
-	Json::Value getMatches(User* user);
+	list<string> getMatches(User* user);
+
+	/**
+	 * Returns a list of strings with the id of all the users that the requested user has liked.
+	 * @param user is the user to retrieve the  matches he has.
+	 */
+	list<string> getLikes(User* user);
 
 	/**
 	 * Checks if the username A liked username B before.
@@ -64,10 +70,25 @@ public:
 	 */
 	bool checkForMatch(User* userA, User* userB);
 
+	/**
+	 * Adds a match between the two users. It does not check if they like each other or not.
+	 *
+	 * @param a first user.
+	 * @param b second user.
+	 */
+	void addMatch(User* a, User* b);
+
+	/**
+	 * Returns the date date when the user last requested for candidates. The tm* has to be freed by the caller.
+	 *
+	 * @param user user to get the last day for.
+	 */
+	tm* getLastRequestTime(User *user);
+
 private:
 	DBConnector* connector;
-
-	void addMatch(User* a, User* b);
+	void initializeUserEntry(User* user);
+	Json::Value getUserEntry(User* user);
 };
 
 

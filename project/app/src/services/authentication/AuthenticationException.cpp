@@ -5,11 +5,11 @@
 #include "AuthenticationException.h"
 
 
-ChatException::ChatException(const string msg) : runtime_error(msg) {
+AuthenticationException::AuthenticationException(const string msg) : runtime_error(msg) {
 
 }
 
-ChatException::~ChatException() {
+AuthenticationException::~AuthenticationException() {
 
 }
 

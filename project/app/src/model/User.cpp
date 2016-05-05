@@ -68,8 +68,14 @@ void User::setLongitude(double longitude) {
 	this->location.setLongitude(longitude);
 }
 
-unordered_map<string, set<string>> User::getInterests() {
-	return this->interests;
+list<Interest*> User::getInterests() {
+	std::list<Interest*> lista;
+	for(auto it = this->interests.begin(); it != this->interests.end(); ++it) {
+		for(auto setit = it->second.begin(); setit != it->second.end(); ++setit) {
+			lista.push_front(new Interest(it->first, *setit));
+		}
+	}
+	return lista;
 }
 
 void User::setId(string id) {
@@ -96,22 +102,32 @@ Json::Value User::toJson() {
 	Json::Value userData;
 	userData["id"] = this->getId();
 	userData["externalId"] = this->getExternalId();
-
 	userData = bodyToJson(userData, *this);
+	Json::Value interests;
+	for (auto it = this->interests.begin(); it != this->interests.end(); ++it ) {
+		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
+			Json::Value valor;
+			valor["category"] = it->first;
+			valor["value"] = *setit;
+			interests.append(valor);
+		}
+	}
+	userData["interests"] = interests;
 	return userData;
 }
 
 Json::Value &User::bodyToJson(Json::Value &userData, User &user) {
-	Json::Value interests;
 	Json::Value location;
 	location["latitude"] = user.getLatitude();
 	location["longitude"] = user.getLongitude();
 	userData["name"] = user.getName();
 	userData["email"] = user.getEmail();
 	userData["photo_profile"] = user.getPhotoURL();
+	userData["alias"] = user.getAlias();
 	userData["age"] = user.getAge();
 	userData["sex"] = user.getSex();
 	userData["location"] = location;
+	Json::Value interests;
 	for (auto it = user.interests.begin(); it != user.interests.end(); ++it ) {
 		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
 			Json::Value valor;
@@ -127,13 +143,14 @@ Json::Value &User::bodyToJson(Json::Value &userData, User &user) {
 User::User(Json::Value & user) {
 	Json::FastWriter writer;
 	Json::Value interestsJson = user.get("interests", "");
-	unordered_map<string, set<string>> interests = this->populateInterests(interestsJson);
-	this->externalId = user.get("id", -1).asInt();
-	this->id = user.get("alias", "").asString();
+	this->interests = this->populateInterests(interestsJson);
+	this->externalId = user.get("externalId", 0).asInt();
+	this->id = user.get("email", "").asString();
 	readCommonBody(user, *this);
 }
 
 void User::readCommonBody(const Json::Value &values, User &user) {
+	user.setAlias(values.get("alias", "").asString());
 	user.setName(values.get("name", "").asString());
 	user.setEmail(values.get("email", "").asString());
 	user.setPhotoURL(values.get("photo_profile", "").asString());
@@ -164,19 +181,28 @@ unordered_map<string, set<string>> User::populateInterests(Json::Value &root) {
 }
 
 void User::toExternalJson(Json::Value &userData) {
+	Json::Value interests;
 	userData["id"] = this->getExternalId();
-	userData["externalId"] = this->getId();
 	userData = bodyToJson(userData, *this);
+	for (auto it = this->interests.begin(); it != this->interests.end(); ++it ) {
+		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
+			Json::Value valor;
+			valor["category"] = it->first;
+			valor["value"] = *setit;
+			interests.append(valor);
+		}
+	}
+	userData["interests"] = interests;
 }
 
 User *User::fromExternalJson(Json::Value &value) {
 	User * user = new User();
-	Json::FastWriter writer;
 	Json::Value interestsJson = value.get("interests", "");
 	unordered_map<string, set<string>> interests = populateInterests(interestsJson);
-	user->setId(value.get("alias", "").asString());
+	user->interests = interests;
 	user->setExternalId(value.get("id", -1).asInt());
 	User::readCommonBody(value, *user);
+	user->setId(value.get("email", "").asString());
 	return user;
 }
 
@@ -185,3 +211,15 @@ User::User() {
 
 
 }
+
+void User::setAlias(string alias) {
+	this->alias = alias;
+}
+
+string User::getAlias() {
+	return this->alias;
+}
+
+
+
+

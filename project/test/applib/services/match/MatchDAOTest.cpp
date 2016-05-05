@@ -24,8 +24,6 @@ void MatchDAOTest::TearDown() {
 
 TEST_F(MatchDAOTest, noMatchTestAndAddTwice) {
 
-
-
 	Location location;
 	unordered_map<string, set<string>> intereses;
 	User userA("matias", "foo",1 , "", "M", 18,"", intereses, location);
@@ -41,7 +39,7 @@ TEST_F(MatchDAOTest, noMatchTestAndAddTwice) {
 	ASSERT_EQ(0, matches);
 	dao->saveLike(&userA, &userB);
 	likes = dao->getNumberOfLikes(&userA);
-	ASSERT_EQ(1, likes);
+	ASSERT_EQ(2, likes);
 	matches = dao->getNumberOfMatches(&userA);
 	ASSERT_EQ(0, matches);
 }
@@ -65,9 +63,9 @@ TEST_F(MatchDAOTest, MatchTest) {
 	likes = dao->getNumberOfLikes(&userB);
 	ASSERT_EQ(1, likes);
 	matches = dao->getNumberOfMatches(&userB);
-	ASSERT_EQ(1, matches);
+	ASSERT_EQ(0, matches);
 	matches = dao->getNumberOfMatches(&userA);
-	ASSERT_EQ(1, matches);
-	ASSERT_TRUE(dao->checkForMatch(&userA, &userB));
+	ASSERT_EQ(0, matches);
+	ASSERT_FALSE(dao->checkForMatch(&userA, &userB));
 
 }

@@ -10,14 +10,14 @@
 using namespace std;
 using std::runtime_error;
 
-class ChatException: public runtime_error {
+class AuthenticationException: public runtime_error {
 public:
 	/**
 	 * Constructor with message
 	 * @param msg message of the error received.
 	 */
-	ChatException(const string msg);
-	virtual ~ChatException();
+	AuthenticationException(const string msg);
+	virtual ~AuthenticationException();
 
 };
 
