@@ -1,11 +1,19 @@
 cmake_minimum_required (VERSION 3.2.2)
 
-option(test "Build all tests." ON)
+option(TEST "Build all tests." OFF)
+option(COVERAGE "Enable code coverage." OFF)
+option(BUILD_DOXY_DOC "build doxygen documentation" OFF)
+
+# Setea las opciones para la herramienta coveralls-cmake
+option(COVERALLS "Activa el soporte para Coveralls.io" OFF)
+option(COVERALLS_UPLOAD "Sube el json generado de coveralls" OFF)
+
+
 project (tinder-server C CXX)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 set(CMAKE_CXX_STANDARD 11)
-if(test)
+if(COVERAGE && TEST)
 	include(CodeCoverage)
 	SET(CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS} -g -O0 -Wall --coverage")
 	SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0 -Wall -W --coverage")
@@ -17,16 +25,27 @@ if(test)
 				)
 endif()
 
+#############################################
+### Seteos para el uso de coveralls-cmake ###
+#############################################
+
+
+# Seteo la ruta donde se encuentran los scripts de la herramienta coveralls-cmake
+set(RUTA_COVERALLS_CMAKE "${RUTA_TOOLS}/coveralls-cmake/cmake")
+
+# Agrega directorios para la búsqueda de módulos CMake dentro de la variable CMAKE_MODULE_PATH
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${RUTA_COVERALLS_CMAKE})
+
 add_subdirectory (app) 
 add_subdirectory (server) 
 
-if(test)
+if(TEST)
 	enable_testing ()
 	add_subdirectory (test)
 endif()
 
-option(BUILD_DOXY_DOC "build doxygen documentation" ON)
-if(BUILD_DOXY_DOC)
+
+if(BUILD_DOXY_DOC && TESTS)
     find_package(Doxygen)
     if(NOT DOXYGEN_FOUND)
         message(WARNING "Doxygen not found, unable to generate documentation")
@@ -52,3 +71,24 @@ if(BUILD_DOXY_DOC)
         #)
     endif()
 endif()
+
+###################################################
+# Configuración de la herramienta coveralls-cmake #
+###################################################
+
+# Si activo Coveralls en la llamada de CMake
+if (COVERALLS)
+	# Agrego el módulo CMake correspondiente...
+	include(Coveralls)
+
+	# ...Agrego los flags de coverage (-fprofile-arcs -ftest-coverage)...
+	coveralls_turn_on_coverage()
+
+	# ... Y preparo la herramienta coveralls-cmake
+	# 1er argumento: Lista de archivos fuente
+	# 2do argumento: "ON" para subir al sitio Coveralls.io
+	# 3er argumento: Ruta alternativa de ubicación de la herramienta coveralls-cmake
+	coveralls_setup("${SRC_TESTEABLE}"
+			${COVERALLS_UPLOAD}
+			"${RUTA_COVERALLS_CMAKE}")
+endif(COVERALLS)
