@@ -33,8 +33,7 @@ void UserResource::getUser(WebContext& context) {
 		User * user = service.getUserByID(context.getUserid());
 		Json::Value result = user->toJson();
 		delete user;
-		Json::FastWriter writer;
-		context.getResponse().setContent(writer.write(result));
+		this->writeJson(context, result);
 	} catch (UserNotFoundException & e) {
 		Json::Value result;
 		result[STATUS_CODE_PARAM] = STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED;

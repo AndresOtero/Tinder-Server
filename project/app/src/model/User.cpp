@@ -102,13 +102,21 @@ Json::Value User::toJson() {
 	Json::Value userData;
 	userData["id"] = this->getId();
 	userData["externalId"] = this->getExternalId();
-
 	userData = bodyToJson(userData, *this);
+	Json::Value interests;
+	for (auto it = this->interests.begin(); it != this->interests.end(); ++it ) {
+		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
+			Json::Value valor;
+			valor["category"] = it->first;
+			valor["value"] = *setit;
+			interests.append(valor);
+		}
+	}
+	userData["interests"] = interests;
 	return userData;
 }
 
 Json::Value &User::bodyToJson(Json::Value &userData, User &user) {
-	Json::Value interests;
 	Json::Value location;
 	location["latitude"] = user.getLatitude();
 	location["longitude"] = user.getLongitude();
@@ -119,6 +127,7 @@ Json::Value &User::bodyToJson(Json::Value &userData, User &user) {
 	userData["age"] = user.getAge();
 	userData["sex"] = user.getSex();
 	userData["location"] = location;
+	Json::Value interests;
 	for (auto it = user.interests.begin(); it != user.interests.end(); ++it ) {
 		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
 			Json::Value valor;
@@ -188,9 +197,9 @@ void User::toExternalJson(Json::Value &userData) {
 
 User *User::fromExternalJson(Json::Value &value) {
 	User * user = new User();
-	Json::FastWriter writer;
 	Json::Value interestsJson = value.get("interests", "");
 	unordered_map<string, set<string>> interests = populateInterests(interestsJson);
+	user->interests = interests;
 	user->setExternalId(value.get("id", -1).asInt());
 	user->setId(value.get("email", "").asString());
 	User::readCommonBody(value, *user);
