@@ -26,17 +26,23 @@ int main() {
 	DBConnector authenticationDB = DBConnector("/tmp/authentication/");
 	if(!authenticationDB.isOk()) LOG_ERROR << ("Error abriendo la DB de autenticación.");
 
+	DBConnector translationDB = DBConnector("/tmp/translation/");
+	if(!authenticationDB.isOk()) LOG_ERROR << ("Error abriendo la DB de traducción.");
 
 	LOG_INFO << "Starting WebServer";
 
 	UserDAO userDAO(&sharedConnector);
 	AuthenticationDAO authDAO (authenticationDB);
-	AuthenticationService authService(&authDAO);
+	TranslationDAO transDAO (translationDB);
+	ProfileServices profileService(&userDAO, &transDAO);
+	AuthenticationService authService(&authDAO, &profileService);
+
 	SecurityFilter securityFilter(authService);
 	securityFilter.excludeRegex("/auth");
 	ApiDispatcher dispatcher(securityFilter);
-	ProfileServices profileService(&userDAO);
+
 	UserResource user(profileService);
+
 	user.setup(dispatcher);
 
 	AuthResource auth (&authService);

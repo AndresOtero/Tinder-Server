@@ -9,10 +9,12 @@
 #define SRC_USER_H_
 
 #include "Location.h"
+#include "Interest.h"
 #include <string>
 #include <unordered_map>
 #include <set>
 #include <json/json.h>
+#include <list>
 
 using namespace std;
 
@@ -26,25 +28,25 @@ using namespace std;
  */
 class User {
 public:
-	/**
-	 * Constructor that sets the user in a valid state.
-	 *
-	 * @param id of the user to represent.
-	 * @param name of the user to represent.
-	 * @param externalId of the user to represent.
-	 * @param email of the user to represent.
-	 * @param sex of the user to represent.
-	 * @param age of the user to represent.
-	 * @param photoURL of the user to represent.
-	 * @param interests of the user to represent. Stored with the categories as keys an the values in the set.
-	 * @param location of the user to represent.
-	 *
-	 */
-	User(string id, string name, int externalId, string email, string sex, int age, string photoURL,
-		 unordered_map<string, set<string>> interests, Location location);
+    /**
+     * Constructor that sets the user in a valid state.
+     *
+     * @param id of the user to represent.
+     * @param name of the user to represent.
+     * @param externalId of the user to represent.
+     * @param email of the user to represent.
+     * @param sex of the user to represent.
+     * @param age of the user to represent.
+     * @param photoURL of the user to represent.
+     * @param interests of the user to represent. Stored with the categories as keys an the values in the set.
+     * @param location of the user to represent.
+     *
+     */
+    User(string id, string name, int externalId, string email, string sex, int age, string photoURL,
+         unordered_map<string, set<string>> interests, Location location);
 
 
-	User();
+    User();
 
 /**
  	* From Json Creation
@@ -52,155 +54,170 @@ public:
 	* @param value a user json representation
 	*
 	*/
-	User (Json::Value & value);
+    User(Json::Value &value);
 
-	virtual ~User();
+    virtual ~User();
 
-	/**
-	 * Returns de id of the user.
-	 */
-	string getId();
+    /**
+     * Returns de id of the user.
+     */
+    string getId();
 
-	/**
-	 * Returns the name of the user;
-	 */
-	string getName();
+    /**
+     * Returns the name of the user;
+     */
+    string getName();
 
-	/**
-	 * Return the externalId of the user.
-	 */
-	int getExternalId();
+    /**
+    * Returns the alias of the user;
+    */
+    string getAlias();
 
-	/**
-	 * Returns the email of the user.
-	 */
-	string getEmail();
+    /**
+     * Return the externalId of the user.
+     */
+    int getExternalId();
 
-	/**
-	 * Returns the url of the profile photo of the user
-	 */
-	string getPhotoURL();
+    /**
+     * Returns the email of the user.
+     */
+    string getEmail();
 
-	/**
-	 * Returns last known latitude of the user
-	 */
-	double getLatitude();
+    /**
+     * Returns the url of the profile photo of the user
+     */
+    string getPhotoURL();
 
-	/**
-	 * Returns las known longtude of the user.
-	 */
-	double getLongitude();
+    /**
+     * Returns last known latitude of the user
+     */
+    double getLatitude();
 
-	/**
-	 * Changes the name of the user.
-	 *
-	 * @param name new value to set.
-	 */
-	void setName(string name);
+    /**
+     * Returns las known longtude of the user.
+     */
+    double getLongitude();
 
-	/**
-	 * Changes the externalId of the user.
-	 *
-	 * @param externalId new value to set.
-	 */
-	void setExternalId(int alias);
+    /**
+     * Changes the name of the user.
+     *
+     * @param name new value to set.
+     */
+    void setName(string name);
 
-	/**
-	 * Changes the email of the user.
-	 *
-	 * @param email new value to set.
-	 */
-	void setEmail(string email);
+    /**
+     * Changes the externalId of the user.
+     *
+     * @param externalId new value to set.
+     */
+    void setExternalId(int alias);
 
-	/**
-	 * Changes the name of the user.
-	 *
-	 * @param name new value to set.
-	 */
-	void setPhotoURL(string url);
+    /**
+     * Changes the email of the user.
+     *
+     * @param email new value to set.
+     */
+    void setEmail(string email);
 
-	/**
-	 * Changes the latitude of the user.
-	 *
-	 * @param latitude new value to set.
-	 */
-	void setLatitude(double latitude);
+    /**
+     * Changes the name of the user.
+     *
+     * @param name new value to set.
+     */
+    void setPhotoURL(string url);
 
-	/**
-	 * Changes the longitude of the user.
-	 *
-	 * @param longitude new value to set.
-	 */
-	void setLongitude(double longitude);
+    /**
+     * Changes the latitude of the user.
+     *
+     * @param latitude new value to set.
+     */
+    void setLatitude(double latitude);
 
-	/**
-	 * Changes the id of the user. WARNING Use only when uploading a new user.
-	 *
-	 * @param id new value to set.
-	 */
-	void setId(string id);
+    /**
+     * Changes the longitude of the user.
+     *
+     * @param longitude new value to set.
+     */
+    void setLongitude(double longitude);
 
-	/**
-	 * Returns the insterests of the user
-	 */
-	unordered_map<string, set<string>> getInterests();
+    /**
+     * Changes the id of the user. WARNING Use only when uploading a new user.
+     *
+     * @param id new value to set.
+     */
+    void setId(string id);
 
-	/**
-	 * Changes the sex of the user.
-	 *
-	 * @param sex new value to set.
-	 */
-	void setSex(string sex);
+    /**
+    * Setter of alias
+    *
+    * @param alias new value to set.
+    */
+    void setAlias(string alias);
 
-	/**
-	 * Changes the age of the user.
-	 *
-	 * @param age new value to set.
-	 */
-	void setAge(int age);
+    /**
+     * Returns a list with interests in it. It is responsability of the caller to delete the Interests in it.
+     */
+    list<Interest *> getInterests();
 
-	/**
-	 * Returns the age of the user
-	 */
-	int getAge();
+    /**
+     * Changes the sex of the user.
+     *
+     * @param sex new value to set.
+     */
+    void setSex(string sex);
 
-	/**
-	 * Returns the sex of the user.
-	 */
-	string getSex();
+    /**
+     * Changes the age of the user.
+     *
+     * @param age new value to set.
+     */
+    void setAge(int age);
 
-	/**
-	 * Return json Representation;
-	 */
-	Json::Value toJson();
-	/**
-	 *	Converts to external user json format.
-	 *	@return a external json representation
-	 *
-	 */
-	void toExternalJson(Json::Value &userData);
+    /**
+     * Returns the age of the user
+     */
+    int getAge();
 
-	/**
-	 * Read a user from a json with external user format
-	 * @param value json values
-	 */
-	static User * fromExternalJson(Json::Value & value);
+    /**
+     * Returns the sex of the user.
+     */
+    string getSex();
 
-	static unordered_map<string, set<string>> populateInterests(Json::Value &root);
+    /**
+     * Return json Representation;
+     */
+    Json::Value toJson();
+
+    /**
+     *	Converts to external user json format.
+     *	@return a external json representation
+     *
+     */
+    void toExternalJson(Json::Value &userData);
+
+    /**
+     * Read a user from a json with external user format
+     * @param value json values
+     */
+    static User *fromExternalJson(Json::Value &value);
+
+    static unordered_map<string, set<string>> populateInterests(Json::Value &root);
+
 private:
-	int age;
-	string sex;
-	string id;
-	string name;
-	int externalId;
-	string email;
-	string photoURL;
-	unordered_map<string, set<string>> interests;
-	Location location;
+    int age;
+    string sex;
+    string id;
+    string name;
+    int externalId;
+    string email;
+    string alias;
+    string photoURL;
+    unordered_map<string, set<string>> interests;
+    Location location;
 
-	static void readCommonBody(const Json::Value &values, User &user);
+    static void readCommonBody(const Json::Value &values, User &user);
 
-	static Json::Value &bodyToJson(Json::Value &userData, User &user);
+    static Json::Value &bodyToJson(Json::Value &userData, User &user);
 };
 
 #endif /* SRC_USER_H_ */

@@ -24,6 +24,12 @@ bool TranslationDAO::exist(string id) {
     return val.size() > 0;
 }
 
+void TranslationDAO::remove(string id) {
+    connector.deleteKey(id);
+}
+
+
+
 
 
 

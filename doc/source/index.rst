@@ -11,18 +11,15 @@ Aqui encontrará todo lo referente a la documentación
 tecnica de la aplicación, manuales de usuario, tecnologias
 utilizadas por los desarolladores, etc.
 
+| Tabla de Contenidos:
 
 
 .. toctree::
    :maxdepth: 2
+   :name: mastertoc
 
    shareServer
+   applicationServer
+   tickets
+   linksInteres
    
-
-.. doxygenclass:: ApiDispatcher
-   :project: myproject
-   :members:
-   :private-members:
-
-
-

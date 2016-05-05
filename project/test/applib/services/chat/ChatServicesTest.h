@@ -11,6 +11,7 @@ static const char *const MATCH_DB_FILE = "/tmp/matchtest";
 static const char *const CHAT_DB_FILE = "/tmp/chattest";
 
 #include <gtest/gtest.h>
+#include <MatchServices.h>
 
 class ChatServicesTest : public ::testing::Test{
 
@@ -33,6 +34,7 @@ public:
 	DBConnector * chatDbConnector;
 	ChatDAO * chatDao;
 	MatchDAO * matchDao;
+	MatchServices* matchServices;
 
 };
 

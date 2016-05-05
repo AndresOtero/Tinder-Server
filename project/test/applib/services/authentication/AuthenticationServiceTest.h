@@ -1,7 +1,13 @@
 #include <DBConnector.h>
+#include <AuthenticationDAO.h>
+#include <SharedConnector.h>
+#include <ProfileServices.h>
+#include <AuthenticationService.h>
 #include "gtest/gtest.h"
 
 static const char *const DB_FILE = "/tmp/usersTestDB";
+static const char *const DB_FILE2 = "/tmp/profilesTestDB";
+static const char *const DB_FILE3 = "/tmp/transTestDB";
 
 // The fixture for testing class Foo.
 class AuthenticationServiceTest : public ::testing::Test {
@@ -27,4 +33,13 @@ protected:
     virtual void TearDown();
 
     DBConnector * connector;
+    DBConnector * profileConnector;
+    DBConnector * transConnector;
+    AuthenticationDAO * authDAO;
+    SharedConnector * sharedConnector;
+    ProfileServices * profileService;
+    TranslationDAO * transDAO;
+
+    UserDAO * userDAO;
+    AuthenticationService * service;
 };

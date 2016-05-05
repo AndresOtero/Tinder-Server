@@ -11,6 +11,7 @@
 #include <string>
 #include <UserDAO.h>
 #include <AuthenticationDAO.h>
+#include <ProfileServices.h>
 #include "../../db/DBConnector.h"
 #include "AuthenticationException.h"
 
@@ -29,7 +30,7 @@ public:
 	 *
 	 * @param dao dao containing the corresponding db.
 	 */
-	AuthenticationService(AuthenticationDAO *dao);
+	AuthenticationService(AuthenticationDAO *dao, ProfileServices * profileService);
 	virtual ~AuthenticationService();
 
 	/**
@@ -48,7 +49,7 @@ public:
 	 * @param currentPassword current password of the username that wants to change it.
 	 * @param newPassword password that the username wants to have.
 	 */
-	void changePassword(std::string username, std::string currentPassword, std::string newPassword);
+	void changePassword(std::string userid, std::string currentPassword, std::string newPassword);
 
 	/**
 	 * Creates a new user with the received password. If the username is taken it throws an exception.
@@ -56,11 +57,12 @@ public:
 	 * @param username to create.
 	 * @param password to set to the username.
 	 */
-	void saveNewUser(std::string username, std::string password);
+	bool saveNewUser(std::string username, std::string password);
 
 private:
 
 	AuthenticationDAO * dao;
+	ProfileServices * profileService;
 };
 
 #endif /* SRC_AUTHENTICATIONSERVICE_H_ */

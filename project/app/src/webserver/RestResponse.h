@@ -45,6 +45,7 @@ public:
 	 * @param body The content
 	 */
 
+
 	void setContent(string body);
 
 	/**

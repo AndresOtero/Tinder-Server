@@ -45,14 +45,14 @@ public:
 	*
 	* @param user to upload to the shared server. Modification of the Id is in place.
 	*/
-	bool saveNewUser(User *user);
+	void saveNewUser(User *user);
 
 	/**
 	 * It deletes the user with the given ID from the shared server.
 	 *
 	 * @param id of the user to delete.
 	 */
-	bool deleteUserByID(int id);
+	void deleteUserByID(int id);
 
 	/**
 	 * It gets all the interests saved in the shared server.
@@ -65,7 +65,7 @@ public:
 	 * @param category category to append the new value to. If it does not exist, it is created.
 	 * @param value to add to the category.
 	 */
-	bool saveNewInterest(string category, string value);
+	void saveNewInterest(string category, string value);
 
 	/**
 	* Given a user it uploads the changes in the profile to the shared server. It returns true or false if the
@@ -73,7 +73,7 @@ public:
 	*
 	* @param user to upload the changes from.
 	*/
-	bool updateUserProfile(User *user);
+	void updateUser(User *user);
 
 
 

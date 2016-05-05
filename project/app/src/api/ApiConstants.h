@@ -8,9 +8,12 @@
 #include <string>
 using namespace std;
 
-const string STATUS_CODE_PARAM="statusCode";
-const int  STATUS_CODE_DONE=200;
-const int STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED=101;
+const string API_STATUS_CODE_PARAM="status";
+const string API_RESPONSE_PARAM ="reponse";
+
+const int  API_STATUS_CODE_DONE=200;
+const int  API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED=101;
+const int  API_STATUS_USER_ALREADY_EXIST=102;
 
 //SECURITY
 
