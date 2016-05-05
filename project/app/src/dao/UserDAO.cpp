@@ -57,7 +57,7 @@ void UserDAO::deleteUserByID(int id) {
 }
 
 void UserDAO::updateUser(User *user) {
-	string url = "/users/" + user->getId();
+	string url = "/users/" + to_string(user->getExternalId());
 	Json::Value userJson;
 	user->toExternalJson(userJson);
 	Json::Value root;

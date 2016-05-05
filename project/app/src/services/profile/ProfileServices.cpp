@@ -6,7 +6,7 @@
 #include "../../log/Logger.h"
 #include "UserNotFoundException.h"
 
-const static string LOG_PREFIX = "PROFILESERVICE: ";
+const static string LOG_PREFIX = "ProfileService: ";
 
 ProfileServices::ProfileServices(UserDAO *dao, TranslationDAO *transDao) {
     this->dao = dao;
@@ -63,7 +63,7 @@ unordered_map<string, set<string>> ProfileServices::getInterests() {
     try {
         return this->dao->getInterests();
     } catch (ConnectionException &e) {
-        LOG_ERROR << LOG_PREFIX << LOG_PREFIX << "Connection error: " << e.what();
+        LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
         throw ServiceException(e.what());
     }
 }
@@ -97,6 +97,8 @@ User *ProfileServices::getUserByID(string id) {
 
 int ProfileServices::translateId(string id, bool shouldUpdate) {
     try {
+        int external =translationDAO->get(id);
+        LOG_DEBUG << LOG_PREFIX << "Id translation : " << id << " to " << external;
         return translationDAO->get(id);
     } catch (TranslationException &e) {
         if (shouldUpdate) {
@@ -104,9 +106,12 @@ int ProfileServices::translateId(string id, bool shouldUpdate) {
 
             this->reloadMapping();
             try {
-                return translationDAO->get(id);
+                int external =translationDAO->get(id);
+                LOG_DEBUG << LOG_PREFIX << "Id translation : " << id << " to " << external;
+                return external;
             } catch (TranslationException &e) {
                 //if fail again, cannot get user.
+                LOG_DEBUG << LOG_PREFIX << "Id translation not completed to: " << id;
                 throw UserNotFoundException(id);
             }
         } else {

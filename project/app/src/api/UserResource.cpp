@@ -46,7 +46,7 @@ void UserResource::getUser(WebContext& context) {
 void UserResource::saveUser(WebContext &context) {
 	try {
 		Json::Value json;
-		RestResource::readJson(context, json);
+			RestResource::readJson(context, json);
 		User user(json);
 		user.setId(context.getUserid());
 		service.saveOrUpdateProfile(&user);
