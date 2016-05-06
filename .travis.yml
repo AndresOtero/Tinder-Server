@@ -35,7 +35,7 @@ script:
 after_success:
   - cd ..
   - chmod 777 ./coverageReport.sh
-  - sudo ./coverageReport-sh 
+  - sudo ./coverageReport.sh 
   - cd build/coverage-data
   - ls
   - lcov --directory . --capture --output-file coverage.info
