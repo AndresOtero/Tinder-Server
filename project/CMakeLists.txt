@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.2.2)
 
-option(TESTS "Build all tests." OFF)
+option(TEST "Build all tests." OFF)
 option(COVERAGE "Enable code coverage." OFF)
 option(BUILD_DOXY_DOC "build doxygen documentation" OFF)
 

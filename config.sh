@@ -92,7 +92,7 @@ CMAKE_PARAMS=""
 
 
 
-if [ "$TESTS" = true ]
+if [ "$TEST" = true ]
 	then
 	CMAKE_PARAMS="$CMAKE_PARAMS -DTESTS=ON"
 fi
