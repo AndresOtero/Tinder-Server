@@ -19,8 +19,23 @@ matrix:
             - g++-5
       env: COMPILER=g++-5
 install:
+  - add-apt-repository ppa:afrank/boost -y
+  - apt-get update -q
   - sudo apt-get install -y lcov
   - gem install coveralls-lcov
+  - apt-get install -y \
+    autotools-dev \
+    libicu-dev \
+    build-essential \
+    cmake \
+    libbz2-dev \
+    libcrypto++-dev \
+    zlib1g-dev \
+    libsnappy-dev \
+    libcurl4-gnutls-dev \
+    doxygen \
+    gcovr
+   -apt-get install libboost1.57-all libboost1.57-all-dev
 before_install:
  # - sudo apt-get update -qq
  # - sudo apt-get install -y build-essential autotools-dev libicu-dev libsnappy-dev libbz2-dev zlib1g-dev gcovr lcov libcurl4-gnutls-dev libcrypto++-dev
@@ -28,18 +43,17 @@ before_install:
  # - sudo apt-get update -q
  # - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 script:
-  - chmod 777 ./config.sh
-  - sudo ./config.sh -oldboost -coverage -test -dependencies -g++-5
+  - mkdir -p build
   - cd build
+  - cmake -DCMAKE_CXX_COMPILER='g++-5' -B. -DTEST=ON -DCOVERAGE=ON -DDOXYDOC=OFF  -DCMAKE_BUILD_TYPE=$COMPILER ../project/  && make VERBOSE=1
   - sudo ./test/applib/testapp
-  - sudo find / -name *.gdca
 after_success:
-  - cd ..
+#  - cd ..
+#  - find -name *.gdca
+#  - chmod 777 ./coverageReport.sh
+#  - sudo ./coverageReport.sh 
   - find -name *.gdca
-  - chmod 777 ./coverageReport.sh
-  - sudo ./coverageReport.sh 
-  - find -name *.gdca
-  - cd build/coverage-data
+#  - cd build/coverage-data
   - sudo lcov --directory . --capture --output-file coverage.info
   - sudo lcov --remove coverage.info '/usr/include/*' --output-file coverage.info
   - sudo lcov --remove coverage.info 'rocksdb/*' --output-file coverage.info
