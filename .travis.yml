@@ -19,7 +19,7 @@ matrix:
             - g++-5
       env: COMPILER=g++-5
 install:
-  - sudo apt-get install lcov
+  - sudo apt-get install -y lcov
   - gem install coveralls-lcov
 before_install:
  # - sudo apt-get update -qq
