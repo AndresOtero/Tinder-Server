@@ -19,11 +19,11 @@ matrix:
             - g++-5
       env: COMPILER=g++-5
 install:
-  - add-apt-repository ppa:afrank/boost -y
-  - apt-get update -q
+  - sudo add-apt-repository ppa:afrank/boost -y
+  - sudo apt-get update -q
   - sudo apt-get install -y lcov
-  - gem install coveralls-lcov
-  - apt-get install -y \
+  - sudo gem install coveralls-lcov
+  - sudo apt-get install -y \
     autotools-dev \
     libicu-dev \
     build-essential \
