@@ -35,7 +35,7 @@ script:
   - find -name *.gdca
 after_success:
   - cd ..
-  - find -n *.gdca
+  - find -name *.gdca
   - chmod 777 ./coverageReport.sh
   - sudo ./coverageReport.sh 
   - find -name *.gdca
