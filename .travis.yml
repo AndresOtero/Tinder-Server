@@ -23,19 +23,8 @@ install:
   - sudo apt-get update -q
   - sudo apt-get install -y lcov
   - sudo gem install coveralls-lcov
-  - sudo apt-get install -y \
-    autotools-dev \
-    libicu-dev \
-    build-essential \
-    cmake \
-    libbz2-dev \
-    libcrypto++-dev \
-    zlib1g-dev \
-    libsnappy-dev \
-    libcurl4-gnutls-dev \
-    doxygen \
-    gcovr
-   -apt-get install libboost1.57-all libboost1.57-all-dev
+  - sudo apt-get install -y autotools-dev libicu-dev build-essential cmake libbz2-dev libcrypto++-dev zlib1g-dev libsnappy-dev libcurl4-gnutls-dev gcovr
+  - apt-get install libboost1.57-all libboost1.57-all-dev
 before_install:
  # - sudo apt-get update -qq
  # - sudo apt-get install -y build-essential autotools-dev libicu-dev libsnappy-dev libbz2-dev zlib1g-dev gcovr lcov libcurl4-gnutls-dev libcrypto++-dev
