@@ -1,12 +1,11 @@
 cmake_minimum_required (VERSION 3.2.2)
 
-option(TEST "Build all tests." OFF)
+option(TESTS "Build all tests." OFF)
 option(COVERAGE "Enable code coverage." OFF)
 option(BUILD_DOXY_DOC "build doxygen documentation" OFF)
 
 # Setea las opciones para la herramienta coveralls-cmake
 option(COVERAGE "Activa el soporte para Coveralls.io" OFF)
-option(COVERALLS_UPLOAD "Sube el json generado de coveralls" OFF)
 
 
 project (tinder-server C CXX)
@@ -22,7 +21,7 @@ if(COVERAGE AND TEST)
 				coverage  # Name for custom target.
 				testapp         # Name of the test driver executable that runs the tests.
 				coverage-report            # Name of output directory.
-				)
+					)
 endif()
 
 #############################################
