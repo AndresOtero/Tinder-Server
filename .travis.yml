@@ -45,7 +45,7 @@ before_install:
 script:
   - mkdir -p build
   - cd build
-  - cmake -DCMAKE_CXX_COMPILER='g++-5' -B. -DTEST=ON -DCOVERAGE=ON -DDOXYDOC=OFF  -DCMAKE_BUILD_TYPE=$COMPILER ../project/  && make VERBOSE=1
+  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
   - sudo ./test/applib/testapp
 after_success:
 #  - cd ..
