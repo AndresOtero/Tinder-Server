@@ -22,6 +22,8 @@ matrix:
         - GCOV_PREFIX=${TRAVIS_BUILD_DIR}/build
         - GCOV_PREFIX_STRIP=5
 install:
+  - echo $GCOV_PREFIX
+  - echo ${TRAVIS_BUILD_DIR}
   - sudo add-apt-repository ppa:afrank/boost -y
   - sudo apt-get update -q
   - sudo apt-get install -y lcov
@@ -36,8 +38,7 @@ before_install:
  # - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 script:
   - mkdir -p build
-  - cd build GCOV_PREFIX
-  - echo $
+  - cd build 
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
   - ./test/applib/testapp
 after_success:
