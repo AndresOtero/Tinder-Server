@@ -32,7 +32,7 @@ script:
   - sudo ./config.sh -oldboost -coverage -test -dependencies -g++-5
   - cd build
   - sudo ./test/applib/testapp
-  - find -name *.gdca
+  - sudo find / -name *.gdca
 after_success:
   - cd ..
   - find -name *.gdca
