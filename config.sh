@@ -103,7 +103,7 @@ fi
 
 if [ "$TESTS" = true ]
 	then
-	CMAKE_PARAMS="$CMAKE_PARAMS -DTESTS=ON "
+	CMAKE_PARAMS="$CMAKE_PARAMS -DTESTS=ON"
 fi
 if [ "$COVERAGE" = true ]
 	then
