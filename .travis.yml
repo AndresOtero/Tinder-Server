@@ -31,7 +31,7 @@ script:
   - chmod 777 ./config.sh
   - sudo ./config.sh -oldboost -coverage -test -dependencies -g++-5
   - cd build
-  - ./test/applib/testapp
+  - .sudo /test/applib/testapp
 after_success:
   - cd ..
   - chmod 777 ./coverageReport.sh
