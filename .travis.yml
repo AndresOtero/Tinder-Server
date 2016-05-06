@@ -35,8 +35,8 @@ script:
   - mkdir -p build
   - cd build
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
-  - sudo ./test/applib/testapp
+  - ./test/applib/testapp
 after_success:
-  - sudo make coverage
-  - sudo lcov --list coverage-report.info
-  - sudo coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info
+  - make coverage
+  - lcov --list coverage-report.info
+  - coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info
