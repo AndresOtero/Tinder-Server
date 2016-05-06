@@ -7,8 +7,8 @@ cd build
 echo "Creo los directorios necesarios"
 mkdir -p $GCOV_PREFIX/applib/CMakeFiles/testapp.dir
 mkdir -p $GCOV_PREFIX/CMakeFiles/applib.dir
-echo "Copiando gcno"
+echo "Copiando gcno desde $MYPWD/build/test/applib/CMakeFiles/testapp.dir/ a $GCOV_PREFIX/applib/CMakeFiles/testapp.dir"
 rsync -acv --filter='+ */' --filter='+ *.cpp' --filter='+ *.h' --filter='+ *.gcno' --filter='- *' $MYPWD/build/test/applib/CMakeFiles/testapp.dir/ $GCOV_PREFIX/applib/CMakeFiles/testapp.dir
+echo "Copando gcno desde $MYPWD/build/app/CMakeFiles/applib.dir/src  $GCOV_PREFIX/CMakeFiles/applib.dir "
 rsync -acv --filter='+ */' --filter='+ *.cpp' --filter='+ *.h' --filter='+ *.gcno' --filter='- *' $MYPWD/build/app/CMakeFiles/applib.dir/src $GCOV_PREFIX/CMakeFiles/applib.dir
-
 make coverage
