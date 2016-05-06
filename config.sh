@@ -24,7 +24,6 @@ while test $# -gt 0; do
                         echo "-oldboost 				compatibilidad de boost para linux version 14.04"
                         echo "-test					habilita los tests 								"
                         echo "-coverage				habilita coverage y agrega -test 								"
-                        echo "-coverallupload				habilita la subida de coverall y -coverage 					"
                         echo "-doxydoc				habilita documentación doxy 					"
                         echo "-dependencies				instala dependencias"
                         echo "--dev 					atajo para -test -doxydoc -coverage		"
@@ -40,10 +39,6 @@ while test $# -gt 0; do
                         ;;
                 -coverage)
 						COVERAGE=true
-                        shift
-                        ;;
-                -coverallupload)
-						COVERALLUPLOAD=true
                         shift
                         ;;
                 -doxydoc)
