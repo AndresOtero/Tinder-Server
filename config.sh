@@ -152,6 +152,7 @@ fi
 
 mkdir -p build
 cd build
+echo "params $CMAKE_PARAMS"
 cmake "$CMAKE_PARAMS -B ."  ../project/ && make
 
 
