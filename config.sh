@@ -95,10 +95,6 @@ fi
 
 CMAKE_PARAMS=""
 
-if [ "$GCINCO" = true ]
-	then
-	CMAKE_PARAMS="-DCMAKE_CXX_COMPILER='g++-5' -B."
-fi
 
 
 if [ "$TESTS" = true ]
@@ -155,7 +151,12 @@ fi
 mkdir -p build
 cd build
 echo "params $CMAKE_PARAMS"
-cmake "$CMAKE_PARAMS"  ../project/ && make
 
+if [ "$GCINCO" = true ]
+	then
+	cmake -DCMAKE_CXX_COMPILER='g++-5' -B. "$CMAKE_PARAMS" ../project/  && make 
+else
+	cmake "$CMAKE_PARAMS" ../project/  && make 
+fi
 
 
