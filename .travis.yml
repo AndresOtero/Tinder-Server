@@ -29,12 +29,13 @@ before_install:
  # - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 script:
   - chmod 777 ./config.sh
+  - chmod 777 ./coverageReport.sh
   - sudo ./config.sh -oldboost -coverage -test -dependencies -g++-5
   - cd build
   - ./test/applib/testapp
   - cd ..
+  - sudo ./coverageReport
 after_success:
-  - chmod 777 ./coverageReport.sh
   - cd ${TRAVIS_BUILD_DIR}/build/coverage-data
   - lcov --directory . --capture --output-file coverage.info
   - lcov --remove coverage.info '/usr/include/*' --output-file coverage.info
