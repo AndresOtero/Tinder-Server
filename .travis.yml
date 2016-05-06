@@ -32,13 +32,13 @@ script:
   - sudo ./config.sh -oldboost -coverage -test -dependencies -g++-5
   - cd build
   - sudo ./test/applib/testapp
-  - find -n *.gdca
+  - find -name *.gdca
 after_success:
   - cd ..
   - find -n *.gdca
   - chmod 777 ./coverageReport.sh
   - sudo ./coverageReport.sh 
-  - find -n *.gdca
+  - find -name *.gdca
   - cd build/coverage-data
   - sudo lcov --directory . --capture --output-file coverage.info
   - sudo lcov --remove coverage.info '/usr/include/*' --output-file coverage.info
