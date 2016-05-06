@@ -35,8 +35,8 @@ endif()
 # Agrega directorios para la búsqueda de módulos CMake dentro de la variable CMAKE_MODULE_PATH
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${RUTA_COVERALLS_CMAKE})
 
-#add_subdirectory (app) 
-#add_subdirectory (server) 
+add_subdirectory (app) 
+add_subdirectory (server) 
 
 if(TEST)
 	message(STATUS "TESTS ENABLED")
