@@ -17,7 +17,10 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-5
-      env: COMPILER=g++-5
+      env: 
+        - COMPILER=g++-5
+        - GCOV_PREFIX=${TRAVIS_BUILD_DIR}/build
+        - GCOV_PREFIX_STRIP=5
 install:
   - sudo add-apt-repository ppa:afrank/boost -y
   - sudo apt-get update -q
@@ -33,7 +36,8 @@ before_install:
  # - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 script:
   - mkdir -p build
-  - cd build
+  - cd build GCOV_PREFIX
+  - echo $
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
   - ./test/applib/testapp
 after_success:
