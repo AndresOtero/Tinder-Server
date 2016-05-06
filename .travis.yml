@@ -35,7 +35,9 @@ script:
 after_success:
   - ls
   - chmod 777 ./coverageReport.sh
+  - ls 
   - cd build/coverage-data
+  - ls
   - lcov --directory . --capture --output-file coverage.info
   - lcov --remove coverage.info '/usr/include/*' --output-file coverage.info
   - lcov --remove coverage.info 'rocksdb/*' --output-file coverage.info

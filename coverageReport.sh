@@ -3,6 +3,7 @@ GCOV_PREFIX=$MYPWD/build/coverage-data
 export GCOV_PREFIX="$MYPWD/build/coverage-data"
 export GCOV_PREFIX_STRIP=`echo $GCOV_PREFIX | tr -d -c '/\n' | awk '{ print length; }'`
 cd build
+make
 echo  $GCOV_PREFIX
 mkdir -p $GCOV_PREFIX/applib/CMakeFiles/testapp.dir
 mkdir -p $GCOV_PREFIX/CMakeFiles/applib.dir
