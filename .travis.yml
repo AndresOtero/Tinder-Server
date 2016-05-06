@@ -38,5 +38,5 @@ script:
   - sudo ./test/applib/testapp
 after_success:
   - sudo make coverage
-  - sudo lcov --list coverage.info
-  - sudo coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage.info
+  - sudo lcov --list coverage-report.info
+  - sudo coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info
