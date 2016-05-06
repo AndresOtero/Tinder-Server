@@ -4,6 +4,7 @@ export GCOV_PREFIX="$MYPWD/build/coverage-data"
 export GCOV_PREFIX_STRIP=`echo $GCOV_PREFIX | tr -d -c '/\n' | awk '{ print length; }'`
 echo "Directorio donde almacenar $GCOV_PREFIX strips $GCOV_PREFIX_STRIP"
 cd build
+make
 echo "Creo los directorios necesarios"
 mkdir -p $GCOV_PREFIX/applib/CMakeFiles/testapp.dir
 mkdir -p $GCOV_PREFIX/CMakeFiles/applib.dir
