@@ -9,7 +9,7 @@
 using namespace std;
 
 const string API_STATUS_CODE_PARAM="status";
-const string API_RESPONSE_PARAM ="reponse";
+const string API_RESPONSE_PARAM ="response";
 
 const int  API_STATUS_CODE_DONE=200;
 const int  API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED=101;
