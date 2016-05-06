@@ -35,6 +35,10 @@ TEST_F(MatchDAOTest, noMatchTestAndAddTwice) {
 	dao->saveLike(&userA, &userB);
 	likes = dao->getNumberOfLikes(&userA);
 	ASSERT_EQ(1, likes);
+	int liked = dao->getNumLiked(&userB);
+	ASSERT_EQ(1, liked);
+	liked = dao->getNumLiked(&userA);
+	ASSERT_EQ(0, liked);
 	matches = dao->getNumberOfMatches(&userA);
 	ASSERT_EQ(0, matches);
 	dao->saveLike(&userA, &userB);

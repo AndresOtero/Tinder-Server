@@ -63,6 +63,7 @@ private:
 	MatchDAO* matchDao;
 	ProfileServices* profileServices;
 
+	list<User*> assembleListFromSet(set<User*> toConvert);
 	bool hasRemainingCandidates(User* user);
 	list<User*> getUsersFromIDs(list<string> &ids);
 };

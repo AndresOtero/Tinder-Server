@@ -85,6 +85,12 @@ public:
 	 */
 	tm* getLastRequestTime(User *user);
 
+	/**
+	 * Returns the number of times that the user was liked.
+	 * @param user the user to check how many likes he got.
+	 */
+	int getNumLiked(User* user);
+
 private:
 	DBConnector* connector;
 	void initializeUserEntry(User* user);

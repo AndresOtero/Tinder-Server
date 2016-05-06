@@ -203,6 +203,11 @@ public:
 
     static unordered_map<string, set<string>> populateInterests(Json::Value &root);
 
+    bool operator== (User &other);
+    bool operator!= (User &other);
+    bool operator< (User &other);
+    bool operator> (User &other);
+
 private:
     int age;
     string sex;

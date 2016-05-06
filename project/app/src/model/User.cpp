@@ -221,5 +221,26 @@ string User::getAlias() {
 }
 
 
+bool User::operator==(User &other) {
+	return (this->getId() == other.getId());
+}
+
+
+bool User::operator!=(User &other) {
+	return this->getId() != other.getId();
+}
+
+
+bool User::operator<(User &other) {
+	return (this->getId() < other.getId());
+}
+
+bool User::operator>(User &other) {
+	return (this->getId() > other.getId());
+}
+
+
+
+
 
 
