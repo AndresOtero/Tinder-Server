@@ -31,12 +31,12 @@ script:
   - chmod 777 ./config.sh
   - chmod 777 ./coverageReport.sh
   - sudo ./config.sh -oldboost -coverage -test -dependencies -g++-5
-  - cd build
-  - ./test/applib/testapp
-  - cd ..
+  #- cd build
+ # - ./test/applib/testapp
+  #- cd ..
   - sudo ./coverageReport.sh
 after_success:
-  - cd ${TRAVIS_BUILD_DIR}/build/coverage-data
+  - cd build/coverage-data
   - lcov --directory . --capture --output-file coverage.info
   - lcov --remove coverage.info '/usr/include/*' --output-file coverage.info
   - lcov --remove coverage.info 'rocksdb/*' --output-file coverage.info
