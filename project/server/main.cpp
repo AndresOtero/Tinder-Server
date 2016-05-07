@@ -6,6 +6,8 @@
 #include <User.h>
 #include <ProfileServices.h>
 #include <SecurityFilter.h>
+#include <MatchServices.h>
+#include <boost/filesystem/operations.hpp>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -28,12 +30,24 @@ int main() {
 	DBConnector translationDB = DBConnector("/tmp/translation/");
 	if(!authenticationDB.isOk()) LOG_ERROR << ("Error abriendo la DB de traducción.");
 
+	boost::filesystem::remove_all("/tmp/match"); //Debugin purpouse
+	DBConnector matchDB = DBConnector("/tmp/match");
+	if(!matchDB.isOk()) LOG_ERROR << ("Error abriendo la DB de match.");
+
 	LOG_INFO << "Starting WebServer";
+	MatchDAO matchDAO(&matchDB);
 	UserDAO userDAO(&sharedConnector);
 	AuthenticationDAO authDAO (authenticationDB);
 	TranslationDAO transDAO (translationDB);
 	ProfileServices profileService(&userDAO, &transDAO);
 	AuthenticationService authService(&authDAO, &profileService);
+	MatchServices matchServices(&matchDAO,&profileService);
+
+	User* usuario = profileService.getUserByID("chelo3");
+	User* otro = profileService.getUserByID("asdasd@adsdac-om");
+	matchServices.likeAUser(usuario, otro);
+	std::list<User*> candidatos = matchServices.getCandidatesForUser(usuario);
+	LOG_INFO << candidatos.size();
 
 	SecurityFilter securityFilter(authService);
 	securityFilter.excludeRegex("/auth");

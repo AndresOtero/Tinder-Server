@@ -8,6 +8,7 @@
 #include <User.h>
 #include <ProfileServices.h>
 #include "MatchDAO.h"
+#include "Candidate.h"
 
 /**
  * @class MatchServices
@@ -62,10 +63,14 @@ public:
 private:
 	MatchDAO* matchDao;
 	ProfileServices* profileServices;
+	int dailyLimit;
 
-	list<User*> assembleListFromSet(set<User*> toConvert);
+	bool findInList(list<User*> likes, User* tofind);
 	bool hasRemainingCandidates(User* user);
 	list<User*> getUsersFromIDs(list<string> &ids);
+	list<User*> getUserListFromCandidates(std::list<Candidate*> candidatos);
+	void getCandidatesScores(std::list<Candidate*> &lista, User* user);
+	int getCommonInterests(User* userA, User* userB);
 };
 
 

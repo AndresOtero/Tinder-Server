@@ -16,7 +16,7 @@ User::User(string id, string name, int externalId, string email, string sex, int
 
 User::~User() {}
 
-string User::getId() {
+string User::getId() const {
 	return this->id;
 }
 
@@ -221,23 +221,13 @@ string User::getAlias() {
 }
 
 
-bool User::operator==(User &other) {
-	return (this->getId() == other.getId());
+bool User::likesInterest(Interest *interest) {
+	auto iter = this->interests.find(interest->getCategory());
+	if (iter == this->interests.end()) return false;
+	return iter->second.find(interest->getValue()) != iter->second.end();
 }
 
 
-bool User::operator!=(User &other) {
-	return this->getId() != other.getId();
-}
-
-
-bool User::operator<(User &other) {
-	return (this->getId() < other.getId());
-}
-
-bool User::operator>(User &other) {
-	return (this->getId() > other.getId());
-}
 
 
 

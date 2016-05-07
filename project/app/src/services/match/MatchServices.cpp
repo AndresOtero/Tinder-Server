@@ -12,6 +12,7 @@ using namespace std;
 MatchServices::MatchServices(MatchDAO *matchDAO, ProfileServices *profile) {
 	this->matchDao = matchDAO;
 	this->profileServices = profile;
+	this->dailyLimit = 10;
 }
 
 MatchServices::~MatchServices() { }
@@ -46,31 +47,52 @@ list<User *> MatchServices::getLikesForUser(User *user) {
 list<User *> MatchServices::getCandidatesForUser(User *user) {
 	if (!this->hasRemainingCandidates(user)) throw NoMoreCandidatesException("Already requested candidates today.");
 	auto lista = this->profileServices->getAllUsers();
-	set<User*> remaining;
+	auto alreadyLiked = this->getLikesForUser(user);
+	std::list<Candidate*> candidates;
 	for (auto itr= lista.begin(); itr != lista.end(); ++itr) {
-		if(*itr != user) remaining.insert(*itr);
+		if((*itr)->getId() != user->getId() && !this->findInList(alreadyLiked, (*itr))) {
+			candidates.push_back(new Candidate(*itr));
+		}
 		else delete *itr;
 	}
-	auto alreadyLiked = this->getLikesForUser(user);
-	for (auto otheritr = alreadyLiked.begin(); otheritr != alreadyLiked.end(); ++otheritr){
-		std::set<User*>::iterator found = remaining.find(*otheritr);
-		if (found != remaining.end()) {
-			User* todelete = *found;
-			remaining.erase(found);
-			delete todelete;
-		}
-		delete *otheritr;
-	}
-	std::list<User*> candidates = this->assembleListFromSet(remaining);
-	return candidates;
+	this->getCandidatesScores(candidates, user);
+	candidates.sort([] (const Candidate* first, const Candidate* second) {
+		return ( first->score < second->score );
+	});
+	return this->getUserListFromCandidates(candidates);
 }
 
-list<User*> MatchServices::assembleListFromSet(set<User*> toConvert) {
-	std::list<User*> lista;
-	for (auto itr=toConvert.begin(); itr!=toConvert.end(); ++itr) {
-		lista.push_back(*itr);
+void MatchServices::getCandidatesScores(std::list<Candidate*> &lista, User* user) {
+	for (auto it = lista.begin(); it != lista.end() ; ++it) {
+		(*it)->numLiked = this->matchDao->getNumLiked((*it)->getUser());
+		(*it)->score = this->getCommonInterests((*it)->getUser(), user) * 3 - (*it)->numLiked;
 	}
-	return lista;
+}
+
+int MatchServices::getCommonInterests(User* userA, User* userB) {
+	std::list<Interest*> intereses = userA->getInterests();
+	int contador = 0;
+	for (auto it = intereses.begin(); it != intereses.end(); ++it) {
+		if (userB->likesInterest(*it)) contador++;
+	}
+	return contador;
+}
+
+list<User*> MatchServices::getUserListFromCandidates(std::list<Candidate*> candidatos) {
+	std::list<User*> toReturn;
+	int contador = 0;
+	for (auto itr=candidatos.begin(); itr!=candidatos.end() && contador < this->dailyLimit; ++itr) {
+		toReturn.push_back((*itr)->getUser());
+		contador++;
+	}
+	return toReturn;
+}
+
+bool MatchServices::findInList(std::list<User*> likes, User* tofind) {
+	for(auto itr = likes.begin(); itr != likes.end(); ++itr) {
+		if ((*itr)->getId() == tofind->getId()) return true;
+	}
+	return false;
 }
 
 bool MatchServices::hasRemainingCandidates(User* user) {

@@ -61,7 +61,7 @@ public:
     /**
      * Returns de id of the user.
      */
-    string getId();
+    string getId() const;
 
     /**
      * Returns the name of the user;
@@ -203,10 +203,11 @@ public:
 
     static unordered_map<string, set<string>> populateInterests(Json::Value &root);
 
-    bool operator== (User &other);
-    bool operator!= (User &other);
-    bool operator< (User &other);
-    bool operator> (User &other);
+    /**
+     * Returns true or false if the user likes the same interest
+     * @param interest interest to check if the user has it or not.
+     */
+     bool likesInterest(Interest* interest);
 
 private:
     int age;
