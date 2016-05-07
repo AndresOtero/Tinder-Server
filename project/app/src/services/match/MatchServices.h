@@ -43,8 +43,9 @@ public:
 	list<User*> getLikesForUser(User* user);
 
 	/**
-	 * Returns a list of all the candidate the user has today. If he has already requested the list today,
-	 * NoMoreCandidatesException is raised. The caller has to delete the users.
+	 * Returns a list of all the candidate the user has today. The list is sorted, the best candidates are first.
+	 * If he has already requested the list today, NoMoreCandidatesException is raised. The caller has to delete
+	 * the users.
 	 */
 	list<User*> getCandidatesForUser(User* user);
 

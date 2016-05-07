@@ -8,6 +8,10 @@
 
 #include <User.h>
 
+/**
+ * @class Candidate
+ * Provides the necessary items to evaluate the candidates.
+ */
 class Candidate {
 public:
 	Candidate(User* user);

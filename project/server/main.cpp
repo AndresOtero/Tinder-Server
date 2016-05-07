@@ -30,7 +30,6 @@ int main() {
 	DBConnector translationDB = DBConnector("/tmp/translation/");
 	if(!authenticationDB.isOk()) LOG_ERROR << ("Error abriendo la DB de traducción.");
 
-	boost::filesystem::remove_all("/tmp/match"); //Debugin purpouse
 	DBConnector matchDB = DBConnector("/tmp/match");
 	if(!matchDB.isOk()) LOG_ERROR << ("Error abriendo la DB de match.");
 
@@ -43,11 +42,6 @@ int main() {
 	AuthenticationService authService(&authDAO, &profileService);
 	MatchServices matchServices(&matchDAO,&profileService);
 
-	User* usuario = profileService.getUserByID("chelo3");
-	User* otro = profileService.getUserByID("asdasd@adsdac-om");
-	matchServices.likeAUser(usuario, otro);
-	std::list<User*> candidatos = matchServices.getCandidatesForUser(usuario);
-	LOG_INFO << candidatos.size();
 
 	SecurityFilter securityFilter(authService);
 	securityFilter.excludeRegex("/auth");
