@@ -8,6 +8,9 @@
 #include <SecurityFilter.h>
 #include <MatchServices.h>
 #include <boost/filesystem/operations.hpp>
+#include <Options.h>
+#include <OptionsReader.h>
+#include <CorruptOptionsException.h>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -17,20 +20,22 @@
 #include "services/authentication/AuthenticationService.h"
 
 int main() {
+	Options* options = OptionsReader::loadDefaultOptions();
+
 	LOG_INFO << "Testing conection to shared server.";
-	SharedConnector sharedConnector = SharedConnector("http://tinder-shared.herokuapp.com");
+	SharedConnector sharedConnector = SharedConnector(options->getSharedServerURL());
 	if(!sharedConnector.testConnection()) LOG_ERROR << "Error probando conexion con el shared server";
 	else LOG_INFO << "CONNECTION [OK]";
 
 
 	LOG_INFO << "Starting DB";
-	DBConnector authenticationDB = DBConnector("/tmp/authentication/");
+	DBConnector authenticationDB = DBConnector(options->getDbLocation() + "/authentication/");
 	if(!authenticationDB.isOk()) LOG_ERROR << ("Error abriendo la DB de autenticación.");
 
-	DBConnector translationDB = DBConnector("/tmp/translation/");
+	DBConnector translationDB = DBConnector(options->getDbLocation() + "/translation/");
 	if(!authenticationDB.isOk()) LOG_ERROR << ("Error abriendo la DB de traducción.");
 
-	DBConnector matchDB = DBConnector("/tmp/match");
+	DBConnector matchDB = DBConnector(options->getDbLocation() + "/match");
 	if(!matchDB.isOk()) LOG_ERROR << ("Error abriendo la DB de match.");
 
 	LOG_INFO << "Starting WebServer";
