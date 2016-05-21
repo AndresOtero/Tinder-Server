@@ -35,13 +35,14 @@ int main(int argc, char* argv[]) {
 		LOG_INFO << "No se recibio archivo de opciones. Cargando valores por defecto.";
 		options = OptionsReader::loadDefaultOptions();
 	}
+	if(options->getLogLevel() == "debug") setDebugFilter();
+	else setInfoFilter();
 
-
+	LOG_DEBUG << "No deberia salir";
 	LOG_INFO << "Testing conection to shared server.";
 	SharedConnector sharedConnector = SharedConnector(options->getSharedServerURL());
 	if(!sharedConnector.testConnection()) LOG_ERROR << "Error probando conexion con el shared server";
 	else LOG_INFO << "CONNECTION [OK]";
-
 
 	LOG_INFO << "Starting DB";
 	DBConnector authenticationDB = DBConnector(options->getDbLocation() + "/authentication/");
