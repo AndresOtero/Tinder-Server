@@ -8,13 +8,17 @@
 #include "string"
 using namespace std;
 
+
+void setInfoFilter();
+void setDebugFilter();
+
 /**
  * File where to store logs
 */
 #define LOGFILE "logfile.log"
 
 /**
- * Default Severety level
+ * Default Severity level
  */
 #define SEVERITY_THRESHOLD logging::trivial::debug
 
