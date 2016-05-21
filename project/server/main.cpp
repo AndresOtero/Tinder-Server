@@ -19,8 +19,23 @@
 #include "api/AuthResource.h"
 #include "services/authentication/AuthenticationService.h"
 
-int main() {
-	Options* options = OptionsReader::loadDefaultOptions();
+int main(int argc, char* argv[]) {
+	Options* options;
+	if (argc == 3 && string(argv[1]) == "-config"){
+		try {
+			LOG_INFO << "Archivo de opciones recibido: " + string(argv[2]) ;
+			options = OptionsReader::readOptionsFromFile(string(argv[2]));
+		}
+		catch (CorruptOptionsException &e){
+			LOG_WARNING << "Error cargando archivo de configuracion. Cargando valores por defecto.";
+			options = OptionsReader::loadDefaultOptions();
+		}
+	}
+	else {
+		LOG_INFO << "No se recibio archivo de opciones. Cargando valores por defecto.";
+		options = OptionsReader::loadDefaultOptions();
+	}
+
 
 	LOG_INFO << "Testing conection to shared server.";
 	SharedConnector sharedConnector = SharedConnector(options->getSharedServerURL());
