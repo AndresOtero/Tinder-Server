@@ -23,6 +23,7 @@ bool SecurityFilter::doFilter(WebContext &context) {
             return true;
         }
 
+        context.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
         return false;
     }
     return true;
