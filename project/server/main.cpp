@@ -11,6 +11,7 @@
 #include <Options.h>
 #include <OptionsReader.h>
 #include <CorruptOptionsException.h>
+#include <LocationResource.h>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -73,8 +74,11 @@ int main(int argc, char* argv[]) {
 	user.setup(dispatcher);
 
 	AuthResource auth (&authService);
-
 	auth.setup(dispatcher);
+
+	LocationResource locationRes(profileService);
+	locationRes.setup(dispatcher);
+
 	WebServer ws(dispatcher);
 
 	ws.start();

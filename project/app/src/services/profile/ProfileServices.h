@@ -78,6 +78,14 @@ public:
 	 */
 	void saveNewInterest(string category, string value);
 
+	/**
+	 * update user location
+	 * @param username The username
+	 * @param latitude latitude where the user is
+	 * @param longitude longitude where the user is
+	 *
+	 */
+	void updateLocation(string username, double latitude, double longitude);
 
 
 private:

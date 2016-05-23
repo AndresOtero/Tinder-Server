@@ -132,6 +132,16 @@ void ProfileServices::reloadMapping() {
     }
 }
 
+void ProfileServices::updateLocation(string username, double latitude, double longitude) {
+    User * user = this->getUserByID(username);
+    user->setLongitude(longitude);
+    user->setLatitude(latitude);
+    this->saveOrUpdateProfile(user);
+    delete user;
+}
+
+
+
 
 
 
