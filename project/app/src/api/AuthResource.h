@@ -49,6 +49,13 @@ public:
  	*/
 	void create(WebContext & wc);
 
+	/**
+	* Delete user from the system
+	*
+ 	* @param wc WebContext Rest request context
+ 	*
+ 	*/
+	void remove(WebContext & wc);
 
 	virtual ~AuthResource();
 };

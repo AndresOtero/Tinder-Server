@@ -64,6 +64,13 @@ public:
 	 * @param id of the user to delete.
 	 */
 	void deleteUserByID(int id);
+/**
+	 * It deletes the user with the given ID from the shared server. If the user is not found it throws
+	 * UserNotFoundException.
+	 *
+	 * @param id of the user to delete.
+	 */
+	void deleteUserByID(string id);
 
 	/**
 	 * It gets all the interests saved in the shared server.

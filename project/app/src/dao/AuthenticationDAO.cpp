@@ -19,3 +19,8 @@ string AuthenticationDAO::getPassword(string username) {
 }
 
 AuthenticationDAO::AuthenticationDAO(DBConnector &dbConnector) : dbConnector(dbConnector) { }
+
+void AuthenticationDAO::deleteUser(string username) {
+ 	this->dbConnector.deleteKey(username);
+}
+

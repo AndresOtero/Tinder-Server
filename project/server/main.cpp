@@ -68,7 +68,8 @@ int main(int argc, char* argv[]) {
 
 
 	SecurityFilter securityFilter(authService);
-	securityFilter.excludeRegex("/auth");
+	securityFilter.excludeRegex(RestRequest::POST, "/auth");
+	securityFilter.excludeRegex(RestRequest::PUT, "/auth");
 	ApiDispatcher dispatcher(securityFilter);
 
 	UserResource user(profileService);

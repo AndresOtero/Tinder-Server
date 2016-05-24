@@ -50,4 +50,18 @@ bool AuthenticationService::saveNewUser(std::string username, std::string passwo
 
 }
 
+void AuthenticationService::deleteUser(std::string username) {
+	if(this->dao->isUsernameTaken(username)) {
+		this->dao->deleteUser(username);
+		try {
+			this->profileService->deleteUserByID(username);
+		} catch (UserNotFoundException & e) {
+			//no action to do.
+		}
+	}
+
+}
+
+
+
 

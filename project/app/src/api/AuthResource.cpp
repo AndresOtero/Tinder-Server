@@ -26,6 +26,8 @@ void AuthResource::setup(ApiDispatcher &dispatcher) {
                                 (function<void(WebContext &)>) bind(&AuthResource::authenticate, this, _1));
     dispatcher.registerEndPoint(RestRequest::POST, "/auth",
                                 (function<void(WebContext &)>) bind(&AuthResource::create, this, _1));
+    dispatcher.registerEndPoint(RestRequest::DELETE, "/auth",
+                                (function<void(WebContext &)>) bind(&AuthResource::remove, this, _1));
 
 }
 
@@ -74,3 +76,9 @@ void AuthResource::create(WebContext &wc) {
     }
 
 }
+
+void AuthResource::remove(WebContext &wc) {
+        service->deleteUser(wc.getUserid());
+}
+
+

@@ -154,6 +154,13 @@ void ProfileServices::updateLocation(string username, double latitude, double lo
     delete user;
 }
 
+void ProfileServices::deleteUserByID(string id) {
+    int translated = this->translateId(id, false);
+    this->deleteUserByID(translated);
+}
+
+
+
 
 
 
