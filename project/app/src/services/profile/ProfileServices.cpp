@@ -80,11 +80,17 @@ void ProfileServices::saveNewInterest(string category, string value) {
 }
 
 void ProfileServices::addInterest(string userid, string category, string value) {
-	//TODO MATY TIENE TU NOMBRE ESTO
+    User * user = this->getUserByID(userid);
+    user->addInterest(category, value);
+    this->saveOrUpdateProfile(user);
+    delete user;
 }
 
 void ProfileServices::removeInterest(string userid, string category, string value) {
-	//TODO tiene que remover un interes de la lista de usuarios.
+    User * user = this->getUserByID(userid);
+    user->removeInterest(category, value);
+    this->saveOrUpdateProfile(user);
+    delete user;
 }
 
 User *ProfileServices::getUserByID(string id) {
@@ -139,6 +145,16 @@ void ProfileServices::reloadMapping() {
         delete user;
     }
 }
+
+void ProfileServices::updateLocation(string username, double latitude, double longitude) {
+    User * user = this->getUserByID(username);
+    user->setLongitude(longitude);
+    user->setLatitude(latitude);
+    this->saveOrUpdateProfile(user);
+    delete user;
+}
+
+
 
 
 

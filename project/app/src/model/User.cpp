@@ -16,7 +16,7 @@ User::User(string id, string name, int externalId, string email, string sex, int
 
 User::~User() {}
 
-string User::getId() {
+string User::getId() const {
 	return this->id;
 }
 
@@ -219,6 +219,17 @@ void User::setAlias(string alias) {
 string User::getAlias() {
 	return this->alias;
 }
+
+
+bool User::likesInterest(Interest *interest) {
+	auto iter = this->interests.find(interest->getCategory());
+	if (iter == this->interests.end()) return false;
+	return iter->second.find(interest->getValue()) != iter->second.end();
+}
+
+
+
+
 
 
 

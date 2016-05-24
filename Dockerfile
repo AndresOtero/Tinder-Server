@@ -12,6 +12,6 @@ MAINTAINER jtierno jtierno
 COPY ./ /home
 
 RUN cd /home && chmod 777 config.sh
-RUN cd /home && ./config.sh
+RUN cd /home && ./config.sh -test -dependencies	
 WORKDIR /home/build
 CMD ["bash"]

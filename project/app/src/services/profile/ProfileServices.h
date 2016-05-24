@@ -78,9 +78,33 @@ public:
 	 */
 	void saveNewInterest(string category, string value);
 
+
+	/**
+	 * Add interest to user
+	 * @param userid the user
+	 * @param category category of interest
+	 * @param value value of interest
+	 */
 	void addInterest(string userid, string category, string value);
 
+	/**
+ 	* Remove interest to user
+ 	* @param userid the user
+ 	* @param category category of interest
+ 	* @param value value of interest
+ 	*/
 	void removeInterest(string userid, string category, string value);
+
+	/**
+	 * update user location
+	 * @param username The username
+	 * @param latitude latitude where the user is
+	 * @param longitude longitude where the user is
+	 *
+	 */
+	void updateLocation(string username, double latitude, double longitude);
+
+
 
 private:
 	unordered_map<string, set<string>> populateInterests(Json::Value &root);

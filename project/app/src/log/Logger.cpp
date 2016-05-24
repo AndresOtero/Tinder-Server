@@ -61,3 +61,19 @@ BOOST_LOG_GLOBAL_LOGGER_INIT(logger, src::severity_logger_mt) {
 
     return logger;
 }
+
+
+void setInfoFilter() {
+    logging::core::get()->set_filter
+            (
+                    logging::trivial::severity >= logging::trivial::info
+            );
+}
+
+void setDebugFilter() {
+    logging::core::get()->set_filter
+            (
+                    logging::trivial::severity >= logging::trivial::debug
+            );
+}
+

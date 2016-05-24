@@ -49,9 +49,9 @@ bool MatchDAO::checkForMatch(User* userA, User* userB) {
 
 tm* MatchDAO::getLastRequestTime(User *user) {
 	Json::Value json = this->getUserEntry(user);
-	std::istringstream lastDate(json["lastRequest"].asString());
+	string fecha = json["lastRequest"].asString();
 	tm* lastDateStruct = (tm*) malloc(sizeof(tm));
-	lastDate >> std::get_time( lastDateStruct, "%d/%m/%Y" );
+	if(!strptime(fecha.c_str(),"%a %b %e %H:%M:%S %Y" ,lastDateStruct)) throw DBException("ERROR parsing last requested time.");
 	return lastDateStruct;
 }
 
@@ -60,15 +60,24 @@ void MatchDAO::initializeUserEntry(User *user) {
 	Json::Value json;
 	time_t currentDay = time(NULL);
 	struct tm* timeStruct = localtime(&currentDay);
-	string timeStamp(to_string(timeStruct->tm_mday) + "/" + to_string(timeStruct->tm_mon + 1) + "/" +
-			                 to_string(timeStruct->tm_year + 1970));
+	if (timeStruct->tm_mday - 1 == 0)  timeStruct->tm_mday = 30;
+	else timeStruct->tm_mday = timeStruct->tm_mday - 1;
+
+	string timeStamp(asctime(timeStruct));
 	json["lastRequest"] = timeStamp;
+	json["numLiked"] = 0;
 	json["numLikes"] = 0;
 	json["numMatches"] = 0;
 	json["likes"] = Json::Value(Json::arrayValue);
 	json["matches"] = Json::Value(Json::arrayValue);
 	Json::FastWriter writer;
 	this->connector->putValueInKey(user->getId(), writer.write(json));
+}
+
+
+int MatchDAO::getNumLiked(User *user) {
+	Json::Value json = this->getUserEntry(user);
+	return json["numLiked"].asInt();
 }
 
 
@@ -81,6 +90,9 @@ void MatchDAO::saveLike(User *userA, User *userB) {
 	Json::FastWriter writer;
 	string toSave = writer.write(json);
 	this->connector->putValueInKey(userA->getId(), toSave);
+	Json::Value jsonB = this->getUserEntry(userB);
+	jsonB["numLiked"] = jsonB["numLiked"].asInt() + 1;
+	this->connector->putValueInKey(userB->getId(), writer.write(jsonB));
 }
 
 void MatchDAO::addMatch(User* userA, User* userB) {

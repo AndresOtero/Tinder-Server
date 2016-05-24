@@ -8,6 +8,7 @@
 #include <User.h>
 #include <ProfileServices.h>
 #include "MatchDAO.h"
+#include "Candidate.h"
 
 /**
  * @class MatchServices
@@ -42,8 +43,9 @@ public:
 	list<User*> getLikesForUser(User* user);
 
 	/**
-	 * Returns a list of all the candidate the user has today. If he has already requested the list today,
-	 * NoMoreCandidatesException is raised. The caller has to delete the users.
+	 * Returns a list of all the candidate the user has today. The list is sorted, the best candidates are first.
+	 * If he has already requested the list today, NoMoreCandidatesException is raised. The caller has to delete
+	 * the users.
 	 */
 	list<User*> getCandidatesForUser(User* user);
 
@@ -62,9 +64,14 @@ public:
 private:
 	MatchDAO* matchDao;
 	ProfileServices* profileServices;
+	int dailyLimit;
 
+	bool findInList(list<User*> likes, User* tofind);
 	bool hasRemainingCandidates(User* user);
 	list<User*> getUsersFromIDs(list<string> &ids);
+	list<User*> getUserListFromCandidates(std::list<Candidate*> candidatos);
+	void getCandidatesScores(std::list<Candidate*> &lista, User* user);
+	int getCommonInterests(User* userA, User* userB);
 };
 
 

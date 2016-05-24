@@ -1,0 +1,5 @@
+{
+  "Log_Level" : "PRUEBA",
+  "Shared_URL" : "http://tinder-shared.herokuapp.com",
+  "Local_DB" : "/tmp"
+}

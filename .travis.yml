@@ -17,8 +17,17 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-5
-      env: COMPILER=g++-5
-
+      env: 
+        - COMPILER=g++-5
+        - GCOV_PREFIX=${TRAVIS_BUILD_DIR}/build
+        - GCOV_PREFIX_STRIP=6
+install:
+  - sudo add-apt-repository ppa:afrank/boost -y
+  - sudo apt-get update -q
+  - sudo apt-get install -y lcov
+  - sudo gem install coveralls-lcov
+  - sudo apt-get install -y autotools-dev libicu-dev build-essential cmake libbz2-dev libcrypto++-dev zlib1g-dev libsnappy-dev libcurl4-gnutls-dev gcovr
+  - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 before_install:
  # - sudo apt-get update -qq
  # - sudo apt-get install -y build-essential autotools-dev libicu-dev libsnappy-dev libbz2-dev zlib1g-dev gcovr lcov libcurl4-gnutls-dev libcrypto++-dev
@@ -26,7 +35,11 @@ before_install:
  # - sudo apt-get update -q
  # - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 script:
-  - chmod 777 ./config.sh
-  - sudo ./config.sh -oldboost -travis
-  - cd build
+  - mkdir -p build
+  - cd build 
+  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
   - ./test/applib/testapp
+after_success:
+  - make coverage
+  - lcov --list coverage-report.info
+  - coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info
