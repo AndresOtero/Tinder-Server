@@ -31,6 +31,11 @@ public:
          */
 	void saveUser(string username, string password);
 
+	/**
+	 * Delete user
+	 * @param username the username
+	 */
+	void deleteUser(string username);
 
 	string getPassword(string user);
 	DBConnector & dbConnector;

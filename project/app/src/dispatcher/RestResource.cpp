@@ -1,14 +1,14 @@
 #include <ApiConstants.h>
 #include "RestResource.h"
+#include "ParsingContentException.h"
 
 
 void RestResource::readJson(WebContext &wc, Json::Value & value) {
     Json::Reader reader;
     bool success = reader.parse(wc.getRequest().getContent(), value);
     if(!success) {
-        throw "Error reading json";
+        throw ParsingContentException();
     }
-
 
 }
 

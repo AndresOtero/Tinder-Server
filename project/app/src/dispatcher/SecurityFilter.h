@@ -9,24 +9,25 @@
 #include <regex>
 #include "Filter.h"
 #include "string"
-
+#include <unordered_map>
+#include <set>
 using namespace std;
 
 class SecurityFilter: public Filter {
 private:
     AuthenticationService & service;
-    list<regex> excludedRegexs;
+    unordered_map<string, set<string>> excludedRegexs;
 protected:
     bool doFilter(WebContext & context);
 
 public:
     SecurityFilter(AuthenticationService & service);
 
-    void excludeRegex(string regex);
+    void excludeRegex(RestRequest::Method method, string regex);
 
     virtual ~SecurityFilter();
 
-    bool isSecured(string uri);
+    bool isSecured(RestRequest::Method method, string uri);
 };
 
 

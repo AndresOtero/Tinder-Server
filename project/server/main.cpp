@@ -6,6 +6,7 @@
 #include <User.h>
 #include <ProfileServices.h>
 #include <SecurityFilter.h>
+#include <InterestResource.h>
 #include <MatchServices.h>
 #include <boost/filesystem/operations.hpp>
 #include <Options.h>
@@ -57,6 +58,7 @@ int main(int argc, char* argv[]) {
 	if(!matchDB.isOk()) LOG_ERROR << ("Error abriendo la DB de match.");
 
 	LOG_INFO << "Starting WebServer";
+
 	MatchDAO matchDAO(&matchDB);
 	UserDAO userDAO(&sharedConnector);
 	AuthenticationDAO authDAO (authenticationDB);
@@ -68,7 +70,8 @@ int main(int argc, char* argv[]) {
 
 
 	SecurityFilter securityFilter(authService);
-	securityFilter.excludeRegex("/auth");
+	securityFilter.excludeRegex(RestRequest::POST, "/auth");
+	securityFilter.excludeRegex(RestRequest::PUT, "/auth");
 	ApiDispatcher dispatcher(securityFilter);
 
 	UserResource user(profileService);
@@ -76,6 +79,9 @@ int main(int argc, char* argv[]) {
 
 	AuthResource auth (&authService);
 	auth.setup(dispatcher);
+
+	InterestResource interestResource(profileService);
+	interestResource.setup(dispatcher);
 
 	LocationResource locationRes(profileService);
 	locationRes.setup(dispatcher);

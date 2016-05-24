@@ -59,6 +59,13 @@ public:
 	 */
 	bool saveNewUser(std::string username, std::string password);
 
+
+	/**
+ 	* Delete an user with his profile
+ 	*
+ 	* @param username to delete.
+ 	*/
+	void deleteUser(std::string username, std::string password);
 private:
 
 	AuthenticationDAO * dao;

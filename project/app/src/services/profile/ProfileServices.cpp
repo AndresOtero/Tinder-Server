@@ -44,15 +44,20 @@ void ProfileServices::deleteUserByID(int id) {
 
 void ProfileServices::saveOrUpdateProfile(User *user) {
     try {
-        int externalId = this->translateId(user->getId(), true);
+
         //if is registered
-        user->setExternalId(externalId);
+        User * storedUser = this->getUserByID(user->getId());
+        user->setExternalId(storedUser->getExternalId());
         //mantengo sincronizado el email.
         user->setEmail(user->getId());
-        this->dao->updateUser(user);
+        this->dao->updateUser(storedUser);
+        delete storedUser;
+
     } catch (UserNotFoundException &e) {
         //if not registered
+        this->translationDAO->remove(user->getId());
         this->dao->saveNewUser(user);
+        this->translationDAO->save(user->getId(), user->getExternalId());
     } catch (ConnectionException &e) {
         LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
         throw ServiceException(e.what());
@@ -77,6 +82,20 @@ void ProfileServices::saveNewInterest(string category, string value) {
         LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
         throw ServiceException(e.what());
     }
+}
+
+void ProfileServices::addInterest(string userid, string category, string value) {
+    User * user = this->getUserByID(userid);
+    user->addInterest(category, value);
+    this->saveOrUpdateProfile(user);
+    delete user;
+}
+
+void ProfileServices::removeInterest(string userid, string category, string value) {
+    User * user = this->getUserByID(userid);
+    user->removeInterest(category, value);
+    this->saveOrUpdateProfile(user);
+    delete user;
 }
 
 User *ProfileServices::getUserByID(string id) {
@@ -139,6 +158,13 @@ void ProfileServices::updateLocation(string username, double latitude, double lo
     this->saveOrUpdateProfile(user);
     delete user;
 }
+
+void ProfileServices::deleteUserByID(string id) {
+    int translated = this->translateId(id, false);
+    this->deleteUserByID(translated);
+    this->translationDAO->remove(id);
+}
+
 
 
 

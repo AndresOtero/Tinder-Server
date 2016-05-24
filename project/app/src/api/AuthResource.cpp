@@ -26,11 +26,12 @@ void AuthResource::setup(ApiDispatcher &dispatcher) {
                                 (function<void(WebContext &)>) bind(&AuthResource::authenticate, this, _1));
     dispatcher.registerEndPoint(RestRequest::POST, "/auth",
                                 (function<void(WebContext &)>) bind(&AuthResource::create, this, _1));
+    dispatcher.registerEndPoint(RestRequest::DELETE, "/auth",
+                                (function<void(WebContext &)>) bind(&AuthResource::remove, this, _1));
 
 }
 
 void AuthResource::authenticate(WebContext &wc) {
-    try {
         Json::Value parsed;
         this->readJson(wc, parsed);
         string user = parsed.get("user", "").asString();
@@ -44,10 +45,6 @@ void AuthResource::authenticate(WebContext &wc) {
         } else {
             wc.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
         }
-    } catch (string &e) {
-        LOG_DEBUG << LOG_PREFIX << "Error parsing request " << e;
-        wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
-    }
 }
 
 AuthResource::~AuthResource() {
@@ -72,9 +69,6 @@ void AuthResource::create(WebContext &wc) {
             this->writeJsonResponse(wc, json);
         }
 
-    } catch (string &e) {
-        LOG_DEBUG << LOG_PREFIX << "Error parsing request " << e;
-        wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
     } catch (AuthenticationException &e) {
         wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
         LOG_DEBUG << LOG_PREFIX << "Error creating user " << e.what();
@@ -82,3 +76,17 @@ void AuthResource::create(WebContext &wc) {
     }
 
 }
+
+void AuthResource::remove(WebContext &wc) {
+    try {
+        Json::Value parsed;
+        this->readJson(wc, parsed);
+        string password = parsed.get("password", "").asString();
+        service->deleteUser(wc.getUserid(), password);
+    } catch (AuthenticationException const & e) {
+        LOG_DEBUG << LOG_PREFIX << "Error deleting user " << e.what();
+        wc.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
+    }
+}
+
+

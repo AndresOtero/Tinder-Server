@@ -64,6 +64,13 @@ public:
 	 * @param id of the user to delete.
 	 */
 	void deleteUserByID(int id);
+/**
+	 * It deletes the user with the given ID from the shared server. If the user is not found it throws
+	 * UserNotFoundException.
+	 *
+	 * @param id of the user to delete.
+	 */
+	void deleteUserByID(string id);
 
 	/**
 	 * It gets all the interests saved in the shared server.
@@ -78,6 +85,23 @@ public:
 	 */
 	void saveNewInterest(string category, string value);
 
+
+	/**
+	 * Add interest to user
+	 * @param userid the user
+	 * @param category category of interest
+	 * @param value value of interest
+	 */
+	void addInterest(string userid, string category, string value);
+
+	/**
+ 	* Remove interest to user
+ 	* @param userid the user
+ 	* @param category category of interest
+ 	* @param value value of interest
+ 	*/
+	void removeInterest(string userid, string category, string value);
+
 	/**
 	 * update user location
 	 * @param username The username
@@ -86,6 +110,7 @@ public:
 	 *
 	 */
 	void updateLocation(string username, double latitude, double longitude);
+
 
 
 private:

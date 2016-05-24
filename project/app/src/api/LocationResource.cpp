@@ -31,9 +31,11 @@ void LocationResource::updateLocation(WebContext & context) {
         this->service.updateLocation(username, latitude, longitude);
     } catch (UserNotFoundException & e) {
         Json::Value result;
-        this->writeJsonResponse(context, result, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);
+         this->writeJsonResponse(context, result, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);
     } catch (ServiceException &e) {
         context.getResponse().setStatus(STATUS_500_INTERNAL_SERVER_ERROR);
+    } catch (Json::LogicError) {
+        context.getResponse().setStatus(STATUS_400_BAD_REQUEST);
     }
 }
 
