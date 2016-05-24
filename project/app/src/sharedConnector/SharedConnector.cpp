@@ -69,7 +69,7 @@ void SharedConnector::postDataToURL(std::string endpoint, string data, string &r
 	res = curl_easy_perform(curl);
 
 	string respuesta((char *) chunk.memory);
-
+	response = string(respuesta);
 	/* always cleanup */
 	curl_easy_cleanup(curl);
 	string error = this->returnedError(res);
@@ -79,14 +79,15 @@ void SharedConnector::postDataToURL(std::string endpoint, string data, string &r
 	}
 }
 
-void SharedConnector::postDataToURL(std::string endpoint, string data, Json::Value &response) {
-	string respuesta;
-	this->postDataToURL(endpoint,data,respuesta);
+void SharedConnector::postDataToURL(std::string endpoint, string data, Json::Value &expectedResponse) {
+	string requestResponse;
+	this->postDataToURL(endpoint,data,requestResponse);
 
-
-	Json::Reader reader;
-	bool resultado = reader.parse(respuesta, response);
-	if(!resultado) throw ConnectionException("Error parsing response");
+	if(requestResponse != "") {
+		Json::Reader reader;
+		bool resultado = reader.parse(requestResponse, expectedResponse);
+		if(!resultado) throw ConnectionException("Error parsing response");
+	};
 }
 
 

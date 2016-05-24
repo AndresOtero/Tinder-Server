@@ -58,7 +58,7 @@ public:
 	 * @param data to send to the endpoint.
 	 * @param response the response of the request is stored there.
 	 */
-	void postDataToURL(std::string endpoint, std::string data, Json::Value &response);
+	void postDataToURL(std::string endpoint, std::string data, Json::Value &expectedResponse);
 
 	/**
 	 * Using the verb Post it send data to the endpoint received and stores the response as a Json. It returns true or false if
