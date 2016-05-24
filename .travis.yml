@@ -47,4 +47,4 @@ script:
 after_success:
   - make coverage
   - lcov --list coverage-report.info
-  - coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info
+  - sudo coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info
