@@ -37,11 +37,12 @@ before_install:
 script:
   - mkdir -p build
   - cd build 
-  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
   - export GCOV_PREFIX
   - export GCOV_PREFIX_STRIP
+  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make
   - ./test/applib/testapp
   - strings ./test/applib/testapp | grep gcda 
+  - pwd
   - sudo find -name *.gcda
 after_success:
   - make coverage
