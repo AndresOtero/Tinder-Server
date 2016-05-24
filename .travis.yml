@@ -43,12 +43,7 @@ script:
   - export GCOV_PREFIX_STRIP
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make
   - sudo ./test/applib/testapp
-  - strings ./test/applib/testapp | grep gcda 
-  - pwd
-  - find  /usr/lib/gcc -name libgcov.a
 after_success:
   - make coverage
-  - cd app/CMakeFiles/applib.dir/src/services
-  - ls 
   - lcov --list coverage-report.info
   - coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info
