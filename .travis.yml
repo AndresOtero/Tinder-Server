@@ -30,6 +30,7 @@ install:
   - sudo apt-get install -y autotools-dev libicu-dev build-essential cmake libbz2-dev libcrypto++-dev zlib1g-dev libsnappy-dev libcurl4-gnutls-dev gcovr
   - sudo apt-get install libboost1.57-all libboost1.57-all-dev
 before_install:
+  - sudo update-alternatives --slave /usr/bin/gcov gcov /usr/bin/gcov-5
  # - sudo apt-get update -qq
  # - sudo apt-get install -y build-essential autotools-dev libicu-dev libsnappy-dev libbz2-dev zlib1g-dev gcovr lcov libcurl4-gnutls-dev libcrypto++-dev
  # - sudo add-apt-repository ppa:afrank/boost -y
