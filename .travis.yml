@@ -40,7 +40,8 @@ script:
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
   - export GCOV_PREFIX
   - export GCOV_PREFIX_STRIP
-  - ./test/applib/testapp 
+  - ./test/applib/testapp
+  - strings ./test/applib/testapp | grep gcda 
   - sudo find -name / *.gcda
 after_success:
   - make coverage 
