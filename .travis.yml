@@ -19,8 +19,8 @@ matrix:
             - g++-5
       env: 
         - COMPILER=g++-5
-        - GCOV_PREFIX=${TRAVIS_BUILD_DIR}/build
-        - GCOV_PREFIX_STRIP=6
+        #- GCOV_PREFIX=${TRAVIS_BUILD_DIR}/build
+        #- GCOV_PREFIX_STRIP=6
 install:
   - sudo add-apt-repository ppa:afrank/boost -y
   - sudo apt-get update -q
@@ -38,6 +38,8 @@ script:
   - mkdir -p build
   - cd build 
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
+  - export GCOV_PREFIX
+  - export GCOV_PREFIX_STRIP
   - ./test/applib/testapp 
   - sudo find -name / *.gcda
 after_success:
