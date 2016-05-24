@@ -30,7 +30,6 @@ void AuthResource::setup(ApiDispatcher &dispatcher) {
 }
 
 void AuthResource::authenticate(WebContext &wc) {
-    try {
         Json::Value parsed;
         this->readJson(wc, parsed);
         string user = parsed.get("user", "").asString();
@@ -44,10 +43,6 @@ void AuthResource::authenticate(WebContext &wc) {
         } else {
             wc.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
         }
-    } catch (string &e) {
-        LOG_DEBUG << LOG_PREFIX << "Error parsing request " << e;
-        wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
-    }
 }
 
 AuthResource::~AuthResource() {
@@ -72,9 +67,6 @@ void AuthResource::create(WebContext &wc) {
             this->writeJsonResponse(wc, json);
         }
 
-    } catch (string &e) {
-        LOG_DEBUG << LOG_PREFIX << "Error parsing request " << e;
-        wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
     } catch (AuthenticationException &e) {
         wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
         LOG_DEBUG << LOG_PREFIX << "Error creating user " << e.what();
