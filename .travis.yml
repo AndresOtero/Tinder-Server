@@ -43,6 +43,7 @@ script:
   - sudo ./test/applib/testapp
   - strings ./test/applib/testapp | grep gcda 
   - pwd
+  - find  /usr/lib/gcc -name libgcov.a
 after_success:
   - make coverage
   - cd app/CMakeFiles/applib.dir/src/services
