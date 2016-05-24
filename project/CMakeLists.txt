@@ -14,9 +14,9 @@ set(CMAKE_CXX_STANDARD 11)
 if(COVERAGE AND TEST)
 	message(STATUS "TESTS COVERAGE ENABLED")
 	include(CodeCoverage)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
-	SET(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage -coverage")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage -coverage")
+	SET(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage -coverage")
     SETUP_TARGET_FOR_COVERAGE(
 				coverage  # Name for custom target.
 				testapp         # Name of the test driver executable that runs the tests.
