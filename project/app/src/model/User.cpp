@@ -227,6 +227,34 @@ bool User::likesInterest(Interest *interest) {
 	return iter->second.find(interest->getValue()) != iter->second.end();
 }
 
+void User::addInterest(string category, string value) {
+	unordered_map<std::string, set<string>>::const_iterator got = this->interests.find(category);
+	if ( got == this->interests.end() ) {
+		set<string> newSet;
+		newSet.insert(value);
+		this->interests[category] = newSet;
+	} else {
+		set<string> valores = got->second;
+		valores.insert(value);
+		this->interests[category] = valores;
+	}
+}
+
+void User::removeInterest(string category, string value) {
+	unordered_map<std::string, set<string>>::const_iterator got = this->interests.find(category);
+	if (got != this->interests.end() ) {
+		set<string> & interSet= got->second;
+		interSet.erase(value);
+		if(interSet.size() == 0) {
+			this->interests.erase(got);
+		}
+	}
+}
+
+
+
+
+
 
 
 

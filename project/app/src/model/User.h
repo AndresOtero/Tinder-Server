@@ -209,6 +209,21 @@ public:
      */
      bool likesInterest(Interest* interest);
 
+    /**
+     * Add an interest if not exsist
+     *
+     * @param category the category of interest
+     * @param value the interest
+     */
+     void addInterest(string category, string value);
+
+    /**
+    * Remove an interest
+    *
+    * @param category the category of interest
+    * @param value the interest
+    */
+    void removeInterest(string category, string value);
 private:
     int age;
     string sex;
