@@ -50,14 +50,20 @@ bool AuthenticationService::saveNewUser(std::string username, std::string passwo
 
 }
 
-void AuthenticationService::deleteUser(std::string username) {
+void AuthenticationService::deleteUser(std::string username, std::string password) {
 	if(this->dao->isUsernameTaken(username)) {
-		this->dao->deleteUser(username);
-		try {
-			this->profileService->deleteUserByID(username);
-		} catch (UserNotFoundException & e) {
-			//no action to do.
+		if(this->isLoginValid(username, password)) {
+			this->dao->deleteUser(username);
+			try {
+				this->profileService->deleteUserByID(username);
+				LOG_DEBUG << "User profile deleted: " << username;
+			} catch (UserNotFoundException & e) {
+				LOG_DEBUG << "User profile inexistent: " << username;
+			}
+		} else {
+			throw AuthenticationException("Must be a valid login");
 		}
+
 	}
 
 }

@@ -65,7 +65,7 @@ public:
  	*
  	* @param username to delete.
  	*/
-	void deleteUser(std::string username);
+	void deleteUser(std::string username, std::string password);
 private:
 
 	AuthenticationDAO * dao;

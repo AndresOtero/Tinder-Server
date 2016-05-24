@@ -78,7 +78,15 @@ void AuthResource::create(WebContext &wc) {
 }
 
 void AuthResource::remove(WebContext &wc) {
-        service->deleteUser(wc.getUserid());
+    try {
+        Json::Value parsed;
+        this->readJson(wc, parsed);
+        string password = parsed.get("password", "").asString();
+        service->deleteUser(wc.getUserid(), password);
+    } catch (AuthenticationException const & e) {
+        LOG_DEBUG << LOG_PREFIX << "Error deleting user " << e.what();
+        wc.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
+    }
 }
 
 
