@@ -12,6 +12,7 @@
 #include <OptionsReader.h>
 #include <CorruptOptionsException.h>
 #include <LocationResource.h>
+#include <CandidateResource.h>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -39,7 +40,7 @@ int main(int argc, char* argv[]) {
 	if(options->getLogLevel() == "debug") setDebugFilter();
 	else setInfoFilter();
 
-	LOG_DEBUG << "No deberia salir";
+	LOG_DEBUG << "Nivel del loggeo seteado en DEBUG.";
 	LOG_INFO << "Testing conection to shared server.";
 	SharedConnector sharedConnector = SharedConnector(options->getSharedServerURL());
 	if(!sharedConnector.testConnection()) LOG_ERROR << "Error probando conexion con el shared server";
@@ -63,6 +64,7 @@ int main(int argc, char* argv[]) {
 	ProfileServices profileService(&userDAO, &transDAO);
 	AuthenticationService authService(&authDAO, &profileService);
 	MatchServices matchServices(&matchDAO,&profileService);
+	//authService.saveNewUser("chelo3","prueba");
 
 
 	SecurityFilter securityFilter(authService);
@@ -70,7 +72,6 @@ int main(int argc, char* argv[]) {
 	ApiDispatcher dispatcher(securityFilter);
 
 	UserResource user(profileService);
-
 	user.setup(dispatcher);
 
 	AuthResource auth (&authService);
@@ -78,6 +79,9 @@ int main(int argc, char* argv[]) {
 
 	LocationResource locationRes(profileService);
 	locationRes.setup(dispatcher);
+
+	CandidateResource candidateResource(matchServices, profileService);
+	candidateResource.setup(dispatcher);
 
 	WebServer ws(dispatcher);
 
