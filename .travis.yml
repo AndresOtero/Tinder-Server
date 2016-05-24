@@ -44,6 +44,8 @@ script:
   - strings ./test/applib/testapp | grep gcda 
   - sudo find -name *.gcda
 after_success:
-  - make coverage 
+  - make coverage
+  - cd app/CMakeFiles/applib.dir/src/services
+  - ls 
   - lcov --list coverage-report.info
   - coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info
