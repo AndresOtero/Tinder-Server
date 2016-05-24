@@ -38,8 +38,9 @@ script:
   - mkdir -p build
   - cd build 
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make VERBOSE=1
-  - ./test/applib/testapp
+  - ./test/applib/testapp 
+  - sudo find -name / *.gcda
 after_success:
-  - make coverage
+  - make coverage 
   - lcov --list coverage-report.info
   - coveralls-lcov --repo-token "${COVERALLS_TOKEN}" coverage-report.info

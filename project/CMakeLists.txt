@@ -38,11 +38,11 @@ endif()
 add_subdirectory (app) 
 add_subdirectory (server) 
 
-# if(TEST)
+if(TEST)
 	message(STATUS "TESTS ENABLED")
 	enable_testing ()
 	add_subdirectory (test)
-# endif()
+endif()
 
 
 if(DOXYDOC AND TEST)
