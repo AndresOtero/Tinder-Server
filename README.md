@@ -14,7 +14,7 @@ Esta es una aplicación realizada dentro del marco de trabajo práctico propuest
 
 [![Build Status](https://travis-ci.org/Tinder2Team/Tinder-Server.svg?branch=master)](https://travis-ci.org/Tinder2Team/
 Tinder-Server)
-[![Coverage Status](https://coveralls.io/repos/github/Tinder2Team/Tinder-Server/badge.svg?branch=coverallconfig)](https://coveralls.io/github/Tinder2Team/Tinder-Server?branch=coverallconfig)
+[![Coverage Status](https://coveralls.io/repos/github/Tinder2Team/Tinder-Server/badge.svg?branch=HEAD)](https://coveralls.io/github/Tinder2Team/Tinder-Server?branch=HEAD)
 
 ##Docker
 
