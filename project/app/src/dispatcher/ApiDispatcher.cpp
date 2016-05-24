@@ -9,6 +9,7 @@
 #include "NoSuchMethodHandlerException.h"
 #include "log/Logger.h"
 #include "webserver/Constants.h"
+#include "ParsingContentException.h"
 
 static string LOGGER_PREFIX = "DISPATCHER: ";
 ApiDispatcher::ApiDispatcher(Filter &filter) : filter(filter) {
@@ -42,6 +43,8 @@ void ApiDispatcher::handle(RestRequest& request, RestResponse& response) {
 		} catch (NoSuchMethodHandlerException const & err) {
 			LOG_INFO << LOGGER_PREFIX << err.what();
 			response.setStatus(STATUS_403_FORBIDDEN);
+		} catch (ParsingContentException const & err) {
+				response.setStatus(STATUS_400_BAD_REQUEST);
 		}
 
 	}

@@ -3,7 +3,10 @@
 //
 
 #include <json/json.h>
+#include <UserNotFoundException.h>
+#include <ServiceException.h>
 #include "InterestResource.h"
+#include "ApiConstants.h"
 
 InterestResource::InterestResource(ProfileServices &profileService): profileServices(profileService) {
 
@@ -34,25 +37,43 @@ void InterestResource::searchInterests(WebContext &wc) {
     Json::Value result;
     result["interests"] = interests;
     RestResource::writeJsonResponse(wc, result);
+
 }
 
 void InterestResource::addInterest(WebContext &wc) {
-    Json::Value json;
-    RestResource::readJson(wc, json);
-    string category = json.get("category", "EMPTY FIELD").asString();
-    string value = json.get("value", "EMPTY FIELD").asString();
-    string userid = wc.getUserid();
-    profileServices.addInterest(userid, category, value);
-
+    try {
+        Json::Value json;
+        RestResource::readJson(wc, json);
+        string category = json.get("category", "EMPTY FIELD").asString();
+        string value = json.get("value", "EMPTY FIELD").asString();
+        string userid = wc.getUserid();
+        profileServices.addInterest(userid, category, value);
+    } catch (UserNotFoundException & e) {
+        Json::Value result;
+         this->writeJsonResponse(wc, result, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);
+    } catch (ServiceException &e) {
+        wc.getResponse().setStatus(STATUS_500_INTERNAL_SERVER_ERROR);
+    } catch (Json::LogicError) {
+        wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
+    }
 }
 
 void InterestResource::removeInterest(WebContext &wc) {
-    Json::Value json;
-    RestResource::readJson(wc, json);
-    string category = json.get("category", "EMPTY FIELD").asString();
-    string value = json.get("value", "EMPTY FIELD").asString();
-    string userid = wc.getUserid();
-    profileServices.removeInterest(userid, category, value);
+    try {
+        Json::Value json;
+        RestResource::readJson(wc, json);
+        string category = json.get("category", "EMPTY FIELD").asString();
+        string value = json.get("value", "EMPTY FIELD").asString();
+        string userid = wc.getUserid();
+        profileServices.removeInterest(userid, category, value);
+    } catch (UserNotFoundException & e) {
+        Json::Value result;
+         this->writeJsonResponse(wc, result, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);
+    } catch (ServiceException &e) {
+        wc.getResponse().setStatus(STATUS_500_INTERNAL_SERVER_ERROR);
+    } catch (Json::LogicError) {
+        wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
+    }
 }
 
 

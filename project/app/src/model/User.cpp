@@ -243,10 +243,13 @@ void User::addInterest(string category, string value) {
 void User::removeInterest(string category, string value) {
 	unordered_map<std::string, set<string>>::const_iterator got = this->interests.find(category);
 	if (got != this->interests.end() ) {
-		set<string> & interSet= got->second;
+		set<string> interSet= got->second;
 		interSet.erase(value);
+
 		if(interSet.size() == 0) {
 			this->interests.erase(got);
+		} else {
+			this->interests[category] = interSet;
 		}
 	}
 }
