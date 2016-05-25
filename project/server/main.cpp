@@ -14,6 +14,8 @@
 #include <CorruptOptionsException.h>
 #include <LocationResource.h>
 #include <CandidateResource.h>
+#include <MatchResource.h>
+#include <LikeResource.h>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -88,6 +90,12 @@ int main(int argc, char* argv[]) {
 
 	CandidateResource candidateResource(matchServices, profileService);
 	candidateResource.setup(dispatcher);
+
+	MatchResource matchResource(matchServices, profileService);
+	matchResource.setup(dispatcher);
+
+	LikeResource likeResource(matchServices, profileService);
+	likeResource.setup(dispatcher);
 
 	WebServer ws(dispatcher);
 
