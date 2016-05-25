@@ -11,6 +11,17 @@ Aqui encontrará todo lo referente a la documentación
 tecnica de la aplicación, manuales de usuario, tecnologias
 utilizadas por los desarolladores, etc.
 
+
+.. _general:
+.. toctree::
+   :maxdepth: 2
+   :name: mastertoc3
+   :caption: General
+
+   tickets  
+   linksInteres
+
+
 .. _application-server:
 .. toctree::
    :maxdepth: 2
@@ -19,8 +30,8 @@ utilizadas por los desarolladores, etc.
 
    appserver/tecnologias
    appserver/solucion
-   appserver/musuario
    appserver/mtecnico
+   appserver/musuario
 
 .. _shared-server:
 .. toctree::
@@ -28,8 +39,11 @@ utilizadas por los desarolladores, etc.
    :name: mastertoc1
    :caption: Shared Server
 
-   tickets
-   shareServer
-   linksInteres
+   shserver/tecnologias
+   shserver/solucion
+   shserver/mtecnico
+   shserver/musuario
+
+
    
    
