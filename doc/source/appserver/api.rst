@@ -90,7 +90,7 @@ Como se puede ver indica el status code 101, y además devuelve el token de segu
 Autenticar
 ------------------
 
-Permite autenticar en el servidor con un registro ya creado
+Permite autenticar en el servidor con un registro ya creado.
 
 - *Método HTTP:* ``PUT``
 - *URL:* ``/auth``
@@ -222,3 +222,30 @@ Obtiene la información del perfil del usuario logueado.
 	}
 
 Responde con estado interno 200 y la información del usuario.
+
+
+Ubicación
+===============
+
+Permite a un usuario gestionar su ubicación geográfica.
+
+Actualizar Ubicación
+--------------------
+
+Actualiza las coordenadas de ubicación del usuario.
+
+- *Método HTTP:* ``POST``
+- *URL:* ``/location``
+- *Seguridad:* ``Con seguridad``
+
+*Ejemplo de request*
+
+.. code-block:: jsonld
+
+	{
+	    "longitude": 33223,
+	    "latitude": 12
+	}
+        
+*Respuesta*
+ ``http status code: 200``
