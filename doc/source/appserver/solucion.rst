@@ -32,7 +32,9 @@ Una vez recibida la petición es necesario determinar si hay un handler o no par
 .. figure:: images/dispatching.png
    :align:   center
 
-En este caso ApiDispatcher es encargado de delegar a una cadena de EndPoints distinta según el método HTTP de la petición (PUT, POST, GET y DELETE). Los EndPoints forman una Chain of Responsability donde si no se puede manejar la petición, es lanzada una excepción capturada por el dispatcher y da como resultado un 403 Forbidden. WebContext es como un contenedor de más alto nivel para la petición y su respuesta, este crecerá para brindar un contexto más rico al contexto del handler de la petición. Por otro lado se encuentra la interfaz RestResource que será implementada por todas aquellas clases que proveen handlers para una serie de peticiones relacionadas, como pueden ser los métodos relacionados la entidad Usuario.
+En este caso ApiDispatcher es encargado de delegar a una cadena de EndPoints distinta según el método HTTP de la petición (PUT, POST, GET y DELETE). Los EndPoints forman una Chain of Responsability donde si no se puede manejar la petición, es lanzada una excepción capturada por el dispatcher y da como resultado un 403 Forbidden. 
+Una vez definido el endpoint que puede manejar el request, se pasa el control a los filters, quienes son los encargados de hacer algun procesamiento extra a la petición. 
+WebContext es como un contenedor de más alto nivel para la petición y su respuesta, este crecerá para brindar un contexto más rico al contexto del handler de la petición. Por otro lado se encuentra la interfaz RestResource que será implementada por todas aquellas clases que proveen handlers para una serie de peticiones relacionadas, como pueden ser los métodos relacionados la entidad Usuario.
 
 Secuencia de respuesta a una petición web
 ------------------------------------------
@@ -41,7 +43,15 @@ Secuencia de respuesta a una petición web
 
 API
 ------------
-Dentro de esta capa se encontrarán las diferentes implementaciones de RestResource quienes serán los handlers concretos a los pedidos. Actualmente no hay ningún endpoint habilitado para ser consultado.
+Dentro de esta capa se encuentran las diferentes implementaciones de RestResource quienes son los handlers concretos de los pedidos. Donde las responsabilidades se dividen de la siguiente manera:
+
+- AuthResource: Registro y autenticación de usuarios.
+- ChatResource: Chat entre usuarios.
+- InterestResource: Intereses de un usuario.
+- LocationResource: Actualización de posición de usuario.
+- UserResource: Moficación de los datos de perfil del usuario.
+
+Además se encuentra implementado el SecurityFilter con la responsabilidad de validar los requests provenientes desde el Android Client mediante el uso de un JsonWebToken.
 
 Service
 ------------
