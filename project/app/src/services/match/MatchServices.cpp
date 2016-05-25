@@ -59,6 +59,7 @@ list<User *> MatchServices::getCandidatesForUser(User *user) {
 	candidates.sort([] (const Candidate* first, const Candidate* second) {
 		return ( first->score < second->score );
 	});
+	this->matchDao->updateLastMatchRequest(user);
 	return this->getUserListFromCandidates(candidates);
 }
 

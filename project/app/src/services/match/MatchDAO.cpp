@@ -47,6 +47,17 @@ bool MatchDAO::checkForMatch(User* userA, User* userB) {
 	return false;
 }
 
+void MatchDAO::updateLastMatchRequest(User *user) {
+	Json::Value json = this->getUserEntry(user);
+	time_t currentDay = time(NULL);
+	struct tm* timeStruct = localtime(&currentDay);
+	string timeStamp(asctime(timeStruct));
+	json["lastRequest"] = timeStamp;
+	Json::FastWriter writer;
+	this->connector->putValueInKey(user->getId(), writer.write(json));
+}
+
+
 tm* MatchDAO::getLastRequestTime(User *user) {
 	Json::Value json = this->getUserEntry(user);
 	string fecha = json["lastRequest"].asString();
