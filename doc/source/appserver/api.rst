@@ -56,6 +56,8 @@ Para cualquier petición que requiera seguridad, además de los parámetros es n
 Autenticación
 ===============
 
+Permite a un usuario gestionar su registro que es la información mínima para poder operar con la aplicación.
+
 Registrar Usuario
 ------------------
 
@@ -139,6 +141,8 @@ Responde con el http status code correspondiente para la operación.
 
 Usuario
 ===============
+
+Permite a un usuario administrar su información de perfil como ser intereses y datos de contacto.
 
 Actualizar Perfil
 ------------------
