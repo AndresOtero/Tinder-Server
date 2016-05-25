@@ -71,7 +71,7 @@ Dentro de esta entrega el alcance contempla:
 `Tickets en GitHub Segundo Checkpoint Android Client <https://github.com/Tinder2Team/Tinder-Client-2/issues?utf8=%E2%9C%93&q=milestone%3A%22Segunda+Entrega%22+>`_
 
 
-*Chekpoint 2 (Semana 14)*
+*Chekpoint 3 (Semana 14)*
 =========================
 
 Application Server
