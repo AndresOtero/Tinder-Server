@@ -71,7 +71,7 @@ void MatchServices::getCandidatesScores(std::list<Candidate*> &lista, User* user
 }
 
 int MatchServices::getCommonInterests(User* userA, User* userB) {
-	std::list<Interest*> intereses = userA->getInterests();
+	std::list<Interest> intereses = userA->getInterests();
 	int contador = 0;
 	for (auto it = intereses.begin(); it != intereses.end(); ++it) {
 		if (userB->likesInterest(*it)) contador++;

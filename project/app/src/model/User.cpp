@@ -68,11 +68,11 @@ void User::setLongitude(double longitude) {
 	this->location.setLongitude(longitude);
 }
 
-list<Interest*> User::getInterests() {
-	std::list<Interest*> lista;
+list<Interest> User::getInterests() {
+	std::list<Interest> lista;
 	for(auto it = this->interests.begin(); it != this->interests.end(); ++it) {
 		for(auto setit = it->second.begin(); setit != it->second.end(); ++setit) {
-			lista.push_front(new Interest(it->first, *setit));
+			lista.push_front(Interest(it->first, *setit));
 		}
 	}
 	return lista;
@@ -223,10 +223,10 @@ string User::getAlias() {
 }
 
 
-bool User::likesInterest(Interest *interest) {
-	auto iter = this->interests.find(interest->getCategory());
+bool User::likesInterest(Interest interest) {
+	auto iter = this->interests.find(interest.getCategory());
 	if (iter == this->interests.end()) return false;
-	return iter->second.find(interest->getValue()) != iter->second.end();
+	return iter->second.find(interest.getValue()) != iter->second.end();
 }
 
 void User::addInterest(string category, string value) {

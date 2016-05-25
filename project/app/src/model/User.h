@@ -157,7 +157,7 @@ public:
     /**
      * Returns a list with interests in it. It is responsability of the caller to delete the Interests in it.
      */
-    list<Interest *> getInterests();
+    list<Interest> getInterests();
 
     /**
      * Changes the sex of the user.
@@ -207,7 +207,7 @@ public:
      * Returns true or false if the user likes the same interest
      * @param interest interest to check if the user has it or not.
      */
-     bool likesInterest(Interest* interest);
+     bool likesInterest(Interest interest);
 
     /**
      * Add an interest if not exsist
