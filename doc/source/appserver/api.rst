@@ -143,7 +143,7 @@ Usuario
 Actualizar Perfil
 ------------------
 
-Permite actualizar la información de perfil de un usuario
+Permite actualizar la información de perfil del usuario logueado.
 
 - *Método HTTP:* ``POST``
 - *URL:* ``/user``
@@ -185,10 +185,10 @@ Permite actualizar la información de perfil de un usuario
 
 Responde con el http status code correspondiente para la operación.
 
-Obtener información de usuario
+Consultar Perfil
 ------------------------------
 
-Obtiene la información del usuario logueado.
+Obtiene la información del perfil del usuario logueado.
 
 - *Método HTTP:* ``GET``
 - *URL:* ``/user``
