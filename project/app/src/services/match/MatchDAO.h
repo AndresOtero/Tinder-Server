@@ -91,6 +91,12 @@ public:
 	 */
 	int getNumLiked(User* user);
 
+	/**
+	 * Updates the last time of the last request from the user to today.
+	 *
+	 * @param user user to update the last request time.
+	 */
+	void updateLastMatchRequest(User* user);
 private:
 	DBConnector* connector;
 	void initializeUserEntry(User* user);

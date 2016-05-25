@@ -30,7 +30,7 @@ void CandidateResource::getCandidates(WebContext &wc) {
 		user = profileServices.getUserByID(wc.getUserid());
 		std::list<User *> candidates = this->matchServices.getCandidatesForUser(user);
 		Json::Value result;
-		result["Candidates"] = Json::Value(Json::arrayValue);
+		result["candidates"] = Json::Value(Json::arrayValue);
 		for(auto it = candidates.begin(); it != candidates.end(); ++it) {
 			result["candidates"].append((*it)->toJson());
 			delete (*it);
