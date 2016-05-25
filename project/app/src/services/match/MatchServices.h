@@ -10,6 +10,7 @@
 #include "MatchDAO.h"
 #include "Candidate.h"
 
+
 /**
  * @class MatchServices
  * Provides de required methods to resolve match related requests.
@@ -72,6 +73,19 @@ private:
 	list<User*> getUserListFromCandidates(std::list<Candidate*> candidatos);
 	void getCandidatesScores(std::list<Candidate*> &lista, User* user);
 	int getCommonInterests(User* userA, User* userB);
+	double deg2rad(double deg);
+	double rad2deg(double rad);
+
+	/**
+	 * Returns the distance between two points on the Earth.
+	 * Direct translation from http://en.wikipedia.org/wiki/Haversine_formula
+	 * @param lat1d Latitude of the first point in degrees
+	 * @param lon1d Longitude of the first point in degrees
+	 * @param lat2d Latitude of the second point in degrees
+	 * @param lon2d Longitude of the second point in degrees
+	 * @return The distance between the two points in kilometers
+	 */
+	double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d);
 };
 
 

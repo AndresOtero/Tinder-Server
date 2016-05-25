@@ -23,6 +23,7 @@ public:
 
 	int score;
 	int numLiked;
+	double distanceToUser;
 
 private:
 	User* user;
