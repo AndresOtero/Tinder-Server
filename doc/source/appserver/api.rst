@@ -142,7 +142,7 @@ Responde con el http status code correspondiente para la operación.
 Usuario
 ===============
 
-Permite a un usuario administrar su información de perfil como ser intereses y datos de contacto.
+Permite a un usuario administrar su información de perfil.
 
 Actualizar Perfil
 ------------------
@@ -248,4 +248,100 @@ Actualiza las coordenadas de ubicación del usuario.
 	}
         
 *Respuesta*
+
+ ``http status code: 200``
+
+
+Intereses
+===============
+
+Permite a un usuario gestionar sus.
+
+Obtener Intereses
+--------------------
+
+Lista los intereses disponibles
+
+- *Método HTTP:* ``GET``
+- *URL:* ``/interest``
+- *Seguridad:* ``Con seguridad``
+        
+*Respuesta*
+
+.. code-block:: jsonld
+
+	{
+	  "response": {
+	    "interests": [
+	      {
+	        "category": "musica",
+	        "value": "beatles"
+	      },
+	      {
+	        "category": "musica",
+	        "value": "los redondos"
+	      },
+	      {
+	        "category": "comida",
+	        "value": "alfajor"
+	      }]
+	  },
+	  "status": 200
+	}
+
+
+Agregar Intereses
+--------------------
+
+Actualiza la lista de intereses del usuario
+
+- *Método HTTP:* ``POST``
+- *URL:* ``/interest``
+- *Seguridad:* ``Con seguridad``
+
+*Ejemplo de request*
+
+.. code-block:: jsonld
+
+	{
+	    "interests": [
+	            {
+	                "category":"futbol",
+	                "value": "river"
+	            },{
+	                "category":"futbol",
+	                "value": "Aldosivi"
+	            },{
+	                "category":"futbol",
+	                "value": "independiente"
+	            }
+	    ]
+	}
+        
+*Respuesta*
+
+ ``http status code: 200``
+
+
+Eliminar Interés
+--------------------
+
+Elimina un Interés de un usuario
+
+- *Método HTTP:* ``DELETE``
+- *URL:* ``/interest``
+- *Seguridad:* ``Con seguridad``
+
+*Ejemplo de request*
+
+.. code-block:: jsonld
+
+	{
+	    "category":"futbol",
+	    "value": "independiente"
+
+	}
+        
+*Respuesta*
+
  ``http status code: 200``
