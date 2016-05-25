@@ -128,15 +128,19 @@ Json::Value &User::bodyToJson(Json::Value &userData, User &user) {
 	userData["sex"] = user.getSex();
 	userData["location"] = location;
 	Json::Value interests;
+	bool hasinterests= false;
 	for (auto it = user.interests.begin(); it != user.interests.end(); ++it ) {
 		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
 			Json::Value valor;
 			valor["category"] = it->first;
 			valor["value"] = *setit;
 			interests.append(valor);
+			hasinterests = true;
 		}
 	}
-	userData["interests"] = interests;
+	if(hasinterests)
+		userData["interests"] = interests;
+
 	return userData;
 }
 
@@ -191,15 +195,6 @@ void User::toExternalJson(Json::Value &userData) {
 	Json::Value interests;
 	userData["id"] = this->getExternalId();
 	userData = bodyToJson(userData, *this);
-	for (auto it = this->interests.begin(); it != this->interests.end(); ++it ) {
-		for (set<string>::iterator setit = it->second.begin(); setit != it->second.end(); ++setit) {
-			Json::Value valor;
-			valor["category"] = it->first;
-			valor["value"] = *setit;
-			interests.append(valor);
-		}
-	}
-	userData["interests"] = interests;
 }
 
 User *User::fromExternalJson(Json::Value &value) {
