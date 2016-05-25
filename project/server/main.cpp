@@ -8,13 +8,14 @@
 #include <SecurityFilter.h>
 #include <InterestResource.h>
 #include <MatchServices.h>
-#include <boost/filesystem/operations.hpp>
 #include <Options.h>
 #include <OptionsReader.h>
 #include <CorruptOptionsException.h>
 #include <LocationResource.h>
 #include <CandidateResource.h>
 #include <WebServerException.h>
+#include <MatchResource.h>
+#include <LikeResource.h>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -102,6 +103,12 @@ int main(int argc, char* argv[]) {
 
 	CandidateResource candidateResource(matchServices, profileService);
 	candidateResource.setup(dispatcher);
+	MatchResource matchResource(matchServices, profileService);
+	matchResource.setup(dispatcher);
+
+	LikeResource likeResource(matchServices, profileService);
+	likeResource.setup(dispatcher);
+
 
 	try {
 		WebServer ws(dispatcher);
@@ -110,6 +117,7 @@ int main(int argc, char* argv[]) {
 		LOG_FATAL <<  "Error starting server : " << e.what();
 		std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
+
 	return 0;
 
 }
