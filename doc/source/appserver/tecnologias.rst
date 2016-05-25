@@ -44,7 +44,7 @@ Tecnologías principales
 
 .. |rocksdbtext| replace:: RocksDB como base de datos utilizada en el almacenamiento interno.
 
-.. |jsoncpptext| replace:: Conversión de datos JSON para transmisión desde y hacia la aplicación utilizando JSONcpp.
+.. |jsoncpptext| replace:: Formato JSON para transmisión desde y hacia la aplicación utilizando la biblioteca JSONcpp.
 
 .. |curltext| replace:: Conexión con el Shared Server mediante CURL
 
