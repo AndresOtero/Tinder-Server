@@ -15,7 +15,7 @@ utilizadas por los desarolladores, etc.
 .. _general:
 .. toctree::
    :maxdepth: 2
-   :name: mastertoc3
+   :name: mastertoc1
    :caption: General
 
    tickets  
@@ -36,13 +36,26 @@ utilizadas por los desarolladores, etc.
 .. _shared-server:
 .. toctree::
    :maxdepth: 2
-   :name: mastertoc1
+   :name: mastertoc3
    :caption: Shared Server
 
    shserver/tecnologias
    shserver/solucion
    shserver/mtecnico
    shserver/musuario
+
+
+
+.. _android-client:
+.. toctree::
+   :maxdepth: 2
+   :name: mastertoc4
+   :caption: Android Client
+
+   client/tecnologias
+   client/solucion
+   client/mtecnico
+   client/musuario
 
 
    
