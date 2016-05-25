@@ -4,22 +4,60 @@
    contain the root `toctree` directive.
 
 
-Bienvenido a la documentación de "Match Application"
+Bienvenido a la documentación de Match Application
 =====================================================
 
 Aqui encontrará todo lo referente a la documentación
 tecnica de la aplicación, manuales de usuario, tecnologias
 utilizadas por los desarolladores, etc.
 
-| Tabla de Contenidos:
 
-
+.. _general:
 .. toctree::
    :maxdepth: 2
-   :name: mastertoc
+   :name: mastertoc1
+   :caption: General
 
-   shareServer
-   applicationServer
-   tickets
+   tickets  
    linksInteres
+
+
+.. _application-server:
+.. toctree::
+   :maxdepth: 2
+   :name: mastertoc2
+   :caption: Application Server
+
+   appserver/tecnologias
+   appserver/solucion
+   appserver/mtecnico
+   appserver/musuario
+   appserver/api
+
+.. _shared-server:
+.. toctree::
+   :maxdepth: 2
+   :name: mastertoc3
+   :caption: Shared Server
+
+   shserver/tecnologias
+   shserver/solucion
+   shserver/mtecnico
+   shserver/musuario
+
+
+
+.. _android-client:
+.. toctree::
+   :maxdepth: 2
+   :name: mastertoc4
+   :caption: Android Client
+
+   client/tecnologias
+   client/solucion
+   client/mtecnico
+   client/musuario
+
+
+   
    

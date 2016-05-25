@@ -1,0 +1,5 @@
+Solución Implementada
+=====================
+
+Estructura general
+---------------------

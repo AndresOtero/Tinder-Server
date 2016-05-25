@@ -1,426 +1,328 @@
+
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Plan de Entregas &mdash; Match Application</title>
+  
 
+  
+  
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+
+  
+  
     
-    <title>Gestión de Tareas/Tickets &mdash; Match Application</title>
-    
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Match Application" href="index.html"/>
+        <link rel="next" title="Links de Interés" href="linksInteres.html"/>
+        <link rel="prev" title="Bienvenido a la documentación de Match Application" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/translations.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Match Application" href="index.html" />
-    <link rel="next" title="Links de Interés" href="linksInteres.html" />
-    <link rel="prev" title="Application Server" href="applicationServer.html" />
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
-<meta name="apple-mobile-web-app-capable" content="yes">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-  </head>
-  <body role="document">
+          
+            <a href="index.html" class="icon icon-home"> Match Application
+          
 
-  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">
-          Match Application</a>
-        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
-      </div>
-
-        <div class="collapse navbar-collapse nav-collapse">
-          <ul class="nav navbar-nav">
-            
-            
-              <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="index.html">Contenido <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="shareServer.html"><strong>Shared Server</strong></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="shareServer.html#tecnologias-principales"><em>Tecnologías principales</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#frontend">FrontEnd</a></li>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#backend">Backend</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="shareServer.html#descripcion-de-solucion-implementada"><em>Descripción de solución implementada</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#id1">FrontEnd</a></li>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#id2">Backend</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#estructura-general">Estructura general</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#express-js">Express JS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#service-layer">Service Layer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#models">Models</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#workflow">Workflow</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="shareServer.html#manual-de-usuario"><em>Manual de usuario</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="shareServer.html#web-de-administracion">Web de administración</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#home">Home</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#creacion-de-usuario">Creación de usuario</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#edicion-de-foto-de-usuario">Edición de foto de usuario</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#edicion-de-usuario">Edición de usuario</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#visualizacion-de-usuario">Visualización de usuario</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#creacion-de-intereses">Creación de intereses</a></li>
-<li class="toctree-l4"><a class="reference internal" href="shareServer.html#listar-intereses">Listar intereses</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="shareServer.html#manual-tecnico">Manual técnico</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="applicationServer.html"><strong>Application Server</strong></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#tecnologias-principales"><em>Tecnologías principales</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#descripcion-de-solucion-implementada"><em>Descripción de solución implementada</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#estructura-general">Estructura general</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#webserver">Webserver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#dispatcher">Dispatcher</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#secuencia-de-respuesta-a-una-peticion-web">Secuencia de respuesta a una petición web</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#api">API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#service">Service</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#dao">DAO</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#connector">Connector</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#manual-de-usuario"><em>Manual de usuario</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#nativo-solo-ubuntu-14-04-y-15-10">Nativo (Solo Ubuntu 14.04 y 15.10)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#docker-plataformas-compatibles-con-docker">Docker (Plataformas compatibles con Docker)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="applicationServer.html#manual-tecnico"><em>Manual técnico</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#tests">Tests</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#code-coverage">Code Coverage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="applicationServer.html#documentacion-automatica">Documentación automática</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Gestión de Tareas/Tickets</strong></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#application-server"><em>Application Server</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#detalle-de-tickets-github">Detalle de Tickets Github</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#shared-server"><em>Shared Server</em></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Detalle de Tickets Github</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="linksInteres.html"><strong>Links de Interés</strong></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#repositorios"><em>Repositorios</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#tickets-github"><em>Tickets GitHub</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="linksInteres.html#herramientas"><em>Herramientas</em></a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
-            
-            
-            
-            
-            
-          </ul>
+          
+          </a>
 
           
             
-<form class="navbar-form navbar-right" action="search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
           
         </div>
-    </div>
-  </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 content">
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Plan de Entregas</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#chekpoint-1-semana-7"><em>Chekpoint 1 (Semana 7)</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#application-server">Application Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shared-server">Shared Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#android-client">Android Client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#chekpoint-2-semana-11"><em>Chekpoint 2 (Semana 11)</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Application Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Shared Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Android Client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#chekpoint-3-semana-14"><em>Chekpoint 3 (Semana 14)</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Application Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Android Client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linksInteres.html"><strong>Links de Interés</strong></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application Server</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appserver/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appserver/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appserver/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appserver/musuario.html">Manual de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appserver/api.html">Especificación de API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Shared Server</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="shserver/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shserver/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shserver/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shserver/musuario.html">Manual de usuario</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="client/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client/musuario.html">Manual de usuario</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
       
-  <div class="section" id="gestion-de-tareas-tickets">
-<h1><strong>Gestión de Tareas/Tickets</strong><a class="headerlink" href="#gestion-de-tareas-tickets" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="application-server">
-<h2><em>Application Server</em><a class="headerlink" href="#application-server" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="line-block">
-<div class="line">En esta entrega se basa en definir las bases de la aplicación para poder implementar la totalidad de la funcionalidad en las próximas entregas. A grandes rasgos esta entrega se compone de:</div>
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Match Application</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li><strong>Plan de Entregas</strong></li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
 </div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="plan-de-entregas">
+<h1><strong>Plan de Entregas</strong><a class="headerlink" href="#plan-de-entregas" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="chekpoint-1-semana-7">
+<h2><em>Chekpoint 1 (Semana 7)</em><a class="headerlink" href="#chekpoint-1-semana-7" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="application-server">
+<h3>Application Server<a class="headerlink" href="#application-server" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El alcance de este primer checkpoint se centra en definir las bases de la aplicación para poder implementar la totalidad de la funcionalidad en las próximas entregas.
+A grandes rasgos esta entrega se compone de:</p>
 <ul class="simple">
 <li>Configuración/Investigación de tecnologías base: Cmake, Mongoose y RocksDB.</li>
 <li>Configuracion/Investigación de tecnologías secundarias: Gtests, Gmock, Curl, Sphinx, Docker y Travis.</li>
 <li>Diseño e integración de la base de datos.</li>
 <li>Integración de operaciones básicas con Shared Server.</li>
-<li>Diseño de componentes genéricos para generar una api rest.</li>
+<li>Diseño de componentes genéricos para proveer una api rest.</li>
 <li>Arquitectura general de la aplicación.</li>
 </ul>
-<div class="section" id="detalle-de-tickets-github">
-<h3>Detalle de Tickets Github<a class="headerlink" href="#detalle-de-tickets-github" title="Enlazar permanentemente con este título">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Startup del Application Server</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Hacer la configuración básica del servidor con cmake.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configuración de Base de datos</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> Configurar RocksDB y hacerlo linkear con cmake</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Diseño de la base de datos</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> Definir qué se va almacenar en la base de datos y cómo.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Definir consultas a la Base de Datos</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> Crear las clases que mapean la base de datos a la logica de la aplicación con sus respectivas consultas para obtener datos de la base..</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configurar Biblioteca REST</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Configurar Mongoose.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configuración tecnologías auxiliares</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Configurar el sistema de log, cobertura, tests unitarios, documentación automática.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Generar estructura REST</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Generar una serie de clases que resuelvan el direccionamiento REST.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Conectar Shared y Application Server</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> Se deben crear las clases en el Application Server para poder hacer consultas al Shared Server.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configurar Integración continua</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> Configurar Travis para mantener la integración continua</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Realizar una correcta administración de las dependencias que requiera la aplicación servidor y para poder simplificar el proceso de despliegue (deploy) del mismo</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Mediante el uso de la herramienta Docker</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> DAO de Usuarios</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> Crear una DAO de acceso a datos de usuario para independizar a los connector. Qué connector se usa para obtener cada dato debería ser indistinto al servicio de perfiles. De esta forma se pueden intercambiar connectors sin la necesidad de alterar clases del modelo.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Manual de instalación y uso</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Documentar cómo instalar y utilizar el application server.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Documentar las capas WEBSERVER, DISPATCHER y API de la aplicación</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Generar los diagramas y la documentación correspondiente de estas capas</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Documentar las capas Service, DAO y Connector</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Documentar las capas inferiores de la aplicación con diagramas, etc.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Documentar arquitectura de la aplicación</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Generar la documentación de la arquitectura de la aplicación</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configurar sphinx</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Configurar sphinx para que tome la salida de doxygen y sume la documentación de clases</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Endpoint De seguridad</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Armar un endpoint que permita iniciar la sesión en el servidor devolviendo el jwt</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configurar docker</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Configurar docker para poder hacer la entrega de este ejecutable</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Subir la versión de libboost en Travis</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Para instalar la 1.54 por tener ubuntu 14.04(trusty) e instalarla de los sources oficiales, hay que hacer que se instale la 1.58</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Doxygen</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Configurar Doxygen para crear la documentación automática</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Definir clases genéricas api rest</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Armar las clases que resuelvan el problema de la api rest para luego poder implementar la funcionalidad</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configurar tests unitarios</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Configuración de  tests unitarios para probar el app server</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Almacenamiento de conversaciones</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> El servidor debe persistir las conversaciones para que las mismas puedan existir en una ejecución posterior del servidor.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Servicio de Conversaciones</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> El servidor brindará un servicio para el delivery de conversaciones. El servidor debe tener un registro de las conexiones activas en el servidor para saber hacia dónde dirigir el mensaje en curso. Para poder iniciar una conversación entre dos usuarios es necesario que exista un match entre ellos.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Servicio de Match</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> En caso de que el usuario esté interesado en el candidato, el servidor deberá almacenar este interés para que en caso de que el candidato esté interesado, estos se puedan poner en contacto.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Servicio de Autenticación</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> El servidor dispondrá de un servicio para la autenticación de los clientes. Este servicio consta de una solicitud de autenticación, que viene junto con las credenciales del usuario. La respuesta a la solicitud es un token (identificador) de la sesión del usuario.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Implementar POST, PUT y DELETE con el SharedServer</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> Implementar las actualizaciones información de los usuarios desde el application server al shared server.</div>
-</div>
-</div>
+<p><a class="reference external" href="https://github.com/Tinder2Team/Tinder-Server/issues?q=milestone%3A%22Primer+Entrega%22">Tickets en GitHub Primer Checkpoint Application Server</a></p>
 </div>
 <div class="section" id="shared-server">
-<h2><em>Shared Server</em><a class="headerlink" href="#shared-server" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>En esta primer entrega se va a implementar la totalidad de la funcionalidad de este servidor, ya que es el puntapié inicial para poder implementar el resto de las aplicaciones que conformarán el sistema global.</p>
+<h3>Shared Server<a class="headerlink" href="#shared-server" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Dentro del alcance se implementará el total de lo requerido para este servidor. Lo que contempla:</p>
+<ul class="simple">
+<li>Todas las operaciones sobre Usuarios e Intereses.</li>
+<li>Una Interfaz web que permita administrar esa información</li>
+</ul>
+<p><a class="reference external" href="https://github.com/Tinder2Team/Tinder-Shared/issues?q=milestone%3A%22Primer+Entrega%22+is%3Aclosed">Tickets en GitHub Primer Checkpoint Shared Server</a></p>
+</div>
+<div class="section" id="android-client">
+<h3>Android Client<a class="headerlink" href="#android-client" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>No habrá desarrollo alguno durante este checkpoint.</p>
+</div>
+</div>
+<div class="section" id="chekpoint-2-semana-11">
+<h2><em>Chekpoint 2 (Semana 11)</em><a class="headerlink" href="#chekpoint-2-semana-11" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="id1">
-<h3>Detalle de Tickets Github<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h3>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> StartUp de aplicación Node.JS con Express.JS</div>
-<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
-<div class="line"><strong>Descripción:</strong> Generar el código preliminar que inicie el servidor Node con su interfaz REST.</div>
+<h3>Application Server<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En esta segunda etapa se abordarán las siguientes actividades:</p>
+<ul class="simple">
+<li>Configuración y seguimiento de análisis de cobertura.</li>
+<li>Reescritura de la documentación a un formato web.</li>
+<li>Implementación de la api para integrar con el cliente Android. Quedando solamente las funcionalidades de Chat para la última entrega</li>
+<li>Seguridad en la api.</li>
+<li>Tests de integración.</li>
+</ul>
+<p><a class="reference external" href="https://github.com/Tinder2Team/Tinder-Server/issues?utf8=%E2%9C%93&amp;q=milestone%3A%22Segunda+Entrega%22+">Tickets en GitHub Segundo Checkpoint Application Server</a></p>
 </div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configurar Heroku</div>
-<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
-<div class="line"><strong>Descripción:</strong> Crear un nodo en heroku y configurarlo con el shared server</div>
+<div class="section" id="id2">
+<h3>Shared Server<a class="headerlink" href="#id2" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Corrección de bugs.</p>
 </div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configurar PostgresSQL</div>
-<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
-<div class="line"><strong>Descripción:</strong> Crear una db en Heroku PostgresSQL y conectarla con el shared server.</div>
+<div class="section" id="id3">
+<h3>Android Client<a class="headerlink" href="#id3" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Dentro de esta entrega el alcance contempla:</p>
+<ul class="simple">
+<li>Registro y autenticación en el Application Server.</li>
+<li>Manejo de perfil e Intereses.</li>
+<li>Match entre usuarios.</li>
+</ul>
+<p><a class="reference external" href="https://github.com/Tinder2Team/Tinder-Client-2/issues?utf8=%E2%9C%93&amp;q=milestone%3A%22Segunda+Entrega%22+">Tickets en GitHub Segundo Checkpoint Android Client</a></p>
 </div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Modelo base de datos</div>
-<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
-<div class="line"><strong>Descripción:</strong> Diseñar el esquema de base de datos que permitirá almacenar la información para solventar la funcionalidad brindada.</div>
 </div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Implementar la API REST</div>
-<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
-<div class="line"><strong>Descripción:</strong> Implementar la api propuesta por el enunciado en su totalidad.</div>
+<div class="section" id="chekpoint-3-semana-14">
+<h2><em>Chekpoint 3 (Semana 14)</em><a class="headerlink" href="#chekpoint-3-semana-14" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="id4">
+<h3>Application Server<a class="headerlink" href="#id4" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Para finalizar con esta aplicación en esta entrega se apuntará a concluir con:</p>
+<ul class="simple">
+<li>Corrección de bugs.</li>
+<li>Implentación de la api para Chat entre usuarios.</li>
+<li>Upload de foto de perfíl de usuario.</li>
+<li>Finalización de tests de integración.</li>
+<li>Revisión completa de cobertura.</li>
+</ul>
+<p><a class="reference external" href="https://github.com/Tinder2Team/Tinder-Server/milestones/Tercer%20Entrega">Tickets en GitHub Tercer Checkpoint Application Server</a></p>
 </div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Manejo de Errores API REST</div>
-<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
-<div class="line"><strong>Descripción:</strong> Implementar el manejo de los errores de la API REST</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Web de administración</div>
-<div class="line"><strong>Responsable:</strong> Uciel Rodriguez</div>
-<div class="line"><strong>Descripción:</strong> Implementar la página web para administrar los usuarios del Shared Server.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Web de administración (formularios)</div>
-<div class="line"><strong>Responsable:</strong> Uciel Rodriguez</div>
-<div class="line"><strong>Descripción:</strong> En jquery y angularJS para la extracción y cargado de datos de usuarios.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Web de administración flujo de datos</div>
-<div class="line"><strong>Responsable:</strong> Uciel Rodriguez</div>
-<div class="line"><strong>Descripción:</strong> En jquery y angularJS para conectarse con la Restful API con el fin de hacer consultas y volcar datos a la base de datos.</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Interfaz gráfica de la Web de administración</div>
-<div class="line"><strong>Responsable:</strong> Uciel Rodriguez</div>
-<div class="line"><strong>Descripción:</strong> Cargando estilos y formas de visualizar con bootstrap</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Configurar Integración continua</div>
-<div class="line"><strong>Responsable:</strong> Matias Luraschi</div>
-<div class="line"><strong>Descripción:</strong> Configurar Travis para mantener la integración continua</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Usar Json Params en vez de HTTP</div>
-<div class="line"><strong>Responsable:</strong> Marcelo Cavazzoli</div>
-<div class="line"><strong>Descripción:</strong> Para hacer más sencillo el manejo de datos</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Tarea:</strong> Correcciones en la web</div>
-<div class="line"><strong>Responsable:</strong> Jonathan Tierno</div>
-<div class="line"><strong>Descripción:</strong> Fix en las vistas</div>
-</div>
+<div class="section" id="id5">
+<h3>Android Client<a class="headerlink" href="#id5" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Para completar la aplicación se deberá implentar:</p>
+<ul class="simple">
+<li>Chat entre usuarios.</li>
+<li>Upload de foto de perfil.</li>
+</ul>
 </div>
 </div>
 </div>
 
 
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="linksInteres.html" class="btn btn-neutral float-right" title="Links de Interés" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Bienvenido a la documentación de Match Application" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-      
-  </div>
-</div>
-<footer class="footer">
-  <div class="container">
-    <p class="pull-right">
-      <a href="#">Back to top</a>
-      
-        <br/>
-        
-      
-    </p>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Grupo 9.<br/>
-      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.<br/>
+        &copy; Copyright 2016, Grupo 9.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
 </footer>
-  </body>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>
