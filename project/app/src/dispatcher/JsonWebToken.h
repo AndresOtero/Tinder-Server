@@ -9,7 +9,7 @@
 #define SRC_JSONWEBTOKEN_H_
 
 #include <string>
-#include "../../json/json/json.h"
+#include "json/json.h"
 
 /**
  * @class JsonWebToken

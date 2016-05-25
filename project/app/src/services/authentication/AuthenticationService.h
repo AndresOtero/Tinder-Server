@@ -12,6 +12,7 @@
 #include <UserDAO.h>
 #include <AuthenticationDAO.h>
 #include <ProfileServices.h>
+#include <UserValidator.h>
 #include "../../db/DBConnector.h"
 #include "AuthenticationException.h"
 
@@ -23,7 +24,7 @@
  * @author MLuraschi
  */
 
-class AuthenticationService {
+class AuthenticationService: public UserValidator {
 public:
 	/**
 	 * Default constructor
@@ -66,6 +67,8 @@ public:
  	* @param username to delete.
  	*/
 	void deleteUser(std::string username, std::string password);
+
+	bool isValid(string userid);
 private:
 
 	AuthenticationDAO * dao;

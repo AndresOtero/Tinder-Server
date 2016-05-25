@@ -1,5 +1,5 @@
 #include "JsonWebTokenTest.h"
-#include "services/authentication/JsonWebToken.h"
+#include "JsonWebToken.h"
 #include <string>
 #include "json/json/json.h"
 #include <time.h>

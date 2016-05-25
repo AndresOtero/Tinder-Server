@@ -68,6 +68,12 @@ void AuthenticationService::deleteUser(std::string username, std::string passwor
 
 }
 
+bool AuthenticationService::isValid(string userid) {
+	return dao->isUsernameTaken(userid);
+}
+
+
+
 
 
 

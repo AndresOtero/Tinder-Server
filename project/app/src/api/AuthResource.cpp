@@ -9,7 +9,7 @@
 #include <functional>
 #include <string>
 #include "json/ParameterReader.h"
-#include "services/authentication/JsonWebToken.h"
+#include "JsonWebToken.h"
 #include "log/Logger.h"
 #include "ApiConstants.h"
 

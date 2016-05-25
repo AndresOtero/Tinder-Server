@@ -4,7 +4,6 @@
 
 #include <JsonWebToken.h>
 #include "SecurityFilter.h"
-#include "ApiConstants.h"
 SecurityFilter::~SecurityFilter() {
 
 };
@@ -20,9 +19,12 @@ bool SecurityFilter::doFilter(WebContext &context) {
         JsonWebToken tokenizr;
         Json::Value values;
         if (tokenizr.getUsernameFromToken(token, values)) {
+
             string user = values.get("name", "User is Empty").asString();
-            context.setUserid(user);
-            return true;
+            if (this->validator.isValid(user)) {
+                context.setUserid(user);
+                return true;
+            }
         }
 
         context.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
@@ -31,7 +33,7 @@ bool SecurityFilter::doFilter(WebContext &context) {
     return true;
 }
 
-SecurityFilter::SecurityFilter(AuthenticationService &service) : service(service) { }
+SecurityFilter::SecurityFilter(UserValidator &validator) : validator(validator) { }
 
 void SecurityFilter::excludeRegex(RestRequest::Method method, string regularExp) {
     unordered_map<string , set<string>>::const_iterator got = this->excludedRegexs.find(RestRequest::getDescription(method));
