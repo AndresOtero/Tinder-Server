@@ -10,22 +10,24 @@ DOXYDOC=false
 DEV=false
 DEPENDENCIES=false
 
+display_help() {
+    echo "Uso: $0 [option...] " >&2
+    echo
+    echo "    -h, --help         Imprimir esta ayuda"
+    echo "    -g++-5             Flag g++-5 para cmake"
+    echo "    -oldboost          Compatibilidad de boost para linux version 14.04"
+    echo "    -test              Habilita los tests"
+    echo "    -coverage          Habilita coverage y agrega -test"
+    echo "    -doxydoc           Habilita documentación doxy"
+    echo "    -dependencies      Instala dependencias"
+    echo "    -dev               Atajo para -test -doxydoc -coverage"
+    exit 1
+}
+
 while test $# -gt 0; do
         case "$1" in
                 -h|--help)
-                        echo "Configuration script"
-                        echo " "
-                        echo "config.sh [options]"
-                        echo " "
-                        echo "options:"
-                        echo "-h, --help    				imprimir esta ayuda 							"
-                        echo "-g++-5        				flag g++-5 para cmake 							"
-                        echo "-oldboost 				compatibilidad de boost para linux version 14.04"
-                        echo "-test					habilita los tests 								"
-                        echo "-coverage				habilita coverage y agrega -test 								"
-                        echo "-doxydoc				habilita documentación doxy 					"
-                        echo "-dependencies				instala dependencias"
-                        echo "--dev 					atajo para -test -doxydoc -coverage		"
+						display_help
                         exit 0
                         ;;
                 -g++-5)
@@ -52,7 +54,7 @@ while test $# -gt 0; do
 						DEPENDENCIES=true	
                         shift
                         ;;
-                --dev)
+                -dev)
 						DEV=true
                         shift
                         ;;
