@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 
-Bienvenido a la documentación de "Match Application"
+Bienvenido a la documentación de Match Application
 =====================================================
 
 Aqui encontrará todo lo referente a la documentación

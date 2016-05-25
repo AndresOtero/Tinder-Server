@@ -24,3 +24,10 @@ Para este método sólo es necesario tener instalado Docker, de esta manera, só
 ``$ sudo docker run -p 0.0.0.0:8000:8000 jtierno/tinder-server /bin/sh -c "./server/server"``
 
 y el servidor en ambos qué casos queda levantado en el puerto 8000 esperando por peticiones.
+
+Configuración externa
+---------------------
+
+
+Especificación de la API
+------------------------

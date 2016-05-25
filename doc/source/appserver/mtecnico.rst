@@ -30,6 +30,15 @@ Para correr la suit de tests de la aplicación, es necesario configurar el proye
 
 Lo cual ejecuta los tests sobre la funcionalidad de la aplicación.
 
+Tests de Integración
+--------------------------
+
+
+
+
+
+
+
 Code Coverage
 --------------------------
 Es posible generar un reporte de cobertura de tests mediante el correspondiente target de make, dentro del directorio build:
@@ -47,3 +56,4 @@ Para generar el reporte del código automática, parado dentro de la carpeta bui
 ``$ make doxyDoc``
 
 Esto genera el archivo “doxyDoc/html/index.html” que se puede abrir con cualquier navegador y permite visualizar la información referente al código de la aplicación.
+
