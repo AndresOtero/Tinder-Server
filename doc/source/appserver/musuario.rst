@@ -10,9 +10,8 @@ Es necesario tener instalado git y hacer una copia del repositorio donde se encu
 
 Luego es necesario correr el script que descarga todas las dependencias necesarias y deja la aplicación lista para correr:
 
-| Ubuntu 14.04: ``$ sudo config.h -oldboost``
-
-Ubuntu 15.10: ``$ sudo config.h``
+* Ubuntu 14.04: ``$ sudo config.h -oldboost``
+* Ubuntu 15.10: ``$ sudo config.h``
 
 Y luego se la aplicación se puede correr con:
 
