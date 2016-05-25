@@ -14,10 +14,11 @@ Estructura general
 ~~~~~~~~~~~~~~~~~~~
 La arquitectura del Shared Server es bastante simple. A continuación se detalla cada componente de la arquitectura y su función.
 
-.. figure:: images/taller2sharedserver.png
-   :align:   center
+.. image:: images/taller2sharedserver.png
+   :scale: 150%
+   :alt: alternate text
+   :align: center
 
-| 
 
 Express JS
 ~~~~~~~~~~~~~~~~~~~
