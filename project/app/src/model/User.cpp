@@ -156,8 +156,15 @@ void User::readCommonBody(const Json::Value &values, User &user) {
 	user.setPhotoURL(values.get("photo_profile", "").asString());
 	user.setSex(values.get("sex", "").asString());
 	user.setAge(values.get("age", "").asInt());
-	user.setLatitude(values.get("location", "").get("latitude", "").asDouble());
-	user.setLongitude(values.get("location", "").get("longitude", "").asDouble());
+	Json::Value location = values.get("location", "");
+	if(location.isObject()) {
+		if(location.isMember("latitude"))
+			user.setLatitude(location.get("latitude", "").asDouble());
+		if(location.isMember("longitude"))
+		user.setLongitude(location.get("longitude", "").asDouble());
+	}
+
+
 }
 
 unordered_map<string, set<string>> User::populateInterests(Json::Value &root) {
