@@ -27,7 +27,3 @@ y el servidor en ambos qué casos queda levantado en el puerto 8000 esperando po
 
 Configuración externa
 ---------------------
-
-
-Especificación de la API
-------------------------

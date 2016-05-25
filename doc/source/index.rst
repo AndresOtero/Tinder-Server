@@ -32,6 +32,7 @@ utilizadas por los desarolladores, etc.
    appserver/solucion
    appserver/mtecnico
    appserver/musuario
+   appserver/api
 
 .. _shared-server:
 .. toctree::
