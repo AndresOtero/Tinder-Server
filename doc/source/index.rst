@@ -11,15 +11,25 @@ Aqui encontrará todo lo referente a la documentación
 tecnica de la aplicación, manuales de usuario, tecnologias
 utilizadas por los desarolladores, etc.
 
-| Tabla de Contenidos:
-
-
+.. _application-server:
 .. toctree::
    :maxdepth: 2
-   :name: mastertoc
+   :name: mastertoc2
+   :caption: Application Server
 
-   shareServer
-   applicationServer
+   appserver/tecnologias
+   appserver/solucion
+   appserver/musuario
+   appserver/mtecnico
+
+.. _shared-server:
+.. toctree::
+   :maxdepth: 2
+   :name: mastertoc1
+   :caption: Shared Server
+
    tickets
+   shareServer
    linksInteres
+   
    
