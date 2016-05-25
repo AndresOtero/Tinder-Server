@@ -345,3 +345,82 @@ Elimina un Interés de un usuario
 *Respuesta*
 
  ``http status code: 200``
+
+
+
+Candidatos
+===============
+
+Permite al usuario conocer la lista diaria de candidatos a match.
+
+- *Método HTTP:* ``GET``
+- *URL:* ``/candidates``
+- *Seguridad:* ``Con seguridad``
+        
+*Respuesta*
+
+.. code-block:: jsonld
+
+	{
+	  "response": {
+	    "candidates": [
+	      {
+	        "age": 28,
+	        "alias": "caca",
+	        "email": "unemail@gmail.com",
+	        "externalId": 94,
+	        "id": "unemail@gmail.com",
+	        "interests": [
+	          {
+	            "category": "futbol",
+	            "value": "racing"
+	          },
+	          {
+	            "category": "musica",
+	            "value": "la renga"
+	          },
+	          {
+	            "category": "comida",
+	            "value": "pastel"
+	          },
+	          {
+	            "category": "comida",
+	            "value": "pizza"
+	          }
+	        ],
+	        "location": {
+	          "latitude": 0,
+	          "longitude": 0
+	        },
+	        "name": "Bufarini",
+	        "photo_profile": "",
+	        "sex": "M"
+	      },
+	      {
+	        "age": 18,
+	        "alias": "jj",
+	        "email": "@",
+	        "externalId": 43,
+	        "id": "@",
+	        "interests": [
+	          {
+	            "category": "music",
+	            "value": "beatles"
+	          },
+	          {
+	            "category": "comida",
+	            "value": "gomas"
+	          }
+	        ],
+	        "location": {
+	          "latitude": 65.966700000000003,
+	          "longitude": -18.533300000000001
+	        },
+	        "name": "hh",
+	        "photo_profile": "",
+	        "sex": "M"
+	      }
+	    ]
+	  },
+	  "status": 200
+	}
