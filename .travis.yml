@@ -42,7 +42,7 @@ script:
   - cd build 
   - export GCOV_PREFIX
   - export GCOV_PREFIX_STRIP
-  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTEST=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make
+  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -B. -DTESTS=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../project/  && make
   - sudo ./test/applib/testapp
 after_success:
   - make coverage

@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.2.2)
 
-option(TEST "Build all tests." OFF)
+option(TESTS "Build all tests." OFF)
 option(COVERAGE "Enable code coverage." OFF)
 option(DOXYDOC "build doxygen documentation" OFF)
 
@@ -11,7 +11,7 @@ project (tinder-server C CXX)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 set(CMAKE_CXX_STANDARD 11)
-if(COVERAGE AND TEST)
+if(COVERAGE AND TESTS)
 	message(STATUS "TESTS COVERAGE ENABLED")
 	include(CodeCoverage)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage -coverage")
@@ -38,14 +38,14 @@ endif()
 add_subdirectory (app) 
 add_subdirectory (server) 
 
-if(TEST)
+if(TESTS)
 	message(STATUS "TESTS ENABLED")
 	enable_testing ()
 	add_subdirectory (test)
 endif()
 
 
-if(DOXYDOC AND TEST)
+if(DOXYDOC AND TESTS)
 	message(STATUS "BUILD DOXY DOC ENABLED")
     find_package(Doxygen)
     if(NOT DOXYGEN_FOUND)
