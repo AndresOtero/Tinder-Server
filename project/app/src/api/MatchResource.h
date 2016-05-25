@@ -10,6 +10,12 @@
 #include "dispatcher/WebContext.h"
 #include "dispatcher/ApiDispatcher.h"
 
+/**
+ * @class MatchResource
+ *
+ * Provides functionality to see previously matches.
+ * @author MLuraschi
+ */
 class MatchResource : public RestResource {
 public:
 	MatchResource(MatchServices& matchServices, ProfileServices& profileServices);

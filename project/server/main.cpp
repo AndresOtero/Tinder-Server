@@ -15,6 +15,7 @@
 #include <LocationResource.h>
 #include <CandidateResource.h>
 #include <MatchResource.h>
+#include <LikeResource.h>
 #include "webserver/WebServer.h"
 #include "log/Logger.h"
 #include "db/DBConnector.h"
@@ -92,6 +93,9 @@ int main(int argc, char* argv[]) {
 
 	MatchResource matchResource(matchServices, profileService);
 	matchResource.setup(dispatcher);
+
+	LikeResource likeResource(matchServices, profileService);
+	likeResource.setup(dispatcher);
 
 	WebServer ws(dispatcher);
 
