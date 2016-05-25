@@ -9,20 +9,20 @@
 #include <regex>
 #include "Filter.h"
 #include "string"
-#include "UserValidator.h"
+
 #include <unordered_map>
 #include <set>
 using namespace std;
 
 class SecurityFilter: public Filter {
 private:
-    UserValidator & validator;
+    AuthenticationService & validator;
     unordered_map<string, set<string>> excludedRegexs;
 protected:
     bool doFilter(WebContext & context);
 
 public:
-    SecurityFilter(UserValidator & validator);
+    SecurityFilter(AuthenticationService & validator);
 
     void excludeRegex(RestRequest::Method method, string regex);
 

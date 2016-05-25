@@ -33,7 +33,7 @@ bool SecurityFilter::doFilter(WebContext &context) {
     return true;
 }
 
-SecurityFilter::SecurityFilter(UserValidator &validator) : validator(validator) { }
+SecurityFilter::SecurityFilter(AuthenticationService &validator) : validator(validator) { }
 
 void SecurityFilter::excludeRegex(RestRequest::Method method, string regularExp) {
     unordered_map<string , set<string>>::const_iterator got = this->excludedRegexs.find(RestRequest::getDescription(method));

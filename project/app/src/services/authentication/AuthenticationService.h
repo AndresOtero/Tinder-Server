@@ -12,7 +12,6 @@
 #include <UserDAO.h>
 #include <AuthenticationDAO.h>
 #include <ProfileServices.h>
-#include <UserValidator.h>
 #include "../../db/DBConnector.h"
 #include "AuthenticationException.h"
 
@@ -24,7 +23,7 @@
  * @author MLuraschi
  */
 
-class AuthenticationService: public UserValidator {
+class AuthenticationService{
 public:
 	/**
 	 * Default constructor
