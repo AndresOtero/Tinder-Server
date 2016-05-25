@@ -59,7 +59,7 @@ Autenticación
 Registrar Usuario
 ------------------
 
-Registra un usuario en la aplicación para que posteriormente pueda loguearse en la misma.
+Crea un registro en la aplicación para posteriormente poder loguear en la misma.
 
 - *Método HTTP:* ``POST``
 - *URL:* ``/auth``
@@ -88,7 +88,7 @@ Como se puede ver indica el status code 101, y además devuelve el token de segu
 Autenticar
 ------------------
 
-Permite autenticar en el servidor con un usuario ya registrado
+Permite autenticar en el servidor con un registro ya creado
 
 - *Método HTTP:* ``PUT``
 - *URL:* ``/auth``
@@ -114,10 +114,10 @@ Permite autenticar en el servidor con un usuario ya registrado
 Como se puede ver indica el status code 200, y además devuelve el token de seguridad que indica que el usuario ya puede operar con la aplicación utilizándolo.
 
 
-Eliminar usuario
+Eliminar Registro
 ------------------
 
-Elimina un usuario del sistema con toda su información relacionada.
+Elimina el registro del sistema con toda su información relacionada.
 
 - *Método HTTP:* ``DELETE``
 - *URL:* ``/auth``
@@ -134,3 +134,87 @@ Elimina un usuario del sistema con toda su información relacionada.
  ``http status code: 200``
 
 Responde con el http status code correspondiente para la operación.
+
+.. _user-docs:
+
+Usuario
+===============
+
+Actualizar Perfil
+------------------
+
+Permite actualizar la información de perfil de un usuario
+
+- *Método HTTP:* ``POST``
+- *URL:* ``/user``
+- *Seguridad:* ``Con seguridad``
+
+*Ejemplo de request*
+
+.. code-block:: jsonld
+
+   {
+        "name": "jose",
+        "age": 35,
+        "sex": "M",
+        "alias": "pepe",
+        "email": "jose@tumail.com",
+        "location": {
+            "longitude": 21,
+            "latitude": 12
+        },
+        "interests": [
+            {
+                "value": "river",
+                "category": "futbol"
+            },
+            {
+                "value": "pizza",
+                "category": "comida"
+            },
+            {
+                "value": "helado",
+                "category": "comida"
+            }
+        ]
+    }
+
+*Respuesta*
+
+ ``http status code: 200``
+
+Responde con el http status code correspondiente para la operación.
+
+Obtener información de usuario
+------------------------------
+
+Obtiene la información del usuario logueado.
+
+- *Método HTTP:* ``GET``
+- *URL:* ``/user``
+- *Seguridad:* ``Con seguridad``
+
+*Respuesta*
+
+.. code-block:: jsonld  
+
+	{
+	  "response": {
+	    "age": 35,
+	    "alias": "pepe",
+	    "email": "pepe@unemail.com",
+	    "externalId": 95,
+	    "id": "pepe@unemail.com",
+	    "interests": null,
+	    "location": {
+	      "latitude": 12,
+	      "longitude": 21
+	    },
+	    "name": "jose",
+	    "photo_profile": "",
+	    "sex": "M"
+	  },
+	  "status": 200
+	}
+
+Responde con estado interno 200 y la información del usuario.
