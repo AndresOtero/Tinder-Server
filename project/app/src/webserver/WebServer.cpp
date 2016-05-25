@@ -14,6 +14,8 @@
 #include "RestRequest.h"
 #include "RestResponse.h"
 #include "Constants.h"
+#include "WebServerException.h"
+
 using namespace std;
 
 
@@ -50,6 +52,7 @@ void WebServer::start() {
 
 	  mg_mgr_init(&mgr, NULL);
 	  connection = mg_bind(&mgr, s_http_port, ev_handler);
+	  if(connection == 0) throw WebServerException("Port already in use");
 	  mg_enable_multithreading(connection);
 	  // Set up HTTP server parameters
 	  mg_set_protocol_http_websocket(connection);

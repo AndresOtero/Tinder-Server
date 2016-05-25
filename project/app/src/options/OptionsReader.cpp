@@ -17,7 +17,7 @@ Options *OptionsReader::readOptionsFromFile(std::string file) {
 	std::string content((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
 	Json::Reader reader;
 	Json::Value jsonContent;
-	if(!reader.parse(content, jsonContent)) throw new CorruptOptionsException("Error parseando el archivo.");
+	if(!reader.parse(content, jsonContent)) throw CorruptOptionsException("Error parseando el archivo.");
 	string LogLevel = jsonContent.get("Log_Level", DefaultLogLevel).asString();
 	string SharedServer = jsonContent.get("Shared_URL", DefaultSharedServer).asString();
 	string LocalDB = jsonContent.get("Local_DB", DefaultLocalDB).asString();
