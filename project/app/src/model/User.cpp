@@ -171,6 +171,19 @@ void User::readCommonBody(const Json::Value &values, User &user) {
 
 }
 
+list<Interest> User::buildInterests(Json::Value &root) {
+	std::list<Interest> lista;
+	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {
+		string category = itr->get("category", "").asString();
+		string value = itr->get("value", "").asString();
+		if(category != "" && value != "") {
+			lista.push_front(Interest(category, value));
+		}
+	}
+	return lista;
+}
+
+
 unordered_map<string, set<string>> User::populateInterests(Json::Value &root) {
 	unordered_map<string, set<string>> mapa;
 	for (Json::ValueIterator itr = root.begin(); itr != root.end(); itr++) {

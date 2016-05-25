@@ -50,7 +50,7 @@ void ProfileServices::saveOrUpdateProfile(User *user) {
         user->setExternalId(storedUser->getExternalId());
         //mantengo sincronizado el email.
         user->setEmail(user->getId());
-        this->dao->updateUser(storedUser);
+        this->dao->updateUser(user);
         delete storedUser;
 
     } catch (UserNotFoundException &e) {
@@ -84,9 +84,14 @@ void ProfileServices::saveNewInterest(string category, string value) {
     }
 }
 
-void ProfileServices::addInterest(string userid, string category, string value) {
+void ProfileServices::addInterest(string userid, list <Interest> &interests) {
     User * user = this->getUserByID(userid);
-    user->addInterest(category, value);
+
+    for(list<Interest>::iterator it = interests.begin(); it != interests.end(); ++ it) {
+        Interest ints = *it;
+        user->addInterest(ints.getCategory(), ints.getValue());
+    }
+
     this->saveOrUpdateProfile(user);
     delete user;
 }

@@ -203,6 +203,7 @@ public:
 
     static unordered_map<string, set<string>> populateInterests(Json::Value &root);
 
+    static list<Interest> buildInterests(Json::Value &root);
     /**
      * Returns true or false if the user likes the same interest
      * @param interest interest to check if the user has it or not.

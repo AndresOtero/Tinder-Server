@@ -44,10 +44,14 @@ void InterestResource::addInterest(WebContext &wc) {
     try {
         Json::Value json;
         RestResource::readJson(wc, json);
-        string category = json.get("category", "EMPTY FIELD").asString();
-        string value = json.get("value", "EMPTY FIELD").asString();
-        string userid = wc.getUserid();
-        profileServices.addInterest(userid, category, value);
+        Json::Value interests= json.get("interests", "");
+        if(interests.isArray()) {
+            list<Interest> interestsBuild= User::buildInterests(interests);
+            string userid = wc.getUserid();
+            profileServices.addInterest(userid, interestsBuild);
+        } else {
+            wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
+        }
     } catch (UserNotFoundException & e) {
         Json::Value result;
          this->writeJsonResponse(wc, result, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);
