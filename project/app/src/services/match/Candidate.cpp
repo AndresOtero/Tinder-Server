@@ -9,6 +9,7 @@ Candidate::Candidate(User *user) {
 	this->user = user;
 	this->score = 0;
 	this->numLiked = 0;
+	this->distanceToUser = 0;
 }
 
 Candidate::~Candidate() { }
