@@ -6,6 +6,11 @@ En esta sección se idica la especificación completa de la interfaz de la aplic
 * :ref:`codigos-docs`
 * :ref:`seguridad-docs`
 * :ref:`auth-docs`
+* :ref:`location-docs`
+* :ref:`interests-docs`
+* :ref:`candidates-docs`
+* :ref:`like-docs`
+* :ref:`matching-docs`
 
 ****
 
@@ -223,6 +228,7 @@ Obtiene la información del perfil del usuario logueado.
 
 Responde con estado interno 200 y la información del usuario.
 
+.. _location-docs:
 
 Ubicación
 ===============
@@ -252,10 +258,12 @@ Actualiza las coordenadas de ubicación del usuario.
  ``http status code: 200``
 
 
+.. _interests-docs:
+
 Intereses
 ===============
 
-Permite a un usuario gestionar sus.
+Permite a un usuario gestionar sus intereses.
 
 Obtener Intereses
 --------------------
@@ -347,6 +355,7 @@ Elimina un Interés de un usuario
  ``http status code: 200``
 
 
+.. _candidates-docs:
 
 Candidatos
 ===============
@@ -425,6 +434,115 @@ Permite al usuario conocer la lista diaria de candidatos a match.
 	   "status":200
 	}
 
+
+
+.. _like-docs:
+
+Likes
+===============
+
+Permite a un usuario indicar con qué otros usuarios tiene afinidad.
+
+Obtener Likes
+--------------------
+
+Lista todos los usuarios a los que les dio like.
+
+- *Método HTTP:* ``GET``
+- *URL:* ``/like``
+- *Seguridad:* ``Con seguridad``
+        
+*Respuesta*
+
+.. code-block:: jsonld
+
+
+	{
+	   "response":{
+	      "candidates":[
+	         {
+	            "age":28,
+	            "alias":"caca",
+	            "email":"unemail@gmail.com",
+	            "externalId":94,
+	            "id":"unemail@gmail.com",
+	            "interests":[
+	               {
+	                  "category":"futbol",
+	                  "value":"racing"
+	               },
+	               {
+	                  "category":"musica",
+	                  "value":"la renga"
+	               },
+	               {
+	                  "category":"comida",
+	                  "value":"pastel"
+	               },
+	               {
+	                  "category":"comida",
+	                  "value":"pizza"
+	               }
+	            ],
+	            "location":{
+	               "latitude":0,
+	               "longitude":0
+	            },
+	            "name":"Bufarini",
+	            "photo_profile":"",
+	            "sex":"M"
+	         },
+	         {
+	            "age":18,
+	            "alias":"jj",
+	            "email":"@",
+	            "externalId":43,
+	            "id":"@",
+	            "interests":[
+	               {
+	                  "category":"music",
+	                  "value":"beatles"
+	               },
+	               {
+	                  "category":"comida",
+	                  "value":"pizza"
+	               }
+	            ],
+	            "location":{
+	               "latitude":65.966700000000003,
+	               "longitude":-18.533300000000001
+	            },
+	            "name":"hh",
+	            "photo_profile":"",
+	            "sex":"M"
+	         }
+	      ]
+	   },
+	   "status":200
+	}	
+
+
+Likear Usuario
+------------------
+
+Permite indicar afinidad con un usuario.
+
+- *Método HTTP:* ``POST``
+- *URL:* ``/like``
+- *Seguridad:* ``Con seguridad``
+
+*Ejemplo de request*
+
+.. code-block:: jsonld
+
+	{ "likedUser" : "luly_salazar" }
+
+*Respuesta*
+
+ ``http status code: 200``
+
+ 
+.. _matching-docs:
 
 Matching
 ===============
