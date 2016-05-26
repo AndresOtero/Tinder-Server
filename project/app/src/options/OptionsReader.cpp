@@ -9,7 +9,7 @@
 
 
 const std::string OptionsReader::DefaultLogLevel = "DEBUG";
-const std::string OptionsReader::DefaultSharedServer =  "http://tinder-shared.herokuapp.com";
+const std::string OptionsReader::DefaultSharedServer =  "http://localhost:3000";
 const std::string OptionsReader::DefaultLocalDB = "/tmp";
 
 Options *OptionsReader::readOptionsFromFile(std::string file) {

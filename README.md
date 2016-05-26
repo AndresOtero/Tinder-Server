@@ -8,7 +8,7 @@ Esta es una aplicación realizada dentro del marco de trabajo práctico propuest
 - [:link: Página Web del poryecto](http://tinder2team.github.io/Tinder-Server/)
 - [:book: Repositorio de servidor de Aplicación](http://tinder2team.github.io/Tinder-Server/)
 - [:book: Repositorio del Shared Server](https://github.com/Tinder2Team/Tinder-Shared)
-- [:book: Repositorio del Cliente Android](https://github.com/Tinder2Team/Tinder-Client)
+- [:book: Repositorio del Cliente Android](https://github.com/Tinder2Team/Tinder-Client-2)
 
 ## Status
 
