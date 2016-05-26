@@ -138,9 +138,11 @@ Elimina el registro del sistema con toda su información relacionada.
 
 *Respuesta*
 
- ``http status code: 200``
+.. code-block:: jsonld
 
-Responde con el http status code correspondiente para la operación.
+   {"response": "", "status": 200}
+
+Responde vacío pero con status 200
 
 .. _user-docs:
 
@@ -190,9 +192,11 @@ Permite actualizar la información de perfil del usuario logueado.
 
 *Respuesta*
 
- ``http status code: 200``
+.. code-block:: jsonld
 
-Responde con el http status code correspondiente para la operación.
+   {"response": "", "status": 200}
+
+Responde vacío pero con status 200
 
 Consultar Perfil
 ------------------------------
@@ -255,7 +259,11 @@ Actualiza las coordenadas de ubicación del usuario.
         
 *Respuesta*
 
- ``http status code: 200``
+.. code-block:: jsonld
+
+   {"response": "", "status": 200}
+
+Responde vacío pero con status 200
 
 
 .. _interests-docs:
@@ -328,7 +336,11 @@ Actualiza la lista de intereses del usuario
         
 *Respuesta*
 
- ``http status code: 200``
+.. code-block:: jsonld
+
+   {"response": "", "status": 200}
+
+Responde vacío pero con status 200
 
 
 Eliminar Interés
@@ -352,7 +364,11 @@ Elimina un Interés de un usuario
         
 *Respuesta*
 
- ``http status code: 200``
+.. code-block:: jsonld
+
+   {"response": "", "status": 200}
+
+Responde vacío pero con status 200
 
 
 .. _candidates-docs:
@@ -539,7 +555,11 @@ Permite indicar afinidad con un usuario.
 
 *Respuesta*
 
- ``http status code: 200``
+.. code-block:: jsonld
+
+   {"response": "", "status": 200}
+
+Responde vacío pero con status 200
 
 
 .. _matching-docs:

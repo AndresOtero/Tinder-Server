@@ -95,22 +95,16 @@ Algo similar se utiliza en el lado del chat. Donde se cuenta con un Intent Servi
 En el caso de existir nuevas notificaciones, se levanta una notificación nativa utilizando el Notification Service.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Workflow
 ==========
+
+
+.. image:: images/workflow.png
+   :height: 600px
+   :width: 800px
+   :scale: 100%
+   :alt: Layers
+   :align: center
 
 A continuación se representa el flujo de trabajo más común.
 Se comienza realizando un intento de Login. Se puede producir un error debido a credenciales inválidas (email, password), en el caso de error se marcan los elementos inválidos y se le da otra oportunidad. 

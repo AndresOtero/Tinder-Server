@@ -56,7 +56,7 @@ En esta segunda etapa se abordarán las siguientes actividades:
 Shared Server
 -----------------------------
 
-Corrección de bugs.
+- Corrección de bugs.
 
 
 
@@ -66,7 +66,6 @@ Dentro de esta entrega el alcance contempla:
 
 - Registro y autenticación en el Application Server.
 - Manejo de perfil e Intereses.
-- Match entre usuarios.
 
 `Tickets en GitHub Segundo Checkpoint Android Client <https://github.com/Tinder2Team/Tinder-Client-2/issues?utf8=%E2%9C%93&q=milestone%3A%22Segunda+Entrega%22+>`_
 
@@ -87,11 +86,16 @@ Para finalizar con esta aplicación en esta entrega se apuntará a concluir con:
 
 `Tickets en GitHub Tercer Checkpoint Application Server <https://github.com/Tinder2Team/Tinder-Server/milestones/Tercer%20Entrega>`_
 
+Shared Server
+-----------------------------
+
+- Upload de foto de perfil.
 
 Android Client
 -----------------------------
 Para completar la aplicación se deberá implentar:
 
+- Match entre usuarios.
 - Chat entre usuarios.
 - Upload de foto de perfil.
 
