@@ -6,6 +6,13 @@ Estructura general
 ==================
 
 
+.. image:: images/arq1.png
+   :height: 300px
+   :width: 300px
+   :scale: 100%
+   :alt: Layers
+   :align: center
+
 La arquitectura del cliente de android es bastante robusta. A continuación se representa en forma reducida mediante un diagrama.
 
 Cada Android Activity (X Activity: UserActivity, LoginActivity, etc), utiliza algun servicio. 
@@ -15,39 +22,29 @@ Existen varios tipos de Service: AccountService, UserService, MatchService, Chat
 Los Servicios utilizan por detrás un Connector, el cual es un Singleton que contiene un wrapper de Volley. 
 Este conector es el encargado de comunicarse con el servidor mediante la REST API.
 
-
-.. figura 1
-
-
-Dispatcher
----------------------
-
-Módulo encargado de crear los pedidos que realiza el connector. Cada Dispatcher conoce la parte de la API REST que le corresponde.
-
-
-Receiver
--------------------
-
-Módulo encargado de recibir y parsear las respuestas del connector. Sabe cómo interpretar las respuestas y crear los elementos necesarios.
-
-Linker
---------
-
-Este módulo se encarga de trasladar la información procesada por el Receiver a la Activity que corresponde. Conoce los elementos de la UI y sabe cómo debe impactarlos. También sabe cómo trasladar los errores a la UI.
+.. image:: images/arq2.png
+   :height: 300px
+   :width: 300px
+   :scale: 100%
+   :alt: Layers
+   :align: center
+   
 
 
+**Dispatcher:** Módulo encargado de crear los pedidos que realiza el connector. Cada Dispatcher conoce la parte de la API REST que le corresponde.
 
 
+**Receiver:** Módulo encargado de recibir y parsear las respuestas del connector. Sabe cómo interpretar las respuestas y crear los elementos necesarios.
+
+**Linker:** Este módulo se encarga de trasladar la información procesada por el Receiver a la Activity que corresponde. Conoce los elementos de la UI y sabe cómo debe impactarlos. También sabe cómo trasladar los errores a la UI.
 
 
-
-
-
-
-
-
-
-
+.. image:: images/arq3.png
+   :height: 500px
+   :width: 500px
+   :scale: 100%
+   :alt: Layers
+   :align: center
 
 
 En el esquema superior, se muestra un ejemplo tomando el caso del AccountService. Como observamos, el AccountService esta compuesto por un AccountReceiver, AccountLinker y AccountDispatcher.
@@ -67,6 +64,13 @@ Casos Particulares
 Location 
 ---------
 
+.. image:: images/loc.png
+   :height: 300px
+   :width: 300px
+   :scale: 100%
+   :alt: Layers
+   :align: center
+
 La ubicacion del usuario es actualizada cada una cierta cantidad de tiempo (ej: 30 minutos). Esto se realiza corriendo una tarea de fondo en Android.
 
 Esto se realiza utilizando un “IntentService” provisto por la SDK de android. 
@@ -78,6 +82,13 @@ En este service se solicita la ubicacion del dispositivo (previamente se debe ha
 
 Chat Service
 ------------
+
+.. image:: images/Chat.png
+   :height: 400px
+   :width: 400px
+   :scale: 100%
+   :alt: Layers
+   :align: center
 
 Algo similar se utiliza en el lado del chat. Donde se cuenta con un Intent Service en este caso para analizar si existen nuevas notificaciones.
 

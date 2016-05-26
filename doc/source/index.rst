@@ -55,6 +55,7 @@ utilizadas por los desarolladores, etc.
 
    client/tecnologias
    client/solucion
+   client/casos
    client/mtecnico
    client/musuario
 
