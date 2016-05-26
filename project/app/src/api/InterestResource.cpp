@@ -48,7 +48,7 @@ void InterestResource::addInterest(WebContext &wc) {
         if(interests.isArray()) {
             list<Interest> interestsBuild= User::buildInterests(interests);
             string userid = wc.getUserid();
-            profileServices.addInterest(userid, interestsBuild);
+            profileServices.saveInterests(userid, interestsBuild);
         } else {
             wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
         }

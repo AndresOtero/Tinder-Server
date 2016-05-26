@@ -225,6 +225,14 @@ public:
     * @param value the interest
     */
     void removeInterest(string category, string value);
+
+    /**
+    * Remove all interests
+    *
+    */
+    void removeInterests();
+
+
 private:
     int age;
     string sex;

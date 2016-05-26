@@ -92,7 +92,7 @@ public:
 	 * @param category category of interest
 	 * @param value value of interest
 	 */
-	void addInterest(string userid, list <Interest> &interests);
+	void saveInterests(string userid, list <Interest> &interests);
 
 	/**
  	* Remove interest to user
