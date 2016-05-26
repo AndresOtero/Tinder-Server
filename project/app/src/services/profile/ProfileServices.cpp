@@ -56,6 +56,7 @@ void ProfileServices::saveOrUpdateProfile(User *user) {
     } catch (UserNotFoundException &e) {
         //if not registered
         this->translationDAO->remove(user->getId());
+        user->setEmail(user->getId());
         this->dao->saveNewUser(user);
         this->translationDAO->save(user->getId(), user->getExternalId());
     } catch (ConnectionException &e) {
@@ -84,9 +85,9 @@ void ProfileServices::saveNewInterest(string category, string value) {
     }
 }
 
-void ProfileServices::addInterest(string userid, list <Interest> &interests) {
+void ProfileServices::saveInterests(string userid, list <Interest> &interests) {
     User * user = this->getUserByID(userid);
-
+    user->removeInterests();
     for(list<Interest>::iterator it = interests.begin(); it != interests.end(); ++ it) {
         Interest ints = *it;
         user->addInterest(ints.getCategory(), ints.getValue());

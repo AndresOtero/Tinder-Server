@@ -48,7 +48,8 @@ void InterestResource::addInterest(WebContext &wc) {
         if(interests.isArray()) {
             list<Interest> interestsBuild= User::buildInterests(interests);
             string userid = wc.getUserid();
-            profileServices.addInterest(userid, interestsBuild);
+            profileServices.saveInterests(userid, interestsBuild);
+            this->writeJsonResponse(wc, API_STATUS_CODE_DONE);
         } else {
             wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
         }
@@ -70,6 +71,7 @@ void InterestResource::removeInterest(WebContext &wc) {
         string value = json.get("value", "EMPTY FIELD").asString();
         string userid = wc.getUserid();
         profileServices.removeInterest(userid, category, value);
+        this->writeJsonResponse(wc, API_STATUS_CODE_DONE);
     } catch (UserNotFoundException & e) {
         Json::Value result;
          this->writeJsonResponse(wc, result, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);

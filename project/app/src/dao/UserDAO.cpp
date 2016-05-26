@@ -72,7 +72,7 @@ void UserDAO::updateUser(User *user) {
 }
 
 void UserDAO::saveNewUser(User *user) {
-	string url = "/users/";
+	string url = "/users";
 	Json::Value userJson;
 	user->toExternalJson(userJson);
 	Json::Value root;
