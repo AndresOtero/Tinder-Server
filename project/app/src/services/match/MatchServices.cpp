@@ -48,7 +48,7 @@ list<User *> MatchServices::getLikesForUser(User *user) {
 	return this->getUsersFromIDs(listaIDs);
 }
 
-list<User *> MatchServices::getCandidatesForUser(User *user) {
+list<User *> MatchServices::getCandidatesForUser(User *user, int distance) {
 	if (!this->hasRemainingCandidates(user)) throw NoMoreCandidatesException("Already requested candidates today.");
 	auto lista = this->profileServices->getAllUsers();
 	auto alreadyLiked = this->getLikesForUser(user);
@@ -59,12 +59,21 @@ list<User *> MatchServices::getCandidatesForUser(User *user) {
 		}
 		else delete *itr;
 	}
+	this->getCandidatesDistance(candidates, user);
 	this->getCandidatesScores(candidates, user);
 	candidates.sort([] (const Candidate* first, const Candidate* second) {
 		return ( first->score < second->score );
 	});
 	this->matchDao->updateLastMatchRequest(user);
-	return this->getUserListFromCandidates(candidates);
+	return this->getUserListFromCandidates(candidates, distance);
+}
+
+void MatchServices::getCandidatesDistance(std::list < Candidate * > candidates, User * user) {
+	for (auto itr = candidates.begin(); itr!=candidates.end(); ++itr) {
+		(*itr)->distanceToUser = this->distanceEarth((*itr)->getUser()->getLatitude(),
+		                                             (*itr)->getUser()->getLongitude(), user->getLatitude(),
+		                                             user->getLongitude());
+	}
 }
 
 void MatchServices::getCandidatesScores(std::list<Candidate*> &lista, User* user) {
@@ -83,12 +92,17 @@ int MatchServices::getCommonInterests(User* userA, User* userB) {
 	return contador;
 }
 
-list<User*> MatchServices::getUserListFromCandidates(std::list<Candidate*> candidatos) {
+list<User*> MatchServices::getUserListFromCandidates(std::list<Candidate*> candidatos, int distance) {
 	std::list<User*> toReturn;
 	int contador = 0;
 	for (auto itr=candidatos.begin(); itr!=candidatos.end() && contador < this->dailyLimit; ++itr) {
-		toReturn.push_back((*itr)->getUser());
-		contador++;
+		if ((*itr)->distanceToUser > distance) {
+			delete (*itr)->getUser();
+		} else {
+			toReturn.push_back((*itr)->getUser());
+			contador++;
+		}
+		delete (*itr);
 	}
 	return toReturn;
 }

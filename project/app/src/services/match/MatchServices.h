@@ -47,8 +47,10 @@ public:
 	 * Returns a list of all the candidate the user has today. The list is sorted, the best candidates are first.
 	 * If he has already requested the list today, NoMoreCandidatesException is raised. The caller has to delete
 	 * the users.
+	 * @param user user to get the candidates for.
+	 * @param distance maximum distance in kms for the candidates.
 	 */
-	list<User*> getCandidatesForUser(User* user);
+	list<User*> getCandidatesForUser(User* user, int distance);
 
 	/**
 	 * Returns the number of likes that the user has.
@@ -70,11 +72,12 @@ private:
 	bool findInList(list<User*> likes, User* tofind);
 	bool hasRemainingCandidates(User* user);
 	list<User*> getUsersFromIDs(list<string> &ids);
-	list<User*> getUserListFromCandidates(std::list<Candidate*> candidatos);
+	list<User*> getUserListFromCandidates(std::list<Candidate*> candidatos, int distance);
 	void getCandidatesScores(std::list<Candidate*> &lista, User* user);
 	int getCommonInterests(User* userA, User* userB);
 	double deg2rad(double deg);
 	double rad2deg(double rad);
+	void getCandidatesDistance(list<Candidate*> candidates, User* user);
 
 	/**
 	 * Returns the distance between two points on the Earth.

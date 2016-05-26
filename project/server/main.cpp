@@ -81,7 +81,6 @@ int main(int argc, char* argv[]) {
 	ProfileServices profileService(&userDAO, &transDAO);
 	AuthenticationService authService(&authDAO, &profileService);
 	MatchServices matchServices(&matchDAO,&profileService);
-	//authService.saveNewUser("chelo3","prueba");
 
 
 	SecurityFilter securityFilter(authService);
