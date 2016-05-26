@@ -185,7 +185,7 @@
             
   <div class="section" id="especificacion-de-la-api">
 <h1>Especificación de la API<a class="headerlink" href="#especificacion-de-la-api" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>En esta sección se idica la especificación completa de la interfaz de la aplicación. La misma es una api tipo REST con interacciones en formato JSON.</p>
+<p>En esta sección se indica la especificación completa de la interfaz de la aplicación. La misma es una api tipo REST con interacciones en formato JSON.</p>
 <ul class="simple">
 <li><a class="reference internal" href="#codigos-docs"><span class="std std-ref">Códigos de error</span></a></li>
 <li><a class="reference internal" href="#seguridad-docs"><span class="std std-ref">Token de Seguridad</span></a></li>
@@ -199,7 +199,7 @@
 <hr class="docutils" />
 <div class="section" id="codigos-de-error">
 <span id="codigos-docs"></span><h2>Códigos de error<a class="headerlink" href="#codigos-de-error" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Cualquier respuesta de la aplicacón, ademas del uso de los clásicos códigos de status HTTP pueden estar acompañados de un código interno de status para proveer mas información al cliente.</p>
+<p>Cualquier respuesta de la aplicación, además del uso de los clásicos códigos de status HTTP pueden estar acompañados de un código interno de status para proveer más información al cliente.</p>
 <p>Mientras una respuesta común es del tipo</p>
 <div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;XXX&quot;</span><span class="p">}</span>
 </pre></div>
@@ -215,9 +215,9 @@
 <p>El código XXX es un número de estado del listado siguiente</p>
 <ul class="simple">
 <li>200: No hay información extra, la petición se completó con éxito;</li>
-<li>101: Es necesario crear un perfíl de usuario.</li>
+<li>101: Es necesario crear un perfil de usuario.</li>
 <li>102: El usuario ya existe.</li>
-<li>103: Se alcancó el límite diario de candidatos consultados.</li>
+<li>103: Se alcanzó el límite diario de candidatos consultados.</li>
 </ul>
 <hr class="docutils" />
 </div>
@@ -651,7 +651,7 @@
 </div>
 <div class="section" id="matching">
 <span id="matching-docs"></span><h2>Matching<a class="headerlink" href="#matching" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Permite al usuario consultar los usuarios con los cuales tuvo Match (utuamente likeados).</p>
+<p>Permite al usuario consultar los usuarios con los cuales tuvo Match (mutuamente likeados).</p>
 <ul class="simple">
 <li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">GET</span></code></li>
 <li><em>URL:</em> <code class="docutils literal"><span class="pre">/match</span></code></li>
