@@ -1,8 +1,6 @@
 Tecnologías principales
 ======================================
 
-FrontEnd
---------------------------
 
 .. |android| image:: images/android.png
    :height: 100px

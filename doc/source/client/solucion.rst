@@ -1,8 +1,9 @@
+=====================
 Solución Implementada
 =====================
 
 Estructura general
----------------------
+==================
 
 
 La arquitectura del cliente de android es bastante robusta. A continuación se representa en forma reducida mediante un diagrama.
@@ -61,19 +62,24 @@ Lo mismo se realiza para los demás Service.
 
 
 Casos Particulares
-------------------
+==================
 
-**Location:** La ubicacion del usuario es actualizada cada una cierta cantidad de tiempo (ej: 30 minutos). Esto se realiza corriendo una tarea de fondo en Android.
+Location 
+---------
 
+La ubicacion del usuario es actualizada cada una cierta cantidad de tiempo (ej: 30 minutos). Esto se realiza corriendo una tarea de fondo en Android.
 
- Esto se realiza utilizando un “IntentService” provisto por la SDK de android. 
+Esto se realiza utilizando un “IntentService” provisto por la SDK de android. 
 
 
 En este service se solicita la ubicacion del dispositivo (previamente se debe haber aceptado el permiso) y se envia constantemente al App Server.
 
 
 
-**Chat Service:** Algo similar se utiliza en el lado del chat. Donde se cuenta con un Intent Service en este caso para analizar si existen nuevas notificaciones.
+Chat Service
+------------
+
+Algo similar se utiliza en el lado del chat. Donde se cuenta con un Intent Service en este caso para analizar si existen nuevas notificaciones.
 
 En el caso de existir nuevas notificaciones, se levanta una notificación nativa utilizando el Notification Service.
 
@@ -93,12 +99,12 @@ En el caso de existir nuevas notificaciones, se levanta una notificación nativa
 
 
 Workflow
----------
+==========
 
 A continuación se representa el flujo de trabajo más común.
 Se comienza realizando un intento de Login. Se puede producir un error debido a credenciales inválidas (email, password), en el caso de error se marcan los elementos inválidos y se le da otra oportunidad. 
 
-En el caso de éxito, pueden ocurrir 2 cosas. La primera, que el usuario no haya creado un perfil. En tal caso el usuario debe completar sus datos en la actividad correspondiente. Si el usuario ya ha creado su perfil, entonces directamente se procede al Main Activity.
+En el caso exitoso, pueden ocurrir dos cosas. La primera, que el usuario no haya creado un perfil. En tal caso el usuario debe completar sus datos en la actividad correspondiente. Si el usuario ya ha creado su perfil, entonces directamente se procede al Main Activity.
 
 En el Main Activity, los usuarios puede proceder a encontrar nuevos contactos. De ser asi, se solicita al servidor por nuevos candidatos. 
 
