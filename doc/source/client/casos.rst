@@ -49,6 +49,17 @@ Estos datos son enviados al servidor mediante el UserService cuando se hace clic
 Luego de esta ventana, se procede a cargar los intereses deseados.
 
 
+.. image:: images/interest.png
+   :height: 100px
+   :width: 200px
+   :scale: 100%
+   :alt: alternate text
+   :align: center
+
+
+Hemos integrado una librería para realizar el “cropeo” y acomodamiento de la foto de perfil. El usuario puede elegir la escala y rotar la foto. 
+
+
 .. |cap1| image:: images/casos4.png
    :height: 100px
    :width: 200px
@@ -70,12 +81,10 @@ Luego de esta ventana, se procede a cargar los intereses deseados.
    :alt: alternate text
    :align: middle
 
+
 +-------------++-------------+-------------+
 | |cap1|      | |cap2|       | |cap3|      |
 +-------------+--------------+-------------+
-
-
-En las capturas superiores, se muestra la opción de selección de foto. Hemos integrado una librería para realizar el “cropeo” y acomodamiento de la foto de perfil. El usuario puede elegir la escala y rotar la foto. 
 
 Además de esto, se escala la definición de la foto automáticamente, convirtiendo la foto a un determinado tamaño (150 x 150 px). Es algo transparente para el usuario, pero de gran impacto, ya que permite fotos de poco peso que son rápidas para enviar.
 
