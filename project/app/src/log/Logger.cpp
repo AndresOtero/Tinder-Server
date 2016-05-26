@@ -79,10 +79,17 @@ void setLevelFilter(std::string level) {
         setLevelFilter(logging::trivial::debug);
         return;
     }
+    if (level == "warning"){
+        setLevelFilter(logging::trivial::warning);
+        return;
+    }
+
+
     if (level == "error"){
         setLevelFilter(logging::trivial::error);
         return;
     }
+
     if (level == "fatal"){
         setLevelFilter(logging::trivial::fatal);
         return;

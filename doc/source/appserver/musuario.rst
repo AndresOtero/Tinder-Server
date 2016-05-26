@@ -27,3 +27,30 @@ y el servidor en ambos qué casos queda levantado en el puerto 8000 esperando po
 
 Configuración externa
 ---------------------
+Para poder parametrizar ciertos parámetros del servidor se puede proveer un archivo de configuración de la siguiente forma:
+
+``/server config.json``
+
+Donde ``config.json`` es un archivo en formato json, como por ejemplo:
+
+.. code-block:: jsonld
+
+	{
+	  "Log_Level" : "debug",
+	  "Shared_URL" : "http://tinder-shared.herokuapp.com",
+	  "Local_DB" : "/tmp"
+	}
+
+Pudiendo variar los siguientes Parámetros
+
+- **Log_Level:** Indica el nivel de log del servidor, las opciones habilitadas son:
+
+	- trace
+	- debug
+	- info
+	- warning
+	- error
+	- fatal
+
+- **Shared_URL:** Es la dirección del shared server a donde hacer las consultas de perfiles de usuario.
+- **Local_DB:** Directorio donde se almacena la base de datos.
