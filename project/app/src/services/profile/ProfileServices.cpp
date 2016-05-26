@@ -56,6 +56,7 @@ void ProfileServices::saveOrUpdateProfile(User *user) {
     } catch (UserNotFoundException &e) {
         //if not registered
         this->translationDAO->remove(user->getId());
+        user->setEmail(user->getId());
         this->dao->saveNewUser(user);
         this->translationDAO->save(user->getId(), user->getExternalId());
     } catch (ConnectionException &e) {
