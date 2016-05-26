@@ -4,7 +4,7 @@ import json
 
 from user import User
 
-URLbase = "http://..../"
+URLbase = "http://52.67.7.172:8000/"
 
 class MyTestCase(unittest.TestCase):
     anUser = User("elpedro@gmail.com",
