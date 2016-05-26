@@ -50,6 +50,8 @@ void UserResource::saveUser(WebContext &context) {
 		User user(json);
 		user.setId(context.getUserid());
 		service.saveOrUpdateProfile(&user);
+		this->writeJsonResponse(context, API_STATUS_CODE_DONE);
+
 		this->writeJsonResponse(context);
 	} catch (ServiceException &e) {
 		context.getResponse().setStatus(STATUS_500_INTERNAL_SERVER_ERROR);
