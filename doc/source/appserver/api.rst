@@ -541,19 +541,14 @@ Permite indicar afinidad con un usuario.
 
  ``http status code: 200``
 
- 
+
 .. _matching-docs:
 
 Matching
 ===============
 
-Permite al usuario conectar con otros usuarios.
+Permite al usuario consultar los usuarios con los cuales tuvo Match (utuamente likeados).
 
-
-Obtener Matchs
----------------
-
-Lista todos los matchs de un usuario.
 
 - *Método HTTP:* ``GET``
 - *URL:* ``/match``
