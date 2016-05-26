@@ -9,8 +9,7 @@
 using namespace std;
 
 
-void setInfoFilter();
-void setDebugFilter();
+void setLevelFilter(string level);
 
 /**
  * File where to store logs

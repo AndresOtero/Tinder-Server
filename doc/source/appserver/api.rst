@@ -375,7 +375,7 @@ Permite al usuario conocer la lista diaria de candidatos a match.
 	      "candidates":[
 	         {
 	            "age":28,
-	            "alias":"caca",
+	            "alias":"unalias",
 	            "email":"unemail@gmail.com",
 	            "externalId":94,
 	            "id":"unemail@gmail.com",
@@ -462,7 +462,7 @@ Lista todos los usuarios a los que les dio like.
 	      "candidates":[
 	         {
 	            "age":28,
-	            "alias":"caca",
+	            "alias":"juan",
 	            "email":"unemail@gmail.com",
 	            "externalId":94,
 	            "id":"unemail@gmail.com",
@@ -535,7 +535,7 @@ Permite indicar afinidad con un usuario.
 
 .. code-block:: jsonld
 
-	{ "likedUser" : "luly_salazar" }
+	{ "likedUser" : "luly_salazar@gmail.com" }
 
 *Respuesta*
 
@@ -563,7 +563,7 @@ Permite al usuario consultar los usuarios con los cuales tuvo Match (utuamente l
 	      "candidates":[
 	         {
 	            "age":28,
-	            "alias":"caca",
+	            "alias":"juan",
 	            "email":"unemail@gmail.com",
 	            "externalId":94,
 	            "id":"unemail@gmail.com",

@@ -14,7 +14,7 @@
 #include <boost/shared_ptr.hpp>
 #include <fstream>
 #include <ostream>
-
+#include <string>
 
 namespace logging = boost::log;
 namespace src = boost::log::sources;
@@ -62,18 +62,31 @@ BOOST_LOG_GLOBAL_LOGGER_INIT(logger, src::severity_logger_mt) {
     return logger;
 }
 
-
-void setInfoFilter() {
-    logging::core::get()->set_filter
-            (
-                    logging::trivial::severity >= logging::trivial::info
-            );
-}
-
-void setDebugFilter() {
+void setLevelFilter(logging::trivial::severity_level level) {
     logging::core::get()->set_filter
             (
                     logging::trivial::severity >= logging::trivial::debug
             );
+}
+
+void setLevelFilter(std::string level) {
+
+    if (level == "trace"){
+        setLevelFilter(logging::trivial::trace);
+        return;
+    }
+    if (level == "debug"){
+        setLevelFilter(logging::trivial::debug);
+        return;
+    }
+    if (level == "error"){
+        setLevelFilter(logging::trivial::error);
+        return;
+    }
+    if (level == "fatal"){
+        setLevelFilter(logging::trivial::fatal);
+        return;
+    }
+    setLevelFilter(logging::trivial::info);
 }
 

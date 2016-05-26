@@ -40,8 +40,11 @@ int main(int argc, char* argv[]) {
 		LOG_INFO << "No se recibio archivo de opciones. Cargando valores por defecto.";
 		options = OptionsReader::loadDefaultOptions();
 	}
-	if(options->getLogLevel() == "debug") setDebugFilter();
-	else setInfoFilter();
+
+
+
+
+	setLevelFilter(options->getLogLevel());
 
 	LOG_DEBUG << "Nivel del loggeo seteado en DEBUG.";
 	LOG_INFO << "Testing conection to shared server.";
