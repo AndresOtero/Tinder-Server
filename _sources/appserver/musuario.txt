@@ -29,7 +29,7 @@ Configuración externa
 ---------------------
 Para poder parametrizar ciertos parámetros del servidor se puede proveer un archivo de configuración de la siguiente forma:
 
-``/server config.json``
+``/server -config config.json``
 
 Donde ``config.json`` es un archivo en formato json, como por ejemplo:
 
