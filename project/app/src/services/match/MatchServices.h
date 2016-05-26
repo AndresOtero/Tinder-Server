@@ -10,6 +10,7 @@
 #include "MatchDAO.h"
 #include "Candidate.h"
 
+
 /**
  * @class MatchServices
  * Provides de required methods to resolve match related requests.
@@ -46,8 +47,10 @@ public:
 	 * Returns a list of all the candidate the user has today. The list is sorted, the best candidates are first.
 	 * If he has already requested the list today, NoMoreCandidatesException is raised. The caller has to delete
 	 * the users.
+	 * @param user user to get the candidates for.
+	 * @param distance maximum distance in kms for the candidates.
 	 */
-	list<User*> getCandidatesForUser(User* user);
+	list<User*> getCandidatesForUser(User* user, int distance);
 
 	/**
 	 * Returns the number of likes that the user has.
@@ -69,9 +72,23 @@ private:
 	bool findInList(list<User*> likes, User* tofind);
 	bool hasRemainingCandidates(User* user);
 	list<User*> getUsersFromIDs(list<string> &ids);
-	list<User*> getUserListFromCandidates(std::list<Candidate*> candidatos);
+	list<User*> getUserListFromCandidates(std::list<Candidate*> candidatos, int distance);
 	void getCandidatesScores(std::list<Candidate*> &lista, User* user);
 	int getCommonInterests(User* userA, User* userB);
+	double deg2rad(double deg);
+	double rad2deg(double rad);
+	void getCandidatesDistance(list<Candidate*> candidates, User* user);
+
+	/**
+	 * Returns the distance between two points on the Earth.
+	 * Direct translation from http://en.wikipedia.org/wiki/Haversine_formula
+	 * @param lat1d Latitude of the first point in degrees
+	 * @param lon1d Longitude of the first point in degrees
+	 * @param lat2d Latitude of the second point in degrees
+	 * @param lon2d Longitude of the second point in degrees
+	 * @return The distance between the two points in kilometers
+	 */
+	double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d);
 };
 
 

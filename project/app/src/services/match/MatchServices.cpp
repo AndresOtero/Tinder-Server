@@ -6,6 +6,10 @@
 #include <iomanip>
 #include "MatchServices.h"
 #include "NoMoreCandidatesException.h"
+#include <cmath>
+
+#define pi 3.14159265358979323846
+#define earthRadiusKm 6371.0
 
 using namespace std;
 
@@ -44,7 +48,7 @@ list<User *> MatchServices::getLikesForUser(User *user) {
 	return this->getUsersFromIDs(listaIDs);
 }
 
-list<User *> MatchServices::getCandidatesForUser(User *user) {
+list<User *> MatchServices::getCandidatesForUser(User *user, int distance) {
 	if (!this->hasRemainingCandidates(user)) throw NoMoreCandidatesException("Already requested candidates today.");
 	auto lista = this->profileServices->getAllUsers();
 	auto alreadyLiked = this->getLikesForUser(user);
@@ -55,12 +59,21 @@ list<User *> MatchServices::getCandidatesForUser(User *user) {
 		}
 		else delete *itr;
 	}
+	this->getCandidatesDistance(candidates, user);
 	this->getCandidatesScores(candidates, user);
 	candidates.sort([] (const Candidate* first, const Candidate* second) {
 		return ( first->score < second->score );
 	});
 	this->matchDao->updateLastMatchRequest(user);
-	return this->getUserListFromCandidates(candidates);
+	return this->getUserListFromCandidates(candidates, distance);
+}
+
+void MatchServices::getCandidatesDistance(std::list < Candidate * > candidates, User * user) {
+	for (auto itr = candidates.begin(); itr!=candidates.end(); ++itr) {
+		(*itr)->distanceToUser = this->distanceEarth((*itr)->getUser()->getLatitude(),
+		                                             (*itr)->getUser()->getLongitude(), user->getLatitude(),
+		                                             user->getLongitude());
+	}
 }
 
 void MatchServices::getCandidatesScores(std::list<Candidate*> &lista, User* user) {
@@ -79,12 +92,17 @@ int MatchServices::getCommonInterests(User* userA, User* userB) {
 	return contador;
 }
 
-list<User*> MatchServices::getUserListFromCandidates(std::list<Candidate*> candidatos) {
+list<User*> MatchServices::getUserListFromCandidates(std::list<Candidate*> candidatos, int distance) {
 	std::list<User*> toReturn;
 	int contador = 0;
 	for (auto itr=candidatos.begin(); itr!=candidatos.end() && contador < this->dailyLimit; ++itr) {
-		toReturn.push_back((*itr)->getUser());
-		contador++;
+		if ((*itr)->distanceToUser > distance) {
+			delete (*itr)->getUser();
+		} else {
+			toReturn.push_back((*itr)->getUser());
+			contador++;
+		}
+		delete (*itr);
 	}
 	return toReturn;
 }
@@ -113,6 +131,25 @@ list<User*> MatchServices::getUsersFromIDs(list<string> &ids) {
 		listaUsers.push_back(this->profileServices->getUserByID(*itr));
 	}
 	return listaUsers;
+}
+
+double MatchServices::deg2rad(double deg) {
+	return (deg * pi / 180);
+}
+
+double MatchServices::rad2deg(double rad) {
+	return (rad * 180 / pi);
+}
+
+double MatchServices::distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d) {
+	double lat1r, lon1r, lat2r, lon2r, u, v;
+	lat1r = deg2rad(lat1d);
+	lon1r = deg2rad(lon1d);
+	lat2r = deg2rad(lat2d);
+	lon2r = deg2rad(lon2d);
+	u = sin((lat2r - lat1r)/2);
+	v = sin((lon2r - lon1r)/2);
+	return 2.0 * earthRadiusKm * asin(sqrt(u * u + cos(lat1r) * cos(lat2r) * v * v));
 }
 
 

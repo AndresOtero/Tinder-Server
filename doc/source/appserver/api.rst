@@ -1,7 +1,7 @@
 ======================================
 Especificación de la API
 ======================================
-En esta sección se idica la especificación completa de la interfaz de la aplicación. La misma es una api tipo REST con interacciones en formato JSON.
+En esta sección se indica la especificación completa de la interfaz de la aplicación. La misma es una api tipo REST con interacciones en formato JSON.
 
 * :ref:`codigos-docs`
 * :ref:`seguridad-docs`
@@ -20,7 +20,7 @@ En esta sección se idica la especificación completa de la interfaz de la aplic
 Códigos de error
 ================
 
-Cualquier respuesta de la aplicacón, ademas del uso de los clásicos códigos de status HTTP pueden estar acompañados de un código interno de status para proveer mas información al cliente.
+Cualquier respuesta de la aplicación, además del uso de los clásicos códigos de status HTTP pueden estar acompañados de un código interno de status para proveer más información al cliente.
 
 Mientras una respuesta común es del tipo
 
@@ -36,9 +36,9 @@ Donde
 El código XXX es un número de estado del listado siguiente
 
 * 200: No hay información extra, la petición se completó con éxito;
-* 101: Es necesario crear un perfíl de usuario.
+* 101: Es necesario crear un perfil de usuario.
 * 102: El usuario ya existe.
-* 103: Se alcancó el límite diario de candidatos consultados.
+* 103: Se alcanzó el límite diario de candidatos consultados.
 
 ****
 
@@ -547,7 +547,7 @@ Permite indicar afinidad con un usuario.
 Matching
 ===============
 
-Permite al usuario consultar los usuarios con los cuales tuvo Match (utuamente likeados).
+Permite al usuario consultar los usuarios con los cuales tuvo Match (mutuamente likeados).
 
 
 - *Método HTTP:* ``GET``

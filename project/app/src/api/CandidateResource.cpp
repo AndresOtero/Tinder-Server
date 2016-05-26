@@ -19,7 +19,7 @@ CandidateResource::~CandidateResource() { }
 
 void CandidateResource::setup(ApiDispatcher &dispatcher){
 	using placeholders::_1;
-	dispatcher.registerEndPoint(RestRequest::GET, "/candidates",
+	dispatcher.registerEndPoint(RestRequest::GET, "/candidates/#distancia#",
 	                            (function<void (WebContext&)>)bind( &CandidateResource::getCandidates, this, _1 ));
 
 }
@@ -28,7 +28,8 @@ void CandidateResource::getCandidates(WebContext &wc) {
 	User *user;
 	try {
 		user = profileServices.getUserByID(wc.getUserid());
-		std::list<User *> candidates = this->matchServices.getCandidatesForUser(user);
+		std::list<User *> candidates = this->matchServices.getCandidatesForUser(user,
+		                                                                        std::stoi(wc.getParam("distancia")));
 		Json::Value result;
 		result["candidates"] = Json::Value(Json::arrayValue);
 		for(auto it = candidates.begin(); it != candidates.end(); ++it) {
