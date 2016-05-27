@@ -142,7 +142,7 @@ int ProfileServices::translateId(string id, bool shouldUpdate) {
                 throw UserNotFoundException(id);
             }
         } else {
-            throw e;
+            throw UserNotFoundException(id);
         }
     }
 }
