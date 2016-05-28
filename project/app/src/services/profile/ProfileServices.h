@@ -77,14 +77,6 @@ public:
 	 */
 	unordered_map<string, set<string>> getInterests();
 
-	/**
-	 * It saves the new interest to the shared server.
-	 *
-	 * @param category category to append the new value to. If it does not exist, it is created.
-	 * @param value to add to the category.
-	 */
-	void saveNewInterest(string category, string value);
-
 
 	/**
 	 * Add interest to user
@@ -94,13 +86,6 @@ public:
 	 */
 	void saveInterests(string userid, list <Interest> &interests);
 
-	/**
- 	* Remove interest to user
- 	* @param userid the user
- 	* @param category category of interest
- 	* @param value value of interest
- 	*/
-	void removeInterest(string userid, string category, string value);
 
 	/**
 	 * update user location
@@ -114,20 +99,10 @@ public:
 
 
 private:
-	unordered_map<string, set<string>> populateInterests(Json::Value &root);
 	UserDAO* dao;
 	TranslationDAO * translationDAO;
 	void reloadMapping();
-
 	int translateId(string id, bool shouldUpdate);
-
-	/**
-	 * Asks the DAO to return the User* with the received id. If the user is not found it throws
- 	* UserNotFoundException
- 	*
- 	* @param id of the username to get.
- 	*/
-	User* getUserByID(int id);
 };
 
 #endif /* SRC_PROFILESERVICES_H_ */

@@ -11,14 +11,14 @@ static const char *const DB_FILE = "/tmp/testsMatch";
 #include <MatchDAO.h>
 #include <MatchServices.h>
 
-class ProfileServicesTest : public ::testing::Test{
+class MatchServiceTest : public ::testing::Test{
 protected:
 
 	// You can do set-up work for each test here.
-	ProfileServicesTest();
+	MatchServiceTest();
 
 	// You can do clean-up work that doesn't throw exceptions here.
-	virtual ~ProfileServicesTest();
+	virtual ~MatchServiceTest();
 
 	// If the constructor and destructor are not enough for setting up
 	// and cleaning up each test, you can define the following methods:

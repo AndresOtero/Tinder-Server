@@ -6,26 +6,25 @@
 #include "MatchServicesTest.h"
 
 
-ProfileServicesTest::ProfileServicesTest() { }
+MatchServiceTest::MatchServiceTest() { }
 
-ProfileServicesTest::~ProfileServicesTest() { }
+MatchServiceTest::~MatchServiceTest() { }
 
-void ProfileServicesTest::SetUp() {
+void MatchServiceTest::SetUp() {
 	boost::filesystem::remove_all(DB_FILE);
 	this->connector = new DBConnector(DB_FILE);
 	this->dao = new MatchDAO(connector);
 	this->service = new MatchServices(this->dao, NULL);
 }
 
-void ProfileServicesTest::TearDown() {
+void MatchServiceTest::TearDown() {
 	delete this->connector;
 	delete this->dao;
 	delete this->service;
 	boost::filesystem::remove_all(DB_FILE);
 }
 
-TEST_F(MatchServicesTest, noMatchTestAndAddTwice) {
-
+TEST_F(MatchServiceTest, noMatchTestAndAddTwice) {
 	Location location;
 	unordered_map<string, set<string>> intereses;
 	User userA("matias", "foo",1 , "", "M", 18,"", intereses, location);
@@ -46,7 +45,7 @@ TEST_F(MatchServicesTest, noMatchTestAndAddTwice) {
 	ASSERT_EQ(0, matches);
 }
 
-TEST_F(MatchServicesTest, MatchTest) {
+TEST_F(MatchServiceTest, MatchTest) {
 	Location location;
 	unordered_map<string, set<string>> intereses;
 	User userA("matias", "foo",1 , "", "M", 18,"", intereses, location);

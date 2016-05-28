@@ -16,18 +16,14 @@ ProfileServices::ProfileServices(UserDAO *dao, TranslationDAO *transDao) {
 ProfileServices::~ProfileServices() { }
 
 
-User *ProfileServices::getUserByID(int id) {
-    User *user = this->dao->getUserById(id);
-    if (!user) {
-        LOG_ERROR << LOG_PREFIX << "Error getting user with ID: " << to_string(id);
-        throw UserNotFoundException(to_string(id));
-    }
-    return user;
-}
-
-
 list<User *> ProfileServices::getAllUsers() {
-    return this->dao->getAllUsers();
+    try {
+        return this->dao->getAllUsers();
+    } catch (ConnectionException & e) {
+        LOG_ERROR << LOG_PREFIX << "Error listing users: " << e.what();
+        throw ServiceException(e.what());
+    }
+
 }
 
 
@@ -76,32 +72,26 @@ unordered_map<string, set<string>> ProfileServices::getInterests() {
     }
 }
 
-void ProfileServices::saveNewInterest(string category, string value) {
-    try {
-        this->dao->saveNewInterest(category, value);
-    } catch (ConnectionException &e) {
-        LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
-        throw ServiceException(e.what());
-    }
-}
 
 void ProfileServices::saveInterests(string userid, list <Interest> &interests) {
-    User * user = this->getUserByID(userid);
-    user->removeInterests();
-    for(list<Interest>::iterator it = interests.begin(); it != interests.end(); ++ it) {
-        Interest ints = *it;
-        user->addInterest(ints.getCategory(), ints.getValue());
-    }
+    User * user = nullptr;
+    try {
+        user = this->getUserByID(userid);
+        user->removeInterests();
+        for (list<Interest>::iterator it = interests.begin(); it != interests.end(); ++it) {
+            Interest ints = *it;
+            user->addInterest(ints.getCategory(), ints.getValue());
+        }
 
-    this->saveOrUpdateProfile(user);
-    delete user;
-}
-
-void ProfileServices::removeInterest(string userid, string category, string value) {
-    User * user = this->getUserByID(userid);
-    user->removeInterest(category, value);
-    this->saveOrUpdateProfile(user);
-    delete user;
+        this->saveOrUpdateProfile(user);
+    } catch (ConnectionException & e) {
+        LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
+        if(user != nullptr)  delete user;
+        throw ServiceException(e.what());
+    } catch(ServiceException &e) {
+          if(user != nullptr)  delete user;
+        throw e;
+    };
 }
 
 User *ProfileServices::getUserByID(string id) {
@@ -117,8 +107,12 @@ User *ProfileServices::getUserByID(string id) {
             this->translationDAO->remove(id);
             throw e;
         }
-        return dao->getUserById(externalId);;
-
+        try {
+            return dao->getUserById(externalId);;
+        } catch (ConnectionException & e) {
+            LOG_ERROR << LOG_PREFIX << "Connection error: " << e.what();
+            throw ServiceException(e.what());
+        }
 
 }
 

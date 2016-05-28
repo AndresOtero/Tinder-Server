@@ -96,18 +96,5 @@ unordered_map<string, set<string>> UserDAO::getInterests() {
 	return mapa;
 }
 
-void UserDAO::saveNewInterest(string category, string value) {
-	string url = "/interests/";
-	string response;
-	Json::Value root;
-	Json::Value interest;
-	interest["category"] = category;
-	interest["value"] = value;
-	root["interest"] = interest;
-	Json::FastWriter writer;
-	string data = writer.write(root);
-	this->sharedConnector->postDataToURL(url, data, response);
-}
-
 
 

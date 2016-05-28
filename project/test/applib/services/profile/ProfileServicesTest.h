@@ -5,8 +5,14 @@
 #ifndef TINDER_SERVER_PROFILESERVICESTEST_H
 #define TINDER_SERVER_PROFILESERVICESTEST_H
 
+static const char *const USER_ID_1 = "aaaaaaaaaaaaaaaaaaaabbbbbbbbbbbb@aaaaaaaa.com";
+
+static const char *const USER_ID_2 = "bbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaa@aaaaaaaa.com";
+
 #include <gtest/gtest.h>
 #include "ProfileServices.h"
+#include "../ServiceTestHelper.h"
+
 class ProfileServicesTest : public ::testing::Test{
 protected:
 
@@ -29,7 +35,8 @@ protected:
 
 
 	ProfileServices * service;
-	ServiceTestHelper
+	ServiceTestHelper * helper;
+	User * user1;
 };
 
 

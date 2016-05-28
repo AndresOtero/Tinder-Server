@@ -14,7 +14,6 @@ class InterestResource: public RestResource {
 private:
     void addInterest(WebContext & wc);
     void searchInterests(WebContext & wc);
-    void removeInterest(WebContext & wc);
     ProfileServices & profileServices;
 public:
 
