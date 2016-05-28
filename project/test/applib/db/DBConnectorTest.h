@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-static const char *const DB_FILE = "/tmp/testdb/";
+static const char *const DB_AUTH = "/tmp/testdb/";
 
 // The fixture for testing class Foo.
 class DBConnectorTest : public ::testing::Test {

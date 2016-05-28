@@ -8,12 +8,12 @@ DBConnectorTest::DBConnectorTest() {}
 DBConnectorTest::~DBConnectorTest() {};
 
 void DBConnectorTest::SetUp() {
-	this->connector = new DBConnector(DB_FILE);
+	this->connector = new DBConnector(DB_AUTH);
 };
 
 void DBConnectorTest::TearDown() {
 	delete this->connector;
-	boost::filesystem::remove_all(DB_FILE);
+	boost::filesystem::remove_all(DB_AUTH);
 };
 
 int contarEntradas(DBConnector* connector) {
