@@ -2,12 +2,14 @@
 #include "DBConnectorTest.h"
 #include <string>
 #include <boost/filesystem.hpp>
+#include <DBException.h>
 
 DBConnectorTest::DBConnectorTest() {}
 
 DBConnectorTest::~DBConnectorTest() {};
 
 void DBConnectorTest::SetUp() {
+
 	this->connector = new DBConnector(DB_AUTH);
 };
 
@@ -81,3 +83,10 @@ TEST_F(DBConnectorTest, DeleteNonExistentValueFromDB) {
 	int contadorFinal = contarEntradas(connector);
 	ASSERT_EQ(0, contadorFinal);
 }
+
+
+TEST_F(DBConnectorTest, IsOK) {
+	ASSERT_TRUE(connector->isOk());
+}
+
+

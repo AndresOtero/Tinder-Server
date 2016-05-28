@@ -59,3 +59,18 @@ TEST_F(ChatServicesTest, sendMessageToLikedPerson) {
 }
 
 
+TEST_F(ChatServicesTest, getConversation) {
+	ChatServices service(chatDao, matchDao);
+	Location location;
+	unordered_map<string, set<string>> intereses;
+	User userA("matias", "foo",1 , "", "M", 18,"", intereses, location);
+	User userB("maria", "foo", 2 , "", "F", 18,"", intereses, location);
+	Message msg("prueba", &userA, &userB);
+	this->matchServices->likeAUser(&userA, &userB);
+	this->matchServices->likeAUser(&userB, &userA);
+	service.sendMessageFromTo(&msg);
+	std::list<Message*>* messages = service.getConversationBetweenUsers(&userA, &userB);
+	ASSERT_EQ(1, messages->size());
+}
+
+

@@ -47,6 +47,20 @@ TEST_F(AuthenticationServiceTest, ChangeUsernamePassword) {
 											newPass));
 }
 
+TEST_F(AuthenticationServiceTest, changeUsernamePasswordSamePass) {
+
+	std::string usuario = "username";
+	std::string password = "pass";
+
+	this->testHelper->getAuthenticationDB()->putValueInKey(usuario, password);
+
+	ASSERT_TRUE(service->isLoginValid(usuario, password));
+
+	std::string newPass = "nueva";
+	ASSERT_THROW(service->changePassword(usuario,password,password), AuthenticationException);
+
+}
+
 TEST_F(AuthenticationServiceTest, saveNewUser) {
 
 	std::string usuario = "username";
@@ -55,5 +69,57 @@ TEST_F(AuthenticationServiceTest, saveNewUser) {
 	ASSERT_TRUE(service->saveNewUser(usuario, password));
 
 	ASSERT_TRUE(service->isLoginValid(usuario, password));
+
+}
+
+TEST_F(AuthenticationServiceTest, saveNewUserAlreadyExist) {
+
+	std::string usuario = "username";
+	std::string password = "pass";
+
+	ASSERT_TRUE(service->saveNewUser(usuario, password));
+	ASSERT_THROW(service->saveNewUser(usuario, password), AuthenticationException);
+
+
+
+}
+
+TEST_F(AuthenticationServiceTest, deleteUser) {
+
+	std::string usuario = "username";
+	std::string password = "pass";
+
+	ASSERT_TRUE(service->saveNewUser(usuario, password));
+
+	ASSERT_TRUE(service->isLoginValid(usuario, password));
+
+	service->deleteUser(usuario, password);
+
+	ASSERT_FALSE(service->isLoginValid(usuario, password));
+}
+
+TEST_F(AuthenticationServiceTest, deleteUserWrongPassword) {
+
+	std::string usuario = "username";
+	std::string password = "pass";
+
+	ASSERT_TRUE(service->saveNewUser(usuario, password));
+
+	ASSERT_TRUE(service->isLoginValid(usuario, password));
+
+	ASSERT_THROW(service->deleteUser(usuario, "pass2"), AuthenticationException);
+
+	ASSERT_TRUE(service->isLoginValid(usuario, password));
+}
+
+
+TEST_F(AuthenticationServiceTest, validateUser) {
+
+	std::string usuario = "username";
+	std::string password = "pass";
+
+	ASSERT_TRUE(service->saveNewUser(usuario, password));
+
+	ASSERT_TRUE(service->isValid(usuario));
 
 }
