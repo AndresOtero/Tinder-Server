@@ -148,6 +148,7 @@ FUNCTION(SETUP_TARGET_FOR_COVERAGE _targetname _testrunner _outputname)
 		COMMAND ${LCOV_PATH} --remove ${_outputname}.info 'gtest/*' --output-file ${_outputname}.info
 		COMMAND ${LCOV_PATH} --remove ${_outputname}.info 'test/*' --output-file ${_outputname}.info
 		COMMAND ${LCOV_PATH} --remove ${_outputname}.info 'json/*' --output-file ${_outputname}.info
+		COMMAND ${LCOV_PATH} --remove ${_outputname}.info 'log/*' --output-file ${_outputname}.info
 		COMMAND ${GENHTML_PATH} -o ${_outputname} ${_outputname}.info
 		#COMMAND ${CMAKE_COMMAND} -E remove ${_outputname}.info ${_outputname}.info.cleaned
 
