@@ -219,14 +219,6 @@ public:
      void addInterest(string category, string value);
 
     /**
-    * Remove an interest
-    *
-    * @param category the category of interest
-    * @param value the interest
-    */
-    void removeInterest(string category, string value);
-
-    /**
     * Remove all interests
     *
     */

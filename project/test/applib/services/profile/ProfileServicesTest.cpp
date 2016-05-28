@@ -136,7 +136,10 @@ TEST_F(ProfileServicesTest, getInexistentUser) {
 TEST_F(ProfileServicesTest, updateInterests) {
     list<Interest> newInterests;
     newInterests.push_back(Interest("futbol", "river"));
+    newInterests.push_back(Interest("futbol", "river"));
+    newInterests.push_back(Interest("futbol", "independiente"));
     newInterests.push_back(Interest("comida", "pizza"));
+
 
     this->service->saveInterests(USER_ID_1, newInterests);
 
@@ -144,7 +147,7 @@ TEST_F(ProfileServicesTest, updateInterests) {
     list <Interest> list = userFound->getInterests();
     delete userFound;
 
-    ASSERT_EQ(2, list.size());
+    ASSERT_EQ(3, list.size());
 
 }
 
