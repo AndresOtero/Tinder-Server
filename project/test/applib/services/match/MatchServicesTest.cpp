@@ -6,18 +6,18 @@
 #include "MatchServicesTest.h"
 
 
-MatchServicesTest::MatchServicesTest() { }
+ProfileServicesTest::ProfileServicesTest() { }
 
-MatchServicesTest::~MatchServicesTest() { }
+ProfileServicesTest::~ProfileServicesTest() { }
 
-void MatchServicesTest::SetUp() {
+void ProfileServicesTest::SetUp() {
 	boost::filesystem::remove_all(DB_FILE);
 	this->connector = new DBConnector(DB_FILE);
 	this->dao = new MatchDAO(connector);
 	this->service = new MatchServices(this->dao, NULL);
 }
 
-void MatchServicesTest::TearDown() {
+void ProfileServicesTest::TearDown() {
 	delete this->connector;
 	delete this->dao;
 	delete this->service;

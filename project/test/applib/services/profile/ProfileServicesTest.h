@@ -2,15 +2,11 @@
 // Created by matias on 5/4/16.
 //
 
-#ifndef TINDER_SERVER_MATCHSERVICESTEST_H
-#define TINDER_SERVER_MATCHSERVICESTEST_H
-
-static const char *const DB_FILE = "/tmp/testsMatch";
+#ifndef TINDER_SERVER_PROFILESERVICESTEST_H
+#define TINDER_SERVER_PROFILESERVICESTEST_H
 
 #include <gtest/gtest.h>
-#include <MatchDAO.h>
-#include <MatchServices.h>
-
+#include "ProfileServices.h"
 class ProfileServicesTest : public ::testing::Test{
 protected:
 
@@ -31,10 +27,9 @@ protected:
 	// before the destructor).
 	virtual void TearDown();
 
-	DBConnector* connector;
-	MatchDAO* dao;
-	MatchServices* service;
 
+	ProfileServices * service;
+	ServiceTestHelper
 };
 
 
