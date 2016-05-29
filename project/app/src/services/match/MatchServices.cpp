@@ -7,6 +7,8 @@
 #include "MatchServices.h"
 #include "NoMoreCandidatesException.h"
 #include <cmath>
+#include <algorithm>
+#include <vector>
 
 #define pi 3.14159265358979323846
 #define earthRadiusKm 6371.0
@@ -48,24 +50,40 @@ list<User *> MatchServices::getLikesForUser(User *user) {
 	return this->getUsersFromIDs(listaIDs);
 }
 
-list<User *> MatchServices::getCandidatesForUser(User *user, int distance) {
-	if (!this->hasRemainingCandidates(user)) throw NoMoreCandidatesException("Already requested candidates today.");
+list<User *> MatchServices::getCandidatesForUser(User *user, int cantidad,int distance) {
+	if (!this->hasRemainingCandidates(user)) throw NoMoreCandidatesException("Already requested all the candidates today.");
+	int cantidadRestante = this->getRemainingAmountOfCandidates(user);
+	int cantidadEfectiva = cantidad;
+	if (cantidad > cantidadRestante) {
+		cantidadEfectiva = cantidadRestante;
+	}
 	auto lista = this->profileServices->getAllUsers();
 	auto alreadyLiked = this->getLikesForUser(user);
 	std::list<Candidate*> candidates;
 	for (auto itr= lista.begin(); itr != lista.end(); ++itr) {
 		if((*itr)->getId() != user->getId() && !this->findInList(alreadyLiked, (*itr))) {
-			candidates.push_back(new Candidate(*itr));
+			candidates.push_back(new Candidate(*itr, distance));
 		}
 		else delete *itr;
 	}
 	this->getCandidatesDistance(candidates, user);
 	this->getCandidatesScores(candidates, user);
-	candidates.sort([] (const Candidate* first, const Candidate* second) {
-		return ( first->score < second->score );
-	});
-	this->matchDao->updateLastMatchRequest(user);
-	return this->getUserListFromCandidates(candidates, distance);
+	std::vector<Candidate*> listaFinal = this->filtrarLista(candidates);
+	if (listaFinal.size() < cantidadEfectiva) cantidadEfectiva = listaFinal.size();
+	this->matchDao->updateLastMatchRequest(user, cantidadEfectiva);
+	random_shuffle(listaFinal.begin(), listaFinal.end());
+	return this->getUserListFromCandidates(listaFinal, cantidadEfectiva);
+}
+
+std::vector<Candidate *> MatchServices::filtrarLista(std::list<Candidate*> toFilter) {
+	std::vector<Candidate*> filtrada;
+	for (auto it = toFilter.begin(); it != toFilter.end(); ++it) {
+		if ((*it)->distanceToUser <= (*it)->distanceLimit && (*it)->score > 0) {
+			filtrada.push_back((*it));
+		}
+		else delete (*it);
+	}
+	return filtrada;
 }
 
 void MatchServices::getCandidatesDistance(std::list < Candidate * > candidates, User * user) {
@@ -92,16 +110,12 @@ int MatchServices::getCommonInterests(User* userA, User* userB) {
 	return contador;
 }
 
-list<User*> MatchServices::getUserListFromCandidates(std::list<Candidate*> candidatos, int distance) {
+list<User*> MatchServices::getUserListFromCandidates(std::vector<Candidate*> candidatos, int cantidad) {
 	std::list<User*> toReturn;
 	int contador = 0;
-	for (auto itr=candidatos.begin(); itr!=candidatos.end() && contador < this->dailyLimit; ++itr) {
-		if ((*itr)->distanceToUser > distance) {
-			delete (*itr)->getUser();
-		} else {
-			toReturn.push_back((*itr)->getUser());
-			contador++;
-		}
+	for (auto itr=candidatos.begin(); itr!=candidatos.end() && contador < cantidad; ++itr) {
+		toReturn.push_back((*itr)->getUser());
+		contador++;
 		delete (*itr);
 	}
 	return toReturn;
@@ -115,6 +129,11 @@ bool MatchServices::findInList(std::list<User*> likes, User* tofind) {
 }
 
 bool MatchServices::hasRemainingCandidates(User* user) {
+	return (this->getRemainingAmountOfCandidates(user) > 0);
+}
+
+
+int MatchServices::getRemainingAmountOfCandidates(User *user) {
 	tm* lastDateStruct = this->matchDao->getLastRequestTime(user);
 	time_t currentDay = time(NULL);
 	struct tm* timeStruct = localtime(&currentDay);
@@ -122,8 +141,14 @@ bool MatchServices::hasRemainingCandidates(User* user) {
 	bool igualAnio = timeStruct->tm_year == lastDateStruct->tm_year;
 	bool igualMes = timeStruct->tm_mon == lastDateStruct->tm_mon;
 	free(lastDateStruct);
-	return  !(igualDia && igualAnio && igualMes);
+	if (!(igualDia && igualAnio && igualMes)) {
+		this->matchDao->resetRequests(user);
+		return this->dailyLimit;
+	}
+	int pedidos = this->matchDao->getRequestedCandidates(user);
+	return this->dailyLimit - pedidos;
 }
+
 
 list<User*> MatchServices::getUsersFromIDs(list<string> &ids) {
 	std::list<User*> listaUsers;
