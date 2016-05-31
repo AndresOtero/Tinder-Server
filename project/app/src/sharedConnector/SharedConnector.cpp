@@ -150,11 +150,15 @@ void SharedConnector::getJsonFromURL(std::string endpoint, Json::Value &jsonData
 	string error = this->returnedError(res);
 	string data((char *) chunk.memory);
 	Json::Reader reader;
-	bool okparse = reader.parse(data, jsonData);
-	free(chunk.memory);
+	try {
+		bool okparse = reader.parse(data, jsonData);
+		free(chunk.memory);
+		if(error.size() > 0) throw ConnectionException(error);
+		if(!okparse) throw ConnectionException("Error parsing response: "+ data);
+	} catch (Json::LogicError) {
+		throw ConnectionException("Error parsing response: "+ data);
+	}
 
-	if(error.size() > 0) throw ConnectionException(error);
-	if(!okparse) throw ConnectionException("Error parsing response: "+ data);
 
 }
 
