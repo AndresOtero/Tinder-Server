@@ -30,6 +30,7 @@ class MyTestCase(unittest.TestCase):
                   [{'category': "Comida", 'value': "Milanesa"}])
 
         self.user1.registerAndLogin()
+        self.user1.saveProfile()
         self.user2.registerAndLogin()
 
     def tearDown(self):
@@ -50,27 +51,15 @@ class MyTestCase(unittest.TestCase):
         response = inexistentUser.login()
         self.assertEqual(response.status_code, 401)
 
-    def test_status_PUTauthExistingUser(self):
-        response = requests.put(URLbase + "auth", data=json.dumps(self.anUser.loginData), headers=self.cabeceras[1])
-        results = response.json()
+    def doLogin(self):
+        response = self.user2.login()
+        self.assertEqual(response.status_code, 200)        
 
-        self.assertEqual(results["response"]["token"], self.anUser.token)
-        self.assertEqual(results["status"], 200)
+    def registerUserAlreadyExistent(self):
+        response = self.user1.registerAndLogin()
+        self.assertEqual(response.status_code, 400)        
 
-    def test_status_PUTauthNOexistingUser(self):
-        loginDataUserNotRegistred = {
-            'user': "jose@gmail.com",
-            'password': "4321"
-        }
-        cabeceras = {
-            "Content-Type": "application/json"
-        }
 
-        response = requests.put(URLbase + "auth", data=json.dumps(loginDataUserNotRegistred), headers=cabeceras)
-        results = response.json()
-
-        self.assertEqual(results["response"]["token"], self.anUser.token)
-        self.assertEqual(results["status"], 200)
 
     def test_POSTuser(self):
         response = requests.post(URLbase + "user", data=json.dumps(self.anUser.profileData), headers=self.cabeceras[1])

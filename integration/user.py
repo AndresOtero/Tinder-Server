@@ -32,10 +32,6 @@ class User:
     def removeInterest(self, interestToRemove):
         self.interests.remove(interestToRemove)
 
-    def register(self):
-        self.registerAndLogin()
-        self.securityToken = ""
-
     def registerAndLogin(self):
         response = requests.post(URLbase + "auth", data=json.dumps(self.loginData), headers=self.cabeceras)
         try:
@@ -65,7 +61,12 @@ class User:
         return response
 
     def saveProfile(self):
-        print ("haciendo update")
+        response = requests.post(URLbase + "user", data=json.dumps(self.profileData), headers=self.getSecureadHeaders())
+        try:
+            results = response.json()
+        except (ValueError, TypeError):
+            print "Error with saveProfle response: ", response
+        return response
 
     def reloadProfile(self):
         print ("recargando")
