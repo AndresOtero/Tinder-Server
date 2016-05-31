@@ -95,8 +95,23 @@ public:
 	 * Updates the last time of the last request from the user to today.
 	 *
 	 * @param user user to update the last request time.
+	 * @param cantidad amount to add.
 	 */
-	void updateLastMatchRequest(User* user);
+	void updateLastMatchRequest(User* user, int cantidad);
+
+	/**
+	 * Resets the candidates requests from the user.
+	 *
+	 * @param user user to reset the requests.
+	 */
+	void resetRequests(User* user);
+
+	/**
+	 * Returns the number of candidates the user has requested.
+	 *
+	 * @param user user to get the requested candidates.
+	 */
+	int getRequestedCandidates(User* user);
 private:
 	DBConnector* connector;
 	void initializeUserEntry(User* user);

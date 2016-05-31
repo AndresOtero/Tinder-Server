@@ -4,12 +4,20 @@
 
 #include "Candidate.h"
 
+Candidate::Candidate(User *user, double limit) {
+	this->user = user;
+	this->score = 0;
+	this->numLiked = 0;
+	this->distanceToUser = 0;
+	this->distanceLimit = limit;
+}
 
 Candidate::Candidate(User *user) {
 	this->user = user;
 	this->score = 0;
 	this->numLiked = 0;
 	this->distanceToUser = 0;
+	this->distanceLimit = 400;
 }
 
 Candidate::~Candidate() { }

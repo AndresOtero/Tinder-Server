@@ -15,6 +15,7 @@
 class Candidate {
 public:
 	Candidate(User* user);
+	Candidate(User* user, double limit);
 	virtual ~Candidate();
 	User* getUser();
 
@@ -24,6 +25,7 @@ public:
 	int score;
 	int numLiked;
 	double distanceToUser;
+	double distanceLimit;
 
 private:
 	User* user;

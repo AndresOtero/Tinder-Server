@@ -44,13 +44,14 @@ public:
 	list<User*> getLikesForUser(User* user);
 
 	/**
-	 * Returns a list of all the candidate the user has today. The list is sorted, the best candidates are first.
-	 * If he has already requested the list today, NoMoreCandidatesException is raised. The caller has to delete
-	 * the users.
+	 * Returns a list with the candidaes for the user. The list will have cantidad number of candidates or ,if less are
+	 * remaining, the remaining amount. If no more candidates are available, NoMoreCandidatesException is Thrown. Users
+	 * in the list must be deleted by the caller.
 	 * @param user user to get the candidates for.
+	 * @param cantidad quantity of candidates to get.
 	 * @param distance maximum distance in kms for the candidates.
 	 */
-	list<User*> getCandidatesForUser(User* user, int distance);
+	list<User*> getCandidatesForUser(User* user, int cantidad,int distance);
 
 	/**
 	 * Returns the number of likes that the user has.
@@ -72,12 +73,14 @@ private:
 	bool findInList(list<User*> likes, User* tofind);
 	bool hasRemainingCandidates(User* user);
 	list<User*> getUsersFromIDs(list<string> &ids);
-	list<User*> getUserListFromCandidates(std::list<Candidate*> candidatos, int distance);
+	list<User*> getUserListFromCandidates(std::vector<Candidate*> candidatos, int distance);
 	void getCandidatesScores(std::list<Candidate*> &lista, User* user);
 	int getCommonInterests(User* userA, User* userB);
 	double deg2rad(double deg);
 	double rad2deg(double rad);
 	void getCandidatesDistance(list<Candidate*> candidates, User* user);
+	int getRemainingAmountOfCandidates(User* user);
+	std::vector<Candidate *> filtrarLista(std::list<Candidate*> toFilter);
 
 	/**
 	 * Returns the distance between two points on the Earth.

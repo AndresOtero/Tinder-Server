@@ -47,14 +47,33 @@ bool MatchDAO::checkForMatch(User* userA, User* userB) {
 	return false;
 }
 
-void MatchDAO::updateLastMatchRequest(User *user) {
+void MatchDAO::updateLastMatchRequest(User *user, int cantidad) {
 	Json::Value json = this->getUserEntry(user);
 	time_t currentDay = time(NULL);
 	struct tm* timeStruct = localtime(&currentDay);
 	string timeStamp(asctime(timeStruct));
 	json["lastRequest"] = timeStamp;
+	json["amountRequested"] = json["amountRequested"].asInt() + cantidad;
 	Json::FastWriter writer;
 	this->connector->putValueInKey(user->getId(), writer.write(json));
+}
+
+
+void MatchDAO::resetRequests(User *user) {
+	Json::Value json = this->getUserEntry(user);
+	time_t currentDay = time(NULL);
+	struct tm* timeStruct = localtime(&currentDay);
+	string timeStamp(asctime(timeStruct));
+	json["lastRequest"] = timeStamp;
+	json["amountRequested"] = 0;
+	Json::FastWriter writer;
+	this->connector->putValueInKey(user->getId(), writer.write(json));
+}
+
+
+int MatchDAO::getRequestedCandidates(User *user) {
+	Json::Value json = this->getUserEntry(user);
+	return json["amountRequested"].asInt();
 }
 
 
@@ -76,6 +95,7 @@ void MatchDAO::initializeUserEntry(User *user) {
 
 	string timeStamp(asctime(timeStruct));
 	json["lastRequest"] = timeStamp;
+	json["amountRequested"] = 0;
 	json["numLiked"] = 0;
 	json["numLikes"] = 0;
 	json["numMatches"] = 0;
