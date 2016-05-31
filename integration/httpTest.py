@@ -4,10 +4,12 @@ import json
 
 from user import User
 
-URLbase = "http://52.67.7.172:8000/"
+URLbase = "http://localhost:8000/"
 
 class MyTestCase(unittest.TestCase):
-    anUser = User("elpedro@gmail.com",
+
+    def setUp(self):
+        self.user1 = User("elpedro@gmail.com",
                        "1234",
                        "Pedro",
                        32,
@@ -16,9 +18,9 @@ class MyTestCase(unittest.TestCase):
                        "www.image.com",
                        {'latitude': 12, 'longitude': 21},
                        [{'category': "Comida", 'value': "Pizza"}])
-
-    user2 = User("lajulia@gmail.com",
-                  "1234",
+        
+        self.user2 = User("lajulia@gmail.com",
+                  "12345",
                   "Julia",
                   32,
                   "F",
@@ -27,29 +29,26 @@ class MyTestCase(unittest.TestCase):
                   {'latitude': 12, 'longitude': 21},
                   [{'category': "Comida", 'value': "Milanesa"}])
 
-    cabeceras = [{
-        "Content-Type": "application/json"
-    }]
+        self.user1.registerAndLogin()
+        self.user2.registerAndLogin()
 
-    def updateCabeceras(self, securityToken):
-        self.cabeceras.append({
-            "Content-Type": "application/json",
-            "SECURITY-TOKEN": securityToken
-        })
-        # self.cabeceras.remove({
-        # "Content-Type": "application/json"
-        # })
+    def tearDown(self):
+        self.user1.unregister()
+        self.user2.unregister()
 
+    def doLoginInexistentUser(self):
+        inexistentUser = User("inexistentIntegration@gmail.com",
+                  "12345",
+                  "Julia",
+                  32,
+                  "F",
+                  "juli",
+                  "www.image2.com",
+                  {'latitude': 12, 'longitude': 21},
+                  [{'category': "Comida", 'value': "Milanesa"}])
 
-    def test_status_POSTauth(self):
-        response = requests.post(URLbase + "auth", data=json.dumps(self.anUser.loginData), headers=self.cabeceras[0])
-        results = response.json()
-
-        securityToken = results["response"]["token"]
-        self.anUser.setToken(securityToken)
-        self.updateCabeceras(securityToken)
-
-        self.assertEqual(results["status"], 101)
+        response = inexistentUser.login()
+        self.assertEqual(response.status_code, 401)
 
     def test_status_PUTauthExistingUser(self):
         response = requests.put(URLbase + "auth", data=json.dumps(self.anUser.loginData), headers=self.cabeceras[1])
@@ -70,7 +69,6 @@ class MyTestCase(unittest.TestCase):
         response = requests.put(URLbase + "auth", data=json.dumps(loginDataUserNotRegistred), headers=cabeceras)
         results = response.json()
 
-        #TODO ¿token vacio?
         self.assertEqual(results["response"]["token"], self.anUser.token)
         self.assertEqual(results["status"], 200)
 
@@ -104,7 +102,6 @@ class MyTestCase(unittest.TestCase):
     def test_CheckLocationUpdated(self):
         responseGET = requests.get(URLbase + "user", headers=self.cabeceras)
         results = responseGET.json()
-
         self.assertEqual(results["location"], self.anUser.location)
 
     def test_UpdateInterests(self):
@@ -132,7 +129,6 @@ class MyTestCase(unittest.TestCase):
     def test_likeUser(self):
         userToLike = {
             'user': "luly_salazar@gmail.com",
-            'password': "luly_love"
         }
         requests.post(URLbase + "auth", data=json.dumps(userToLike), headers=self.cabeceras[1])
 
@@ -157,7 +153,6 @@ class MyTestCase(unittest.TestCase):
         self.user2.setToken(securityToken)
         self.updateCabeceras(securityToken)
 
-        #TODO ¿puede dar like sin tener un perfil creado?
         requests.post(URLbase + "like", data=json.dumps({'likedUser': "elpedro@gmail.com"}),headers=self.cabeceras[2])#Julia da like a Pedro
 
         requests.post(URLbase + "like", data=json.dumps({'likedUser': "lajulia@gmail.com"}),headers=self.cabeceras[1])#Pedro da like a Julia
