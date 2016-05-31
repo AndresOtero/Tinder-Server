@@ -29,6 +29,7 @@ void LocationResource::updateLocation(WebContext & context) {
         double latitude = parsed.get("latitude", "").asDouble();
         double longitude = parsed.get("longitude", "").asDouble();
         this->service.updateLocation(username, latitude, longitude);
+        this->writeJsonResponse(context);
     } catch (UserNotFoundException & e) {
         Json::Value result;
          this->writeJsonResponse(context, result, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);
