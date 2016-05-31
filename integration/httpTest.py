@@ -15,7 +15,7 @@ class MyTestCase(unittest.TestCase):
                        "pedrin",
                        "www.image.com",
                        {'latitude': 12, 'longitude': 21},
-                       [{'category': "music", 'value': "los redondos"}])
+                       [{'category': "Comida", 'value': "Pizza"}])
 
     user2 = User("lajulia@gmail.com",
                   "1234",
@@ -25,7 +25,7 @@ class MyTestCase(unittest.TestCase):
                   "juli",
                   "www.image2.com",
                   {'latitude': 12, 'longitude': 21},
-                  [{'category': "comida", 'value': "pizza"}])
+                  [{'category': "Comida", 'value': "Milanesa"}])
 
     cabeceras = [{
         "Content-Type": "application/json"
@@ -108,20 +108,14 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(results["location"], self.anUser.location)
 
     def test_UpdateInterests(self):
-        self.anUser.addInterest({'category': "futbol", 'value': "river"})
-        response = requests.post(URLbase + "interest", data=json.dumps(self.anUser.interests), headers=self.cabeceras[1])
+        self.anUser.addInterest({'category': "Comida", 'value': "Asado"})
+        response = requests.post(URLbase + "interest", data=json.dumps({'interests': self.anUser.interests}), headers=self.cabeceras[1])
         results = response.json()
 
         self.assertEqual(results["status"], 200)
 
-    def test_CheckInterestsUpdated(self):
-        responseGET = requests.get(URLbase + "interest", headers=self.cabeceras[1])
-        results = responseGET.json()
-
-        self.assertEqual(results["interests"], self.anUser.interests)
-
     def test_DeleteInterest(self):
-        interestToRemove = {'category': "futbol", 'value': "river"}
+        interestToRemove = {'category': "Comida", 'value': "Asado"}
 
         self.anUser.removeInterest(interestToRemove)
         response = requests.delete(URLbase + "interest", data=json.dumps(interestToRemove), headers=self.cabeceras[1])
