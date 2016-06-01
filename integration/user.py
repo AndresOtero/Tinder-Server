@@ -69,7 +69,14 @@ class User:
         return response
 
     def reloadProfile(self):
-        print ("recargando")
+        try:    
+            responseGET = requests.get(URLbase + "user", headers=self.getSecureadHeaders())
+            jsonResponse = responseGET.json()
+            self.profileData = jsonResponse
+        except (ValueError, TypeError):
+            print "Error with reloading profile response: ", response
+        return response
+
 
     def updateLocation(self):
         print ("recalculando location")

@@ -59,7 +59,8 @@ class MyTestCase(unittest.TestCase):
         response = self.user1.registerAndLogin()
         self.assertEqual(response.status_code, 400)        
 
-
+    def updateUser(self):
+        s
 
     def test_POSTuser(self):
         response = requests.post(URLbase + "user", data=json.dumps(self.anUser.profileData), headers=self.cabeceras[1])
