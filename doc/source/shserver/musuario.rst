@@ -26,28 +26,8 @@ Creación de usuario
 .. figure:: images/usuario_crear.png
    :align:   center
 
-   En esta sección es posible crear un usuario completando el formulario y seleccionando los intereses.
+   En esta sección es posible crear un usuario completando el formulario y seleccionando los intereses. Al momento de guardar los datos ingresados se podra agregar una foto de perfil que se encuentre almacenada localmente.
 
-
-Edición de foto de usuario
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- URL: http://tinder-shared.herokuapp.com/#/user/edit/photo
-- Navegación: “Usuarios/Editar Foto”
-
-.. figure:: images/usuario_fotoperfil.png
-   :align:   center
-
-   En esta sección es posible editar la foto de un usuario como una url (actualmente la misma no se encuentra reflejada en el usuario, más adelante funcionará para subir la foto de un usuario, aunque es posible que esto se fusione con la edición de usuario.
-
-Edición de usuario
-~~~~~~~~~~~~~~~~~~~
-- URL: http://tinder-shared.herokuapp.com/#/users/edit
-- Navegación: “Usuarios/Modificar”
-
-.. figure:: images/usuario_modificar.png
-   :align:   center
-
-   Allí podemos ingresar el ID del y presionando el botón se cargan los datos del usuario.. Una vez completo el formulario, con el botón “Modificar usuario” se confirman los datos, obteniendo el correspondiente mensaje del estado de la operación.
 
 
 Visualización de usuario
@@ -59,29 +39,21 @@ Visualización de usuario
    :align:   center
 
    Aquí se puede tener una vista más detallada de los usuarios.
+   Hacer clic en "1" para modificar la foto de perfil del usuario.
+   Hacer clic en "2" para modificar los datos del usuario.
+   Hacer clic en "3" para borrar el usuario.
 
 
 
-Creación de intereses
+
+Administrar intereses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- URL: http://tinder-shared.herokuapp.com/#/interests/add
-- Navegación: “Intereses/Crear”
+- URL: http://tinder-shared.herokuapp.com/#/interests
+- Navegación: “Intereses/Administrar”
 
 
-.. figure:: images/intereses_crear.png
+.. figure:: images/intereses_administrar.png
    :align:   center
 
    Allí podemos ingresar los datos del interés a registrar. Finalmente haciendo clic en el botón “Agregar Interés” se agregara a la base de datos ese interés. Ya sea que la operación haya sido exitosa o no, se informará con un mensaje del estado final.
-
-
-
-
-Listar intereses
-~~~~~~~~~~~~~~~~~~~
-- URL: http://tinder-shared.herokuapp.com/#/interests
-- Navegación: “Intereses/Listar”
-
-.. figure:: images/intereses_listar.png
-   :align:   center
-
-   En esta sección es posible listar todos los intereses agrupados por categorías.
+   Más abajo podemos ver los intereses que actualmente estan registrados en la base de datos.
