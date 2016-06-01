@@ -343,34 +343,6 @@ Actualiza la lista de intereses del usuario
 Responde vacío pero con status 200
 
 
-Eliminar Interés
---------------------
-
-Elimina un Interés de un usuario
-
-- *Método HTTP:* ``DELETE``
-- *URL:* ``/interest``
-- *Seguridad:* ``Con seguridad``
-
-*Ejemplo de request*
-
-.. code-block:: jsonld
-
-	{
-	    "category":"futbol",
-	    "value": "independiente"
-
-	}
-        
-*Respuesta*
-
-.. code-block:: jsonld
-
-   {"response": "", "status": 200}
-
-Responde vacío pero con status 200
-
-
 .. _candidates-docs:
 
 Candidatos
