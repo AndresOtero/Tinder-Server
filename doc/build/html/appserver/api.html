@@ -1,0 +1,809 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Especificación de la API &mdash; Match Application</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Match Application" href="../index.html"/>
+        <link rel="next" title="Tecnologías principales" href="../shserver/tecnologias.html"/>
+        <link rel="prev" title="Manual de usuario" href="musuario.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Match Application
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tickets.html"><strong>Plan de Entregas</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linksInteres.html"><strong>Links de Interés</strong></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application Server</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="musuario.html">Manual de usuario</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Especificación de la API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#codigos-de-error">Códigos de error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#token-de-seguridad">Token de Seguridad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#autenticacion">Autenticación</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#registrar-usuario">Registrar Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autenticar">Autenticar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eliminar-registro">Eliminar Registro</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#usuario">Usuario</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#actualizar-perfil">Actualizar Perfil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#consultar-perfil">Consultar Perfil</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ubicacion">Ubicación</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#actualizar-ubicacion">Actualizar Ubicación</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#intereses">Intereses</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#obtener-intereses">Obtener Intereses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#agregar-intereses">Agregar Intereses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eliminar-interes">Eliminar Interés</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#candidatos">Candidatos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#likes">Likes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#obtener-likes">Obtener Likes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#likear-usuario">Likear Usuario</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#matching">Matching</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Shared Server</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/musuario.html">Manual de usuario</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../client/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/casos.html">Casos de Uso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/musuario.html">Manual de usuario</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Match Application</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Especificación de la API</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="especificacion-de-la-api">
+<h1>Especificación de la API<a class="headerlink" href="#especificacion-de-la-api" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>En esta sección se indica la especificación completa de la interfaz de la aplicación. La misma es una api tipo REST con interacciones en formato JSON.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#codigos-docs"><span class="std std-ref">Códigos de error</span></a></li>
+<li><a class="reference internal" href="#seguridad-docs"><span class="std std-ref">Token de Seguridad</span></a></li>
+<li><a class="reference internal" href="#auth-docs"><span class="std std-ref">Autenticación</span></a></li>
+<li><a class="reference internal" href="#location-docs"><span class="std std-ref">Ubicación</span></a></li>
+<li><a class="reference internal" href="#interests-docs"><span class="std std-ref">Intereses</span></a></li>
+<li><a class="reference internal" href="#candidates-docs"><span class="std std-ref">Candidatos</span></a></li>
+<li><a class="reference internal" href="#like-docs"><span class="std std-ref">Likes</span></a></li>
+<li><a class="reference internal" href="#matching-docs"><span class="std std-ref">Matching</span></a></li>
+</ul>
+<hr class="docutils" />
+<div class="section" id="codigos-de-error">
+<span id="codigos-docs"></span><h2>Códigos de error<a class="headerlink" href="#codigos-de-error" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Cualquier respuesta de la aplicación, además del uso de los clásicos códigos de status HTTP pueden estar acompañados de un código interno de status para proveer más información al cliente.</p>
+<p>Mientras una respuesta común es del tipo</p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;XXX&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Donde</dt>
+<dd><ul class="first last simple">
+<li>response: Respuesta esperada.</li>
+<li>status: Código de estado interno.</li>
+</ul>
+</dd>
+</dl>
+<p>El código XXX es un número de estado del listado siguiente</p>
+<ul class="simple">
+<li>200: No hay información extra, la petición se completó con éxito;</li>
+<li>101: Es necesario crear un perfil de usuario.</li>
+<li>102: El usuario ya existe.</li>
+<li>103: Se alcanzó el límite diario de candidatos consultados.</li>
+</ul>
+<hr class="docutils" />
+</div>
+<div class="section" id="token-de-seguridad">
+<span id="seguridad-docs"></span><h2>Token de Seguridad<a class="headerlink" href="#token-de-seguridad" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para cualquier petición que requiera seguridad, además de los parámetros es necesario proporcionar el encabezado http de uso interno con el correspondiente token de seguridad brindado al autenticar en la aplicación</p>
+<ul class="simple">
+<li>Nombre: <code class="docutils literal"><span class="pre">SECURITY-TOKEN</span></code></li>
+<li>Valor: El token proporcionado por la aplicación al autenticar.</li>
+</ul>
+<hr class="docutils" />
+</div>
+<div class="section" id="autenticacion">
+<span id="auth-docs"></span><h2>Autenticación<a class="headerlink" href="#autenticacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Permite a un usuario gestionar su registro que es la información mínima para poder operar con la aplicación.</p>
+<div class="section" id="registrar-usuario">
+<h3>Registrar Usuario<a class="headerlink" href="#registrar-usuario" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Crea un registro en la aplicación para posteriormente poder loguear en la misma.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">POST</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/auth</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Sin</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Ejemplo de request</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;usuario&quot;</span><span class="p">,</span> <span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;pass&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;response&quot;</span><span class="p">:{</span>
+      <span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="s2">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9Cg==.eyJleHAiOiJXZWQgTWF5IDI1IDE2OjU3OjA1IDIwMTZcbiIsImlzcyI6IlRpbmRlcjItU2hhcmVkIiwibmFtZSI6ImNoZWxvNCJ9Cg==.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9Cg==eyJleHAiOiJXZWQgTWF5IDI1IDE2OjU3OjA1IDIwMTZcbiIsImlzcyI6IlRpbmRlcjItU2hhcmVkIiwibmFtZSI6ImNoZWxvNCJ9Cg==&quot;</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="mi">101</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Como se puede ver indica el status code 101, y además devuelve el token de seguridad que indica que el usuario ya puede operar con la aplicación utilizándolo.</p>
+</div>
+<div class="section" id="autenticar">
+<h3>Autenticar<a class="headerlink" href="#autenticar" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Permite autenticar en el servidor con un registro ya creado.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">PUT</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/auth</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Sin</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Ejemplo de request</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;usuario&quot;</span><span class="p">,</span> <span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;pass&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9Cg==.eyJleHAiOiJXZWQgTWF5IDI1IDE3OjA5OjE2IDIwMTZcbiIsImlzcyI6IlRpbmRlcjItU2hhcmVkIiwibmFtZSI6ImNoZWxvMyJ9Cg==.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9Cg==eyJleHAiOiJXZWQgTWF5IDI1IDE3OjA5OjE2IDIwMTZcbiIsImlzcyI6IlRpbmRlcjItU2hhcmVkIiwibmFtZSI6ImNoZWxvMyJ9Cg==&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Como se puede ver indica el status code 200, y además devuelve el token de seguridad que indica que el usuario ya puede operar con la aplicación utilizándolo.</p>
+</div>
+<div class="section" id="eliminar-registro">
+<h3>Eliminar Registro<a class="headerlink" href="#eliminar-registro" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Elimina el registro del sistema con toda su información relacionada.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">DELETE</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/auth</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Ejemplo de request</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;usuario&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Responde vacío pero con status 200</p>
+</div>
+</div>
+<div class="section" id="usuario">
+<span id="user-docs"></span><h2>Usuario<a class="headerlink" href="#usuario" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Permite a un usuario administrar su información de perfil.</p>
+<div class="section" id="actualizar-perfil">
+<h3>Actualizar Perfil<a class="headerlink" href="#actualizar-perfil" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Permite actualizar la información de perfil del usuario logueado.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">POST</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/user</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Ejemplo de request</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;jose&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;age&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+     <span class="nt">&quot;sex&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;pepe&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;jose@tumail.com&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="nt">&quot;longitude&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+         <span class="nt">&quot;latitude&quot;</span><span class="p">:</span> <span class="mi">12</span>
+     <span class="p">},</span>
+     <span class="nt">&quot;interests&quot;</span><span class="p">:</span> <span class="p">[</span>
+         <span class="p">{</span>
+             <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;river&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;futbol&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+             <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;pizza&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;comida&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+             <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;helado&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;comida&quot;</span>
+         <span class="p">}</span>
+     <span class="p">]</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Responde vacío pero con status 200</p>
+</div>
+<div class="section" id="consultar-perfil">
+<h3>Consultar Perfil<a class="headerlink" href="#consultar-perfil" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Obtiene la información del perfil del usuario logueado.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">GET</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/user</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;age&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+    <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;pepe&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;pepe@unemail.com&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;externalId&quot;</span><span class="p">:</span> <span class="mi">95</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;pepe@unemail.com&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;interests&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;latitude&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+      <span class="nt">&quot;longitude&quot;</span><span class="p">:</span> <span class="mi">21</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;jose&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;photo_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;sex&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Responde con estado interno 200 y la información del usuario.</p>
+</div>
+</div>
+<div class="section" id="ubicacion">
+<span id="location-docs"></span><h2>Ubicación<a class="headerlink" href="#ubicacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Permite a un usuario gestionar su ubicación geográfica.</p>
+<div class="section" id="actualizar-ubicacion">
+<h3>Actualizar Ubicación<a class="headerlink" href="#actualizar-ubicacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Actualiza las coordenadas de ubicación del usuario.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">POST</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/location</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Ejemplo de request</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;longitude&quot;</span><span class="p">:</span> <span class="mi">33223</span><span class="p">,</span>
+    <span class="nt">&quot;latitude&quot;</span><span class="p">:</span> <span class="mi">12</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Responde vacío pero con status 200</p>
+</div>
+</div>
+<div class="section" id="intereses">
+<span id="interests-docs"></span><h2>Intereses<a class="headerlink" href="#intereses" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Permite a un usuario gestionar sus intereses.</p>
+<div class="section" id="obtener-intereses">
+<h3>Obtener Intereses<a class="headerlink" href="#obtener-intereses" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Lista los intereses disponibles</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">GET</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/interest</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;interests&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;musica&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;beatles&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;musica&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;los redondos&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;alfajor&quot;</span>
+      <span class="p">}]</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="agregar-intereses">
+<h3>Agregar Intereses<a class="headerlink" href="#agregar-intereses" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Actualiza la lista de intereses del usuario</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">POST</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/interest</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Ejemplo de request</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;interests&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;futbol&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;river&quot;</span>
+            <span class="p">},{</span>
+                <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;futbol&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Aldosivi&quot;</span>
+            <span class="p">},{</span>
+                <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;futbol&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;independiente&quot;</span>
+            <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Responde vacío pero con status 200</p>
+</div>
+<div class="section" id="eliminar-interes">
+<h3>Eliminar Interés<a class="headerlink" href="#eliminar-interes" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Elimina un Interés de un usuario</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">DELETE</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/interest</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Ejemplo de request</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;futbol&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;independiente&quot;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Responde vacío pero con status 200</p>
+</div>
+</div>
+<div class="section" id="candidatos">
+<span id="candidates-docs"></span><h2>Candidatos<a class="headerlink" href="#candidatos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Permite al usuario conocer la lista diaria de candidatos a match.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">GET</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/candidates</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;response&quot;</span><span class="p">:{</span>
+      <span class="nt">&quot;candidates&quot;</span><span class="p">:[</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">28</span><span class="p">,</span>
+            <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;unalias&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;unemail@gmail.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;externalId&quot;</span><span class="p">:</span><span class="mi">94</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;unemail@gmail.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;interests&quot;</span><span class="p">:[</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;futbol&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;racing&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;musica&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;la renga&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pastel&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pizza&quot;</span>
+               <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;location&quot;</span><span class="p">:{</span>
+               <span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+               <span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Bufarini&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;photo_profile&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;sex&quot;</span><span class="p">:</span><span class="s2">&quot;M&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span>
+            <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;jj&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;externalId&quot;</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;interests&quot;</span><span class="p">:[</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;music&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;beatles&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pizza&quot;</span>
+               <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;location&quot;</span><span class="p">:{</span>
+               <span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">65.966700000000003</span><span class="p">,</span>
+               <span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">-18.533300000000001</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;hh&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;photo_profile&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;sex&quot;</span><span class="p">:</span><span class="s2">&quot;M&quot;</span>
+         <span class="p">}</span>
+      <span class="p">]</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="likes">
+<span id="like-docs"></span><h2>Likes<a class="headerlink" href="#likes" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Permite a un usuario indicar con qué otros usuarios tiene afinidad.</p>
+<div class="section" id="obtener-likes">
+<h3>Obtener Likes<a class="headerlink" href="#obtener-likes" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Lista todos los usuarios a los que les dio like.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">GET</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/like</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;response&quot;</span><span class="p">:{</span>
+      <span class="nt">&quot;candidates&quot;</span><span class="p">:[</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">28</span><span class="p">,</span>
+            <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;juan&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;unemail@gmail.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;externalId&quot;</span><span class="p">:</span><span class="mi">94</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;unemail@gmail.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;interests&quot;</span><span class="p">:[</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;futbol&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;racing&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;musica&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;la renga&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pastel&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pizza&quot;</span>
+               <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;location&quot;</span><span class="p">:{</span>
+               <span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+               <span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Bufarini&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;photo_profile&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;sex&quot;</span><span class="p">:</span><span class="s2">&quot;M&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span>
+            <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;jj&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;externalId&quot;</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;interests&quot;</span><span class="p">:[</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;music&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;beatles&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pizza&quot;</span>
+               <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;location&quot;</span><span class="p">:{</span>
+               <span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">65.966700000000003</span><span class="p">,</span>
+               <span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">-18.533300000000001</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;hh&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;photo_profile&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;sex&quot;</span><span class="p">:</span><span class="s2">&quot;M&quot;</span>
+         <span class="p">}</span>
+      <span class="p">]</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="likear-usuario">
+<h3>Likear Usuario<a class="headerlink" href="#likear-usuario" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Permite indicar afinidad con un usuario.</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">POST</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/like</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Ejemplo de request</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;likedUser&quot;</span> <span class="p">:</span> <span class="s2">&quot;luly_salazar@gmail.com&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Responde vacío pero con status 200</p>
+</div>
+</div>
+<div class="section" id="matching">
+<span id="matching-docs"></span><h2>Matching<a class="headerlink" href="#matching" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Permite al usuario consultar los usuarios con los cuales tuvo Match (mutuamente likeados).</p>
+<ul class="simple">
+<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">GET</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/match</span></code></li>
+<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
+</ul>
+<p><em>Respuesta</em></p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;response&quot;</span><span class="p">:{</span>
+      <span class="nt">&quot;candidates&quot;</span><span class="p">:[</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">28</span><span class="p">,</span>
+            <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;juan&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;unemail@gmail.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;externalId&quot;</span><span class="p">:</span><span class="mi">94</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;unemail@gmail.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;interests&quot;</span><span class="p">:[</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;futbol&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;racing&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;musica&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;la renga&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pastel&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pizza&quot;</span>
+               <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;location&quot;</span><span class="p">:{</span>
+               <span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+               <span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Bufarini&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;photo_profile&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;sex&quot;</span><span class="p">:</span><span class="s2">&quot;M&quot;</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span>
+            <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;jj&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;externalId&quot;</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;interests&quot;</span><span class="p">:[</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;music&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;beatles&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;comida&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;pizza&quot;</span>
+               <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;location&quot;</span><span class="p">:{</span>
+               <span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">65.966700000000003</span><span class="p">,</span>
+               <span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">-18.533300000000001</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;hh&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;photo_profile&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;sex&quot;</span><span class="p">:</span><span class="s2">&quot;M&quot;</span>
+         <span class="p">}</span>
+      <span class="p">]</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../shserver/tecnologias.html" class="btn btn-neutral float-right" title="Tecnologías principales" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="musuario.html" class="btn btn-neutral" title="Manual de usuario" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grupo 9.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

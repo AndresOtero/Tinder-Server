@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Solución Implementada &mdash; Match Application</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Match Application" href="../index.html"/>
+        <link rel="next" title="Casos de Uso" href="casos.html"/>
+        <link rel="prev" title="Tecnologías principales" href="tecnologias.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Match Application
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tickets.html"><strong>Plan de Entregas</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linksInteres.html"><strong>Links de Interés</strong></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application Server</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appserver/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appserver/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appserver/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appserver/musuario.html">Manual de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appserver/api.html">Especificación de la API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Shared Server</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/musuario.html">Manual de usuario</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android Client</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solución Implementada</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#estructura-general">Estructura general</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#casos-particulares">Casos Particulares</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#location">Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chat-service">Chat Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#workflow">Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="casos.html">Casos de Uso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="musuario.html">Manual de usuario</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Match Application</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Solución Implementada</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="solucion-implementada">
+<h1>Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="estructura-general">
+<h2>Estructura general<a class="headerlink" href="#estructura-general" title="Enlazar permanentemente con este título">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/arq1.png"><img alt="Layers" class="align-center" src="../_images/arq1.png" style="width: 300.0px; height: 300.0px;" /></a>
+<p>La arquitectura del cliente de android es bastante robusta. A continuación se representa en forma reducida mediante un diagrama.</p>
+<p>Cada Android Activity (X Activity: UserActivity, LoginActivity, etc), utiliza algun servicio.</p>
+<p>Existen varios tipos de Service: AccountService, UserService, MatchService, ChatService, etc). Son encargados de resolver las distintas funcionalidades: Cuentas, Usuarios, Matchs, Chats, etc.</p>
+<p>Los Servicios utilizan por detrás un Connector, el cual es un Singleton que contiene un wrapper de Volley.
+Este conector es el encargado de comunicarse con el servidor mediante la REST API.</p>
+<a class="reference internal image-reference" href="../_images/arq2.png"><img alt="Layers" class="align-center" src="../_images/arq2.png" style="width: 300.0px; height: 300.0px;" /></a>
+<p><strong>Dispatcher:</strong> Módulo encargado de crear los pedidos que realiza el connector. Cada Dispatcher conoce la parte de la API REST que le corresponde.</p>
+<p><strong>Receiver:</strong> Módulo encargado de recibir y parsear las respuestas del connector. Sabe cómo interpretar las respuestas y crear los elementos necesarios.</p>
+<p><strong>Linker:</strong> Este módulo se encarga de trasladar la información procesada por el Receiver a la Activity que corresponde. Conoce los elementos de la UI y sabe cómo debe impactarlos. También sabe cómo trasladar los errores a la UI.</p>
+<a class="reference internal image-reference" href="../_images/arq3.png"><img alt="Layers" class="align-center" src="../_images/arq3.png" style="width: 500.0px; height: 500.0px;" /></a>
+<p>En el esquema superior, se muestra un ejemplo tomando el caso del AccountService. Como observamos, el AccountService esta compuesto por un AccountReceiver, AccountLinker y AccountDispatcher.</p>
+<p>En este caso, el AccountDispatcher conoce los pedidos que debe realizar. Estos pedidos son: Account Login, Account Register.
+El Account Receiver conoce las respuestas que devuelve el servidor, sabe cómo interpretarlas y actuar en base a ello. Algunas respuestas: Invalid Account, Account Created OK, etc.
+El AccountLinker en este caso conoce la actividad que lo esté invocando. En este caso puede llamarse de 2 actividades: LoginActivity, RegisterActivity. Es el encargado de realizar los cambios visuales en esta actividades.</p>
+<p>Lo mismo se realiza para los demás Service.</p>
+</div>
+<div class="section" id="casos-particulares">
+<h2>Casos Particulares<a class="headerlink" href="#casos-particulares" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="location">
+<h3>Location<a class="headerlink" href="#location" title="Enlazar permanentemente con este título">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/loc.png"><img alt="Layers" class="align-center" src="../_images/loc.png" style="width: 300.0px; height: 300.0px;" /></a>
+<p>La ubicacion del usuario es actualizada cada una cierta cantidad de tiempo (ej: 30 minutos). Esto se realiza corriendo una tarea de fondo en Android.</p>
+<p>Esto se realiza utilizando un “IntentService” provisto por la SDK de android.</p>
+<p>En este service se solicita la ubicacion del dispositivo (previamente se debe haber aceptado el permiso) y se envia constantemente al App Server.</p>
+</div>
+<div class="section" id="chat-service">
+<h3>Chat Service<a class="headerlink" href="#chat-service" title="Enlazar permanentemente con este título">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/Chat.png"><img alt="Layers" class="align-center" src="../_images/Chat.png" style="width: 400.0px; height: 400.0px;" /></a>
+<p>Algo similar se utiliza en el lado del chat. Donde se cuenta con un Intent Service en este caso para analizar si existen nuevas notificaciones.</p>
+<p>En el caso de existir nuevas notificaciones, se levanta una notificación nativa utilizando el Notification Service.</p>
+</div>
+</div>
+<div class="section" id="workflow">
+<h2>Workflow<a class="headerlink" href="#workflow" title="Enlazar permanentemente con este título">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/workflow.png"><img alt="Layers" class="align-center" src="../_images/workflow.png" style="width: 800.0px; height: 600.0px;" /></a>
+<p>A continuación se representa el flujo de trabajo más común.
+Se comienza realizando un intento de Login. Se puede producir un error debido a credenciales inválidas (email, password), en el caso de error se marcan los elementos inválidos y se le da otra oportunidad.</p>
+<p>En el caso exitoso, pueden ocurrir dos cosas. La primera, que el usuario no haya creado un perfil. En tal caso el usuario debe completar sus datos en la actividad correspondiente. Si el usuario ya ha creado su perfil, entonces directamente se procede al Main Activity.</p>
+<p>En el Main Activity, los usuarios puede proceder a encontrar nuevos contactos. De ser asi, se solicita al servidor por nuevos candidatos.</p>
+<p>La cantidad de candidatos que el servidor envía, esta limitada a una cierta cantidad por dia. Superando este límite, los usuarios no podrán obtener más candidatos.</p>
+<p>El servidor analiza la posición geográfica del usuario y le envía supuestos candidatos al mismo. Se procede a la actividad que permite visualizar estos candidatos. Esta actividad utiliza una estética denominada “Swipe Cards”. El usuario puede deslizar hacia la izquierda o la derecha los candidatos que le interese.</p>
+<p>Completado esto, el usuario queda a la espera de la respuesta de otro usuario para que se produzca un match. Esto sucede en un workflow diferente.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casos.html" class="btn btn-neutral float-right" title="Casos de Uso" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tecnologias.html" class="btn btn-neutral" title="Tecnologías principales" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grupo 9.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

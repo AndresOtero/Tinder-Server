@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Manual de usuario &mdash; Match Application</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Match Application" href="../index.html"/>
+        <link rel="next" title="Especificación de la API" href="api.html"/>
+        <link rel="prev" title="Manual técnico" href="mtecnico.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Match Application
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tickets.html"><strong>Plan de Entregas</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linksInteres.html"><strong>Links de Interés</strong></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application Server</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Manual de usuario</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nativo-solo-ubuntu-14-04-y-15-10">Nativo (Solo Ubuntu 14.04 y 15.10)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-plataformas-compatibles-con-docker">Docker (Plataformas compatibles con Docker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuracion-externa">Configuración externa</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Especificación de la API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Shared Server</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/musuario.html">Manual de usuario</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../client/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/casos.html">Casos de Uso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/musuario.html">Manual de usuario</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Match Application</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Manual de usuario</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="manual-de-usuario">
+<h1>Manual de usuario<a class="headerlink" href="#manual-de-usuario" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Para poder utilizar este servidor, existen dos posibilidades Nativo, o por Docker, cada una se explica a continuación.</p>
+<div class="section" id="nativo-solo-ubuntu-14-04-y-15-10">
+<h2>Nativo (Solo Ubuntu 14.04 y 15.10)<a class="headerlink" href="#nativo-solo-ubuntu-14-04-y-15-10" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Es necesario tener instalado git y hacer una copia del repositorio donde se encuentra el proyecto:</p>
+<p><code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;github.com:Tinder2Team/Tinder-Server.git</span></code></p>
+<p>Luego es necesario correr el script que descarga todas las dependencias necesarias y deja la aplicación lista para correr:</p>
+<ul class="simple">
+<li>Ubuntu 14.04: <code class="docutils literal"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">config.h</span> <span class="pre">-oldboost</span></code></li>
+<li>Ubuntu 15.10: <code class="docutils literal"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">config.h</span></code></li>
+</ul>
+<p>Y luego se la aplicación se puede correr con:</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">./build/server/server</span></code></p>
+</div>
+<div class="section" id="docker-plataformas-compatibles-con-docker">
+<h2>Docker (Plataformas compatibles con Docker)<a class="headerlink" href="#docker-plataformas-compatibles-con-docker" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para este método sólo es necesario tener instalado Docker, de esta manera, sólo se debe ejecutar:</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">0.0.0.0:8000:8000</span> <span class="pre">jtierno/tinder-server</span> <span class="pre">/bin/sh</span> <span class="pre">-c</span> <span class="pre">&quot;./server/server&quot;</span></code></p>
+<p>y el servidor en ambos qué casos queda levantado en el puerto 8000 esperando por peticiones.</p>
+</div>
+<div class="section" id="configuracion-externa">
+<h2>Configuración externa<a class="headerlink" href="#configuracion-externa" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para poder parametrizar ciertos parámetros del servidor se puede proveer un archivo de configuración de la siguiente forma:</p>
+<p><code class="docutils literal"><span class="pre">/server</span> <span class="pre">-config</span> <span class="pre">config.json</span></code></p>
+<p>Donde <code class="docutils literal"><span class="pre">config.json</span></code> es un archivo en formato json, como por ejemplo:</p>
+<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;Log_Level&quot;</span> <span class="p">:</span> <span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;Shared_URL&quot;</span> <span class="p">:</span> <span class="s2">&quot;http://tinder-shared.herokuapp.com&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;Local_DB&quot;</span> <span class="p">:</span> <span class="s2">&quot;/tmp&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Pudiendo variar los siguientes Parámetros</p>
+<ul>
+<li><p class="first"><strong>Log_Level:</strong> Indica el nivel de log del servidor, las opciones habilitadas son:</p>
+<blockquote>
+<div><ul class="simple">
+<li>trace</li>
+<li>debug</li>
+<li>info</li>
+<li>warning</li>
+<li>error</li>
+<li>fatal</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Shared_URL:</strong> Es la dirección del shared server a donde hacer las consultas de perfiles de usuario.</p>
+</li>
+<li><p class="first"><strong>Local_DB:</strong> Directorio donde se almacena la base de datos.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="Especificación de la API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mtecnico.html" class="btn btn-neutral" title="Manual técnico" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grupo 9.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
