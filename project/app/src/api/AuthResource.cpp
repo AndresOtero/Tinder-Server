@@ -8,6 +8,7 @@
 #include <api/AuthResource.h>
 #include <functional>
 #include <string>
+#include <ServiceException.h>
 #include "json/ParameterReader.h"
 #include "JsonWebToken.h"
 #include "log/Logger.h"
@@ -73,6 +74,9 @@ void AuthResource::create(WebContext &wc) {
         wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
         LOG_DEBUG << LOG_PREFIX << "Error creating user " << e.what();
         this->writeJsonResponse(wc, API_STATUS_USER_ALREADY_EXIST);
+    } catch (ServiceException & e) {
+        LOG_DEBUG << LOG_PREFIX << "Error creating user " << e.what();
+        wc.getResponse().setStatus(STATUS_500_INTERNAL_SERVER_ERROR);
     }
 
 }
@@ -87,7 +91,11 @@ void AuthResource::remove(WebContext &wc) {
     } catch (AuthenticationException const & e) {
         LOG_DEBUG << LOG_PREFIX << "Error deleting user " << e.what();
         wc.getResponse().setStatus(STATUS_401_UNAUTHORIZED);
+    } catch (ServiceException & e) {
+        LOG_DEBUG << LOG_PREFIX << "Error deleting user " << e.what();
+        wc.getResponse().setStatus(STATUS_500_INTERNAL_SERVER_ERROR);
     }
+
 }
 
 

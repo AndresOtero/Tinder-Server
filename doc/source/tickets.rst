@@ -57,6 +57,15 @@ Shared Server
 -----------------------------
 
 - Corrección de bugs.
+- Almacenamiento de la imágen de usuario.
+- Rediseño de la web.
+
+
+`Tickets en GitHub Segundo Checkpoint Shared Server <https://github.com/Tinder2Team/Tinder-Shared/issues?utf8=%E2%9C%93&q=milestone%3A%22Segunda+Entrega%22>`_
+
+
+
+
 
 
 
