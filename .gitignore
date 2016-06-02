@@ -4,3 +4,4 @@ logfile.log
 .log
 *.log
 .idea/
+doc/build/*
