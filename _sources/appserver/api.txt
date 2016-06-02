@@ -309,7 +309,7 @@ Lista los intereses disponibles
 Agregar Intereses
 --------------------
 
-Actualiza la lista de intereses del usuario
+Actualiza la lista de intereses del usuario, reemplazando los anteriores.
 
 - *Método HTTP:* ``POST``
 - *URL:* ``/interest``
@@ -343,43 +343,15 @@ Actualiza la lista de intereses del usuario
 Responde vacío pero con status 200
 
 
-Eliminar Interés
---------------------
-
-Elimina un Interés de un usuario
-
-- *Método HTTP:* ``DELETE``
-- *URL:* ``/interest``
-- *Seguridad:* ``Con seguridad``
-
-*Ejemplo de request*
-
-.. code-block:: jsonld
-
-	{
-	    "category":"futbol",
-	    "value": "independiente"
-
-	}
-        
-*Respuesta*
-
-.. code-block:: jsonld
-
-   {"response": "", "status": 200}
-
-Responde vacío pero con status 200
-
-
 .. _candidates-docs:
 
 Candidatos
 ===============
 
-Permite al usuario conocer la lista diaria de candidatos a match.
+Permite al usuario pedir una cantidad de usuarios para hacer match. La cantidad es parte de la url. De encontrarse la cantidad necesaria se devuelven sino se retorna la cantidad disponible. Luego de superado el límite de candidatos disponibles para el día, se retorna una respuesta vacia con código de estado 103   (ver :ref:`codigos-docs`)
 
 - *Método HTTP:* ``GET``
-- *URL:* ``/candidates``
+- *URL:* ``/candidates/[cantidad]`` 
 - *Seguridad:* ``Con seguridad``
         
 *Respuesta*
@@ -475,7 +447,7 @@ Lista todos los usuarios a los que les dio like.
 
 	{
 	   "response":{
-	      "candidates":[
+	      "likes":[
 	         {
 	            "age":28,
 	            "alias":"juan",
@@ -580,7 +552,7 @@ Permite al usuario consultar los usuarios con los cuales tuvo Match (mutuamente 
 
 	{
 	   "response":{
-	      "candidates":[
+	      "matches":[
 	         {
 	            "age":28,
 	            "alias":"juan",

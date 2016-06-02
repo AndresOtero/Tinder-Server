@@ -20,4 +20,5 @@
 ======================================
 * Travis: https://travis-ci.org/Tinder2Team/Tinder-Server
 * Dockub: https://hub.docker.com/r/jtierno/tinder-server/
-* Coverall https://coveralls.io/github/Tinder2Team/Tinder-Server
+* Coverall: https://coveralls.io/github/Tinder2Team/Tinder-Server
+* Docker Hub : https://hub.docker.com/r/jtierno/tinder-server/

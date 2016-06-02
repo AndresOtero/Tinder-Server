@@ -2,7 +2,7 @@
 **Plan de Entregas**
 ==============================================
 
-*Chekpoint 1 (Semana 7)*
+*Chekpoint 1 (Clase 7)*
 =====================================
 
 Application Server
@@ -37,7 +37,7 @@ No habrá desarrollo alguno durante este checkpoint.
 
 
 
-*Chekpoint 2 (Semana 11)*
+*Chekpoint 2 (Clase 11)*
 =========================
 
 Application Server
@@ -50,6 +50,8 @@ En esta segunda etapa se abordarán las siguientes actividades:
 - Implementación de la api para integrar con el cliente Android. Quedando solamente las funcionalidades de Chat para la última entrega
 - Seguridad en la api.
 - Tests de integración.
+- Upload de foto de perfíl de usuario.
+- Implentación de la api para Chat entre usuarios.
 
 `Tickets en GitHub Segundo Checkpoint Application Server <https://github.com/Tinder2Team/Tinder-Server/issues?utf8=%E2%9C%93&q=milestone%3A%22Segunda+Entrega%22+>`_
 
@@ -57,6 +59,15 @@ Shared Server
 -----------------------------
 
 - Corrección de bugs.
+- Almacenamiento de la imágen de usuario.
+- Rediseño de la web.
+
+
+`Tickets en GitHub Segundo Checkpoint Shared Server <https://github.com/Tinder2Team/Tinder-Shared/issues?utf8=%E2%9C%93&q=milestone%3A%22Segunda+Entrega%22>`_
+
+
+
+
 
 
 
@@ -70,7 +81,7 @@ Dentro de esta entrega el alcance contempla:
 `Tickets en GitHub Segundo Checkpoint Android Client <https://github.com/Tinder2Team/Tinder-Client-2/issues?utf8=%E2%9C%93&q=milestone%3A%22Segunda+Entrega%22+>`_
 
 
-*Chekpoint 3 (Semana 14)*
+*Chekpoint 3 (Clase 14)*
 =========================
 
 Application Server
@@ -79,17 +90,12 @@ Application Server
 Para finalizar con esta aplicación en esta entrega se apuntará a concluir con:
 
 - Corrección de bugs.
-- Implentación de la api para Chat entre usuarios.
-- Upload de foto de perfíl de usuario.
+- Implentación de la api para Chat entre usuarios. (Continuación)
 - Finalización de tests de integración.
 - Revisión completa de cobertura.
 
 `Tickets en GitHub Tercer Checkpoint Application Server <https://github.com/Tinder2Team/Tinder-Server/milestones/Tercer%20Entrega>`_
 
-Shared Server
------------------------------
-
-- Upload de foto de perfil.
 
 Android Client
 -----------------------------

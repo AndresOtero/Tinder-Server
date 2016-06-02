@@ -115,7 +115,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#intereses">Intereses</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#obtener-intereses">Obtener Intereses</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#agregar-intereses">Agregar Intereses</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#eliminar-interes">Eliminar Interés</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#candidatos">Candidatos</a></li>
@@ -436,7 +435,7 @@
 </div>
 <div class="section" id="agregar-intereses">
 <h3>Agregar Intereses<a class="headerlink" href="#agregar-intereses" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Actualiza la lista de intereses del usuario</p>
+<p>Actualiza la lista de intereses del usuario, reemplazando los anteriores.</p>
 <ul class="simple">
 <li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">POST</span></code></li>
 <li><em>URL:</em> <code class="docutils literal"><span class="pre">/interest</span></code></li>
@@ -465,35 +464,13 @@
 </div>
 <p>Responde vacío pero con status 200</p>
 </div>
-<div class="section" id="eliminar-interes">
-<h3>Eliminar Interés<a class="headerlink" href="#eliminar-interes" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Elimina un Interés de un usuario</p>
-<ul class="simple">
-<li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">DELETE</span></code></li>
-<li><em>URL:</em> <code class="docutils literal"><span class="pre">/interest</span></code></li>
-<li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
-</ul>
-<p><em>Ejemplo de request</em></p>
-<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;futbol&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;independiente&quot;</span>
-
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><em>Respuesta</em></p>
-<div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>Responde vacío pero con status 200</p>
-</div>
 </div>
 <div class="section" id="candidatos">
 <span id="candidates-docs"></span><h2>Candidatos<a class="headerlink" href="#candidatos" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Permite al usuario conocer la lista diaria de candidatos a match.</p>
+<p>Permite al usuario pedir una cantidad de usuarios para hacer match. La cantidad es parte de la url. De encontrarse la cantidad necesaria se devuelven sino se retorna la cantidad disponible. Luego de superado el límite de candidatos disponibles para el día, se retorna una respuesta vacia con código de estado 103   (ver <a class="reference internal" href="#codigos-docs"><span class="std std-ref">Códigos de error</span></a>)</p>
 <ul class="simple">
 <li><em>Método HTTP:</em> <code class="docutils literal"><span class="pre">GET</span></code></li>
-<li><em>URL:</em> <code class="docutils literal"><span class="pre">/candidates</span></code></li>
+<li><em>URL:</em> <code class="docutils literal"><span class="pre">/candidates/[cantidad]</span></code></li>
 <li><em>Seguridad:</em> <code class="docutils literal"><span class="pre">Con</span> <span class="pre">seguridad</span></code></li>
 </ul>
 <p><em>Respuesta</em></p>
@@ -577,7 +554,7 @@
 <p><em>Respuesta</em></p>
 <div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
    <span class="nt">&quot;response&quot;</span><span class="p">:{</span>
-      <span class="nt">&quot;candidates&quot;</span><span class="p">:[</span>
+      <span class="nt">&quot;likes&quot;</span><span class="p">:[</span>
          <span class="p">{</span>
             <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">28</span><span class="p">,</span>
             <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;juan&quot;</span><span class="p">,</span>
@@ -671,7 +648,7 @@
 <p><em>Respuesta</em></p>
 <div class="highlight-jsonld"><div class="highlight"><pre><span></span><span class="p">{</span>
    <span class="nt">&quot;response&quot;</span><span class="p">:{</span>
-      <span class="nt">&quot;candidates&quot;</span><span class="p">:[</span>
+      <span class="nt">&quot;matches&quot;</span><span class="p">:[</span>
          <span class="p">{</span>
             <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">28</span><span class="p">,</span>
             <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;juan&quot;</span><span class="p">,</span>
