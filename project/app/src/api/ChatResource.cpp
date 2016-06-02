@@ -4,6 +4,7 @@
 
 #include <ChatServices.h>
 #include <UserNotFoundException.h>
+#include <ChatException.h>
 #include "ChatResource.h"
 #include "ApiConstants.h"
 
@@ -29,6 +30,7 @@ void ChatResource::getConversation(WebContext &wc) {
     } catch (UserNotFoundException & e) {
         Json::Value result;
         this->writeJsonResponse(wc, result, API_STATUS_INVALID_RECIPIENT);
+        return;
     }
 
     try {
@@ -36,6 +38,7 @@ void ChatResource::getConversation(WebContext &wc) {
     } catch (UserNotFoundException & e) {
         delete receiver;
         this->writeJsonResponse(wc, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);
+        return;
     }
 
     try {
@@ -59,6 +62,43 @@ void ChatResource::getConversation(WebContext &wc) {
 void ChatResource::sendMessage(WebContext &wc) {
     Json::Value params;
     RestResource::readJson(wc, params);
+    User * sender;
+    User* receiver;
+    string content;
+    Message* message;
+    try {
+        sender = profileServices.getUserByID(wc.getUserid());
+    } catch (UserNotFoundException & e) {
+        this->writeJsonResponse(wc, API_STATUS_CODE_AUTH_PROFILE_CREATION_REQUIRED);
+        return;
+    }
+    string receiverID = params["receiver"].asString();
+    content = params["content"].asString();
+    if (receiverID == "" || content == "") {
+        wc.getResponse().setStatus(STATUS_400_BAD_REQUEST);
+        return;
+    }
+    try {
+        receiver = profileServices.getUserByID(receiverID);
+    } catch (UserNotFoundException & e) {
+        delete sender;
+        this->writeJsonResponse(wc, API_STATUS_INVALID_RECIPIENT);
+        return;
+    }
+    try {
+        message = new Message(content, sender, receiver);
+        chatService.sendMessageFromTo(message);
+        this->writeJsonResponse(wc, API_STATUS_CODE_DONE);
+        delete sender;
+        delete receiver;
+        delete message;
+    } catch (ChatException & e) {
+        delete sender;
+        delete receiver;
+        delete message;
+        this->writeJsonResponse(wc, API_STATUS_INVALID_RECIPIENT);
+    }
+
 }
 
 

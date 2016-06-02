@@ -45,9 +45,7 @@ Message::Message(string content, User *sender, User *receiver) {
 	this->currentTime.tm_zone = estructura->tm_zone;
 }
 
-Message::~Message() {
-	delete this->currentTime;
-}
+Message::~Message() { }
 
 
 User* Message::getSender() {
@@ -69,7 +67,7 @@ tm* Message::getTime() {
 
 Json::Value Message::toJson() {
 	Json::Value raiz;
-	raiz["time"] = asctime(this->currentTime);
+	raiz["time"] = asctime(&(this->currentTime));
 	raiz["content"] = this->getContent();
 	return raiz;
 }
