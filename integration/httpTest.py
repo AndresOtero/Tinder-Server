@@ -28,9 +28,32 @@ class MyTestCase(unittest.TestCase):
                           {'latitude': 78, 'longitude': 87},
                           [{'category': "futbol", 'value': "river"}])
 
+        self.user3 = User("lakenny00@gmail.com",
+                          "12345",
+                          "kenny",
+                          32,
+                          "F",
+                          "ken",
+                          "www.image3.com",
+                          {'latitude': 78, 'longitude': 87},
+                          [{'category': "comida", 'value': "pizza"}])
+
+        if (self.user1.login()).status_code == 200:
+            self.user1.unregister()
+
         self.user1.register()
         self.user1.saveProfile()
+
+        if (self.user2.login()).status_code == 200:
+            self.user2.unregister()
+
         self.user2.register()
+
+        if (self.user3.login()).status_code == 200:
+            self.user3.unregister()
+
+        self.user3.register()
+        self.user3.saveProfile()
 
     def tearDown(self):
         self.user1.unregister()
@@ -119,60 +142,34 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(boolean, True)
 
-    @unittest.skip("\n")
-    def test_deleteInterest(self):#FALLA!!
-        interestToRemove = {'category': "comida", 'value': "pizza"}
-        response = self.user1.removeInterest(interestToRemove)
+    #@unittest.skip("\n")
+    def test_checkStatusToLikeUser(self):
+        self.user2.saveProfile()
+        response = self.user1.like(self.user2)
 
         self.assertEqual(response.json()["status"], 200)
 
-        boolean = self.user1.haveThisInterests(self.user1.reloadProfile().json()["response"]["interests"])
+    #@unittest.skip("\n")
+    def test_checkUsersLiked(self):
+        self.user2.saveProfile()
+        self.user1.like(self.user2)
+        self.user1.like(self.user3)
+        response = self.user1.getUsersLiked()
+        usersLike = (response.json())["response"]["likes"]
+        self.assertEqual(usersLike[0]["email"], self.user3.profileData["email"])
+        self.assertEqual(usersLike[1]["email"], self.user2.profileData["email"])
 
-        self.assertEqual(boolean, True)
+    #@unittest.skip("\n")
+    def test_matching(self):
+        self.user1.like(self.user3)
+        self.user3.like(self.user1)
+        response = self.user1.getMatchs()
+        results = response.json()
 
-    
-    
-    
-    #TODO AUN SIN TESTEAR BAJO EL NUEVO MODELO
-    # def test_likeUser(self):
-    #     userToLike = {
-    #         'user': "luly_salazar@gmail.com",
-    #     }
-    #     requests.post(URLbase + "auth", data=json.dumps(userToLike), headers=self.cabeceras[1])
-    #
-    #     response = requests.post(URLbase + "like", data=json.dumps({'likedUser': "luly_salazar@gmail.com"}),
-    #                              headers=self.cabeceras[1])
-    #     results = response.json()
-    #
-    #     self.assertEqual(results["status"], 200)
-    #
-    # def test_CheckUsersLiked(self):
-    #     responseGET = requests.get(URLbase + "like", headers=self.cabeceras[1])
-    #     results = responseGET.json()
-    #     candidates = results["response"]["candidates"]
-    #
-    #     self.assertEqual(candidates, [{"luly_salazar@gmail.com"}])
-    #     self.assertEqual(results["status"], 200)
-    #
-    # def test_matching(self):
-    #     response = requests.post(URLbase + "auth", data=json.dumps(self.user2.loginData), headers=self.cabeceras[0])
-    #     results = response.json()
-    #
-    #     securityToken = results["response"]["token"]
-    #     self.user2.setToken(securityToken)
-    #     self.updateCabeceras(securityToken)
-    #
-    #     requests.post(URLbase + "like", data=json.dumps({'likedUser': "elpedro@gmail.com"}),
-    #                   headers=self.cabeceras[2])  # Julia da like a Pedro
-    #
-    #     requests.post(URLbase + "like", data=json.dumps({'likedUser': "lajulia@gmail.com"}),
-    #                   headers=self.cabeceras[1])  # Pedro da like a Julia
-    #     responseGET = requests.get(URLbase + "match", headers=self.cabeceras[1])
-    #     results = responseGET.json()
-    #     candidatesMatch = results["response"]["candidates"]
-    #
-    #     self.assertEqual(candidatesMatch, [{"lajulia@gmail.com"}])
-    #     self.assertEqual(results["status"], 200)
+        candidatesMatch = results["response"]["matches"]
+
+        self.assertEqual(candidatesMatch[0]["email"], self.user3.profileData["email"])
+        self.assertEqual(results["status"], 200)
 
 
 if __name__ == '__main__':

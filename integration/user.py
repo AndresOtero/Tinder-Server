@@ -26,6 +26,9 @@ class User:
     def setToken(self, token):
         self.token = token
 
+    def getSecureadHeaders(self):
+        return {"Content-Type": "application/json", "SECURITY-TOKEN": self.securityToken}
+
     def register(self):
         response = requests.post(URLbase + "auth", data=json.dumps(self.loginData), headers=self.cabeceras)
         try:
@@ -109,12 +112,30 @@ class User:
             print("Error with delete interest response: ", response)
         return response
 
-    def doMatch(self):
-        print("haciendo match")
+    def like(self, userToLike):
+        response = requests.post(URLbase + "like", data=json.dumps({'likedUser': userToLike.profileData["email"]}),
+                                 headers=self.getSecureadHeaders())
+        try:
+            results = response.json()
+        except (ValueError, TypeError):
+            print("Error with like user response: ", response)
+        return response
+
+    def getUsersLiked(self):
+        responseGET = requests.get(URLbase + "like", headers=self.getSecureadHeaders())
+        try:
+            results = responseGET.json()
+        except (ValueError, TypeError):
+            print("Error with get users liked response: ", responseGET)
+        return responseGET
+
+    def getMatchs(self):
+        responseGET = requests.get(URLbase + "match", headers=self.getSecureadHeaders())
+        try:
+            results = responseGET.json()
+        except (ValueError, TypeError):
+            print("Error with get matchs response: ", responseGET)
+        return responseGET
 
     def getAvailableInterests(self):
         print("obteniendo lista de intereses")
-
-    def getSecureadHeaders(self):
-        return {"Content-Type": "application/json", "SECURITY-TOKEN": self.securityToken}
-
