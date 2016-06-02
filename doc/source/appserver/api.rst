@@ -447,7 +447,7 @@ Lista todos los usuarios a los que les dio like.
 
 	{
 	   "response":{
-	      "candidates":[
+	      "likes":[
 	         {
 	            "age":28,
 	            "alias":"juan",
