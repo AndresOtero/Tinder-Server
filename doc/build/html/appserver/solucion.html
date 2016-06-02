@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Solución Implementada &mdash; Match Application</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Match Application" href="../index.html"/>
+        <link rel="next" title="Manual técnico" href="mtecnico.html"/>
+        <link rel="prev" title="Tecnologías principales" href="tecnologias.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Match Application
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tickets.html"><strong>Plan de Entregas</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linksInteres.html"><strong>Links de Interés</strong></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application Server</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solución Implementada</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#estructura-general">Estructura general</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#webserver">Webserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dispatcher">Dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#secuencia-de-respuesta-a-una-peticion-web">Secuencia de respuesta a una petición web</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#service">Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dao">DAO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connector">Connector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="musuario.html">Manual de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Especificación de la API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Shared Server</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/musuario.html">Manual de usuario</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../client/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/casos.html">Casos de Uso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/musuario.html">Manual de usuario</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Match Application</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Solución Implementada</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="solucion-implementada">
+<h1>Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="estructura-general">
+<h2>Estructura general<a class="headerlink" href="#estructura-general" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La arquitectura básica de la aplicación es una estructura por capas de la siguiente manera:</p>
+<a class="reference internal image-reference" href="../_images/layers.png"><img alt="Layers" class="align-center" src="../_images/layers.png" style="width: 300.0px; height: 300.0px;" /></a>
+<p>WEBSERVER y DISPATCHER se pueden ver como dos subcapas  de una misma capa diseñada para resolver el problema de recibir las peticiones y delegar correctamente su procesamiento.
+En la capa WEBSERVER se manejan las conexiones web entrantes y adapta los datos que las componen para ser interpretados en la capa DISPATCHER. DISPATCHER determina el handler correcto para la petición y delega su procesamiento. Estos handlers se encuentran ubicados en la capa API, la cual se encarga de enviar el procesamiento a los objetos con la lógica de negocio ubicados en la capa SERVICE, que como su nombre lo indica, tiene los servicios que proveen el core de la funcionalidad. En una instancia inferior están DAO y CONNECTOR, quienes proveen un acceso homogéneo a datos y conexión a los sistemas adyacentes (la base de datos y el Shared Server) respectivamente.</p>
+</div>
+<div class="section" id="webserver">
+<h2>Webserver<a class="headerlink" href="#webserver" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En esta capa se encuentran una serie de clases que hacen el manejo de las conexiones entrantes.</p>
+<div class="figure align-center">
+<img alt="../_images/webserver.png" src="../_images/webserver.png" />
+</div>
+<p>Donde WebServer tiene la responsabilidad de recibir las peticiones  y delegarlas al RequestDispatcher, encargado de procesarlo y generar la respuesta adecuada. Por otro lado RestRequest brinda el acceso a los datos de la petición, y RestResponse se encarga de recibir los datos que se transformarán luego en la respuesta a la petición web.</p>
+</div>
+<div class="section" id="dispatcher">
+<h2>Dispatcher<a class="headerlink" href="#dispatcher" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una vez recibida la petición es necesario determinar si hay un handler o no para atender la petición, esto es manejado por esta capa:</p>
+<div class="figure align-center">
+<img alt="../_images/dispatching.png" src="../_images/dispatching.png" />
+</div>
+<p>En este caso ApiDispatcher es encargado de delegar a una cadena de EndPoints distinta según el método HTTP de la petición (PUT, POST, GET y DELETE). Los EndPoints forman una Chain of Responsability donde si no se puede manejar la petición, es lanzada una excepción capturada por el dispatcher y da como resultado un 403 Forbidden.
+Una vez definido el endpoint que puede manejar el request, se pasa el control a los filters, quienes son los encargados de hacer algun procesamiento extra a la petición.
+WebContext es como un contenedor de más alto nivel para la petición y su respuesta, este crecerá para brindar un contexto más rico al contexto del handler de la petición. Por otro lado se encuentra la interfaz RestResource que será implementada por todas aquellas clases que proveen handlers para una serie de peticiones relacionadas, como pueden ser los métodos relacionados la entidad Usuario.</p>
+</div>
+<div class="section" id="secuencia-de-respuesta-a-una-peticion-web">
+<h2>Secuencia de respuesta a una petición web<a class="headerlink" href="#secuencia-de-respuesta-a-una-peticion-web" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="figure align-center">
+<img alt="../_images/secuenciarespuesta.png" src="../_images/secuenciarespuesta.png" />
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Dentro de esta capa se encuentran las diferentes implementaciones de RestResource quienes son los handlers concretos de los pedidos. Donde las responsabilidades se dividen de la siguiente manera:</p>
+<ul class="simple">
+<li>AuthResource: Registro y autenticación de usuarios.</li>
+<li>ChatResource: Chat entre usuarios.</li>
+<li>InterestResource: Intereses de un usuario.</li>
+<li>LocationResource: Actualización de posición de usuario.</li>
+<li>UserResource: Moficación de los datos de perfil del usuario.</li>
+</ul>
+<p>Además se encuentra implementado el SecurityFilter con la responsabilidad de validar los requests provenientes desde el Android Client mediante el uso de un JsonWebToken.</p>
+</div>
+<div class="section" id="service">
+<h2>Service<a class="headerlink" href="#service" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En esta capa se proveen los servicios básicos del modelo de negocios, proveyendo las funcionalidades necesarias para resolver los requests recibidos, más no poseen ningún conocimiento sobre cómo son almacenados estos datos. Para ello, hacen uso de alguno de los DAO ofrecidos. Los servicios provistos son: autenticación, administración de perfiles de usuario,  conversaciones y búsqueda de candidatos(no implementado aun).</p>
+</div>
+<div class="section" id="dao">
+<h2>DAO<a class="headerlink" href="#dao" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Se trata de una capa intermedia entre la de connectors y la de servicios. Aquí se mapean los datos recibidos de las distintas fuentes con las clases del modelo de negocio utilizadas por la capa superior. Dentro se encuentra ChatDAO que provee funcionalidad para obtener los mensajes del chat que usando un DBConnector permite obtener y guardar mensajes que un usuario origen envía a otro usuario destino.
+Otro de los componentes de esta capa es  MatchDAO que brinda la posibilidad de almacenar y recuperar matches que se dan entre dos usuarios.</p>
+</div>
+<div class="section" id="connector">
+<h2>Connector<a class="headerlink" href="#connector" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Esta última capa es la encargada de las comunicaciones entre los distintos componentes que forman la aplicación, en este caso la base de datos (RocksDB) y el Shared Server. En ambos connectors se ofrecen todos los metodos necesario para intercambiar información con su par del otro lado. Sin embargo, no poseen ningún tipo de conocimiento sobre la forma de los datos que están enviando o recibiendo. Su única función es proveer una interfaz de comunicación.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mtecnico.html" class="btn btn-neutral float-right" title="Manual técnico" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tecnologias.html" class="btn btn-neutral" title="Tecnologías principales" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grupo 9.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

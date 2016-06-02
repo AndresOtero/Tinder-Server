@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Manual técnico &mdash; Match Application</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Match Application" href="../index.html"/>
+        <link rel="next" title="Manual de usuario" href="musuario.html"/>
+        <link rel="prev" title="Solución Implementada" href="solucion.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Match Application
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tickets.html"><strong>Plan de Entregas</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linksInteres.html"><strong>Links de Interés</strong></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application Server</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Manual técnico</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuracion-del-proyecto">Configuración del proyecto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tests-de-integracion">Tests de Integración</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-coverage">Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentacion-automatica">Documentación automática</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="musuario.html">Manual de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Especificación de la API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Shared Server</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shserver/musuario.html">Manual de usuario</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Android Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../client/tecnologias.html">Tecnologías principales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/solucion.html">Solución Implementada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/casos.html">Casos de Uso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/mtecnico.html">Manual técnico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client/musuario.html">Manual de usuario</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Match Application</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Manual técnico</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="manual-tecnico">
+<h1>Manual técnico<a class="headerlink" href="#manual-tecnico" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="configuracion-del-proyecto">
+<h2>Configuración del proyecto<a class="headerlink" href="#configuracion-del-proyecto" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Dentro del directorio raíz del proyecto existe un script que permite configurar la aplicación.
+Se puede listar una ayuda completa mediante la ejecución de:</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">./config.sh</span> <span class="pre">-h</span></code></p>
+<p>Obteniendo la siguiente salida</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Uso: ./config.sh [option...].</span>
+<span class="go">     -h, --help         Imprimir esta ayuda.</span>
+<span class="go">     -g++-5             Flag g++-5 para cmake.</span>
+<span class="go">     -oldboost          Compatibilidad de boost para linux version 14.04.</span>
+<span class="go">     -test              Habilita los tests.</span>
+<span class="go">     -coverage          Habilita coverage y agrega -test.</span>
+<span class="go">     -doxydoc           Habilita documentación doxy.</span>
+<span class="go">     -dependencies      Instala dependencias.</span>
+<span class="go">     -dev               Atajo para -test -doxydoc -coverage.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para correr la suit de tests de la aplicación, es necesario configurar el proyecto con <code class="docutils literal"><span class="pre">-test</span></code> y luego parado en la raiz del proyecto, se debe ejecutar:</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">./build/test/applib/testapp</span></code></p>
+<p>Lo cual ejecuta los tests sobre la funcionalidad de la aplicación.</p>
+</div>
+<div class="section" id="tests-de-integracion">
+<h2>Tests de Integración<a class="headerlink" href="#tests-de-integracion" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="code-coverage">
+<h2>Code Coverage<a class="headerlink" href="#code-coverage" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Es posible generar un reporte de cobertura de tests mediante el correspondiente target de make, dentro del directorio build:</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">make</span> <span class="pre">coverage</span></code></p>
+<p>La sentencia anterior genera el archivo “build/coverage-report/index.html” el cual se puede abrir con cualquier navegador. En éste se puede ver el reporte generado.
+Para poder ejecutar este target de make previamente el proyecto se debe haber configurado con la opción <code class="docutils literal"><span class="pre">-coverage</span></code></p>
+</div>
+<div class="section" id="documentacion-automatica">
+<h2>Documentación automática<a class="headerlink" href="#documentacion-automatica" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Previamente habiendo configurado el proyecto con el flag <code class="docutils literal"><span class="pre">-doxydoc</span></code>
+Para generar el reporte del código automática, parado dentro de la carpeta build, se debe ejecutar el siguiente target del make</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">make</span> <span class="pre">doxyDoc</span></code></p>
+<p>Esto genera el archivo “doxyDoc/html/index.html” que se puede abrir con cualquier navegador y permite visualizar la información referente al código de la aplicación.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="musuario.html" class="btn btn-neutral float-right" title="Manual de usuario" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="solucion.html" class="btn btn-neutral" title="Solución Implementada" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Grupo 9.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
