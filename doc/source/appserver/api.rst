@@ -552,7 +552,7 @@ Permite al usuario consultar los usuarios con los cuales tuvo Match (mutuamente 
 
 	{
 	   "response":{
-	      "candidates":[
+	      "matches":[
 	         {
 	            "age":28,
 	            "alias":"juan",
