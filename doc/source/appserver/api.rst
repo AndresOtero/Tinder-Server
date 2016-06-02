@@ -309,7 +309,7 @@ Lista los intereses disponibles
 Agregar Intereses
 --------------------
 
-Actualiza la lista de intereses del usuario
+Actualiza la lista de intereses del usuario, reemplazando los anteriores.
 
 - *Método HTTP:* ``POST``
 - *URL:* ``/interest``
@@ -348,10 +348,10 @@ Responde vacío pero con status 200
 Candidatos
 ===============
 
-Permite al usuario conocer la lista diaria de candidatos a match.
+Permite al usuario pedir una cantidad de usuarios para hacer match. La cantidad es parte de la url. De encontrarse la cantidad necesaria se devuelven sino se retorna la cantidad disponible. Luego de superado el límite de candidatos disponibles para el día, se retorna una respuesta vacia con código de estado 103   (ver :ref:`codigos-docs`)
 
 - *Método HTTP:* ``GET``
-- *URL:* ``/candidates``
+- *URL:* ``/candidates/[cantidad]`` 
 - *Seguridad:* ``Con seguridad``
         
 *Respuesta*
