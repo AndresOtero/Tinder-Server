@@ -47,11 +47,10 @@ En esta segunda etapa se abordarán las siguientes actividades:
 
 - Configuración y seguimiento de análisis de cobertura.
 - Reescritura de la documentación a un formato web.
-- Implementación de la api para integrar con el cliente Android. Quedando solamente las funcionalidades de Chat para la última entrega
+- Implementación de la api para integrar con el cliente Android. (Excepto Chat que finalizará en la última entrega)
 - Seguridad en la api.
 - Tests de integración.
 - Upload de foto de perfíl de usuario.
-- Implentación de la api para Chat entre usuarios.
 
 `Tickets en GitHub Segundo Checkpoint Application Server <https://github.com/Tinder2Team/Tinder-Server/issues?utf8=%E2%9C%93&q=milestone%3A%22Segunda+Entrega%22+>`_
 
