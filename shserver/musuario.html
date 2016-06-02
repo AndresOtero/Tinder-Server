@@ -105,11 +105,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#web-de-administracion">Web de administración</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#home">Home</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creacion-de-usuario">Creación de usuario</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#edicion-de-foto-de-usuario">Edición de foto de usuario</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#edicion-de-usuario">Edición de usuario</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#visualizacion-de-usuario">Visualización de usuario</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creacion-de-intereses">Creación de intereses</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#listar-intereses">Listar intereses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#administrar-intereses">Administrar intereses</a></li>
 </ul>
 </li>
 </ul>
@@ -189,29 +186,7 @@
 </ul>
 <div class="figure align-center" id="id2">
 <img alt="../_images/usuario_crear.png" src="../_images/usuario_crear.png" />
-<p class="caption"><span class="caption-text">En esta sección es posible crear un usuario completando el formulario y seleccionando los intereses.</span></p>
-</div>
-</div>
-<div class="section" id="edicion-de-foto-de-usuario">
-<h3>Edición de foto de usuario<a class="headerlink" href="#edicion-de-foto-de-usuario" title="Enlazar permanentemente con este título">¶</a></h3>
-<ul class="simple">
-<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/user/edit/photo">http://tinder-shared.herokuapp.com/#/user/edit/photo</a></li>
-<li>Navegación: “Usuarios/Editar Foto”</li>
-</ul>
-<div class="figure align-center" id="id3">
-<img alt="../_images/usuario_fotoperfil.png" src="../_images/usuario_fotoperfil.png" />
-<p class="caption"><span class="caption-text">En esta sección es posible editar la foto de un usuario como una url (actualmente la misma no se encuentra reflejada en el usuario, más adelante funcionará para subir la foto de un usuario, aunque es posible que esto se fusione con la edición de usuario.</span></p>
-</div>
-</div>
-<div class="section" id="edicion-de-usuario">
-<h3>Edición de usuario<a class="headerlink" href="#edicion-de-usuario" title="Enlazar permanentemente con este título">¶</a></h3>
-<ul class="simple">
-<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/users/edit">http://tinder-shared.herokuapp.com/#/users/edit</a></li>
-<li>Navegación: “Usuarios/Modificar”</li>
-</ul>
-<div class="figure align-center" id="id4">
-<img alt="../_images/usuario_modificar.png" src="../_images/usuario_modificar.png" />
-<p class="caption"><span class="caption-text">Allí podemos ingresar el ID del y presionando el botón se cargan los datos del usuario.. Una vez completo el formulario, con el botón “Modificar usuario” se confirman los datos, obteniendo el correspondiente mensaje del estado de la operación.</span></p>
+<p class="caption"><span class="caption-text">En esta sección es posible crear un usuario completando el formulario y seleccionando los intereses. Al momento de guardar los datos ingresados se podra agregar una foto de perfil que se encuentre almacenada localmente.</span></p>
 </div>
 </div>
 <div class="section" id="visualizacion-de-usuario">
@@ -220,31 +195,24 @@
 <li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/user/8">http://tinder-shared.herokuapp.com/#/user/8</a> (8 es el id del usuario)</li>
 <li>Navegación: Desde el listado de usuarios, clickear en el botón “Ver” de un usuario.</li>
 </ul>
-<div class="figure align-center" id="id5">
+<div class="figure align-center" id="id3">
 <img alt="../_images/usuario_planilla.png" src="../_images/usuario_planilla.png" />
-<p class="caption"><span class="caption-text">Aquí se puede tener una vista más detallada de los usuarios.</span></p>
+<p class="caption"><span class="caption-text">Aquí se puede tener una vista más detallada de los usuarios.
+Hacer clic en &#8220;1&#8221; para modificar la foto de perfil del usuario.
+Hacer clic en &#8220;2&#8221; para modificar los datos del usuario.
+Hacer clic en &#8220;3&#8221; para borrar el usuario.</span></p>
 </div>
 </div>
-<div class="section" id="creacion-de-intereses">
-<h3>Creación de intereses<a class="headerlink" href="#creacion-de-intereses" title="Enlazar permanentemente con este título">¶</a></h3>
-<ul class="simple">
-<li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/interests/add">http://tinder-shared.herokuapp.com/#/interests/add</a></li>
-<li>Navegación: “Intereses/Crear”</li>
-</ul>
-<div class="figure align-center" id="id6">
-<img alt="../_images/intereses_crear.png" src="../_images/intereses_crear.png" />
-<p class="caption"><span class="caption-text">Allí podemos ingresar los datos del interés a registrar. Finalmente haciendo clic en el botón “Agregar Interés” se agregara a la base de datos ese interés. Ya sea que la operación haya sido exitosa o no, se informará con un mensaje del estado final.</span></p>
-</div>
-</div>
-<div class="section" id="listar-intereses">
-<h3>Listar intereses<a class="headerlink" href="#listar-intereses" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="administrar-intereses">
+<h3>Administrar intereses<a class="headerlink" href="#administrar-intereses" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
 <li>URL: <a class="reference external" href="http://tinder-shared.herokuapp.com/#/interests">http://tinder-shared.herokuapp.com/#/interests</a></li>
-<li>Navegación: “Intereses/Listar”</li>
+<li>Navegación: “Intereses/Administrar”</li>
 </ul>
-<div class="figure align-center" id="id7">
-<img alt="../_images/intereses_listar.png" src="../_images/intereses_listar.png" />
-<p class="caption"><span class="caption-text">En esta sección es posible listar todos los intereses agrupados por categorías.</span></p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/intereses_administrar.png" src="../_images/intereses_administrar.png" />
+<p class="caption"><span class="caption-text">Allí podemos ingresar los datos del interés a registrar. Finalmente haciendo clic en el botón “Agregar Interés” se agregara a la base de datos ese interés. Ya sea que la operación haya sido exitosa o no, se informará con un mensaje del estado final.
+Más abajo podemos ver los intereses que actualmente estan registrados en la base de datos.</span></p>
 </div>
 </div>
 </div>
