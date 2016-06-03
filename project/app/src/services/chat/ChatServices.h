@@ -42,6 +42,7 @@ public:
 private:
 	ChatDAO* chat;
 	MatchDAO* match;
+	bool static compareMessages( Message* msg1,  Message* msg2);
 };
 
 

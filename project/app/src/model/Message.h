@@ -18,6 +18,7 @@ public:
 	User* getReceiver();
 	string getContent();
 	tm* getTime();
+	Json::Value toJson();
 
 private:
 	struct tm currentTime;

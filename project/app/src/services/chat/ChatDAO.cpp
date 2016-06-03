@@ -44,8 +44,8 @@ void ChatDAO::getMsgBetween(User* sender, User* receiver, list<Message*>* msgs) 
 		LOG_ERROR << "DB Corrupted, error parsing." << jsonString << " .";
 		throw DBException("DB corrupted");
 	}
-	Json::FastWriter writer;
-	string prueba = writer.write(json);
+	//Json::FastWriter writer;
+	//string prueba = writer.write(json);
 	for (Json::ValueIterator itr = json.begin(); itr != json.end(); itr++) {
 		struct tm savedTime;
 		if(!strptime(itr->get("time", "error").asString().c_str(), "%a %b %e %H:%M:%S %Y", &savedTime))

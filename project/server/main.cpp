@@ -25,7 +25,9 @@
 #include "services/authentication/AuthenticationService.h"
 #include <thread>
 #include <chrono>
-int main(int argc, char* argv[]) {
+#include <ChatResource.h>
+
+	int main(int argc, char* argv[]) {
 	Options* options;
 	if (argc == 3 && string(argv[1]) == "-config"){
 		try {
@@ -75,21 +77,33 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 
+	DBConnector chatDB = DBConnector(options->getDbLocation() + "/chat");
+	if(!matchDB.isOk()) {
+		LOG_FATAL << ("Error abriendo la DB de chat.");
+		std::this_thread::sleep_for (std::chrono::seconds(1));
+		return 0;
+	}
+
 	LOG_INFO << "Starting WebServer";
 
 	MatchDAO matchDAO(&matchDB);
 	UserDAO userDAO(&sharedConnector);
 	AuthenticationDAO authDAO (authenticationDB);
 	TranslationDAO transDAO (translationDB);
+	ChatDAO chatDAO (&chatDB);
 	ProfileServices profileService(&userDAO, &transDAO);
 	AuthenticationService authService(&authDAO, &profileService);
 	MatchServices matchServices(&matchDAO,&profileService);
+	ChatServices chatServices(&chatDAO, &matchDAO);
 
 
 	SecurityFilter securityFilter(authService);
 	securityFilter.excludeRegex(RestRequest::POST, "/auth");
 	securityFilter.excludeRegex(RestRequest::PUT, "/auth");
 	ApiDispatcher dispatcher(securityFilter);
+
+	ChatResource chatResoure(chatServices, profileService);
+	chatResoure.setup(dispatcher);
 
 	UserResource user(profileService);
 	user.setup(dispatcher);

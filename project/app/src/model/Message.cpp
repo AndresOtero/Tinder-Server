@@ -65,3 +65,12 @@ tm* Message::getTime() {
 }
 
 
+Json::Value Message::toJson() {
+	Json::Value raiz;
+	raiz["time"] = asctime(&(this->currentTime));
+	raiz["sender"] = this->getSender()->getId();
+	raiz["content"] = this->getContent();
+	return raiz;
+}
+
+
