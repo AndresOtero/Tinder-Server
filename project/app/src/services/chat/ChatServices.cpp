@@ -26,6 +26,14 @@ list<Message*>* ChatServices::getConversationBetweenUsers(User* userA, User* use
 	std::list<Message*>* lista = new list<Message*>();
 	this->chat->getMsgBetween(userA, userB, lista);
 	this->chat->getMsgBetween(userB, userA, lista);
+	lista->sort(this->compareMessages);
 	return lista;
+}
+
+
+bool ChatServices::compareMessages(Message* msg1, Message *msg2) {
+	std::time_t seconds1 = std::mktime(  msg1->getTime());
+	std::time_t seconds2 = std::mktime(  msg2->getTime());
+	return (seconds1 > seconds2);
 }
 
